@@ -93,6 +93,7 @@ public class ReplaceWord extends BaseAction {
 
                 pathSet.executeQuery(pathSql);
                 RecordSet updateSet = new RecordSet();
+
                 while (pathSet.next()) {
                     String filePath = pathSet.getString("filerealpath");
                     this.writeLog("变更前filerealpath: " + pathSet.getString("filerealpath") + " ,imagefilename: " + pathSet.getString("imagefilename"));
