@@ -27,13 +27,13 @@ public class ReplaceWord extends BaseAction {
     /**
      * 替换标记
      */
-    private String bhFlag = "${number}";
+    private static final String BH_FLAG = "${number}";
     /**
-     * 附件字段 1,2,3
+     * 附件字段 例：1,2,3
      */
     private String fjStr;
     /**
-     * 编号字段
+     * 编号字段（取值字段）
      */
     private String bhStr;
 
@@ -79,6 +79,7 @@ public class ReplaceWord extends BaseAction {
                     fileMap.put(str, tempStr.split(","));
                 }
             }
+            this.writeLog("字段名 - 附件id数组: " + gson.toJson(fileMap));
 
             // 查询附件 名称 - 所在路径
             RecordSet pathSet = new RecordSet();
@@ -118,9 +119,6 @@ public class ReplaceWord extends BaseAction {
                 }
             }
 
-            this.writeLog("字段名 - 附件id数组: " + gson.toJson(fileMap));
-
-
             this.writeLog("页眉标记替换 End ===============" + TimeUtil.getCurrentTimeString());
         } catch (Exception e) {
             this.writeLog("页眉标记替换 异常： " + e);
@@ -136,7 +134,7 @@ public class ReplaceWord extends BaseAction {
     /**
      * docx 替换页眉
      */
-    public void replaceDocx(InputStream inputStream, String outPath, String fileName) {
+    private void replaceDocx(InputStream inputStream, String outPath, String fileName) {
         try (
                 OutputStream outputStream = new FileOutputStream(outPath);
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -181,7 +179,6 @@ public class ReplaceWord extends BaseAction {
                     xwpfRun.setUnderline(UnderlinePatterns.SINGLE);
                     xwpfRun.setFontSize(fontSize);
                     xwpfRun.setText(runText);
-
                 }
             }
         }
@@ -190,7 +187,7 @@ public class ReplaceWord extends BaseAction {
     /**
      * doc替换页眉
      */
-    public void replaceDoc(InputStream inputStream, String outPath) {
+    private void replaceDoc(InputStream inputStream, String outPath, String fileName) {
         try (
                 OutputStream outputStream = new FileOutputStream(outPath);
                 ZipOutputStream zos = new ZipOutputStream(outputStream);
@@ -198,11 +195,13 @@ public class ReplaceWord extends BaseAction {
         ) {
             HWPFDocument doc = new HWPFDocument(inputStream);
             Range range = doc.getHeaderStoryRange();
-            range.replaceText(bhFlag, bhStrValue);
+            range.replaceText(BH_FLAG, bhStrValue);
 
             //导出到文件
             doc.write(byteArrayOutputStream);
+            zos.putNextEntry(new ZipEntry(fileName));
             zos.write(byteArrayOutputStream.toByteArray());
+            zos.closeEntry();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -217,7 +216,7 @@ public class ReplaceWord extends BaseAction {
      * @param type        doc 或者 docx
      * @throws RuntimeException
      */
-    public void unZip(String srcFilePath, String outPath, String type, String fileName) throws RuntimeException {
+    private void unZip(String srcFilePath, String outPath, String type, String fileName) throws RuntimeException {
         InputStream is = null;
         File srcFile = new File(srcFilePath);
         // 判断源文件是否存在
@@ -237,7 +236,7 @@ public class ReplaceWord extends BaseAction {
             }
             // 替换标签并输出
             if ("doc".equals(type)) {
-                replaceDoc(is, outPath);
+                replaceDoc(is, outPath, fileName);
             } else {
                 replaceDocx(is, outPath, fileName);
             }
