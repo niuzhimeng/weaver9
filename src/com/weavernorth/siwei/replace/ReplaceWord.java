@@ -27,7 +27,7 @@ public class ReplaceWord extends BaseAction {
     /**
      * 替换标记
      */
-    private static final String BH_FLAG = "${number}";
+    private static final String BH_FLAG = "{number}";
     /**
      * 附件字段 例：1,2,3
      */
@@ -44,7 +44,7 @@ public class ReplaceWord extends BaseAction {
 
     private Gson gson = new Gson();
 
-    private Pattern pattern = Pattern.compile("\\$\\{(number)}", Pattern.CASE_INSENSITIVE);
+    private Pattern pattern = Pattern.compile("\\{(number)}", Pattern.CASE_INSENSITIVE);
 
     @Override
     public String execute(RequestInfo requestInfo) {
