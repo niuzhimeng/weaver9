@@ -177,7 +177,7 @@ public class ReplaceWord extends BaseAction {
 
                     XWPFRun xwpfRun = para.insertNewRun(i);
                     xwpfRun.setUnderline(UnderlinePatterns.SINGLE);
-                    xwpfRun.setFontSize(fontSize);
+                    //xwpfRun.setFontSize(fontSize);
                     xwpfRun.setText(runText);
                 }
             }
