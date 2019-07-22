@@ -23,6 +23,10 @@ public class TriggerSonFlow extends BaseCronJob {
      * 子流程id
      */
     private static final String SON_FLOW_ID = "44";
+    /**
+     * 创建人id（固定值：张益源）
+     */
+    private static final String PERSON_ID = "29";
 
     private RecordSet updateRecordSet = new RecordSet();
 
@@ -81,14 +85,18 @@ public class TriggerSonFlow extends BaseCronJob {
     private void triggerFlow(RecordSet recordSet) {
         try {
             baseBean.writeLog("创建流程开始===============");
-            // 创建人id
-            String creatorId = "29";
+
+            RecordSet depSet = new RecordSet();
+            depSet.executeQuery("select departmentid from HrmResource where id = " + PERSON_ID);
+            depSet.next();
+            String depId = depSet.getString("departmentid");
 
             WorkflowRequestTableField[] mainField = new WorkflowRequestTableField[15]; //主表行对象
 
             int i = 0;
             mainField[i] = new WorkflowRequestTableField();
             mainField[i].setFieldName("mdmc");// 字段名
+            baseBean.writeLog("店铺名称: " + recordSet.getString("dpmc"));
             mainField[i].setFieldValue(recordSet.getString("dpmc")); // 店铺名称
             mainField[i].setView(true); //字段是否可见
             mainField[i].setEdit(true); //字段是否可编辑
@@ -96,6 +104,7 @@ public class TriggerSonFlow extends BaseCronJob {
             i++;
             mainField[i] = new WorkflowRequestTableField();
             mainField[i].setFieldName("mdbh");
+            baseBean.writeLog("门店编号: " + recordSet.getString("mdbh"));
             mainField[i].setFieldValue(recordSet.getString("mdbh")); // 门店编号
             mainField[i].setView(true);
             mainField[i].setEdit(true);
@@ -103,13 +112,16 @@ public class TriggerSonFlow extends BaseCronJob {
             i++;
             mainField[i] = new WorkflowRequestTableField();
             mainField[i].setFieldName("mdlx");
-            mainField[i].setFieldValue(recordSet.getString("bzdmnd")); // 标准店/迷你店
+            String bzdmnd = recordSet.getString("bzdmnd");
+            baseBean.writeLog("标准店/迷你店: " + bzdmnd);
+            mainField[i].setFieldValue(bzdmnd); // 标准店/迷你店
             mainField[i].setView(true);
             mainField[i].setEdit(true);
 
             i++;
             mainField[i] = new WorkflowRequestTableField();
             mainField[i].setFieldName("qytz");
+            baseBean.writeLog("区域拓展: " + recordSet.getString("qytz"));
             mainField[i].setFieldValue(recordSet.getString("qytz")); // 区域拓展
             mainField[i].setView(true);
             mainField[i].setEdit(true);
@@ -117,7 +129,39 @@ public class TriggerSonFlow extends BaseCronJob {
             i++;
             mainField[i] = new WorkflowRequestTableField();
             mainField[i].setFieldName("mdsjkyrq");
-            mainField[i].setFieldValue(recordSet.getString("mdsjkyrq")); // 门店实际开业日期
+            String mdsjkyrq = recordSet.getString("mdsjkyrq");
+            baseBean.writeLog("门店实际开业日期: " + mdsjkyrq);
+            mainField[i].setFieldValue(mdsjkyrq); // 门店实际开业日期
+            mainField[i].setView(true);
+            mainField[i].setEdit(true);
+
+            i++;
+            mainField[i] = new WorkflowRequestTableField();
+            mainField[i].setFieldName("fqr");
+            mainField[i].setFieldValue(PERSON_ID); // 创建人（固定张益源）
+            mainField[i].setView(true);
+            mainField[i].setEdit(true);
+
+            i++;
+            mainField[i] = new WorkflowRequestTableField();
+            mainField[i].setFieldName("fqbm");
+            mainField[i].setFieldValue(depId); // 发起人部门
+            mainField[i].setView(true);
+            mainField[i].setEdit(true);
+
+            i++;
+            mainField[i] = new WorkflowRequestTableField();
+            mainField[i].setFieldName("fqrq");
+            mainField[i].setFieldValue(LocalDate.now().toString()); // 发起日期
+            mainField[i].setView(true);
+            mainField[i].setEdit(true);
+
+            i++;
+            mainField[i] = new WorkflowRequestTableField();
+            mainField[i].setFieldName("scbtyf");
+            String firstMonth = getFirstMonth(bzdmnd, mdsjkyrq);
+            baseBean.writeLog("首次补贴月份： " + firstMonth);
+            mainField[i].setFieldValue(firstMonth); // 首次补贴月份
             mainField[i].setView(true);
             mainField[i].setEdit(true);
 
@@ -133,16 +177,16 @@ public class TriggerSonFlow extends BaseCronJob {
             workflowBaseInfo.setWorkflowId(SON_FLOW_ID);// 流程id
 
             WorkflowRequestInfo workflowRequestInfo = new WorkflowRequestInfo();// 流程基本信息
-            workflowRequestInfo.setCreatorId(creatorId);// 创建人id
+            workflowRequestInfo.setCreatorId(PERSON_ID);// 创建人id
             workflowRequestInfo.setRequestLevel("0");// 0 正常，1重要，2紧急
-            workflowRequestInfo.setRequestName("ZC-04开业补贴申请" + TimeUtil.getOnlyCurrentTimeString());// 流程标题
+            workflowRequestInfo.setRequestName("ZC-04开业补贴申请" + "-张益源-" + LocalDate.now());// 流程标题
             workflowRequestInfo.setWorkflowBaseInfo(workflowBaseInfo);
             workflowRequestInfo.setWorkflowMainTableInfo(workflowMainTableInfo);// 添加主表字段数据
             workflowRequestInfo.setIsnextflow("0");
 
             //创建流程的类
             WorkflowServiceImpl service = new WorkflowServiceImpl();
-            String requestId = service.doCreateWorkflowRequest(workflowRequestInfo, Integer.parseInt(creatorId));
+            String requestId = service.doCreateWorkflowRequest(workflowRequestInfo, Integer.parseInt(PERSON_ID));
 
             baseBean.writeLog("ZC-04开业补贴申请创建流程完毕===============" + requestId);
 
@@ -151,6 +195,26 @@ public class TriggerSonFlow extends BaseCronJob {
         }
     }
 
+
+    /**
+     * 获取首次补贴日期
+     *
+     * @param dpType    店铺类型
+     * @param startDate 实际开业日期
+     * @return
+     */
+    private String getFirstMonth(String dpType, String startDate) {
+        String returnStr;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate parse = LocalDate.parse(startDate, formatter);
+        if ("0".equals(dpType)) {
+            // 标准店
+            returnStr = parse.plusMonths(3).toString();
+        } else {
+            returnStr = parse.plusMonths(6).toString();
+        }
+        return returnStr;
+    }
 
     /**
      * 更新触发次数

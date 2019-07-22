@@ -53,5 +53,12 @@ public class Test {
         System.out.println(equals);
     }
 
+    @org.junit.Test
+    public void test5() {
+        LocalDate nowDate = LocalDate.now();
+
+        System.out.println(nowDate.toString());
+    }
+
 
 }
