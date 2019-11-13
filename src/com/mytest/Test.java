@@ -1,14 +1,32 @@
 package com.mytest;
 
+import cn.hutool.core.convert.Convert;
+import cn.hutool.core.io.FileTypeUtil;
+import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.io.IoUtil;
+import cn.hutool.core.io.file.FileReader;
+import cn.hutool.core.util.IdUtil;
+import cn.hutool.core.util.NumberUtil;
+import cn.hutool.core.util.PageUtil;
+import cn.hutool.extra.qrcode.QrCodeUtil;
+import cn.hutool.http.HttpUtil;
+import cn.hutool.poi.word.Word07Writer;
 import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.metadata.Sheet;
 import com.alibaba.excel.metadata.Table;
 import com.alibaba.excel.support.ExcelTypeEnum;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.artofsolving.jodconverter.DocumentConverter;
 import com.artofsolving.jodconverter.openoffice.connection.OpenOfficeConnection;
 import com.artofsolving.jodconverter.openoffice.connection.SocketOpenOfficeConnection;
 import com.artofsolving.jodconverter.openoffice.converter.OpenOfficeDocumentConverter;
 import com.artofsolving.jodconverter.openoffice.converter.StreamOpenOfficeDocumentConverter;
+import com.google.gson.Gson;
+import com.mytest.vo.MyTest;
+import com.mytest.vo.impl.MyTestImpl;
+import com.mytest.vo.impl.MyThreadTest;
+import com.weaver.integration.datesource.SAPInterationOutUtilTest;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -17,16 +35,16 @@ import org.artofsolving.jodconverter.OfficeDocumentConverter;
 import org.artofsolving.jodconverter.office.DefaultOfficeManagerConfiguration;
 import org.artofsolving.jodconverter.office.OfficeManager;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
+import java.awt.*;
+import java.io.*;
+import java.math.BigDecimal;
 import java.net.ConnectException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Test {
@@ -178,6 +196,33 @@ public class Test {
         converter.convert(new File("C:\\Users\\29529\\Desktop\\2.docx"), new File("C:\\Users\\29529\\Desktop\\123.pdf"));
         connection.disconnect();
         exec.destroy();
+    }
+
+
+    @org.junit.Test
+    public void test17() throws Exception {
+        Word07Writer writer = new Word07Writer();
+
+// 添加段落（标题）
+        writer.addText(new Font("方正小标宋简体", Font.PLAIN, 22), "我是第一部分", "我是第二部分");
+// 添加段落（正文）
+        writer.addText(new Font("宋体", Font.PLAIN, 22), "我是正文第一部分", "我是正文第二部分");
+// 写出到文件
+        writer.flush(FileUtil.file("C:\\Users\\29529\\Desktop\\wordWrite.docx"));
+// 关闭
+        writer.close();
+
+
+    }
+
+    @org.junit.Test
+    public void test18() {
+        Map<String, String> returnMap = new HashMap<>();
+        returnMap.put("1", "1");
+        returnMap.put("2", "2");
+        String s = JSONObject.toJSONString(returnMap);
+        System.out.println(s);
+
     }
 
 }
