@@ -37,10 +37,23 @@ public class MyButtonProxy extends AbstractCommandProxy {
         baseBean.writeLog("requestid ============= " + requestid);
 
         List<RightMenu> rightMenus = (List<RightMenu>) stringObjectMap.get("rightMenus");
-        RightMenu rightMenu = new RightMenu("自定义按钮", RequestMenuType.BTN_CUSTOMIZE, "diyFun()",
+        RightMenu rightMenu = new RightMenu("我的催办", RequestMenuType.BTN_CUSTOMIZE, "diyFun()",
                 "icon-workflow-Right-menu-Collection", 4.1);
         rightMenu.setIsTop("1");
+        rightMenu.setOrder(2);
         rightMenus.add(rightMenu);
+
+        RightMenu rightMenu1 = new RightMenu("我的收回", RequestMenuType.BTN_CUSTOMIZE, "diyFun1()",
+                "icon-workflow-Right-menu-Collection", 4.1);
+        rightMenu1.setIsTop("1");
+        rightMenu1.setOrder(3);
+        rightMenus.add(rightMenu1);
+
+        RightMenu rightMenu2 = new RightMenu("我的button", RequestMenuType.BTN_CUSTOMIZE, "diyFun2()",
+                "icon-workflow-Right-menu-Collection", 4.1);
+        rightMenu2.setIsTop("1");
+        rightMenu2.setOrder(4);
+        rightMenus.add(rightMenu2);
 
         baseBean.writeLog("系统按钮返回数据：" + JSONObject.toJSONString(stringObjectMap));
         return stringObjectMap;
