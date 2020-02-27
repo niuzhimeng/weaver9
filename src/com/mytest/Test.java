@@ -16,6 +16,7 @@ import com.alibaba.excel.metadata.Sheet;
 import com.alibaba.excel.metadata.Table;
 import com.alibaba.excel.support.ExcelTypeEnum;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.artofsolving.jodconverter.DocumentConverter;
 import com.artofsolving.jodconverter.openoffice.connection.OpenOfficeConnection;
@@ -27,6 +28,7 @@ import com.mytest.vo.MyTest;
 import com.mytest.vo.impl.MyTestImpl;
 import com.mytest.vo.impl.MyThreadTest;
 import com.weaver.integration.datesource.SAPInterationOutUtilTest;
+import com.weavernorth.bjcj.vo.BjcjHrmDepartment;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -217,11 +219,8 @@ public class Test {
 
     @org.junit.Test
     public void test18() {
-        Map<String, String> returnMap = new HashMap<>();
-        returnMap.put("1", "1");
-        returnMap.put("2", "2");
-        String s = JSONObject.toJSONString(returnMap);
-        System.out.println(s);
+        Map<String, String> numIdMap = new HashMap<>();
+        System.out.println(numIdMap.get("1"));
 
     }
 
