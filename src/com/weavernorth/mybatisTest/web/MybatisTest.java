@@ -1,8 +1,6 @@
 package com.weavernorth.mybatisTest.web;
 
-import com.weavernorth.mybatis.service.MyBatisConnection;
 import com.weavernorth.mybatisTest.entity.HrmVO;
-import org.apache.ibatis.session.SqlSession;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,13 +23,13 @@ public class MybatisTest {
         Map<String, String> map = new HashMap<>();
         map.put("id", id);
 
-        MyBatisConnection myBatisConnection = new MyBatisConnection();
-        // 通过会话工厂创建会话
-        SqlSession session = myBatisConnection.getSession();
-        List<HrmVO> listVideo = session.selectList("ExampleHrmResource.findUserAll", map);
-        //关闭会话（必须！！）
-        myBatisConnection.closeSession();
-        return listVideo;
+//        MyBatisConnection myBatisConnection = new MyBatisConnection();
+//        // 通过会话工厂创建会话
+//        SqlSession session = myBatisConnection.getSession();
+//        List<HrmVO> listVideo = session.selectList("ExampleHrmResource.findUserAll", map);
+//        //关闭会话（必须！！）
+//        myBatisConnection.closeSession();
+        return null;
 
 
     }
