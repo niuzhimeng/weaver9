@@ -20,7 +20,7 @@ public class MybatisTest {
     @Path("/getAllUser")
     @Produces(MediaType.APPLICATION_JSON)
     //@Consumes(MediaType.APPLICATION_JSON)
-    public List<HrmVO> getDataTest(@Context HttpServletRequest request, @Context HttpServletResponse response) {
+    public HashMap<String, Object> getDataTest(@Context HttpServletRequest request, @Context HttpServletResponse response) {
         String id = request.getParameter("id");
         Map<String, String> map = new HashMap<>();
         map.put("id", id);
@@ -31,7 +31,11 @@ public class MybatisTest {
         List<HrmVO> listVideo = session.selectList("ExampleHrmResource.findUserAll", map);
         //关闭会话（必须！！）
         myBatisConnection.closeSession();
-        return listVideo;
+
+        HashMap<String, Object> objectObjectHashMap = new HashMap<>();
+        objectObjectHashMap.put("statusCode","0");
+        objectObjectHashMap.put("body",listVideo);
+        return objectObjectHashMap;
 
 
     }
