@@ -1,11 +1,10 @@
 package com.mytest;
 
-import cn.hutool.core.io.FileUtil;
-import cn.hutool.poi.word.Word07Writer;
 import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.metadata.Sheet;
 import com.alibaba.excel.metadata.Table;
 import com.alibaba.excel.support.ExcelTypeEnum;
+import com.cloudstore.dev.api.util.HttpManager;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -13,14 +12,18 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.artofsolving.jodconverter.OfficeDocumentConverter;
 import org.artofsolving.jodconverter.office.DefaultOfficeManagerConfiguration;
 import org.artofsolving.jodconverter.office.OfficeManager;
+import weaver.file.AESCoder;
 
-import java.awt.*;
+import javax.activation.MimetypesFileTypeMap;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.StreamingOutput;
 import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -178,25 +181,100 @@ public class Test {
 
     @org.junit.Test
     public void test17() throws Exception {
-        Word07Writer writer = new Word07Writer();
-
-// 添加段落（标题）
-        writer.addText(new Font("方正小标宋简体", Font.PLAIN, 22), "我是第一部分", "我是第二部分");
-// 添加段落（正文）
-        writer.addText(new Font("宋体", Font.PLAIN, 22), "我是正文第一部分", "我是正文第二部分");
-// 写出到文件
-        writer.flush(FileUtil.file("C:\\Users\\29529\\Desktop\\wordWrite.docx"));
-// 关闭
-        writer.close();
+//        Word07Writer writer = new Word07Writer();
+//
+//// 添加段落（标题）
+//        writer.addText(new Font("方正小标宋简体", Font.PLAIN, 22), "我是第一部分", "我是第二部分");
+//// 添加段落（正文）
+//        writer.addText(new Font("宋体", Font.PLAIN, 22), "我是正文第一部分", "我是正文第二部分");
+//// 写出到文件
+//        writer.flush(FileUtil.file("C:\\Users\\29529\\Desktop\\wordWrite.docx"));
+//// 关闭
+//        writer.close();
 
 
     }
 
     @org.junit.Test
     public void test18() throws UnsupportedEncodingException {
-        String decode = URLDecoder.decode("%e7%be%8e%e9%98%9f%e7%9b%be%e7%89%8c", "utf-8");
-        System.out.println(decode);
+        HttpManager httpManager = new HttpManager();
+        Map<String, String> map = new HashMap<>();
+        map.put("name", "310771351@qq.com");
+        map.put("password", "123456");
+        // String s = HTTPUtil.doPost("http://bfpt.yunkeonline.cn/sso/api/login", map);
+        String s = httpManager.postData("http://bfpt.yunkeonline.cn/sso/api/login", map);
+        System.out.println(s);
+
 
     }
+
+    @org.junit.Test
+    public void getPropValue() throws Exception {
+        String encrptKey = "EAVERECOLOGYDBENCODER";
+
+        String encrypt = AESCoder.encrypt("牛智萌", encrptKey);
+        System.out.println("加密后： " + encrypt);
+
+        String sValue = AESCoder.decrypt(encrypt, encrptKey);
+        System.out.println("解密后： " + sValue);
+
+
+    }
+
+    @org.junit.Test
+    public void test19() throws Exception {
+        URL url = new URL("http://111.160.2.51:8888/gysDoc/test.docx");
+        HttpURLConnection urlCon = (HttpURLConnection) url.openConnection();
+        urlCon.setConnectTimeout(6000);
+        urlCon.setReadTimeout(6000);
+        int code = urlCon.getResponseCode();
+        if (code != HttpURLConnection.HTTP_OK) {
+            throw new Exception("文件读取失败");
+        }
+
+        //读文件流
+        InputStream input = urlCon.getInputStream();
+        FileOutputStream fileOutputStream = new FileOutputStream("C:\\Users\\86157\\Desktop\\test.docx");
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        int byteread;
+        byte[] data = new byte[1024];
+        while ((byteread = input.read(data)) != -1) {
+            out.write(data, 0, byteread);
+            out.flush();
+        }
+        byte[] content = out.toByteArray();
+        out.close();
+        input.close();
+
+        fileOutputStream.write(content);
+        fileOutputStream.close();
+    }
+
+    @org.junit.Test
+    public void test20() {
+        File file = null;
+        try {
+            file = new File("E:\\WEAVER\\测试的文件你23ABC.pdf");
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        String mt = new MimetypesFileTypeMap().getContentType(file);
+        System.out.println(mt);
+        System.out.println(file.length() / 1024);
+
+        byte[] bytes = new byte[1];
+
+        StreamingOutput streamingOutput = new StreamingOutput() {
+            @Override
+            public void write(OutputStream outputStream) throws IOException, WebApplicationException {
+
+            }
+        };
+
+        StreamingOutput streamingOutput1 = outputStream -> outputStream.write(bytes);
+    }
+
 
 }
