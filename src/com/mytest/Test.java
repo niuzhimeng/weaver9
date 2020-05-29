@@ -4,7 +4,9 @@ import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.metadata.Sheet;
 import com.alibaba.excel.metadata.Table;
 import com.alibaba.excel.support.ExcelTypeEnum;
+import com.alibaba.fastjson.JSONObject;
 import com.cloudstore.dev.api.util.HttpManager;
+import org.apache.commons.lang.StringUtils;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -274,6 +276,15 @@ public class Test {
         };
 
         StreamingOutput streamingOutput1 = outputStream -> outputStream.write(bytes);
+    }
+
+    @org.junit.Test
+    public void test21() {
+        Map<String, String> MAP_NAME = new HashMap() {{
+            put("map1", "value1");
+            put("map2", "value2");
+            put("map3", "value3");
+        }};
     }
 
 
