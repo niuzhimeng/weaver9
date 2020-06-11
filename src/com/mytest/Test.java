@@ -6,7 +6,6 @@ import com.alibaba.excel.metadata.Table;
 import com.alibaba.excel.support.ExcelTypeEnum;
 import com.alibaba.fastjson.JSONObject;
 import com.cloudstore.dev.api.util.HttpManager;
-import org.apache.commons.lang.StringUtils;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -14,6 +13,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.artofsolving.jodconverter.OfficeDocumentConverter;
 import org.artofsolving.jodconverter.office.DefaultOfficeManagerConfiguration;
 import org.artofsolving.jodconverter.office.OfficeManager;
+import weaver.conn.BatchRecordSet;
 import weaver.file.AESCoder;
 
 import javax.activation.MimetypesFileTypeMap;
@@ -25,11 +25,13 @@ import java.net.URL;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Test {
+    volatile int i = 0;
 
     @org.junit.Test
     public void test1() {
@@ -275,17 +277,20 @@ public class Test {
             }
         };
 
-        StreamingOutput streamingOutput1 = outputStream -> outputStream.write(bytes);
+        try {
+            StreamingOutput streamingoutput1 = outputStream -> outputStream.write(bytes);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @org.junit.Test
-    public void test21() {
-        Map<String, String> MAP_NAME = new HashMap() {{
-            put("map1", "value1");
-            put("map2", "value2");
-            put("map3", "value3");
-        }};
-    }
+    public void test21() throws Exception {
+        LocalDateTime now = LocalDateTime.now();
+        System.out.println(now);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        System.out.println(formatter.format(now));
 
+    }
 
 }
