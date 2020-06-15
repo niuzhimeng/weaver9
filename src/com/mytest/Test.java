@@ -15,6 +15,7 @@ import org.artofsolving.jodconverter.office.DefaultOfficeManagerConfiguration;
 import org.artofsolving.jodconverter.office.OfficeManager;
 import weaver.conn.BatchRecordSet;
 import weaver.file.AESCoder;
+import weaver.rsa.security.RSA;
 
 import javax.activation.MimetypesFileTypeMap;
 import javax.ws.rs.WebApplicationException;
@@ -286,10 +287,10 @@ public class Test {
 
     @org.junit.Test
     public void test21() throws Exception {
-        LocalDateTime now = LocalDateTime.now();
-        System.out.println(now);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        System.out.println(formatter.format(now));
+        String cpk = RSA.getRSA_PUB();
+        //System.out.println(cpk);
+
+        System.out.println(Runtime.getRuntime().availableProcessors());
 
     }
 

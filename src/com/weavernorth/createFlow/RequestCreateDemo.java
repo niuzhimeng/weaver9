@@ -24,7 +24,6 @@ import java.util.Map;
  */
 public class RequestCreateDemo {
 
-
     @Test
     public void test1() {
         createRequest("流程测试-" + currentTime(), "21");
@@ -64,8 +63,12 @@ public class RequestCreateDemo {
         // 如果isnextflow为1，提交时的签字意见
         params.put("remark", "restful接口创建流程测试");
         try {
-            String res = OkHttpUtil.okPostBodyHeader(url, params, heads);
-            System.out.println("创建流程返回数据： " + res);
+            System.out.println("================");
+            System.out.println("url: " + url);
+            System.out.println("params: " + params);
+            System.out.println("heads: " + heads);
+//            String res = OkHttpUtil.okPostBodyHeader(url, params, heads);
+//            System.out.println("创建流程返回数据： " + res);
         } catch (Exception e) {
             e.printStackTrace();
         }
