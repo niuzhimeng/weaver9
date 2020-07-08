@@ -2,18 +2,21 @@ package com.weavernorth.hualianFlow.util;
 
 import com.alibaba.fastjson.JSONObject;
 import okhttp3.*;
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import weaver.conn.RecordSet;
 import weaver.general.MD5;
+import weaver.general.TimeUtil;
 import weaver.general.Util;
 
 import javax.crypto.Mac;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -31,8 +34,8 @@ public class HlConnUtil {
 
     private static Log log = LogFactory.getLog(HlConnUtil.class);
 
-    private static final Pattern pattern = Pattern.compile("<[a-zA-Z]+.*?>([\\s\\S]*?)</[a-zA-Z]*>");
-    private static final Pattern pattern1 = Pattern.compile(">(.*?)</");
+    private static final Pattern pattern = Pattern.compile("<[a-zA-Z]+.*?>([\\s\\S]*?)</[a-zA-Z]*>", Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+    private static final Pattern pattern1 = Pattern.compile(">(.*?)</", Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
 
     private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
@@ -174,6 +177,9 @@ public class HlConnUtil {
     }
 
     public static String getRemarkStr(String beforeStr) {
+        beforeStr = beforeStr.replaceAll("(?i)<img.*?/>", "")
+                .replaceAll("(?i)<a.*?</a>", "")
+                .replaceAll("(?i)<table.*?</table>", "");
         String returnStr = "";
         if (beforeStr.startsWith("<p")) {
             StringBuilder stringBuilder = new StringBuilder();
@@ -185,12 +191,12 @@ public class HlConnUtil {
                 if (s.contains("<span")) {
                     Matcher matcher = pattern.matcher(s);
                     if (matcher.find()) {
-                        stringBuilder.append(matcher.group(1).trim());
+                        stringBuilder.append(matcher.group(1).trim()).append(" ");
                     }
                 } else {
                     Matcher matcher = pattern1.matcher(s);
                     if (matcher.find()) {
-                        stringBuilder.append(matcher.group(1).trim());
+                        stringBuilder.append(matcher.group(1).trim()).append(" ");
                     }
                 }
             }
@@ -209,4 +215,22 @@ public class HlConnUtil {
                 .replace("&apos;", "'")
                 .replace("&#39;", "'");
     }
+
+    /**
+     * 获取接口验证用的sig
+     */
+    public static String getSig() {
+        String sig = "";
+        try {
+            String dateString = TimeUtil.getCurrentDateString().replace("-", "");
+            String srcStr = "appid=" + APP_ID + "&format=json&ts=" + dateString + "&userip=" + USER_IP;
+            String base64Src = "POST&" + URLEncoder.encode(URI, "utf-8") + "&" + URLEncoder.encode(srcStr, "utf-8");
+            byte[] bytes = HlConnUtil.HmacSHA1EncryptByte(base64Src, APP_KEY + "&");
+            sig = new String(new Base64().encode(bytes));
+        } catch (Exception e) {
+            log.error("拼接sig异常getSig() " + e);
+        }
+        return sig;
+    }
+
 }
