@@ -32,6 +32,7 @@ public class HlConnUtil {
     private static Log log = LogFactory.getLog(HlConnUtil.class);
 
     private static final Pattern pattern = Pattern.compile("<[a-zA-Z]+.*?>([\\s\\S]*?)</[a-zA-Z]*>");
+    private static final Pattern pattern1 = Pattern.compile(">(.*?)</");
 
     private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
@@ -181,9 +182,16 @@ public class HlConnUtil {
                 if ("".equals(s)) {
                     continue;
                 }
-                Matcher matcher = pattern.matcher(s);
-                if (matcher.find()) {
-                    stringBuilder.append(matcher.group(1));
+                if (s.contains("<span")) {
+                    Matcher matcher = pattern.matcher(s);
+                    if (matcher.find()) {
+                        stringBuilder.append(matcher.group(1).trim());
+                    }
+                } else {
+                    Matcher matcher = pattern1.matcher(s);
+                    if (matcher.find()) {
+                        stringBuilder.append(matcher.group(1).trim());
+                    }
                 }
             }
             returnStr = stringBuilder.toString();
@@ -191,8 +199,14 @@ public class HlConnUtil {
             returnStr = beforeStr;
         }
 
-        return returnStr.replace("&nbsp;", ", ")
-                .replaceAll("(?i)[<br/*>]", " ")
-                .replaceAll("\\s+", " ");
+        return returnStr.replace("&nbsp;", " ")
+                .replaceAll("(?i)(<br/>)", " ")
+                .replaceAll("\\s+", " ")
+                .replace("&lt;", "<")
+                .replace("&gt;", ">")
+                .replace("&amp;", "&")
+                .replace("&quot;", "\\\"")
+                .replace("&apos;", "'")
+                .replace("&#39;", "'");
     }
 }

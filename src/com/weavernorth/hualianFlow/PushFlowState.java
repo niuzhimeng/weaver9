@@ -20,6 +20,8 @@ public class PushFlowState extends BaseAction {
     public String execute(RequestInfo requestInfo) {
         String requestId = requestInfo.getRequestid();
         String remark = requestInfo.getRequestManager().getRemark(); // 当前节点签字意见
+        int nodeId = requestInfo.getRequestManager().getNodeid();
+        String nodeName = getColumn("nodename", "workflow_nodebase", "id", String.valueOf(nodeId));
         String operateType = requestInfo.getRequestManager().getSrc();
         User currentUser = requestInfo.getRequestManager().getUser();
         int formId = requestInfo.getRequestManager().getFormid();
@@ -32,6 +34,7 @@ public class PushFlowState extends BaseAction {
 
         this.writeLog("流程状态推送 Start requestid=" + requestId + "  operatetype --- " + operateType + "   fromTable --- " + tableName);
         try {
+            this.writeLog("nodeId: " + nodeId + " nodeName: " + nodeName);
             this.writeLog("修改前签字意见： " + remark);
             String remarkStr = HlConnUtil.getRemarkStr(remark);
             this.writeLog("修改后签字意见： " + remarkStr);
@@ -59,7 +62,7 @@ public class PushFlowState extends BaseAction {
             dataJsonObj.put("Result", "submit".equalsIgnoreCase(operateType) ? "1" : "2"); // 1:审批通过；2：驳回；3：超时；4：最终审批通过
             dataJsonObj.put("CreateDate", TimeUtil.getCurrentTimeString());
             dataJsonObj.put("LoginName", currentUser.getLoginid());
-            dataJsonObj.put("Description", remarkStr);
+            dataJsonObj.put("Description", currentUser.getLastname() + ": " + remarkStr);
 
             sendJsonObj.put("Approve", dataJsonObj);
 
@@ -89,5 +92,18 @@ public class PushFlowState extends BaseAction {
         return "1";
     }
 
-
+    /**
+     * 根据某个字段查询另一个字段
+     *
+     * @param col        要查询的列名
+     * @param tableName  表名
+     * @param whereLeft  where条件 例：where name = 'nzm' 中的 name
+     * @param whereRight where条件 例：where name = 'nzm' 中的 'nzm'
+     */
+    private String getColumn(String col, String tableName, String whereLeft, String whereRight) {
+        RecordSet recordSet = new RecordSet();
+        recordSet.executeQuery("select " + col + " from " + tableName + " where " + whereLeft + " = '" + whereRight + "'");
+        recordSet.next();
+        return recordSet.getString(col);
+    }
 }
