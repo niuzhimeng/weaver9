@@ -1,12 +1,10 @@
 package com.weavernorth.hualianFlow;
 
-import com.alibaba.fastjson.JSONObject;
 import com.weavernorth.hualianFlow.myThread.PushThread;
 import weaver.conn.RecordSet;
 import weaver.soa.workflow.request.RequestInfo;
 import weaver.workflow.action.BaseAction;
 
-import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -23,35 +21,24 @@ public class PushFlowStateAsyn extends BaseAction {
 
     @Override
     public String execute(RequestInfo requestInfo) {
+        this.writeLog("推送签字意见节点后执行==========");
         String requestId = requestInfo.getRequestid();
-
         int nodeId = requestInfo.getRequestManager().getNodeid();
-        String nodeName = getColumn("nodename", "workflow_nodebase", "id", String.valueOf(nodeId));
         String operateType = requestInfo.getRequestManager().getSrc();
-        int formId = requestInfo.getRequestManager().getFormid();
-        String tableName = "";
-        RecordSet recordSet = new RecordSet();
-        recordSet.executeQuery("SELECT tablename FROM workflow_bill WHERE id = " + formId);
-        if (recordSet.next()) {
-            tableName = recordSet.getString("tablename");
-        }
-
-        this.writeLog("流程状态推送 Start requestid=" + requestId + "  operatetype --- " + operateType + "   fromTable --- " + tableName);
         try {
+            String nodeName = getColumn("nodename", "workflow_nodebase", "id", String.valueOf(nodeId));
             PushThread pushThread = new PushThread();
             pushThread.setRequestId(requestId);
             pushThread.setNodeId(String.valueOf(nodeId));
             pushThread.setNodeName(nodeName);
             pushThread.setOperateType(operateType);
             executorService.execute(pushThread);
-            this.writeLog("流程状态推送 End ===============");
         } catch (Exception e) {
             this.writeLog("流程状态推送 异常： " + e);
             requestInfo.getRequestManager().setMessageid("110000");
             requestInfo.getRequestManager().setMessagecontent("流程状态推送 异常： " + e);
             return "0";
         }
-
         return "1";
     }
 

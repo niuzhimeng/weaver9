@@ -1,8 +1,10 @@
 package com.weavernorth.hualianFlow.myThread;
 
+import com.alibaba.fastjson.JSONObject;
 import com.weavernorth.hualianFlow.util.HlConnUtil;
 import weaver.conn.RecordSet;
 import weaver.general.BaseBean;
+import weaver.general.TimeUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -42,8 +44,9 @@ public class PushThread extends BaseBean implements Runnable {
     @Override
     public void run() {
         try {
+            this.writeLog("异步推送签字意见Start================");
             Thread.sleep(3000);
-            this.writeLog("nodeId: " + nodeId + " nodeName: " + nodeName);
+            String currentDate = TimeUtil.getCurrentDateString().replace("-", "");
             RecordSet recordSet = new RecordSet();
             recordSet.executeQuery("SELECT r.requestid,r.nodeid,r.logtype,r.operatedate + ' ' + r.operatetime operdatetime,r.operator,r.receivedpersonids,r.receivedPersons,r.remark,r.destnodeid," +
                     "n.nodename destnodename,n.isstart,n.isend FROM workflow_requestLog r LEFT JOIN workflow_nodebase n ON r.destnodeid = n.id WHERE r.requestid = ? AND r.nodeid = ? " +
@@ -62,40 +65,42 @@ public class PushThread extends BaseBean implements Runnable {
                 String isend = recordSet.getString("isend"); // 下一节点是否为归档节点	 0：否，1：是
 
                 String destNodeType = getDestNodeType(isstart, isend);
-                this.writeLog("操作类型： " + logType + " 操作时间： " + operDatetime + " 操作者： " + operator +
+                this.writeLog("--------------------------");
+                this.writeLog("节点名称： " + nodeName + " 操作类型： " + logType + " 操作时间： " + operDatetime + " 操作者： " + operator +
                         " 接收人id： " + receivedpersonids + " 接收人姓名： " + receivedPersons + " 签字意见： " + remark +
-                        " 下一节点id: " + destnodeid + " 下一节点名称: " + destnodename + " 下一节点类型: " + destNodeType
-                );
-            }
+                        " 下一节点id: " + destnodeid + " 下一节点名称: " + destnodename + " 下一节点类型: " + destNodeType);
 
-//            JSONObject sendJsonObj = new JSONObject(true);
-//            sendJsonObj.put("appid", HlConnUtil.APP_ID);
-//            sendJsonObj.put("ts", TimeUtil.getCurrentDateString().replace("-", ""));
-//            sendJsonObj.put("sig", HlConnUtil.getSig());
-//            sendJsonObj.put("format", "json");
-//            sendJsonObj.put("userip", HlConnUtil.USER_IP);
+                JSONObject sendJsonObj = new JSONObject(true);
+                sendJsonObj.put("appid", HlConnUtil.APP_ID);
+                sendJsonObj.put("ts", currentDate);
+                sendJsonObj.put("sig", HlConnUtil.getSig());
+                sendJsonObj.put("format", "json");
+                sendJsonObj.put("userip", HlConnUtil.USER_IP);
+
+                JSONObject dataJsonObj = new JSONObject(true);
+                dataJsonObj.put("ExtInstanceID", requestId);
+                dataJsonObj.put("Result", getSendType(isstart, isend)); // 1:审批通过；2：驳回；3：超时；4：最终审批通过
+                dataJsonObj.put("CreateDate", TimeUtil.getCurrentTimeString());
+                dataJsonObj.put("LoginName", "");
+                dataJsonObj.put("Description", "remarkStr");
+
+                sendJsonObj.put("Approve", dataJsonObj);
+
+                String sendJsonStr = sendJsonObj.toJSONString();
+                this.writeLog("签字意见接口发送数据：" + sendJsonStr);
+
+                // 调用签字意见接口
+//                String returnJson = HlConnUtil.sendPost(HlConnUtil.URL, sendJsonStr);
+//                this.writeLog("推送签字意见接口返回： " + returnJson);
 //
-//            JSONObject dataJsonObj = new JSONObject(true);
-//            dataJsonObj.put("ExtInstanceID", requestId);
- //          dataJsonObj.put("Result", getSendType(isstart, isend)); // 1:审批通过；2：驳回；3：超时；4：最终审批通过
-//            dataJsonObj.put("CreateDate", TimeUtil.getCurrentTimeString());
-//            dataJsonObj.put("LoginName", "");
-//            dataJsonObj.put("Description", "remarkStr");
-//
-//            sendJsonObj.put("Approve", dataJsonObj);
-//
-//            String sendJsonStr = sendJsonObj.toJSONString();
-//            this.writeLog("签字意见接口发送数据：" + sendJsonStr);
-//
-//            // 调用签字意见接口
-//            String returnJson = HlConnUtil.sendPost(HlConnUtil.URL, sendJsonStr);
-//            this.writeLog("推送签字意见接口返回： " + returnJson);
-//
-//            JSONObject returnJsonObj = JSONObject.parseObject(returnJson);
-//            String code = returnJsonObj.getString("code");
-//            if (!"200".equals(code)) {
-//                // 写入错误信息表
-//            }
+//                JSONObject returnJsonObj = JSONObject.parseObject(returnJson);
+//                String code = returnJsonObj.getString("code");
+//                if (!"200".equals(code)) {
+//                    // 写入错误信息表
+//                }
+            }
+            this.writeLog("异步推送签字意见End================");
+
         } catch (Exception e) {
             this.writeLog("推送状态异常： " + e);
         }
