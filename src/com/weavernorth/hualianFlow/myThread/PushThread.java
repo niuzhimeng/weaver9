@@ -45,9 +45,9 @@ public class PushThread extends BaseBean implements Runnable {
             Thread.sleep(3000);
             this.writeLog("nodeId: " + nodeId + " nodeName: " + nodeName);
             RecordSet recordSet = new RecordSet();
-            recordSet.executeQuery("SELECT requestid,nodeid,logtype,operatedate + ' ' + operatetime operdatetime,operator," +
-                    " receivedpersonids,receivedPersons,remark FROM workflow_requestLog WHERE requestid = ? AND nodeid = ? " +
-                    " ORDER BY operdatetime ASC", this.requestId, this.nodeId);
+            recordSet.executeQuery("SELECT r.requestid,r.nodeid,r.logtype,r.operatedate + ' ' + r.operatetime operdatetime,r.operator,r.receivedpersonids,r.receivedPersons,r.remark,r.destnodeid," +
+                    "n.nodename destnodename,n.isstart,n.isend FROM workflow_requestLog r LEFT JOIN workflow_nodebase n ON r.destnodeid = n.id WHERE r.requestid = ? AND r.nodeid = ? " +
+                    "ORDER BY operdatetime ASC", requestId, nodeId);
             while (recordSet.next()) {
                 String logType = logTypeMap.get(recordSet.getString("logtype")); // 操作类型
                 String operDatetime = recordSet.getString("operdatetime"); // 操作时间
@@ -56,8 +56,16 @@ public class PushThread extends BaseBean implements Runnable {
                 String receivedPersons = recordSet.getString("receivedPersons"); // 接收人姓名
 
                 String remark = HlConnUtil.getRemarkStr(recordSet.getString("remark")); // 签字意见
-                this.writeLog("操作类型： " + logType + " 操作时间： " + operDatetime + " 操作者： " + operator);
-                this.writeLog("接收人id： " + receivedpersonids + " 接收人姓名： " + receivedPersons + " 签字意见： " + remark);
+                String destnodeid = recordSet.getString("destnodeid"); // 下一节点id
+                String destnodename = recordSet.getString("destnodename"); // 下一节点名称
+                String isstart = recordSet.getString("isstart"); // 下一节点是否为创建节点 0：否，1：是
+                String isend = recordSet.getString("isend"); // 下一节点是否为归档节点	 0：否，1：是
+
+                String destNodeType = getDestNodeType(isstart, isend);
+                this.writeLog("操作类型： " + logType + " 操作时间： " + operDatetime + " 操作者： " + operator +
+                        " 接收人id： " + receivedpersonids + " 接收人姓名： " + receivedPersons + " 签字意见： " + remark +
+                        " 下一节点id: " + destnodeid + " 下一节点名称: " + destnodename + " 下一节点类型: " + destNodeType
+                );
             }
 
 //            JSONObject sendJsonObj = new JSONObject(true);
@@ -69,7 +77,7 @@ public class PushThread extends BaseBean implements Runnable {
 //
 //            JSONObject dataJsonObj = new JSONObject(true);
 //            dataJsonObj.put("ExtInstanceID", requestId);
-//            dataJsonObj.put("Result", "1"); // 1:审批通过；2：驳回；3：超时；4：最终审批通过
+ //          dataJsonObj.put("Result", getSendType(isstart, isend)); // 1:审批通过；2：驳回；3：超时；4：最终审批通过
 //            dataJsonObj.put("CreateDate", TimeUtil.getCurrentTimeString());
 //            dataJsonObj.put("LoginName", "");
 //            dataJsonObj.put("Description", "remarkStr");
@@ -91,6 +99,34 @@ public class PushThread extends BaseBean implements Runnable {
         } catch (Exception e) {
             this.writeLog("推送状态异常： " + e);
         }
+    }
+
+    /**
+     * 获取发送类型
+     * 1:审批通过；2：驳回；3：超时；4：最终审批通过
+     */
+    private String getSendType(String isStart, String isEnd) {
+        String nodeType = "1";
+        if ("1".equals(isStart)) {
+            nodeType = "2";
+        } else if ("1".equals(isEnd)) {
+            nodeType = "4";
+        }
+        return nodeType;
+    }
+
+    /**
+     * 获取下一节点类型
+     */
+    private String getDestNodeType(String isStart, String isEnd) {
+        String nodeType = "中间节点";
+        if ("1".equals(isStart)) {
+            nodeType = "创建节点";
+        } else if ("1".equals(isEnd)) {
+            nodeType = "归档节点";
+        }
+
+        return nodeType;
     }
 
     public String getOperateType() {

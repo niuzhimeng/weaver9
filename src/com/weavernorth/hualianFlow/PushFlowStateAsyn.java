@@ -2,15 +2,11 @@ package com.weavernorth.hualianFlow;
 
 import com.alibaba.fastjson.JSONObject;
 import com.weavernorth.hualianFlow.myThread.PushThread;
-import com.weavernorth.hualianFlow.util.HlConnUtil;
-import org.apache.commons.codec.binary.Base64;
 import weaver.conn.RecordSet;
-import weaver.general.TimeUtil;
-import weaver.hrm.User;
 import weaver.soa.workflow.request.RequestInfo;
 import weaver.workflow.action.BaseAction;
 
-import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -21,13 +17,14 @@ import java.util.concurrent.TimeUnit;
  */
 public class PushFlowStateAsyn extends BaseAction {
 
-    private static final ExecutorService executorService = new ThreadPoolExecutor(5, 5,
+    private static final ExecutorService executorService = new ThreadPoolExecutor(5, 10,
             0L, TimeUnit.MILLISECONDS,
-            new LinkedBlockingQueue<>(1024));
+            new LinkedBlockingQueue<>(512));
 
     @Override
     public String execute(RequestInfo requestInfo) {
         String requestId = requestInfo.getRequestid();
+
         int nodeId = requestInfo.getRequestManager().getNodeid();
         String nodeName = getColumn("nodename", "workflow_nodebase", "id", String.valueOf(nodeId));
         String operateType = requestInfo.getRequestManager().getSrc();
