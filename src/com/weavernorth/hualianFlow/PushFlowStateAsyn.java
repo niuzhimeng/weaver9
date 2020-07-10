@@ -27,6 +27,14 @@ public class PushFlowStateAsyn extends BaseAction {
         int nodeId = requestInfo.getRequestManager().getNodeid();
         String operateType = requestInfo.getRequestManager().getSrc();
         User user = requestInfo.getRequestManager().getUser();
+        int formId = requestInfo.getRequestManager().getFormid();
+        String tableName = "";
+        RecordSet recordSet = new RecordSet();
+        recordSet.executeQuery("SELECT tablename FROM workflow_bill WHERE id = '" + formId + "'");
+        if (recordSet.next()) {
+            tableName = recordSet.getString("tablename");
+        }
+
         try {
             String nodeName = getColumn("nodename", "workflow_nodebase", "id", String.valueOf(nodeId));
             PushThread pushThread = new PushThread();
@@ -35,6 +43,8 @@ public class PushFlowStateAsyn extends BaseAction {
             pushThread.setNodeName(nodeName);
             pushThread.setOperateType(operateType);
             pushThread.setUser(user);
+
+            pushThread.setTableName(tableName);
 
             executorService.execute(pushThread);
         } catch (Exception e) {

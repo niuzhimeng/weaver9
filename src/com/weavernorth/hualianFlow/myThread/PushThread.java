@@ -2,9 +2,11 @@ package com.weavernorth.hualianFlow.myThread;
 
 import com.alibaba.fastjson.JSONObject;
 import com.weavernorth.hualianFlow.util.HlConnUtil;
+import org.apache.commons.lang.StringUtils;
 import weaver.conn.RecordSet;
 import weaver.general.BaseBean;
 import weaver.general.TimeUtil;
+import weaver.general.Util;
 import weaver.hrm.User;
 
 import java.util.HashMap;
@@ -17,6 +19,8 @@ public class PushThread extends BaseBean implements Runnable {
     private String nodeName; // 节点名称
     private String operateType; // 操作类型 submit reject
     private User user; // 操作人
+
+    private String tableName; // 流程表名
 
     private static Map<String, String> logTypeMap = new HashMap<>();
 
@@ -46,14 +50,28 @@ public class PushThread extends BaseBean implements Runnable {
     @Override
     public void run() {
         try {
-            this.writeLog("异步推送签字意见Start================");
+            this.writeLog("异步推送签字意见Start================" + requestId);
             Thread.sleep(3000);
             String currentDate = TimeUtil.getCurrentDateString().replace("-", "");
+            RecordSet updateSet = new RecordSet();
             RecordSet recordSet = new RecordSet();
-            recordSet.executeQuery("SELECT r.requestid,r.nodeid,r.logtype,r.operatedate + ' ' + r.operatetime operdatetime,r.operator,r.receivedpersonids,r.receivedPersons,r.remark,r.destnodeid," +
+            // 查询已推送logid
+            recordSet.executeQuery("select logid from " + tableName + " where requestid = ?", requestId);
+            recordSet.next();
+            String alreadyLogId = Util.null2String(recordSet.getString("logid")).trim();
+
+            recordSet.executeQuery("SELECT r.logid,r.requestid,r.nodeid,r.logtype,r.operatedate + ' ' + r.operatetime operdatetime,r.operator,r.receivedpersonids,r.receivedPersons,r.remark,r.destnodeid," +
                     "n.nodename destnodename,n.isstart,n.isend FROM workflow_requestLog r LEFT JOIN workflow_nodebase n ON r.destnodeid = n.id WHERE r.requestid = ? AND r.nodeid = ? " +
                     "ORDER BY operdatetime ASC", requestId, nodeId);
+            // 本次推送的logId
+            StringBuilder stringBuilder = new StringBuilder();
             while (recordSet.next()) {
+                String currentLogId = recordSet.getString("logid"); // 日志id，防止重复推送
+                if (alreadyLogId.contains("," + currentLogId + ",")) {
+                    continue;
+                }
+                stringBuilder.append(currentLogId).append(",");
+
                 String logType = logTypeMap.get(recordSet.getString("logtype")); // 操作类型
                 String operDatetime = recordSet.getString("operdatetime"); // 操作时间
                 String operator = recordSet.getString("operator"); // 操作者
@@ -84,7 +102,7 @@ public class PushThread extends BaseBean implements Runnable {
                 dataJsonObj.put("Result", getSendType(isstart, isend)); // 1:审批通过；2：驳回；3：超时；4：最终审批通过
                 dataJsonObj.put("CreateDate", TimeUtil.getCurrentTimeString());
                 dataJsonObj.put("LoginName", user.getLoginid());
-                dataJsonObj.put("Description", "节点名称： " + nodeName + " 操作类型： " + logType + " 操作时间： " + operDatetime +
+                dataJsonObj.put("Description", "节点名称： " + nodeName + " 操作类型： " + logType +
                         "操作人：" + user.getLastname() + "签字意见： " + remark);
 
                 sendJsonObj.put("Approve", dataJsonObj);
@@ -102,6 +120,17 @@ public class PushThread extends BaseBean implements Runnable {
 //                    // 写入错误信息表
 //                }
             }
+
+            // 更新-已推送logId
+            String logIds = stringBuilder.toString();
+            if (StringUtils.isBlank(alreadyLogId)) {
+                logIds = "," + logIds;
+            } else {
+                logIds = alreadyLogId + logIds;
+            }
+
+            updateSet.executeUpdate("update " + tableName + " set logid = ? where requestid = ?", logIds.trim(), requestId);
+
             this.writeLog("异步推送签字意见End================");
         } catch (Exception e) {
             this.writeLog("异步推送推送状态异常： " + e);
@@ -134,6 +163,14 @@ public class PushThread extends BaseBean implements Runnable {
         }
 
         return nodeType;
+    }
+
+    public String getTableName() {
+        return tableName;
+    }
+
+    public void setTableName(String tableName) {
+        this.tableName = tableName;
     }
 
     public User getUser() {
