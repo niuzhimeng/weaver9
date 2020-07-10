@@ -5,6 +5,7 @@ import com.weavernorth.hualianFlow.util.HlConnUtil;
 import weaver.conn.RecordSet;
 import weaver.general.BaseBean;
 import weaver.general.TimeUtil;
+import weaver.hrm.User;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,6 +16,7 @@ public class PushThread extends BaseBean implements Runnable {
     private String nodeId; // 节点id
     private String nodeName; // 节点名称
     private String operateType; // 操作类型 submit reject
+    private User user; // 操作人
 
     private static Map<String, String> logTypeMap = new HashMap<>();
 
@@ -81,8 +83,9 @@ public class PushThread extends BaseBean implements Runnable {
                 dataJsonObj.put("ExtInstanceID", requestId);
                 dataJsonObj.put("Result", getSendType(isstart, isend)); // 1:审批通过；2：驳回；3：超时；4：最终审批通过
                 dataJsonObj.put("CreateDate", TimeUtil.getCurrentTimeString());
-                dataJsonObj.put("LoginName", "");
-                dataJsonObj.put("Description", "remarkStr");
+                dataJsonObj.put("LoginName", user.getLoginid());
+                dataJsonObj.put("Description", "节点名称： " + nodeName + " 操作类型： " + logType + " 操作时间： " + operDatetime +
+                        "操作人：" + user.getLastname() + "签字意见： " + remark);
 
                 sendJsonObj.put("Approve", dataJsonObj);
 
@@ -90,8 +93,8 @@ public class PushThread extends BaseBean implements Runnable {
                 this.writeLog("签字意见接口发送数据：" + sendJsonStr);
 
                 // 调用签字意见接口
-//                String returnJson = HlConnUtil.sendPost(HlConnUtil.URL, sendJsonStr);
-//                this.writeLog("推送签字意见接口返回： " + returnJson);
+                String returnJson = HlConnUtil.sendPost(HlConnUtil.URL, sendJsonStr);
+                this.writeLog("推送签字意见接口返回： " + returnJson);
 //
 //                JSONObject returnJsonObj = JSONObject.parseObject(returnJson);
 //                String code = returnJsonObj.getString("code");
@@ -100,9 +103,8 @@ public class PushThread extends BaseBean implements Runnable {
 //                }
             }
             this.writeLog("异步推送签字意见End================");
-
         } catch (Exception e) {
-            this.writeLog("推送状态异常： " + e);
+            this.writeLog("异步推送推送状态异常： " + e);
         }
     }
 
@@ -132,6 +134,14 @@ public class PushThread extends BaseBean implements Runnable {
         }
 
         return nodeType;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getOperateType() {

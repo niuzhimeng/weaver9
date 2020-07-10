@@ -2,6 +2,7 @@ package com.weavernorth.hualianFlow;
 
 import com.weavernorth.hualianFlow.myThread.PushThread;
 import weaver.conn.RecordSet;
+import weaver.hrm.User;
 import weaver.soa.workflow.request.RequestInfo;
 import weaver.workflow.action.BaseAction;
 
@@ -25,6 +26,7 @@ public class PushFlowStateAsyn extends BaseAction {
         String requestId = requestInfo.getRequestid();
         int nodeId = requestInfo.getRequestManager().getNodeid();
         String operateType = requestInfo.getRequestManager().getSrc();
+        User user = requestInfo.getRequestManager().getUser();
         try {
             String nodeName = getColumn("nodename", "workflow_nodebase", "id", String.valueOf(nodeId));
             PushThread pushThread = new PushThread();
@@ -32,6 +34,8 @@ public class PushFlowStateAsyn extends BaseAction {
             pushThread.setNodeId(String.valueOf(nodeId));
             pushThread.setNodeName(nodeName);
             pushThread.setOperateType(operateType);
+            pushThread.setUser(user);
+
             executorService.execute(pushThread);
         } catch (Exception e) {
             this.writeLog("流程状态推送 异常： " + e);
