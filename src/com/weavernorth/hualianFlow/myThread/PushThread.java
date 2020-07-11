@@ -77,6 +77,9 @@ public class PushThread extends BaseBean implements Runnable {
                 String operator = recordSet.getString("operator"); // 操作者
                 String receivedpersonids = recordSet.getString("receivedpersonids"); // 接收人id
                 String receivedPersons = recordSet.getString("receivedPersons"); // 接收人姓名
+                if (receivedPersons.endsWith(",")) {
+                    receivedPersons = receivedPersons.substring(0, receivedPersons.length() - 1);
+                }
 
                 String remark = HlConnUtil.getRemarkStr(recordSet.getString("remark")); // 签字意见
                 String destnodeid = recordSet.getString("destnodeid"); // 下一节点id
@@ -85,10 +88,11 @@ public class PushThread extends BaseBean implements Runnable {
                 String isend = recordSet.getString("isend"); // 下一节点是否为归档节点	 0：否，1：是
 
                 String destNodeType = getDestNodeType(isstart, isend);
+                String operatorName = getColumn("lastname", "hrmresource", "id", operator); // 操作者姓名
                 this.writeLog("--------------------------");
-                this.writeLog("节点名称： " + nodeName + " 操作类型： " + logType + " 操作时间： " + operDatetime + " 操作者： " + operator +
-                        " 接收人id： " + receivedpersonids + " 接收人姓名： " + receivedPersons + " 签字意见： " + remark +
-                        " 下一节点id: " + destnodeid + " 下一节点名称: " + destnodename + " 下一节点类型: " + destNodeType);
+                this.writeLog("节点名称： " + nodeName + " 操作类型： " + logType + " 操作时间： " + operDatetime + " 操作者id： " + operator +
+                        "操作者姓名：" + operatorName + " 接收人id： " + receivedpersonids + " 接收人姓名： " + receivedPersons + " 签字意见： " +
+                        remark + " 下一节点id: " + destnodeid + " 下一节点名称: " + destnodename + " 下一节点类型: " + destNodeType);
 
                 JSONObject sendJsonObj = new JSONObject(true);
                 sendJsonObj.put("appid", HlConnUtil.APP_ID);
@@ -102,8 +106,9 @@ public class PushThread extends BaseBean implements Runnable {
                 dataJsonObj.put("Result", getSendType(isstart, isend)); // 1:审批通过；2：驳回；3：超时；4：最终审批通过
                 dataJsonObj.put("CreateDate", TimeUtil.getCurrentTimeString());
                 dataJsonObj.put("LoginName", user.getLoginid());
-                dataJsonObj.put("Description", "节点名称： " + nodeName + " 操作类型： " + logType +
-                        "操作人：" + user.getLastname() + "签字意见： " + remark);
+                dataJsonObj.put("Description", "节点名称： " + nodeName + "；操作类型： " + logType +
+                        "；操作人：" + operatorName + "；签字意见： " + remark + "；接收人：" + receivedPersons +
+                        "；下节点名称： " + destnodename + "；下节点类型： " + destNodeType);
 
                 sendJsonObj.put("Approve", dataJsonObj);
 
@@ -163,6 +168,21 @@ public class PushThread extends BaseBean implements Runnable {
         }
 
         return nodeType;
+    }
+
+    /**
+     * 根据某个字段查询另一个字段
+     *
+     * @param col        要查询的列名
+     * @param tableName  表名
+     * @param whereLeft  where条件 例：where name = 'nzm' 中的 name
+     * @param whereRight where条件 例：where name = 'nzm' 中的 'nzm'
+     */
+    private String getColumn(String col, String tableName, String whereLeft, String whereRight) {
+        RecordSet recordSet = new RecordSet();
+        recordSet.executeQuery("select " + col + " from " + tableName + " where " + whereLeft + " = '" + whereRight + "'");
+        recordSet.next();
+        return recordSet.getString(col);
     }
 
     public String getTableName() {
