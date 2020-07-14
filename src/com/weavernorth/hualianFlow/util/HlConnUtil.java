@@ -171,6 +171,7 @@ public class HlConnUtil {
             Response response = call.execute();
             returnStr = response.body().string();
         } catch (IOException e) {
+            returnStr = "error:" + e;
             log.error("签字意见发送异常sendPost() " + e);
         }
         return returnStr;
@@ -211,7 +212,7 @@ public class HlConnUtil {
                 .replace("&lt;", "<")
                 .replace("&gt;", ">")
                 .replace("&amp;", "&")
-                .replace("&quot;", "\\\"")
+                .replace("&quot;", "\"")
                 .replace("&apos;", "'")
                 .replace("&#39;", "'");
     }

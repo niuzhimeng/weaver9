@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class PushFlowStateAsyn extends BaseAction {
 
-    private static final ExecutorService executorService = new ThreadPoolExecutor(5, 10,
+    private static final ExecutorService executorService = new ThreadPoolExecutor(10, 15,
             0L, TimeUnit.MILLISECONDS,
             new LinkedBlockingQueue<>(512));
 

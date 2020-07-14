@@ -22,6 +22,9 @@ public class PushThread extends BaseBean implements Runnable {
 
     private String tableName; // 流程表名
 
+    private static final String INSERT_ERR_SQL = "insert into uf_err_log(logid, myRequestid, sendType, operDatetime, loginid," +
+            " description, returnInfo, rePushCount) values(?,?,?,?,?, ?,?,?)";
+
     private static Map<String, String> logTypeMap = new HashMap<>();
 
     static {
@@ -74,6 +77,7 @@ public class PushThread extends BaseBean implements Runnable {
 
                 String logType = logTypeMap.get(recordSet.getString("logtype")); // 操作类型
                 String operDatetime = recordSet.getString("operdatetime"); // 操作时间
+
                 String operator = recordSet.getString("operator"); // 操作者
                 String receivedpersonids = recordSet.getString("receivedpersonids"); // 接收人id
                 String receivedPersons = recordSet.getString("receivedPersons"); // 接收人姓名
@@ -89,10 +93,10 @@ public class PushThread extends BaseBean implements Runnable {
 
                 String destNodeType = getDestNodeType(isstart, isend);
                 String operatorName = getColumn("lastname", "hrmresource", "id", operator); // 操作者姓名
-                this.writeLog("--------------------------");
-                this.writeLog("节点名称： " + nodeName + " 操作类型： " + logType + " 操作时间： " + operDatetime + " 操作者id： " + operator +
-                        "操作者姓名：" + operatorName + " 接收人id： " + receivedpersonids + " 接收人姓名： " + receivedPersons + " 签字意见： " +
-                        remark + " 下一节点id: " + destnodeid + " 下一节点名称: " + destnodename + " 下一节点类型: " + destNodeType);
+//                this.writeLog("--------------------------");
+//                this.writeLog("节点名称： " + nodeName + " 操作类型： " + logType + " 操作时间： " + operDatetime + " 操作者id： " + operator +
+//                        "操作者姓名：" + operatorName + " 接收人id： " + receivedpersonids + " 接收人姓名： " + receivedPersons + " 签字意见： " +
+//                        remark + " 下一节点id: " + destnodeid + " 下一节点名称: " + destnodename + " 下一节点类型: " + destNodeType);
 
                 JSONObject sendJsonObj = new JSONObject(true);
                 sendJsonObj.put("appid", HlConnUtil.APP_ID);
@@ -101,14 +105,18 @@ public class PushThread extends BaseBean implements Runnable {
                 sendJsonObj.put("format", "json");
                 sendJsonObj.put("userip", HlConnUtil.USER_IP);
 
+                String sendType = getSendType(isstart, isend);
+                String loginId = user.getLoginid();
+                String description = "节点名称： " + nodeName + "；操作类型： " + logType +
+                        "；操作人：" + operatorName + "；签字意见： " + remark + "；接收人：" + receivedPersons +
+                        "；下节点名称： " + destnodename + "；下节点类型： " + destNodeType;
+
                 JSONObject dataJsonObj = new JSONObject(true);
                 dataJsonObj.put("ExtInstanceID", requestId);
-                dataJsonObj.put("Result", getSendType(isstart, isend)); // 1:审批通过；2：驳回；3：超时；4：最终审批通过
-                dataJsonObj.put("CreateDate", TimeUtil.getCurrentTimeString());
-                dataJsonObj.put("LoginName", user.getLoginid());
-                dataJsonObj.put("Description", "节点名称： " + nodeName + "；操作类型： " + logType +
-                        "；操作人：" + operatorName + "；签字意见： " + remark + "；接收人：" + receivedPersons +
-                        "；下节点名称： " + destnodename + "；下节点类型： " + destNodeType);
+                dataJsonObj.put("Result", sendType); // 1:审批通过；2：驳回；3：超时；4：最终审批通过
+                dataJsonObj.put("CreateDate", operDatetime); // 审批时间
+                dataJsonObj.put("LoginName", loginId);
+                dataJsonObj.put("Description", description);
 
                 sendJsonObj.put("Approve", dataJsonObj);
 
@@ -118,12 +126,21 @@ public class PushThread extends BaseBean implements Runnable {
                 // 调用签字意见接口
                 String returnJson = HlConnUtil.sendPost(HlConnUtil.URL, sendJsonStr);
                 this.writeLog("推送签字意见接口返回： " + returnJson);
-//
-//                JSONObject returnJsonObj = JSONObject.parseObject(returnJson);
-//                String code = returnJsonObj.getString("code");
-//                if (!"200".equals(code)) {
-//                    // 写入错误信息表
-//                }
+                if (returnJson.startsWith("error")) {
+                    // 接口调用异常  写入错误信息表
+                    updateSet.executeUpdate(INSERT_ERR_SQL,
+                            currentLogId, requestId, sendType, operDatetime, loginId,
+                            description, "接口调用异常" + returnJson, "0");
+                } else {
+                    JSONObject returnJsonObj = JSONObject.parseObject(returnJson);
+                    String code = returnJsonObj.getString("code");
+                    if (!"200".equals(code)) {
+                        // 写入错误信息表
+                        updateSet.executeUpdate(INSERT_ERR_SQL,
+                                currentLogId, requestId, sendType, operDatetime, loginId,
+                                description, returnJson, "0");
+                    }
+                }
             }
 
             // 更新-已推送logId
