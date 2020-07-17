@@ -62,7 +62,7 @@ public class HlConnUtil {
             long longValue = getLongValue(currentTime);
             long result = currentTimeMillis - longValue;
             long min = result / 1000 / 60;
-            if (min > 5) {
+            if (min > 30) {
                 return createReturnObj("1", "认证失败-token已过期");
             }
 
@@ -78,7 +78,7 @@ public class HlConnUtil {
             workCode = StringUtils.isBlank(workCode) ? "error" : workCode;
             recordSet.executeQuery("select id from hrmresource where loginid = ?", workCode);
             if (!recordSet.next()) {
-                return createReturnObj("1", "创建人工号不存在");
+                return createReturnObj("1", "创建人登录名不存在");
             }
         } catch (Exception e) {
             log.error("apiCheck异常： " + e);
