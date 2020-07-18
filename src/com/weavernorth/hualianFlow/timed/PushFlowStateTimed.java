@@ -31,7 +31,7 @@ public class PushFlowStateTimed extends BaseCronJob {
             sendJsonObj.put("userip", HlConnUtil.USER_IP);
 
             recordSet.executeQuery("select id, logid, myRequestid, sendType, operDatetime, loginid, description, " +
-                    "returnInfo, rePushCount from uf_err_log where rePushCount < 3");
+                    "returnInfo, rePushCount from uf_err_log where ifsuccess = 1 and rePushCount < 3 ");
             while (recordSet.next()) {
                 String id = recordSet.getString("id");
                 int currentCount = Util.getIntValue(recordSet.getString("rePushCount"), 0);
@@ -69,7 +69,6 @@ public class PushFlowStateTimed extends BaseCronJob {
         } catch (Exception e) {
             log.error("定时推送流程状态异常： " + e);
         }
-
 
         log.info("定时推送流程状态End");
     }
