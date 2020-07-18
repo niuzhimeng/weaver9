@@ -23,7 +23,7 @@ public class PushThread extends BaseBean implements Runnable {
     private String tableName; // 流程表名
 
     private static final String INSERT_ERR_SQL = "insert into uf_err_log(logid, myRequestid, sendType, operDatetime, loginid," +
-            " description, returnInfo, rePushCount) values(?,?,?,?,?, ?,?,?)";
+            " description, returnInfo, rePushCount, ifsuccess) values(?,?,?,?,?, ?,?,?,?)";
 
     private static Map<String, String> logTypeMap = new HashMap<>();
 
@@ -130,7 +130,7 @@ public class PushThread extends BaseBean implements Runnable {
                     // 接口调用异常  写入错误信息表
                     updateSet.executeUpdate(INSERT_ERR_SQL,
                             currentLogId, requestId, sendType, operDatetime, loginId,
-                            description, "接口调用异常" + returnJson, "0");
+                            description, "接口调用异常" + returnJson, "0", "1");
                 } else {
                     JSONObject returnJsonObj = JSONObject.parseObject(returnJson);
                     String code = returnJsonObj.getString("code");
@@ -138,7 +138,7 @@ public class PushThread extends BaseBean implements Runnable {
                         // 写入错误信息表
                         updateSet.executeUpdate(INSERT_ERR_SQL,
                                 currentLogId, requestId, sendType, operDatetime, loginId,
-                                description, returnJson, "0");
+                                description, returnJson, "0", "1");
                     }
                 }
             }
