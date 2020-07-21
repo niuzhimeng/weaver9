@@ -32,6 +32,7 @@ public class PushFlowStateTimed extends BaseCronJob {
 
             recordSet.executeQuery("select id, logid, myRequestid, sendType, operDatetime, loginid, description, " +
                     "returnInfo, rePushCount from uf_err_log where ifsuccess = 1 and rePushCount < 3 ");
+            log.info("可推送签字意见条数： " + recordSet.getCounts());
             while (recordSet.next()) {
                 String id = recordSet.getString("id");
                 int currentCount = Util.getIntValue(recordSet.getString("rePushCount"), 0);
@@ -52,16 +53,19 @@ public class PushFlowStateTimed extends BaseCronJob {
                 log.info("定时任务推送签字意见接口返回： " + returnJson);
                 if (returnJson.startsWith("error")) {
                     // 接口调用异常 推送次数+1
-                    updateSet.executeUpdate("update uf_err_log set rePushCount = ? where id = ?", currentCount, id);
+                    updateSet.executeUpdate("update uf_err_log set rePushCount = ?, returnInfo = ? where id = ?",
+                            currentCount, returnJson, id);
                 } else {
                     JSONObject returnJsonObj = JSONObject.parseObject(returnJson);
                     String code = returnJsonObj.getString("code");
                     if (!"200".equals(code)) {
                         // 接口返回状态为失败，推送次数+1
-                        updateSet.executeUpdate("update uf_err_log set rePushCount = ? where id = ?", currentCount, id);
+                        updateSet.executeUpdate("update uf_err_log set rePushCount = ?, returnInfo = ?  where id = ?",
+                                currentCount, returnJson, id);
                     } else {
                         // 重推成功，更新标记 推送次数+1
-                        updateSet.executeUpdate("update uf_err_log set rePushCount = ?, ifsuccess = 0 where id = ?", currentCount, id);
+                        updateSet.executeUpdate("update uf_err_log set rePushCount = ?, returnInfo = ?, ifsuccess = 0 where id = ?",
+                                currentCount, returnJson, id);
                     }
                 }
             }
