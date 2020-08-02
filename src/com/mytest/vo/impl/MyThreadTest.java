@@ -14,4 +14,9 @@ public class MyThreadTest implements Runnable {
         }
 
     }
+
+    @Deprecated()
+    public void test1(){
+        System.out.println("test1执行");
+    }
 }

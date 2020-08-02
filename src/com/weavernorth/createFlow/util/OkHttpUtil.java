@@ -10,16 +10,16 @@ public class OkHttpUtil {
      * 参数拼接到请求头
      *
      * @param url
-     * @param map
+     * @param herders 请求头参数
      * @return
      */
-    public static String okPost(String url, Map<String, String> map) {
+    public static String okPost(String url, Map<String, String> herders) {
         OkHttpClient okHttpClient = new OkHttpClient();
 
         Request.Builder builder = new Request.Builder()
                 .url(url)
                 .post(new FormBody.Builder().build());
-        map.forEach(builder::header);
+        herders.forEach(builder::header);
         Request request = builder.build();
 
         Call call = okHttpClient.newCall(request);
@@ -45,12 +45,17 @@ public class OkHttpUtil {
     public static String okPostBodyHeader(String url, Map<String, String> body, Map<String, String> herder) {
         OkHttpClient okHttpClient = new OkHttpClient();
         FormBody.Builder bodyBuilder = new FormBody.Builder();
-        body.forEach(bodyBuilder::add);
+        if (body != null) {
+            body.forEach(bodyBuilder::add);
+        }
 
         Request.Builder builder = new Request.Builder()
                 .url(url)
                 .post(bodyBuilder.build());
-        herder.forEach(builder::header);
+        if (herder != null) {
+            herder.forEach(builder::header);
+        }
+
         Request request = builder.build();
 
         Call call = okHttpClient.newCall(request);

@@ -19,6 +19,7 @@ public class WeaverBootTest {
     //你可以对那个报文进行操作，然后在这个方法里return回去
     @WeaReplaceAfter(value = "/api/workflow/reqform/getRequestLogList", order = 1)
     public String after(WeaAfterReplaceParam weaAfterReplaceParam) {
+        
         String data = weaAfterReplaceParam.getData();//这个就是接口执行完的报文
 
         baseBean.writeLog("接口返回json： " + JSONObject.toJSONString(data));

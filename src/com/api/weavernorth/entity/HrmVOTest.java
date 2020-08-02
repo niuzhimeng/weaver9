@@ -1,6 +1,6 @@
-package com.weavernorth.mybatisTest.entity;
+package com.api.weavernorth.entity;
 
-public class HrmVO {
+public class HrmVOTest {
 
     private String loginid;
     private String lastname;
@@ -20,7 +20,7 @@ public class HrmVO {
     private String dsporder;
     private String belongto;
 
-    public HrmVO() {
+    public HrmVOTest() {
     }
 
     public String getLoginid() {

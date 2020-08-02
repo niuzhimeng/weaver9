@@ -6,6 +6,10 @@ import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.metadata.Sheet;
 import com.alibaba.excel.metadata.Table;
 import com.alibaba.excel.support.ExcelTypeEnum;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.cloudstore.dev.api.util.HttpManager;
+import com.mytest.vo.impl.MyThreadTest;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -13,6 +17,9 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.artofsolving.jodconverter.OfficeDocumentConverter;
 import org.artofsolving.jodconverter.office.DefaultOfficeManagerConfiguration;
 import org.artofsolving.jodconverter.office.OfficeManager;
+import org.junit.After;
+import org.junit.Before;
+
 
 import java.awt.*;
 import java.io.BufferedOutputStream;
@@ -246,5 +253,21 @@ public class Test {
                 .replace("&#39;", "'");
     }
 
+    @Before
+    public void myInit() {
+        System.out.println("before执行");
+    }
+
+    @After
+    public void myClose() {
+        System.out.println("close执行");
+    }
+
+    @org.junit.Test
+    public void test45() {
+        MyThreadTest myThreadTest = new MyThreadTest();
+        myThreadTest.test1();
+        System.out.println("test45执行");
+    }
 
 }

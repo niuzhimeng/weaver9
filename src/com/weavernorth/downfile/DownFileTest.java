@@ -18,6 +18,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.StreamingOutput;
 import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Map;
@@ -25,6 +27,7 @@ import java.util.Map;
 public class DownFileTest {
     private static final Log MY_LOG = LogFactory.getLog(DownFileTest.class);
 
+    //好使
     @GET
     @Path("/getDataTest")
     @Produces(MediaType.APPLICATION_JSON)
@@ -36,12 +39,12 @@ public class DownFileTest {
         String contentType = new MimetypesFileTypeMap().getContentType(file);
         return Response
                 .ok(file, contentType)
-                .header("Content-disposition",
-                        "attachment;filename=" + fileName)
+                .header("Content-disposition", "attachment;filename=" + fileName)
                 .header("Cache-Control", "no-cache").build();
 
     }
 
+    // 好使
     @GET
     @Path("/getDataTest1")
     @Produces(MediaType.APPLICATION_JSON)
@@ -54,7 +57,15 @@ public class DownFileTest {
         if (!file.exists()) {
             return Response.status(Response.Status.NOT_FOUND).build();
         } else {
-            StreamingOutput streamingOutput = outputStream -> outputStream.write(FileUtils.readFileToByteArray(file));
+
+            StreamingOutput a =  new StreamingOutput() {
+                @Override
+                public void write(OutputStream output) throws IOException, WebApplicationException {
+                    output.write(FileUtils.readFileToByteArray(file));
+                }
+            };
+
+            StreamingOutput streamingOutput = (OutputStream outputStream) -> outputStream.write(FileUtils.readFileToByteArray(file));
             //Response.ok((StreamingOutput) output -> output.write(FileUtils.readFileToByteArray(file)));
             return Response.ok(streamingOutput, contentType)
                     .header("Content-disposition", "attachment;filename=" + fileName)
@@ -62,6 +73,28 @@ public class DownFileTest {
         }
 
     }
+
+    //
+    @GET
+    @Path("/getDataTest2")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_OCTET_STREAM)
+    public Response getDataTest2(@Context HttpServletRequest request, @Context HttpServletResponse response) throws Exception {
+        String fileName = "测试的文件你23ABC.pdf";
+
+        File file = new File("E:\\WEAVER\\" + fileName);
+        fileName = URLEncoder.encode(fileName, "utf-8");
+        String mimeType = request.getSession().getServletContext().getMimeType(fileName);
+        String contentType = new MimetypesFileTypeMap().getContentType(file);
+        MY_LOG.info("mimeType: " + mimeType);
+        MY_LOG.info("contentType: " + contentType);
+
+
+        return Response.ok()
+                .header("Content-disposition", "attachment;filename=" + fileName)
+                .header("Cache-Control", "no-cache").build();
+    }
+
 
     @POST
     @Path("/updatePerson")
