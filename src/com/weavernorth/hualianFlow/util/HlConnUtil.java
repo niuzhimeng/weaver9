@@ -17,12 +17,13 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class HlConnUtil {
 
-    public static final String URL = "http://10.154.220.206:8081/api/WorkFlow/RequestWorkFlow";
+    public static final String URL = "http://10.154.220.208:8082/api/WorkFlow/RequestWorkFlow";
 
     public static final String URI = "/api/WorkFlow/RequestWorkFlow";
 
@@ -38,6 +39,13 @@ public class HlConnUtil {
     private static final Pattern pattern1 = Pattern.compile(">(.*?)</", Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
 
     private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+
+    private static OkHttpClient okHttpClient = new OkHttpClient.Builder()
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
+            .retryOnConnectionFailure(true)
+            .build();
 
     /**
      * 校验接口调用权限
@@ -156,8 +164,8 @@ public class HlConnUtil {
     }
 
     public static String sendPost(String url, String jsonStr) {
-        OkHttpClient okHttpClient = new OkHttpClient();
-
+        long start = System.currentTimeMillis();
+        log.info("发送json： " + jsonStr);
         //创建一个RequestBody(参数1：数据类型 参数2传递的json串)
         RequestBody requestBody = RequestBody.create(JSON, jsonStr);
         Request.Builder builder = new Request.Builder()
@@ -174,6 +182,8 @@ public class HlConnUtil {
             returnStr = "error:" + e;
             log.error("签字意见发送异常sendPost() " + e);
         }
+        long end = System.currentTimeMillis();
+        log.info("此次调用接口耗时： " + (end - start) / 1000 + "秒");
         return returnStr;
     }
 

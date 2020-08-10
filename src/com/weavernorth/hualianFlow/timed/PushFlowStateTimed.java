@@ -37,13 +37,17 @@ public class PushFlowStateTimed extends BaseCronJob {
                 String id = recordSet.getString("id");
                 int currentCount = Util.getIntValue(recordSet.getString("rePushCount"), 0);
                 currentCount += 1;
-
+                // 审批意见
+                String description = recordSet.getString("description");
+                description = description.replace("&nbsp;", " ")
+                        .replaceAll("\\r", "")
+                        .replaceAll("(?i)<br/*>", " ");
                 JSONObject dataJsonObj = new JSONObject(true);
                 dataJsonObj.put("ExtInstanceID", recordSet.getString("myRequestid"));
                 dataJsonObj.put("Result", recordSet.getString("sendType")); // 1:审批通过；2：驳回；3：超时；4：最终审批通过
                 dataJsonObj.put("CreateDate", recordSet.getString("operDatetime")); // 审批时间
                 dataJsonObj.put("LoginName", recordSet.getString("loginid"));
-                dataJsonObj.put("Description", recordSet.getString("description"));
+                dataJsonObj.put("Description", description);
 
                 sendJsonObj.put("Approve", dataJsonObj);
 
