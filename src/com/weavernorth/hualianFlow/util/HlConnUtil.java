@@ -164,7 +164,6 @@ public class HlConnUtil {
     }
 
     public static String sendPost(String url, String jsonStr) {
-        log.info("发送json： " + jsonStr);
         //创建一个RequestBody(参数1：数据类型 参数2传递的json串)
         RequestBody requestBody = RequestBody.create(JSON, jsonStr);
         Request.Builder builder = new Request.Builder()

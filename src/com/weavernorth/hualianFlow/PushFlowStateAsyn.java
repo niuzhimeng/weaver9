@@ -1,6 +1,7 @@
 package com.weavernorth.hualianFlow;
 
 import weaver.conn.RecordSet;
+import weaver.general.TimeUtil;
 import weaver.general.Util;
 import weaver.hrm.User;
 import weaver.soa.workflow.request.RequestInfo;
@@ -27,16 +28,14 @@ public class PushFlowStateAsyn extends BaseAction {
         }
 
         try {
+            String timeString = TimeUtil.getCurrentTimeString();
             String nodeName = getColumn("nodename", "workflow_nodebase", "id", String.valueOf(nodeId));
-            // 查询已推送logid
-            recordSet.executeQuery("select logid from " + tableName + " where requestid = ?", requestId);
-            recordSet.next();
-            String alreadyLogId = Util.null2String(recordSet.getString("logid")).trim();
+
             // 插入待推送状态表
             recordSet.executeUpdate("insert into uf_push_state(myRequestid, nodeId, nodeName, operateType, loginid, " +
-                            "tableName, logid, ifpush ) values(?,?,?,?,?, ?,?,?)",
+                            "tableName, rq, ifpush ) values(?,?,?,?,?, ?,?,?)",
                     requestId, nodeId, nodeName, operateType, user.getLoginid(),
-                    tableName, alreadyLogId, "1");
+                    tableName, timeString, "1");
         } catch (Exception e) {
             this.writeLog("流程状态推送 异常： " + e);
             requestInfo.getRequestManager().setMessageid("110000");

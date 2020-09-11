@@ -58,12 +58,16 @@ public class FirstPushStateTimed extends BaseCronJob {
             }
             log.info("定时任务推送流程状态Start================" + "待推送节点数量" + counts);
             while (requestLogSet.next()) {
-                String alreadyLogId = Util.null2String(requestLogSet.getString("logid")).trim();
                 String requestId = requestLogSet.getString("myRequestid");
                 String nodeId = requestLogSet.getString("nodeId");
                 String nodeName = requestLogSet.getString("nodeName");
                 String loginId = requestLogSet.getString("loginid");
                 String tableName = requestLogSet.getString("tableName");
+
+                // 查询已推送logid
+                recordSet.executeQuery("select logid from " + tableName + " where requestid = ?", requestId);
+                recordSet.next();
+                String alreadyLogId = Util.null2String(recordSet.getString("logid")).trim();
 
                 // 将该条流程某节点更新为已推送
                 updateSet.executeUpdate("update uf_push_state set ifpush = 0 where myRequestid = ? and nodeId = ?", requestId, nodeId);
