@@ -27,26 +27,16 @@ public class MuBanAction extends BaseAction {
 
             // 查询主表
             recordSet.executeQuery("select * from " + tableName + " where requestid = '" + requestId + "'");
-            if (recordSet.next()) {
-                // 申请人
-                String sqr = recordSet.getString("sqr");
-                // 费用科目
-                String fykm = recordSet.getString("fykm");
-                // 付款金额
-                String fkje = recordSet.getString("fkje");
-                // 付款时间
-                String fksj = recordSet.getString("fksj");
-                // 付款方式
-                String fkfs = recordSet.getString("fkfs");
+            recordSet.next();
+            // 申请人
+            String sqr = recordSet.getString("sqr");
 
-
-            }
 
             this.writeLog("费用报销 End ===============");
         } catch (Exception e) {
-            this.writeLog("费用报销 异常： " + e);
+            this.writeLog("费用报销 Error： " + e);
             requestInfo.getRequestManager().setMessageid("110000");
-            requestInfo.getRequestManager().setMessagecontent("费用报销 异常： " + e);
+            requestInfo.getRequestManager().setMessagecontent("费用报销 Error： " + e);
             return "0";
         }
 
