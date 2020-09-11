@@ -41,9 +41,9 @@ public class HlConnUtil {
     private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
     private static OkHttpClient okHttpClient = new OkHttpClient.Builder()
-            .connectTimeout(30, TimeUnit.SECONDS)
-            .readTimeout(30, TimeUnit.SECONDS)
-            .writeTimeout(30, TimeUnit.SECONDS)
+            .connectTimeout(15, TimeUnit.SECONDS)
+            .readTimeout(15, TimeUnit.SECONDS)
+            .writeTimeout(15, TimeUnit.SECONDS)
             .retryOnConnectionFailure(true)
             .build();
 
@@ -164,7 +164,6 @@ public class HlConnUtil {
     }
 
     public static String sendPost(String url, String jsonStr) {
-        long start = System.currentTimeMillis();
         log.info("发送json： " + jsonStr);
         //创建一个RequestBody(参数1：数据类型 参数2传递的json串)
         RequestBody requestBody = RequestBody.create(JSON, jsonStr);
@@ -182,8 +181,6 @@ public class HlConnUtil {
             returnStr = "error:" + e;
             log.error("签字意见发送异常sendPost() " + e);
         }
-        long end = System.currentTimeMillis();
-        log.info("此次调用接口耗时： " + (end - start) / 1000 + "秒");
         return returnStr;
     }
 

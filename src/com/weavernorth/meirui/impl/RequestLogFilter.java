@@ -13,7 +13,7 @@ public class RequestLogFilter {
 
     private static final Log log = LogFactory.getLog(RequestLogFilter.class);
 
-    @WeaReplaceAfter(value = "/api/workflow/reqform/getRequestLogList", order = 1, description = "")
+    @WeaReplaceAfter(value = "/api/workflow/reqform/getRequestLogList", order = 1)
     public String after(WeaAfterReplaceParam weaAfterReplaceParam) {
 
         String data = weaAfterReplaceParam.getData();//这个就是接口执行完的报文

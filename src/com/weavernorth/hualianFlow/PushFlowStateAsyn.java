@@ -1,24 +1,15 @@
 package com.weavernorth.hualianFlow;
 
-import com.weavernorth.hualianFlow.myThread.PushThread;
 import weaver.conn.RecordSet;
+import weaver.general.Util;
 import weaver.hrm.User;
 import weaver.soa.workflow.request.RequestInfo;
 import weaver.workflow.action.BaseAction;
-
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 /**
  * 流程状态推送-异步
  */
 public class PushFlowStateAsyn extends BaseAction {
-
-    private static final ExecutorService executorService = new ThreadPoolExecutor(10, 15,
-            0L, TimeUnit.MILLISECONDS,
-            new LinkedBlockingQueue<>(512));
 
     @Override
     public String execute(RequestInfo requestInfo) {
@@ -37,16 +28,15 @@ public class PushFlowStateAsyn extends BaseAction {
 
         try {
             String nodeName = getColumn("nodename", "workflow_nodebase", "id", String.valueOf(nodeId));
-            PushThread pushThread = new PushThread();
-            pushThread.setRequestId(requestId);
-            pushThread.setNodeId(String.valueOf(nodeId));
-            pushThread.setNodeName(nodeName);
-            pushThread.setOperateType(operateType);
-            pushThread.setUser(user);
-
-            pushThread.setTableName(tableName);
-
-            executorService.execute(pushThread);
+            // 查询已推送logid
+            recordSet.executeQuery("select logid from " + tableName + " where requestid = ?", requestId);
+            recordSet.next();
+            String alreadyLogId = Util.null2String(recordSet.getString("logid")).trim();
+            // 插入待推送状态表
+            recordSet.executeUpdate("insert into uf_push_state(myRequestid, nodeId, nodeName, operateType, loginid, " +
+                            "tableName, logid, ifpush ) values(?,?,?,?,?, ?,?,?)",
+                    requestId, nodeId, nodeName, operateType, user.getLoginid(),
+                    tableName, alreadyLogId, "1");
         } catch (Exception e) {
             this.writeLog("流程状态推送 异常： " + e);
             requestInfo.getRequestManager().setMessageid("110000");

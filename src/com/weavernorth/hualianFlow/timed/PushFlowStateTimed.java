@@ -18,7 +18,6 @@ public class PushFlowStateTimed extends BaseCronJob {
 
     @Override
     public void execute() {
-        log.info("定时推送流程状态Start");
         RecordSet recordSet = new RecordSet();
         RecordSet updateSet = new RecordSet();
         String currentDate = TimeUtil.getCurrentDateString().replace("-", "");
@@ -32,7 +31,11 @@ public class PushFlowStateTimed extends BaseCronJob {
 
             recordSet.executeQuery("select id, logid, myRequestid, sendType, operDatetime, loginid, description, " +
                     "returnInfo, rePushCount from uf_err_log where ifsuccess = 1 and rePushCount < 3 ");
-            log.info("可推送签字意见条数： " + recordSet.getCounts());
+            int counts = recordSet.getCounts();
+            if (counts <= 0) {
+                return;
+            }
+            log.info("流程状态再次推送Start===============可推送签字意见条数： " + counts);
             while (recordSet.next()) {
                 String id = recordSet.getString("id");
                 int currentCount = Util.getIntValue(recordSet.getString("rePushCount"), 0);
@@ -75,9 +78,9 @@ public class PushFlowStateTimed extends BaseCronJob {
             }
 
         } catch (Exception e) {
-            log.error("定时推送流程状态异常： " + e);
+            log.error("流程状态再次推送异常： " + e);
         }
 
-        log.info("定时推送流程状态End");
+        log.info("流程状态再次推送End");
     }
 }
