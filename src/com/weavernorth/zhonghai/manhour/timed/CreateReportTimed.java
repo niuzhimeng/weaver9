@@ -23,7 +23,7 @@ public class CreateReportTimed extends BaseCronJob {
 
         // 8-9月的 叫9月份报表; 9-10 的叫10月报表
         try {
-            // 生成 【当前月】-【当前月+1】 的报表
+            // 生成 【当前月】-【当前月-1】 的报表
             LocalDate nowDate = LocalDate.now();
             int year = nowDate.getYear();
             int month = nowDate.getMonthValue();
