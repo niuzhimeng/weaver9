@@ -10,9 +10,33 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.time.temporal.ChronoUnit.DAYS;
+
 public class ManHourUtil {
 
     private static final Log MY_LOG = LogFactory.getLog(ManHourUtil.class);
+
+    /**
+     * 获取当前考勤区间
+     */
+    public static LocalDate[] getCurrentRange() {
+        // 生成 【当前月】-【当前月-1】 的报表
+        LocalDate nowDate = LocalDate.now();
+        int year = nowDate.getYear();
+        int month = nowDate.getMonthValue();
+        int day = nowDate.getDayOfMonth();
+        if (day >= 24) {
+            // 生成 【当前月】-【当前月+1】 的报表
+            LocalDate alterDate = nowDate.plusMonths(1);
+            year = alterDate.getYear();
+            month = alterDate.getMonthValue();
+        }
+
+        // 计算两个日期间的工作日 上月24 - 本月23
+        LocalDate endDate = LocalDate.of(year, month, 23);
+        LocalDate startDate = endDate.minusMonths(1).plusDays(1);
+        return new LocalDate[]{startDate, endDate};
+    }
 
     /**
      * 计算期间的工作日天数
@@ -27,9 +51,9 @@ public class ManHourUtil {
         MY_LOG.info("查询节假日表sql： " + selectSql);
         recordSet.executeQuery(selectSql);
         // 工作日集合
-        List<String> workdaysList = new ArrayList<>(recordSet.getCounts());
+        List<String> workdaysList = new ArrayList<>();
         // 休息日集合（节假日 + 调配休息日）
-        List<String> restList = new ArrayList<>(recordSet.getCounts());
+        List<String> restList = new ArrayList<>();
         while (recordSet.next()) {
             // 1-公众假日 2-调配工作日 3-调配休息日
             int changeType = recordSet.getInt("changeType");
@@ -43,9 +67,12 @@ public class ManHourUtil {
 
         // 工作日天数
         int count = 0;
-        while (startDate.isBefore(endDate) || startDate.isEqual(endDate)) {
+        long betweenDays = DAYS.between(startDate, endDate);
+        for (int i = 0; i <= betweenDays; i++) {
             String dataStr = startDate.toString();
             DayOfWeek week = startDate.getDayOfWeek();
+
+            startDate = startDate.plusDays(1);
             if (restList.contains(dataStr)) {
                 continue;
             }
@@ -54,8 +81,8 @@ public class ManHourUtil {
             } else if (week != DayOfWeek.SATURDAY && week != DayOfWeek.SUNDAY) {
                 count++;
             }
-            startDate = startDate.plusDays(1);
         }
+
         return count;
     }
 

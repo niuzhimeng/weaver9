@@ -1,6 +1,7 @@
 package com.weavernorth.zhonghai.manhour.timed;
 
 import com.weavernorth.zhonghai.manhour.util.ManHourUtil;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import weaver.conn.RecordSet;
@@ -23,25 +24,19 @@ public class CreateReportTimed extends BaseCronJob {
 
         // 8-9月的 叫9月份报表; 9-10 的叫10月报表
         try {
-            // 生成 【当前月】-【当前月-1】 的报表
-            LocalDate nowDate = LocalDate.now();
-            int year = nowDate.getYear();
-            int month = nowDate.getMonthValue();
-            int day = nowDate.getDayOfMonth();
-            if (day >= 24) {
-                // 生成 【当前月】-【当前月+1】 的报表
-                LocalDate alterDate = nowDate.plusMonths(1);
-                year = alterDate.getYear();
-                month = alterDate.getMonthValue();
-            }
-
-            // 计算两个日期间的工作日 上月24 - 本月23
-            LocalDate endDate = LocalDate.of(year, month, 23);
-            LocalDate startDate = endDate.minusMonths(1).plusDays(1);
+            // 获取当前考勤区间
+            LocalDate[] currentRange = ManHourUtil.getCurrentRange();
+            LocalDate startDate = currentRange[0];
+            LocalDate endDate = currentRange[1];
+            int year = endDate.getYear();
+            int month = endDate.getMonthValue();
+            MY_LOG.info("报表区间： " + startDate.toString() + " 至 " + endDate.toString());
+            MY_LOG.info("报表年： " + year + " 报表月 " + month);
 
             int workdays = ManHourUtil.getWorkdays(startDate, endDate);
+            MY_LOG.info("区间内全部工作日天数：" + workdays);
             int hour = workdays * 8;
-            MY_LOG.info(year + "-" + month + "-23 至上月24号工作日天数：" + workdays + ", 工时: " + hour);
+            MY_LOG.info("标准工时: " + hour);
 
             RecordSet recordSet = new RecordSet();
             RecordSet updateSet = new RecordSet();
@@ -63,10 +58,20 @@ public class CreateReportTimed extends BaseCronJob {
                 String workCode = recordSet.getString("workcode");
                 String departmentId = recordSet.getString("departmentid");
 
-                updateSet.executeUpdate(mainInsertSql,
-                        id, workCode, departmentId, hour, year, month);
+                String companyStartDate = recordSet.getString("companystartdate"); // 入职日期
+                if (StringUtils.isNotBlank(companyStartDate)) {
+                    LocalDate companyDate = LocalDate.parse(companyStartDate);
+                    if (companyDate.isBefore(startDate)) {
+                        // 入职日期在 【区间开始日期】 之前，按满工作日工计算
+                        updateSet.executeUpdate(mainInsertSql,
+                                id, workCode, departmentId, hour, year, month);
+                    }
+                } else {
+                    // 部分老员工没有入职日期，按满工作日工计算
+                    updateSet.executeUpdate(mainInsertSql,
+                            id, workCode, departmentId, hour, year, month);
+                }
             }
-
             MY_LOG.info("生成工时报表定时任务 End");
         } catch (Exception e) {
             MY_LOG.info("生成工时报表定时任务 Error");
