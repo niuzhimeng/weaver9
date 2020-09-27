@@ -26,8 +26,10 @@ public class CreateReportTimed extends BaseCronJob {
         try {
             // 获取当前考勤区间
             LocalDate[] currentRange = ManHourUtil.getCurrentRange();
-            LocalDate startDate = currentRange[0];
-            LocalDate endDate = currentRange[1];
+//            LocalDate startDate = currentRange[0];
+//            LocalDate endDate = currentRange[1];
+            LocalDate startDate = LocalDate.of(2020, 10, 24);
+            LocalDate endDate = LocalDate.of(2020, 11, 23);
             int year = endDate.getYear();
             int month = endDate.getMonthValue();
             MY_LOG.info("报表区间： " + startDate.toString() + " 至 " + endDate.toString());
@@ -57,20 +59,29 @@ public class CreateReportTimed extends BaseCronJob {
                 }
                 String workCode = recordSet.getString("workcode");
                 String departmentId = recordSet.getString("departmentid");
-
                 String companyStartDate = recordSet.getString("companystartdate"); // 入职日期
-                if (StringUtils.isNotBlank(companyStartDate)) {
-                    LocalDate companyDate = LocalDate.parse(companyStartDate);
-                    if (companyDate.isBefore(startDate)) {
-                        // 入职日期在 【区间开始日期】 之前，按满工作日工计算
-                        updateSet.executeUpdate(mainInsertSql,
-                                id, workCode, departmentId, hour, year, month);
-                    }
-                } else {
+
+                if (StringUtils.isBlank(companyStartDate)) {
                     // 部分老员工没有入职日期，按满工作日工计算
                     updateSet.executeUpdate(mainInsertSql,
                             id, workCode, departmentId, hour, year, month);
+                    continue;
                 }
+
+                LocalDate companyDate = LocalDate.parse(companyStartDate);
+                if (companyDate.isBefore(startDate) || companyDate.isEqual(startDate)) {
+                    // 入职日期在 【区间开始日期】 之前，按满工作日工计算
+                    updateSet.executeUpdate(mainInsertSql,
+                            id, workCode, departmentId, hour, year, month);
+                } else if ((companyDate.isAfter(startDate) && companyDate.isBefore(endDate))
+                        || companyDate.isEqual(endDate)) {
+                    // 区间开始日期 < 入职日期 <= 区间结束日期
+                    int workdays1 = ManHourUtil.getWorkdays(companyDate, endDate);
+                    int hour1 = workdays1 * 8;
+                    updateSet.executeUpdate(mainInsertSql,
+                            id, workCode, departmentId, hour1, year, month);
+                }
+
             }
             MY_LOG.info("生成工时报表定时任务 End");
         } catch (Exception e) {
