@@ -2,6 +2,9 @@ package com.weavernorth.zhonghai.manhour.report;
 
 import com.weavernorth.zhonghai.manhour.util.ManHourUtil;
 import weaver.conn.RecordSet;
+import weaver.hrm.companyvirtual.DepartmentVirtualComInfo;
+import weaver.hrm.companyvirtual.ResourceVirtualComInfo;
+import weaver.hrm.companyvirtual.SubCompanyVirtualComInfo;
 import weaver.soa.workflow.request.RequestInfo;
 import weaver.workflow.action.BaseAction;
 
@@ -18,6 +21,9 @@ public class RuZhiAction extends BaseAction {
         String operateType = requestInfo.getRequestManager().getSrc();
         int formId = requestInfo.getRequestManager().getFormid();
         String tableName = "";
+        DepartmentVirtualComInfo departmentVirtualComInfo = new DepartmentVirtualComInfo();
+        SubCompanyVirtualComInfo subCompanyVirtualComInfo = new SubCompanyVirtualComInfo();
+        ResourceVirtualComInfo resourceVirtualComInfo = new ResourceVirtualComInfo();
         RecordSet recordSet = new RecordSet();
         RecordSet updateSet = new RecordSet();
         RecordSet existSet = new RecordSet();
@@ -34,10 +40,22 @@ public class RuZhiAction extends BaseAction {
             String gh = recordSet.getString("gh"); // 工号
             String rzrq = recordSet.getString("rzrq"); // 入职日期
             String xnbm = recordSet.getString("xnbm"); // 虚拟部门
+            String xnfb = departmentVirtualComInfo.getSubcompanyid1(xnbm); // 虚拟分部
+            String virtualType = subCompanyVirtualComInfo.getCompanyid(xnfb);
             String id = getIdByWorkCode(gh); // 人员id
-            this.writeLog("工号： " + gh + ", 入职日期： " + rzrq + ", 虚拟部门: " + xnbm + ", 人员id： " + id);
+            this.writeLog("工号： " + gh + ", 入职日期： " + rzrq + ", 虚拟部门: " + xnbm + ", 虚拟分部：" + xnfb +
+                    "虚拟组织id： " + virtualType + ", 人员id： " + id);
 
             LocalDate companyDate = LocalDate.parse(rzrq);
+
+            int maxId = 0;
+            recordSet.executeQuery("select max(id) from HrmResourceVirtual ");
+            if (recordSet.next()) {
+                maxId = recordSet.getInt(1) + 1;
+            }
+            updateSet.executeUpdate("insert into hrmresourcevirtual(id, resourceid, subcompanyid, departmentid, virtualtype) " +
+                    " values (?, ?, ?, ?, ?)", maxId, id, xnfb, xnbm, virtualType);
+            resourceVirtualComInfo.removeResourceVirtualCache();
 
             this.writeLog("插入虚拟部门完成===========");
             /*

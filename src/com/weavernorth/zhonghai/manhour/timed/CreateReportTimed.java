@@ -26,10 +26,8 @@ public class CreateReportTimed extends BaseCronJob {
         try {
             // 获取当前考勤区间
             LocalDate[] currentRange = ManHourUtil.getCurrentRange();
-//            LocalDate startDate = currentRange[0];
-//            LocalDate endDate = currentRange[1];
-            LocalDate startDate = LocalDate.of(2020, 10, 24);
-            LocalDate endDate = LocalDate.of(2020, 11, 23);
+            LocalDate startDate = currentRange[0];
+            LocalDate endDate = currentRange[1];
             int year = endDate.getYear();
             int month = endDate.getMonthValue();
             MY_LOG.info("报表区间： " + startDate.toString() + " 至 " + endDate.toString());
