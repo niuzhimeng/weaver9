@@ -22,7 +22,7 @@ public class SevenU9WeaverLocator extends org.apache.axis.client.Service impleme
     }
 
     // Use to get a proxy class for SevenU9WeaverSoap12
-    private String SevenU9WeaverSoap12_address = "http://111.160.2.51/SVUW/SevenU9Weaver.asmx";
+    private String SevenU9WeaverSoap12_address = "http://office.chinaseven.com/SVUW/SevenU9Weaver.asmx";
 
     public String getSevenU9WeaverSoap12Address() {
         return SevenU9WeaverSoap12_address;
@@ -67,7 +67,7 @@ public class SevenU9WeaverLocator extends org.apache.axis.client.Service impleme
 
 
     // Use to get a proxy class for SevenU9WeaverSoap
-    private String SevenU9WeaverSoap_address = "http://111.160.2.51/SVUW/SevenU9Weaver.asmx";
+    private String SevenU9WeaverSoap_address = "http://office.chinaseven.com/SVUW/SevenU9Weaver.asmx";
 
     public String getSevenU9WeaverSoapAddress() {
         return SevenU9WeaverSoap_address;
