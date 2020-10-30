@@ -8,8 +8,9 @@ import com.alibaba.excel.metadata.Table;
 import com.alibaba.excel.support.ExcelTypeEnum;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.cloudstore.dev.api.util.HttpManager;
-import com.mytest.vo.impl.MyThreadTest;
+import com.weavernorth.meitanzy.util.MeiTanConfigInfo;
+import com.weavernorth.meitanzy.util.MeiTanZyFtpUtil;
+import org.apache.commons.net.ftp.FTPClient;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -17,24 +18,26 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.artofsolving.jodconverter.OfficeDocumentConverter;
 import org.artofsolving.jodconverter.office.DefaultOfficeManagerConfiguration;
 import org.artofsolving.jodconverter.office.OfficeManager;
-import org.junit.After;
-import org.junit.Before;
-
+import weaver.general.TimeUtil;
+import weaver.general.Util;
 
 import java.awt.*;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static java.time.temporal.ChronoUnit.DAYS;
 
 public class Test {
 
@@ -210,9 +213,11 @@ public class Test {
 
     @org.junit.Test
     public void test44() throws Exception {
-        String str = "<p>&quot;;&#39;{}[]【】【{}】、||\\》</p>";
-        String remarkStr = getRemarkStr(str);
-        System.out.println(remarkStr);
+        String str = "<p &quot;;&#39;{}[]【】【{}】、||>ok</p>";
+        String s = Util.delHtml(str);
+        System.out.println(s);
+//        String remarkStr = getRemarkStr(str);
+//        System.out.println(remarkStr);
     }
 
 
@@ -253,21 +258,161 @@ public class Test {
                 .replace("&#39;", "'");
     }
 
-    @Before
+    @org.junit.Test
     public void myInit() {
-        System.out.println("before执行");
+        LocalDate parse = LocalDate.parse("2020-09-28");
+        LocalDate beforeParse = LocalDate.parse("2020-09-26");
+
+        long daysBetween = DAYS.between(beforeParse, parse);
+        System.out.println(daysBetween);
     }
 
-    @After
+
     public void myClose() {
+        LinkedBlockingQueue<String> strings = new LinkedBlockingQueue<>();
         System.out.println("close执行");
     }
 
     @org.junit.Test
     public void test45() {
-        MyThreadTest myThreadTest = new MyThreadTest();
-        myThreadTest.test1();
-        System.out.println("test45执行");
+        // LocalDate localDate = LocalDate.now();
+        LocalDate localDate = LocalDate.of(2020, 1, 24);
+        int year = localDate.getYear();
+        int month = localDate.getMonthValue();
+        System.out.println(year);
+        System.out.println(month);
+
+        LocalDate beforeDate = localDate.minus(1, ChronoUnit.MONTHS);
+        int beforeYear = beforeDate.getYear();
+        int beforeMonth = beforeDate.getMonthValue();
+        System.out.println(beforeYear);
+        System.out.println(beforeMonth);
     }
+
+    @org.junit.Test
+    public void test46() {
+        // 法定节假日与调休配置表 KQ_HolidaySet
+        //LocalDate localDate = LocalDate.now();
+        //LocalDate localDate = LocalDate.of(2020, 9, 4);
+        LocalDate localDate = LocalDate.parse("2020-09-04");
+        DayOfWeek week = localDate.getDayOfWeek();
+        if (week == DayOfWeek.SATURDAY || week == DayOfWeek.SUNDAY) {
+            System.out.println(localDate.toString() + " ->周末");
+        } else {
+            System.out.println(localDate.toString() + " ->工作日");
+        }
+    }
+
+    @org.junit.Test
+    public void test47() throws FileNotFoundException {
+
+        JSONObject jsonObject = new JSONObject(true);
+        jsonObject.put("contractUniqueId", "合同唯一标识");
+        jsonObject.put("contractType", "合同类型");
+        jsonObject.put("contractSubject", "合同标的");
+        jsonObject.put("contractName", "合同名称");
+        jsonObject.put("contractSelfCode", "合同自编号");
+
+        jsonObject.put("buyMethod", "采购方式");
+        jsonObject.put("bidFile", "中标通知书");
+        jsonObject.put("contractAmount", "合同金额/暂估金额");
+        jsonObject.put("valuationMode", "计价方式");
+        jsonObject.put("currencyName", "币种");
+
+        jsonObject.put("exchangeRate", "汇率");
+        jsonObject.put("amountExplain", "合同金额说明");
+        jsonObject.put("paymentDirection", "收支方向");
+        jsonObject.put("paymentType", "合同收/付款类型");
+        jsonObject.put("paymentMethod", "合同收/付款方式");
+
+        jsonObject.put("signingSubject", "我方签约主体");
+        jsonObject.put("signingSubjectCode", "签约主体编码");
+        jsonObject.put("creatorAccount", "经办人账号");
+        jsonObject.put("creatorName", "经办人名称");
+        jsonObject.put("creatorDeptCode", "经办部门编码");
+
+        jsonObject.put("creatorDeptName", "经办部门");
+        jsonObject.put("performAddress", "合同履行地");
+        jsonObject.put("signAddress", "合同签署地");
+        jsonObject.put("contractPeriod", "合同期限类型");
+        jsonObject.put("performPeriod", "合同履行期限");
+
+        jsonObject.put("periodExplain", "期限说明");
+        jsonObject.put("ourIsAuth", "是否授权（我方）");
+        jsonObject.put("authType", "授权类型");
+
+        // 合同正文
+        JSONArray contractText = new JSONArray();
+        JSONObject zwObj = new JSONObject(true);
+        zwObj.put("filename", "正文名称");
+        zwObj.put("filepath", "附件路径");
+        zwObj.put("createtime", "createtime");
+        zwObj.put("num", "1");
+        contractText.add(zwObj);
+        jsonObject.put("contractText", contractText);
+
+        // 合同审批单
+        JSONArray contractApprovalForm = new JSONArray();
+        JSONObject spdObj = new JSONObject(true);
+        spdObj.put("filename", "正文名称");
+        spdObj.put("filepath", "附件路径");
+        spdObj.put("createtime", "createtime");
+        spdObj.put("num", "1");
+        contractApprovalForm.add(spdObj);
+        jsonObject.put("contractApprovalForm", contractApprovalForm);
+
+        // 相对方联系人
+        JSONArray relOppositeInfoList = new JSONArray();
+        JSONObject xdfObj = new JSONObject(true);
+        xdfObj.put("oppositeUniqueId", "相对方唯一标识");
+        xdfObj.put("oppositeName", "相对方名称");
+        xdfObj.put("oppositeRelName", "相对方联系人");
+        relOppositeInfoList.add(xdfObj);
+        jsonObject.put("relOppositeInfoList", relOppositeInfoList);
+
+        JSONObject allObj = new JSONObject();
+        allObj.put("contractInfo", jsonObject);
+        System.out.println(allObj.toJSONString());
+    }
+
+    @org.junit.Test
+    public void test48() throws Exception {
+        String s = TimeUtil.getCurrentTimeString().replace("-", "")
+                .replace(":", "").replaceAll("\\s*", "");
+        System.out.println(s);
+    }
+
+
+    @org.junit.Test
+    public void test49() throws IOException {
+        try {
+            File file = new File("d:\\20201027_合同管理_1200.docx");
+            FileInputStream fileInputStream = new FileInputStream(file);
+
+            String name = file.getName();
+            name = new String(name.getBytes("GBK"), StandardCharsets.ISO_8859_1);
+            String currentDate = "202010";
+            String htbm = "006";
+            String fieldName = "filedname";
+            String savePath = "/home/document/" + MeiTanConfigInfo.DWBM.getValue() + "/" + currentDate + "/" + htbm + "/" + fieldName + "/";
+
+            // 获取ftp对象
+//            FTPClient ftpClient = MeiTanZyFtpUtil.getFtpClient(MeiTanConfigInfo.FTP_URL.getValue(), Integer.parseInt(MeiTanConfigInfo.FTP_PORT.getValue()),
+//                    MeiTanConfigInfo.FTP_USERNAME.getValue(), MeiTanConfigInfo.FTP_PASSWORD.getValue());
+            FTPClient ftpClient = MeiTanZyFtpUtil.getFtpClient(MeiTanConfigInfo.FTP_URL.getValue(), Integer.parseInt(MeiTanConfigInfo.FTP_PORT.getValue()),
+                    "cqyjyftp", "cqyjyftp");
+
+            // 上传文件
+            boolean upload = MeiTanZyFtpUtil.upload(savePath, name, fileInputStream, ftpClient);
+            System.out.println("上传： " + upload);
+
+            // 关闭ftp连接
+            MeiTanZyFtpUtil.disconnect(ftpClient);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }

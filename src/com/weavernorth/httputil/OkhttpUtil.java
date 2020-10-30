@@ -57,4 +57,20 @@ public class OkhttpUtil {
         System.out.println(string);
 
     }
+
+    @Test
+    public void test3() throws IOException {
+        RequestBody requestBody = new FormBody.Builder()
+                .add("Param name1", "Param value1")
+                .add("Param name2", "Param value2").build();
+
+        Request request = new Request.Builder()
+                .post(requestBody)
+                .url("http://ucapitest.tidepharm.com/api/account/verification")
+                .build();
+        Response response = client.newCall(request).execute();
+        String string = response.body().string();
+        System.out.println(string);
+    }
+
 }
