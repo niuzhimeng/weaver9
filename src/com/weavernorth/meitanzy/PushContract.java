@@ -3,9 +3,9 @@ package com.weavernorth.meitanzy;
 import com.alibaba.fastjson.JSONObject;
 import com.engine.common.util.ParamUtil;
 import com.weavernorth.meitanzy.service.PushService;
+import com.weavernorth.meitanzy.service.impl.KxInfoService;
 import com.weavernorth.meitanzy.service.impl.SrInfoService;
-import com.weavernorth.meitanzy.util.MeiTanConfigInfo;
-import com.weavernorth.meitanzy.util.MtHttpUtil;
+import com.weavernorth.meitanzy.util.ConnUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -16,7 +16,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import java.util.HashMap;
 import java.util.Map;
 
 public class PushContract {
@@ -33,28 +32,27 @@ public class PushContract {
         String ids = (String) objectMap.get("ids");
 
         // 获取token
-//        Map<String, String> bodyMap = new HashMap<>();
-//        bodyMap.put("appuser", MeiTanConfigInfo.appuser.getValue()); // 应用授权代码
-//        bodyMap.put("secretkey", MeiTanConfigInfo.secretkey.getValue());// 秘钥
-//        String tokenStr = MtHttpUtil.postBody(MeiTanConfigInfo.LOGIN_URL.getValue(), bodyMap);
-//        LOGGER.info("本次获取token接口返回： " + tokenStr);
-//        if ("".equals(tokenStr)) {
-//            JSONObject returnObj = new JSONObject();
-//            returnObj.put("myState", false);
-//            returnObj.put("message", tokenStr);
-//            return returnObj.toJSONString();
-//        }
-//        JSONObject jsonObject = JSONObject.parseObject(tokenStr);
-       // String token = jsonObject.getString("token");
-        String token = "testtoken";
+        String token = ConnUtil.getToken();
+        if ("".equals(token)) {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("myState", false);
+            jsonObject.put("message", "获取token异常，请查看日志分析错误原因。");
+            return jsonObject.toJSONString();
+        }
+        //String token = "testtoken";
 
-//        // 合同签订信息上报接口
+        // 合同签订信息上报接口
 //        PushUtil pushUtil = new PushUtil();
 //        pushUtil.registerContractInfo(ids, token);
 
         // 收入信息上报接口
         PushService srInfoService = new SrInfoService();
         srInfoService.push(ids, token);
+
+        // 款项信息上报接口
+        KxInfoService kxInfoService = new KxInfoService();
+        kxInfoService.push(ids, token);
+
         LOGGER.info("合同推送接口End ==============================");
         return JSONObject.toJSONString(objectMap);
 

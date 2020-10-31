@@ -114,10 +114,7 @@ public class HtqdService implements PushService {
                 MeiTanConfigInfo.FTP_URL.getValue(), Integer.parseInt(MeiTanConfigInfo.FTP_PORT.getValue()));
 
         // 发送请求
-        Map<String, String> headerMap = new HashMap<>();
-        headerMap.put("Content-Type", "application/json");
-        headerMap.put("appuser", MeiTanConfigInfo.appuser.getValue());
-        headerMap.put("token", token);
+        Map<String, String> headerMap = ConnUtil.getHeader(token);
         String returnStr = MtHttpUtil.postJsonHeader(MeiTanConfigInfo.QIAN_DING_URL.getValue(), "", headerMap);
         LOGGER.info("合同签订信息上报接口返回信息： " + returnStr);
 
