@@ -4,23 +4,11 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.weavernorth.meitanzy.service.PushService;
 import com.weavernorth.meitanzy.util.ConnUtil;
-import com.weavernorth.meitanzy.util.MeiTanConfigInfo;
-import com.weavernorth.meitanzy.util.MeiTanZyFtpUtil;
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.commons.net.ftp.FTPClient;
 import weaver.conn.RecordSet;
-import weaver.general.TimeUtil;
 
-import java.io.File;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
 
 /**
  * 收入信息上报接口
@@ -56,8 +44,8 @@ public class SrInfoService implements PushService {
                 object.put("assistEvidence", ConnUtil.pushFileToFtp(recordSet_Detail.getString("fzzj1"), htzbh, "fzzj1")); // 辅助证据
                 object.put("currentPeriodAmount", recordSet_Detail.getString("dqkpje")); // 当期开票金额
                 jsonArray.add(object);
-                jsonObject.put("incomeInfoList", jsonArray);
             }
+            jsonObject.put("incomeInfoList", jsonArray);
             allObj.put("registerIncomeInfo", jsonObject);
             LOGGER.info("收入信息上报接口传输json： " + allObj.toJSONString());
             // 调用接口
@@ -68,7 +56,6 @@ public class SrInfoService implements PushService {
         LOGGER.info("收入信息上报接口End========");
         return null;
     }
-
 
 
 }

@@ -3,6 +3,7 @@ package com.weavernorth.meitanzy;
 import com.alibaba.fastjson.JSONObject;
 import com.engine.common.util.ParamUtil;
 import com.weavernorth.meitanzy.service.PushService;
+import com.weavernorth.meitanzy.service.impl.HtqdService;
 import com.weavernorth.meitanzy.service.impl.KxInfoService;
 import com.weavernorth.meitanzy.service.impl.SrInfoService;
 import com.weavernorth.meitanzy.util.ConnUtil;
@@ -42,15 +43,15 @@ public class PushContract {
         //String token = "testtoken";
 
         // 合同签订信息上报接口
-//        PushUtil pushUtil = new PushUtil();
-//        pushUtil.registerContractInfo(ids, token);
+        PushService htqdService = new HtqdService();
+        htqdService.push(ids, token);
 
         // 收入信息上报接口
         PushService srInfoService = new SrInfoService();
         srInfoService.push(ids, token);
 
         // 款项信息上报接口
-        KxInfoService kxInfoService = new KxInfoService();
+        PushService kxInfoService = new KxInfoService();
         kxInfoService.push(ids, token);
 
         LOGGER.info("合同推送接口End ==============================");

@@ -56,6 +56,22 @@ public class ConnUtil {
     }
 
     /**
+     * 根据城市id获取汉字  如：黑龙江省齐齐哈尔市
+     *
+     * @param cityId 城市id
+     * @return 省 + 市名字
+     */
+    public static String getProvinceAndCityNameById(String cityId) {
+        if (StringUtils.isBlank(cityId)) {
+            return "";
+        }
+        RecordSet recordSet = new RecordSet();
+        recordSet.executeQuery("select b.provincedesc, a.cityname from hrmcity a left join hrmprovince b on a.provinceid = b.id where a.id = " + cityId);
+        recordSet.next();
+        return recordSet.getString("provincedesc") + recordSet.getString("cityname");
+    }
+
+    /**
      * 获取请求头
      */
     public static Map<String, String> getHeader(String token) {
