@@ -40,19 +40,21 @@ public class PushContract {
             jsonObject.put("message", "获取token异常，请查看日志分析错误原因。");
             return jsonObject.toJSONString();
         }
-        //String token = "testtoken";
 
-        // 合同签订信息上报接口
+        LOGGER.info("合同签订信息上报接口-----------开始");
+        long start = System.currentTimeMillis();
         PushService htqdService = new HtqdService();
         htqdService.push(ids, token);
+        long end = System.currentTimeMillis();
+        LOGGER.info("合同签订信息上报接口-----------结束，耗时：" + (end - start) + " 毫秒");
 
-        // 收入信息上报接口
+        LOGGER.info("收入信息上报接口-----------开始");
         PushService srInfoService = new SrInfoService();
-        srInfoService.push(ids, token);
+        // srInfoService.push(ids, token);
 
-        // 款项信息上报接口
+        LOGGER.info("款项信息上报接口-----------开始");
         PushService kxInfoService = new KxInfoService();
-        kxInfoService.push(ids, token);
+        // kxInfoService.push(ids, token);
 
         LOGGER.info("合同推送接口End ==============================");
         return JSONObject.toJSONString(objectMap);

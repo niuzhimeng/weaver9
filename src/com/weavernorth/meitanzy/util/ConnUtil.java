@@ -23,6 +23,22 @@ public class ConnUtil {
     private static final Log LOGGER = LogFactory.getLog(ConnUtil.class);
 
     /**
+     * 查询流程下拉框汉字显示
+     *
+     * @param fieldId     下拉框择框字段
+     * @param selectValue 表单中下拉框的值
+     */
+    public static String getWorkflowSelect(String fieldId, String selectValue) {
+        RecordSet recordSet = new RecordSet();
+        String returnStr = "";
+        recordSet.executeQuery(" SELECT selectname FROM workflow_selectitem WHERE fieldid = '" + fieldId + "' and selectvalue = '" + selectValue + "'");
+        if (recordSet.next()) {
+            returnStr = recordSet.getString("selectname");
+        }
+        return returnStr;
+    }
+
+    /**
      * 查询公共选择框的汉字显示
      *
      * @param mainId   公共选择框id
@@ -154,10 +170,10 @@ public class ConnUtil {
      * 获取接口请求token
      */
     public static String getToken() {
-        Map<String, String> bodyMap = new HashMap<>();
-        bodyMap.put("appuser", MeiTanConfigInfo.appuser.getValue()); // 应用授权代码
-        bodyMap.put("secretkey", MeiTanConfigInfo.secretkey.getValue());// 秘钥
-        String tokenStr = MtHttpUtil.postBody(MeiTanConfigInfo.LOGIN_URL.getValue(), bodyMap);
+        Map<String, String> headerMap = new HashMap<>();
+        headerMap.put("appuser", MeiTanConfigInfo.appuser.getValue()); // 应用授权代码
+        headerMap.put("secretkey", MeiTanConfigInfo.secretkey.getValue());// 秘钥
+        String tokenStr = MtHttpUtil.postHeader(MeiTanConfigInfo.LOGIN_URL.getValue(), headerMap);
         LOGGER.info("本次获取token接口返回： " + tokenStr);
 
         String token = "";

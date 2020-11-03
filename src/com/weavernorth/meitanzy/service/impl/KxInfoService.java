@@ -60,14 +60,12 @@ public class KxInfoService implements PushService {
                 fkObj.put("realPayAmount", recordSet_Detail.getString("sjsfkje")); // 实际收付款金额
                 feedbackArray.add(fkObj);
             }
-            JSONObject planObj = getJsonObj(htzbh, "PLAN", planArray);
-            String planJson = planObj.toJSONString();
+            String planJson = getJsonObj(htzbh, "PLAN", planArray);
             LOGGER.info("款项信息上报接口 - 计划 传输json： " + planJson);
             String planReturnStr = MtHttpUtil.postJsonHeader(MeiTanConfigInfo.KUAN_XIANG_URL.getValue(), planJson, headerMap);
             LOGGER.info("款项信息上报接口 - 计划 返回数据： " + planReturnStr);
 
-            JSONObject feedbackObj = getJsonObj(htzbh, "FEEDBACK", feedbackArray);
-            String feedbackJson = feedbackObj.toJSONString();
+            String feedbackJson = getJsonObj(htzbh, "FEEDBACK", feedbackArray);
             LOGGER.info("款项信息上报接口 - 反馈 传输json： " + feedbackJson);
             String feedbackReturnStr = MtHttpUtil.postJsonHeader(MeiTanConfigInfo.KUAN_XIANG_URL.getValue(), feedbackJson, headerMap);
             LOGGER.info("款项信息上报接口 - 反馈 返回数据： " + feedbackReturnStr);
@@ -82,8 +80,7 @@ public class KxInfoService implements PushService {
      * @param htzbh 合同自编号
      * @param xxly  信息来源 PLAN, FEEDBACK
      */
-    private JSONObject getJsonObj(String htzbh, String xxly, JSONArray jsonArray) {
-        JSONObject allObj = new JSONObject();
+    private String getJsonObj(String htzbh, String xxly, JSONArray jsonArray) {
         JSONObject jsonObject = new JSONObject(true);
         jsonObject.put("contractUniqueId", htzbh); // 合同唯一标识
         jsonObject.put("sourceInfo", xxly); // 信息来源
@@ -94,8 +91,9 @@ public class KxInfoService implements PushService {
             jsonObject.put("paymentPlanList", new JSONArray());
             jsonObject.put("paymentFeedbackList", jsonArray);
         }
-        allObj.put("paymentPlanAndFeedbackInfo", jsonObject);
+        JSONObject allObj = new JSONObject();
+        allObj.put("paymentPlanAndFeedbackInfo", jsonObject.toJSONString());
+        return allObj.toJSONString();
 
-        return allObj;
     }
 }

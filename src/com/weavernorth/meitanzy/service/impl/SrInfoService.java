@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.weavernorth.meitanzy.service.PushService;
 import com.weavernorth.meitanzy.util.ConnUtil;
+import com.weavernorth.meitanzy.util.MeiTanConfigInfo;
+import com.weavernorth.meitanzy.util.MtHttpUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import weaver.conn.RecordSet;
@@ -46,11 +48,12 @@ public class SrInfoService implements PushService {
                 jsonArray.add(object);
             }
             jsonObject.put("incomeInfoList", jsonArray);
-            allObj.put("registerIncomeInfo", jsonObject);
-            LOGGER.info("收入信息上报接口传输json： " + allObj.toJSONString());
+            allObj.put("registerIncomeInfo", jsonObject.toJSONString());
+            String sendJson = allObj.toJSONString();
+            LOGGER.info("收入信息上报接口传输json： " + sendJson);
             // 调用接口
-//            String returnStr = MtHttpUtil.postJsonHeader(MeiTanConfigInfo.SHOU_RU_URL.getValue(), allObj.toJSONString(), headerMap);
-//            LOGGER.info("收入信息上报接口返回数据： " + returnStr);
+            String returnStr = MtHttpUtil.postJsonHeader(MeiTanConfigInfo.SHOU_RU_URL.getValue(), sendJson, headerMap);
+            LOGGER.info("收入信息上报接口返回数据： " + returnStr);
 
         }
         LOGGER.info("收入信息上报接口End========");
