@@ -25,10 +25,12 @@ public class HtqdService implements PushService {
         // 状态改为推送中
         //changeToPushing(ids);
         try {
+            RecordSet updateSet = new RecordSet();
             RecordSet recordSet = new RecordSet();
             recordSet.executeQuery("select * from uf_Mkzy_htgl where id in (" + ids + ")");
             while (recordSet.next()) {
                 JSONObject jsonObject = new JSONObject(true);
+                String id = recordSet.getString("id");
                 String htzbh = recordSet.getString("htzbh");
                 jsonObject.put("contractUniqueId", htzbh); // 合同唯一标识
                 jsonObject.put("contractType", recordSet.getString("htsjflbm")); // 合同类型
@@ -97,6 +99,7 @@ public class HtqdService implements PushService {
                 sealInfo.put("sealTime", recordSet.getString("yyrq")); // "用印日期
                 sealInfo.put("sealType", recordSet.getString("yylx")); // 用印类型
                 sealInfo.put("signNum", recordSet.getString("yyfs")); // 用印份数
+                sealInfoList.add(sealInfo);
                 jsonObject.put("sealInfoList", sealInfoList);
 
                 // signInfoList拼接
@@ -107,7 +110,7 @@ public class HtqdService implements PushService {
                 signInfo.put("ownAuth", ConnUtil.pushFileToFtp(recordSet.getString("wfsqwts"), htzbh, "wfsqwts")); // 我方授权委托书
                 signInfo.put("contractScanFile", ConnUtil.pushFileToFtp(recordSet.getString("htqswb"), htzbh, "htqswb")); // 签署文本
                 signInfoList.add(signInfo);
-                sealInfo.put("signInfoList", signInfoList);
+                jsonObject.put("signInfoList", signInfoList);
 
                 // signItemList拼接
                 JSONArray signItemList = new JSONArray();
@@ -117,7 +120,7 @@ public class HtqdService implements PushService {
                 signItem.put("opptIsAuth", recordSet.getString("dfsfsq")); // 对方是否授权
                 signItem.put("opptAuth", ConnUtil.pushFileToFtp(recordSet.getString("dfsqwts"), htzbh, "dfsqwts")); // 对方授权委托书
                 signItemList.add(signItem);
-                sealInfo.put("signItemList", signItemList);
+                jsonObject.put("signItemList", signItemList);
 
                 // relatedPartyList拼接
                 JSONArray relatedPartyList = new JSONArray();
@@ -133,9 +136,7 @@ public class HtqdService implements PushService {
                 relatedParty.put("isImportantRelatedDeal", recordSet.getString("sfzdgljy")); // 是否重大关联交易
                 relatedParty.put("isNeedPerfApprove", recordSet.getString("sfjlxgljysp")); // 是否经履行关联交易审批
                 relatedPartyList.add(relatedParty);
-                sealInfo.put("relatedPartyList", relatedPartyList);
-                sealInfoList.add(sealInfo);
-                jsonObject.put("sealInfoList", sealInfoList);
+                //jsonObject.put("relatedPartyList", relatedPartyList); //todo 关联交易类型 对方系统有问题  暂时不传
 
                 JSONObject allObj = new JSONObject();
                 allObj.put("contractInfo", jsonObject.toJSONString());
@@ -147,11 +148,18 @@ public class HtqdService implements PushService {
                 String returnStr = MtHttpUtil.postJsonHeader(MeiTanConfigInfo.QIAN_DING_URL.getValue(), sendJson, headerMap);
                 LOGGER.info("合同签订信息上报接口返回信息： " + returnStr);
 
-                JSONObject returnObj = JSONObject.parseObject(returnStr);
-                String code = returnObj.getString("code");
-                if (!"200".equals(code)) {
-                    LOGGER.error("合同签订信息上报接口推送失败： " + returnObj.getString("message"));
+                // 更新推送返回信息
+                String updateSql = "update uf_Mkzy_htgl set htqddxxsbztfk = ? where id = ?";
+                String message = "";
+                try {
+                    JSONObject returnObj = JSONObject.parseObject(returnStr);
+                    String code = returnObj.getString("code");
+                    message = code + " " + returnObj.getString("message");
+                } catch (Exception e) {
+                    message = "接口返回异常：" + returnStr;
                 }
+                updateSet.executeUpdate(updateSql, message, id);
+
             }
         } catch (Exception e) {
             LOGGER.error("合同签订信息上报接口异常： " + e);

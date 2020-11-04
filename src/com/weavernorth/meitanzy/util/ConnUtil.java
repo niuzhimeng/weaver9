@@ -136,7 +136,7 @@ public class ConnUtil {
                 LOGGER.info("文件名： " + imagefilename + "; 文件路径： " + filerealpath);
 
                 // 防止中文名乱码
-                String imagefilenameFtp = new String(imagefilename.getBytes("GBK"), StandardCharsets.ISO_8859_1);
+                String imagefilenameFtp = new String(imagefilename.getBytes(StandardCharsets.UTF_8), StandardCharsets.ISO_8859_1);
                 File srcFile = new File(filerealpath);
                 // 开始解压
                 ZipFile zipFile = new ZipFile(srcFile);

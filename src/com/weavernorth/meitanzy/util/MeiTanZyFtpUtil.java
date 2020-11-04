@@ -33,7 +33,7 @@ public class MeiTanZyFtpUtil {
             ftpClient.connect(addr, port);
             ftpClient.login(username, password);
 
-            ftpClient.setControlEncoding("GBK");
+            ftpClient.setControlEncoding("utf-8");
             FTPClientConfig conf = new FTPClientConfig(FTPClientConfig.SYST_NT);
             conf.setServerLanguageCode("zh");
             ftpClient.enterLocalPassiveMode();
