@@ -41,4 +41,30 @@ public class GetDataTest {
 
 
     }
+
+    @GET
+    @Path("/ajaxTest")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Map<String, Object> ajaxTest(@Context HttpServletRequest request, @Context HttpServletResponse response) throws InterruptedException {
+        String time = request.getParameter("myTime");
+        int longTime = Integer.parseInt(time) * 1000;
+        Thread.sleep(longTime);
+
+        RecordSet recordSet = new RecordSet();
+        Map<String, Object> objMap = new HashMap<>();
+        recordSet.executeQuery("select * from hrmresource");
+        List<Map<String, String>> returnList = new ArrayList<>();
+        while (recordSet.next()) {
+            Map<String, String> returnMap = new HashMap<>();
+            returnMap.put("lastname", recordSet.getString("lastname"));
+            returnMap.put("id", recordSet.getString("id"));
+            returnMap.put("sex", recordSet.getString("sex"));
+            returnList.add(returnMap);
+        }
+        objMap.put("data", returnList);
+
+        return objMap;
+
+
+    }
 }

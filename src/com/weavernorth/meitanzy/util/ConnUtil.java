@@ -187,4 +187,27 @@ public class ConnUtil {
         return token;
     }
 
+    /**
+     * 解析接口返回数据
+     *
+     * @param returnStr [状态，信息]
+     */
+    public static String[] parseReturnJson(String returnStr) {
+        String state = "1"; // 0成功；1失败
+        String message;
+        try {
+            JSONObject returnObj = JSONObject.parseObject(returnStr);
+            String code = returnObj.getString("code");
+            if ("200".equals(code)) {
+                state = "0";
+            }
+            message = code + " " + returnObj.getString("message");
+        } catch (Exception e) {
+            message = "接口返回异常：" + returnStr;
+            state = "1";
+        }
+
+        return new String[]{state, message};
+    }
+
 }

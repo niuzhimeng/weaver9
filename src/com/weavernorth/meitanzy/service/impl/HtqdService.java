@@ -136,7 +136,7 @@ public class HtqdService implements PushService {
                 relatedParty.put("isImportantRelatedDeal", recordSet.getString("sfzdgljy")); // 是否重大关联交易
                 relatedParty.put("isNeedPerfApprove", recordSet.getString("sfjlxgljysp")); // 是否经履行关联交易审批
                 relatedPartyList.add(relatedParty);
-                //jsonObject.put("relatedPartyList", relatedPartyList); //todo 关联交易类型 对方系统有问题  暂时不传
+                jsonObject.put("relatedPartyList", relatedPartyList);
 
                 JSONObject allObj = new JSONObject();
                 allObj.put("contractInfo", jsonObject.toJSONString());
@@ -149,16 +149,9 @@ public class HtqdService implements PushService {
                 LOGGER.info("合同签订信息上报接口返回信息： " + returnStr);
 
                 // 更新推送返回信息
-                String updateSql = "update uf_Mkzy_htgl set htqddxxsbztfk = ? where id = ?";
-                String message = "";
-                try {
-                    JSONObject returnObj = JSONObject.parseObject(returnStr);
-                    String code = returnObj.getString("code");
-                    message = code + " " + returnObj.getString("message");
-                } catch (Exception e) {
-                    message = "接口返回异常：" + returnStr;
-                }
-                updateSet.executeUpdate(updateSql, message, id);
+                String updateSql = "update uf_Mkzy_htgl set htqdfhzt = ?, htqddxxsbztfk = ? where id = ?";
+                String[] message = ConnUtil.parseReturnJson(returnStr);
+                updateSet.executeUpdate(updateSql, message[0], message[1], id);
 
             }
         } catch (Exception e) {

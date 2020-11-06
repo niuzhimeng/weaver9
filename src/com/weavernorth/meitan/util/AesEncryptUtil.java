@@ -1,5 +1,6 @@
 package com.weavernorth.meitan.util;
 
+import com.alibaba.fastjson.JSONObject;
 import weaver.general.SecurityHelper;
 
 import javax.crypto.Cipher;
@@ -9,6 +10,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 /**
+ * 网报系统
  * @author puqi
  * @version 1.0
  * @description Aes加密工具类
@@ -25,11 +27,14 @@ public class AesEncryptUtil {
 //        String password = "MWrZc3s4nXg=QjRGUSZ3PP4=";
 //        password = SecurityHelper.decryptSimple(password);
 //        System.out.println(password);
+        JSONObject jsonObject = new JSONObject(true);
+        jsonObject.put("account", "SsoTest");
+        jsonObject.put("password", "SsoTest@123");
+        String jsonStr = jsonObject.toJSONString();
+        System.out.println(jsonStr);
+        String secretKey = "smartdot&hd@9999";
 
-        String text = "{\"code\":\"CSYH2\",\"password\":\"aaaaaa\"}";
-        String secretKey = "secretKey";
-
-        String encryptStr = encrypt(text, secretKey);
+        String encryptStr = encrypt(jsonStr, secretKey);
         System.out.println(encryptStr);
     }
 

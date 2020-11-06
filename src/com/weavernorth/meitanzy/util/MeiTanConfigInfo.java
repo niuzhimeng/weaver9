@@ -15,7 +15,7 @@ public enum MeiTanConfigInfo {
     FTP_PORT("21"), // ftp端口
 
     // 流程下拉框
-    HTBD("6795"); // 合同标的字段di
+    HTBD("6795"); // 合同标的字段id
 
     MeiTanConfigInfo(String value) {
         this.value = value;

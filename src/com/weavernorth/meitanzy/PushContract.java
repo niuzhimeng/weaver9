@@ -42,21 +42,25 @@ public class PushContract {
         }
 
         LOGGER.info("合同签订信息上报接口-----------开始");
-        long start = System.currentTimeMillis();
+        long time1 = System.currentTimeMillis();
         PushService htqdService = new HtqdService();
         htqdService.push(ids, token);
-        long end = System.currentTimeMillis();
-        LOGGER.info("合同签订信息上报接口-----------结束，耗时：" + (end - start) + " 毫秒");
-
-        LOGGER.info("收入信息上报接口-----------开始");
-        PushService srInfoService = new SrInfoService();
-        // srInfoService.push(ids, token);
+        long time2 = System.currentTimeMillis();
+        LOGGER.info("合同签订信息上报接口-----------结束，耗时：" + (time2 - time1) + " 毫秒");
 
         LOGGER.info("款项信息上报接口-----------开始");
         PushService kxInfoService = new KxInfoService();
-        // kxInfoService.push(ids, token);
+        kxInfoService.push(ids, token);
+        long time3 = System.currentTimeMillis();
+        LOGGER.info("款项信息上报接口-----------结束，耗时：" + (time3 - time2) + " 毫秒");
 
-        LOGGER.info("合同推送接口End ==============================");
+        LOGGER.info("收入信息上报接口-----------开始");
+        PushService srInfoService = new SrInfoService();
+        srInfoService.push(ids, token);
+        long time4 = System.currentTimeMillis();
+        LOGGER.info("收入信息上报接口-----------结束，耗时：" + (time4 - time3) + " 毫秒");
+
+        LOGGER.info("合同推送接口End ==============================结束，总耗时：" + (time4 - time1) + " 毫秒");
         return JSONObject.toJSONString(objectMap);
 
 
