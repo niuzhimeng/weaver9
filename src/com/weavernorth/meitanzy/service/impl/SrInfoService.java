@@ -35,6 +35,12 @@ public class SrInfoService implements PushService {
                 String mainId = recordSet.getString("id");
                 String htzbh = recordSet.getString("htzbh");
                 String ljskje = recordSet.getString("ljskje");
+                String szfx = recordSet.getString("szfx"); // 收支方向
+                if (!"2".equals(szfx)) {
+                    // 不等于收款，不调用接口
+                    updateSet.executeUpdate("update uf_Mkzy_htgl set zhgxsj = ? where id = ?", TimeUtil.getCurrentTimeString(), mainId);
+                    continue;
+                }
 
                 JSONObject allObj = new JSONObject();
                 JSONObject jsonObject = new JSONObject(true);
@@ -62,6 +68,7 @@ public class SrInfoService implements PushService {
                 String updateSql = "update uf_Mkzy_htgl set srxxfhzt = ?, sfkxxsbztfk = ?, zhgxsj = ? where id = ?";
                 String[] message = ConnUtil.parseReturnJson(returnStr);
                 updateSet.executeUpdate(updateSql, message[0], message[1], TimeUtil.getCurrentTimeString(), mainId);
+
             }
 
         } catch (Exception e) {
@@ -70,6 +77,5 @@ public class SrInfoService implements PushService {
         LOGGER.info("收入信息上报接口End========");
         return "";
     }
-
 
 }
