@@ -9,6 +9,7 @@ import com.weavernorth.meitanzy.util.MtHttpUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import weaver.conn.RecordSet;
+import weaver.general.TimeUtil;
 
 import java.util.Map;
 
@@ -58,9 +59,9 @@ public class SrInfoService implements PushService {
                 LOGGER.info("收入信息上报接口返回数据： " + returnStr);
 
                 // 更新推送返回信息
-                String updateSql = "update uf_Mkzy_htgl set srxxfhzt = ?, htqddxxsbztfk = ? where id = ?";
+                String updateSql = "update uf_Mkzy_htgl set srxxfhzt = ?, sfkxxsbztfk = ?, zhgxsj = ? where id = ?";
                 String[] message = ConnUtil.parseReturnJson(returnStr);
-                updateSet.executeUpdate(updateSql, message[0], message[1], mainId);
+                updateSet.executeUpdate(updateSql, message[0], message[1], TimeUtil.getCurrentTimeString(), mainId);
             }
 
         } catch (Exception e) {
