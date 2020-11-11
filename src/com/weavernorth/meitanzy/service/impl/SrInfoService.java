@@ -50,7 +50,7 @@ public class SrInfoService implements PushService {
                 recordSet_Detail.executeQuery("select * from uf_Mkzy_htgl_dt2 where mainid = " + mainId);
                 while (recordSet_Detail.next()) {
                     JSONObject object = new JSONObject(true);
-                    object.put("incomeId", recordSet_Detail.getString("srfkid")); // 收入ID
+                    object.put("incomeId", recordSet_Detail.getString("id")); // 收入ID
                     object.put("incomeAmount", recordSet_Detail.getString("yqrsrje")); // 已确认收入金额
                     object.put("assistEvidence", ConnUtil.pushFileToFtp(recordSet_Detail.getString("fzzj1"), htzbh, "fzzj1")); // 辅助证据
                     object.put("currentPeriodAmount", recordSet_Detail.getString("dqkpje")); // 当期开票金额
