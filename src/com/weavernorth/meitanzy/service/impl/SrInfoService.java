@@ -45,12 +45,12 @@ public class SrInfoService implements PushService {
                 JSONObject allObj = new JSONObject();
                 JSONObject jsonObject = new JSONObject(true);
                 JSONArray jsonArray = new JSONArray();
-                jsonObject.put("contractUniqueId", htzbh); // 合同唯一标识
+                jsonObject.put("contractUniqueId", MeiTanConfigInfo.DWBM.getValue() + "_" + htzbh); // 合同唯一标识
                 jsonObject.put("incomeTotalAmount", ljskje); // 累计收款金额
                 recordSet_Detail.executeQuery("select * from uf_Mkzy_htgl_dt2 where mainid = " + mainId);
                 while (recordSet_Detail.next()) {
                     JSONObject object = new JSONObject(true);
-                    object.put("incomeId", recordSet_Detail.getString("id")); // 收入ID
+                    object.put("incomeId", MeiTanConfigInfo.DWBM.getValue() + "_" + recordSet_Detail.getString("id")); // 收入ID
                     object.put("incomeAmount", recordSet_Detail.getString("yqrsrje")); // 已确认收入金额
                     object.put("assistEvidence", ConnUtil.pushFileToFtp(recordSet_Detail.getString("fzzj1"), htzbh, "fzzj1")); // 辅助证据
                     object.put("currentPeriodAmount", recordSet_Detail.getString("dqkpje")); // 当期开票金额

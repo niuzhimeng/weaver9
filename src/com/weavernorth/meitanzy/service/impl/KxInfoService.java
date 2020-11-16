@@ -35,11 +35,11 @@ public class KxInfoService implements PushService {
                 JSONArray planArray = new JSONArray(); // 计划
                 JSONArray feedbackArray = new JSONArray(); // 反馈
                 String mainId = recordSet.getString("id");
-                String htzbh = recordSet.getString("htzbh"); // 传输类型 计划、反馈、计划+反馈
+                String htzbh = MeiTanConfigInfo.DWBM.getValue() + "_" + recordSet.getString("htzbh");
 
                 recordSet_Detail.executeQuery("select * from uf_Mkzy_htgl_dt1 where mainid = " + mainId);
                 while (recordSet_Detail.next()) {
-                    String jhfk = recordSet_Detail.getString("jhfk"); // 传输类型
+                    String jhfk = recordSet_Detail.getString("jhfk"); // 传输类型 计划、反馈、计划+反馈
                     String id = recordSet_Detail.getString("id");
                     // 计划 部门所需字段
                     String lxsx = recordSet_Detail.getString("lxsx");  // 履行事项
@@ -114,7 +114,7 @@ public class KxInfoService implements PushService {
     private JSONObject getPlanJsonObj(String id, String lxsx, String jhsfkrq, String tqtxts, String jhsfkje) {
         // 计划数据拼接
         JSONObject jhObj = new JSONObject(true);
-        jhObj.put("planId", id); // 计划ID
+        jhObj.put("planId", MeiTanConfigInfo.DWBM.getValue() + "_" + id); // 计划ID
         jhObj.put("sortNum", id); // 计划序号
         jhObj.put("performItem", lxsx);
         jhObj.put("payDate", jhsfkrq);
@@ -135,8 +135,8 @@ public class KxInfoService implements PushService {
      */
     private JSONObject getFeedbackJsonObj(String id, String sfzc, String ycyy, String sjsfkrq, String sjsfkje) {
         JSONObject fkObj = new JSONObject(true);
-        fkObj.put("planId", id); // 计划ID
-        fkObj.put("feedBackId", id); // 反馈ID
+        fkObj.put("planId", MeiTanConfigInfo.DWBM.getValue() + "_" + id); // 计划ID
+        fkObj.put("feedBackId", MeiTanConfigInfo.DWBM.getValue() + "_" + id); // 反馈ID
         fkObj.put("sortNum", id); // 反馈序号
         fkObj.put("isNormal", sfzc);
         fkObj.put("abnormalReason", ycyy);

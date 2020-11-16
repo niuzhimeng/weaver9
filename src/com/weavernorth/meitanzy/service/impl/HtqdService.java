@@ -22,8 +22,7 @@ public class HtqdService implements PushService {
     @Override
     public String push(String ids, String token) {
         LOGGER.info("合同签订信息上报接口Start ================== 此次推送数据id： " + ids);
-        // 状态改为推送中
-        //changeToPushing(ids);
+
         try {
             RecordSet updateSet = new RecordSet();
             RecordSet recordSet = new RecordSet();
@@ -32,7 +31,7 @@ public class HtqdService implements PushService {
                 JSONObject jsonObject = new JSONObject(true);
                 String id = recordSet.getString("id");
                 String htzbh = recordSet.getString("htzbh");
-                jsonObject.put("contractUniqueId", htzbh); // 合同唯一标识
+                jsonObject.put("contractUniqueId", MeiTanConfigInfo.DWBM.getValue() + "_" + htzbh); // 合同唯一标识
                 jsonObject.put("contractType", recordSet.getString("htsjflbm")); // 合同类型
                 jsonObject.put("contractSubject", ConnUtil.getWorkflowSelect(MeiTanConfigInfo.HTBD.getValue(), recordSet.getString("sjhtflcphjsmc"))); // 合同标的
                 jsonObject.put("contractName", recordSet.getString("htmc")); // 合同名称
@@ -162,16 +161,5 @@ public class HtqdService implements PushService {
 
         return "";
     }
-
-    /**
-     * 将数据状态变为 推送中
-     *
-     * @param ids 要推送的id数组
-     */
-    public void changeToPushing(String ids) {
-        RecordSet recordSet = new RecordSet();
-        recordSet.executeUpdate("update uf_xxx set xxx = 1 where id in (" + ids + ")");
-    }
-
 
 }
