@@ -1,6 +1,5 @@
 package com.weavernorth.meitanzy.util;
 
-import com.alibaba.fastjson.JSONObject;
 import okhttp3.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -57,6 +56,20 @@ public class MtHttpUtil {
         }
 
         return "";
+    }
+
+    public static String get(String url) {
+        String returnStr = "";
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder().url(url).get().build();
+        try {
+            Response response = client.newCall(request).execute();
+            returnStr = response.body().string();
+        } catch (IOException e) {
+            LOGGER.error("http请求get异常： " + e);
+        }
+
+        return returnStr;
     }
 
 

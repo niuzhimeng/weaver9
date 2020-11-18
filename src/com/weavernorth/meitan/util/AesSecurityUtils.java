@@ -87,8 +87,8 @@ public class AesSecurityUtils {
      * @return 加密后的byte[]
      */
     private static byte[] aesEncryptToBytes(String content, String encryptKey) throws Exception {
-        KeyGenerator kgen = KeyGenerator.getInstance("AES");
-        kgen.init(128);
+//        KeyGenerator kgen = KeyGenerator.getInstance("AES");
+//        kgen.init(128);
         Cipher cipher = Cipher.getInstance(ALGORITHMSTR);
         cipher.init(Cipher.ENCRYPT_MODE, new SecretKeySpec(encryptKey.getBytes(), "AES"));
 
