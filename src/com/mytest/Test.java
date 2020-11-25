@@ -6,10 +6,10 @@ import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.metadata.Sheet;
 import com.alibaba.excel.metadata.Table;
 import com.alibaba.excel.support.ExcelTypeEnum;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
+import com.fapiao.neon.util.AESUtil;
 import com.weavernorth.meitanzy.util.MeiTanConfigInfo;
 import com.weavernorth.meitanzy.util.MeiTanZyFtpUtil;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -18,27 +18,38 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.artofsolving.jodconverter.OfficeDocumentConverter;
 import org.artofsolving.jodconverter.office.DefaultOfficeManagerConfiguration;
 import org.artofsolving.jodconverter.office.OfficeManager;
-import weaver.general.TimeUtil;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 import weaver.general.Util;
 
+import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 import java.awt.*;
 import java.io.*;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.security.Key;
+import java.security.SecureRandom;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
+/**
+ * @author nzm
+ */
 public class Test {
 
 
@@ -275,18 +286,14 @@ public class Test {
 
     @org.junit.Test
     public void test45() {
-        // LocalDate localDate = LocalDate.now();
-        LocalDate localDate = LocalDate.of(2020, 1, 24);
-        int year = localDate.getYear();
-        int month = localDate.getMonthValue();
-        System.out.println(year);
-        System.out.println(month);
+        Function<Integer, String> function = (a) -> "1";
 
-        LocalDate beforeDate = localDate.minus(1, ChronoUnit.MONTHS);
-        int beforeYear = beforeDate.getYear();
-        int beforeMonth = beforeDate.getMonthValue();
-        System.out.println(beforeYear);
-        System.out.println(beforeMonth);
+        Function<Integer, Integer> myFun = (x) -> {
+            return x + 1;
+        };
+
+        Integer apply = myFun.apply(2);
+        System.out.println(apply);
     }
 
     @org.junit.Test
@@ -304,115 +311,174 @@ public class Test {
     }
 
     @org.junit.Test
-    public void test47() throws FileNotFoundException {
+    public void test47() {
+        try (
+                BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\86157\\Desktop\\photo(1).txt"));
+                FileOutputStream fileOutputStream = new FileOutputStream("C:\\Users\\86157\\Desktop\\ceshi.jpg")
+        ) {
+            String str;
+            StringBuilder stringBuilder = new StringBuilder();
+            while ((str = reader.readLine()) != null) {
+                stringBuilder.append(str);
+            }
+            String s = stringBuilder.toString();
+            byte[] decode = hexStr2bytes(s);
+            if (decode != null) {
+                fileOutputStream.write(decode);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        JSONObject jsonObject = new JSONObject(true);
-        jsonObject.put("contractUniqueId", "合同唯一标识");
-        jsonObject.put("contractType", "合同类型");
-        jsonObject.put("contractSubject", "合同标的");
-        jsonObject.put("contractName", "合同名称");
-        jsonObject.put("contractSelfCode", "合同自编号");
+    }
 
-        jsonObject.put("buyMethod", "采购方式");
-        jsonObject.put("bidFile", "中标通知书");
-        jsonObject.put("contractAmount", "合同金额/暂估金额");
-        jsonObject.put("valuationMode", "计价方式");
-        jsonObject.put("currencyName", "币种");
-
-        jsonObject.put("exchangeRate", "汇率");
-        jsonObject.put("amountExplain", "合同金额说明");
-        jsonObject.put("paymentDirection", "收支方向");
-        jsonObject.put("paymentType", "合同收/付款类型");
-        jsonObject.put("paymentMethod", "合同收/付款方式");
-
-        jsonObject.put("signingSubject", "我方签约主体");
-        jsonObject.put("signingSubjectCode", "签约主体编码");
-        jsonObject.put("creatorAccount", "经办人账号");
-        jsonObject.put("creatorName", "经办人名称");
-        jsonObject.put("creatorDeptCode", "经办部门编码");
-
-        jsonObject.put("creatorDeptName", "经办部门");
-        jsonObject.put("performAddress", "合同履行地");
-        jsonObject.put("signAddress", "合同签署地");
-        jsonObject.put("contractPeriod", "合同期限类型");
-        jsonObject.put("performPeriod", "合同履行期限");
-
-        jsonObject.put("periodExplain", "期限说明");
-        jsonObject.put("ourIsAuth", "是否授权（我方）");
-        jsonObject.put("authType", "授权类型");
-
-        // 合同正文
-        JSONArray contractText = new JSONArray();
-        JSONObject zwObj = new JSONObject(true);
-        zwObj.put("filename", "正文名称");
-        zwObj.put("filepath", "附件路径");
-        zwObj.put("createtime", "createtime");
-        zwObj.put("num", "1");
-        contractText.add(zwObj);
-        jsonObject.put("contractText", contractText);
-
-        // 合同审批单
-        JSONArray contractApprovalForm = new JSONArray();
-        JSONObject spdObj = new JSONObject(true);
-        spdObj.put("filename", "正文名称");
-        spdObj.put("filepath", "附件路径");
-        spdObj.put("createtime", "createtime");
-        spdObj.put("num", "1");
-        contractApprovalForm.add(spdObj);
-        jsonObject.put("contractApprovalForm", contractApprovalForm);
-
-        // 相对方联系人
-        JSONArray relOppositeInfoList = new JSONArray();
-        JSONObject xdfObj = new JSONObject(true);
-        xdfObj.put("oppositeUniqueId", "相对方唯一标识");
-        xdfObj.put("oppositeName", "相对方名称");
-        xdfObj.put("oppositeRelName", "相对方联系人");
-        relOppositeInfoList.add(xdfObj);
-        jsonObject.put("relOppositeInfoList", relOppositeInfoList);
-
-        JSONObject allObj = new JSONObject();
-        allObj.put("contractInfo", jsonObject);
-        System.out.println(allObj.toJSONString());
+    public static byte[] hexStr2bytes(String hexStr) {
+        if (StringUtils.isBlank(hexStr)) {
+            return null;
+        }
+        if (hexStr.length() % 2 != 0) {//长度为单数
+            hexStr = "0" + hexStr;//前面补0
+        }
+        char[] chars = hexStr.toCharArray();
+        int len = chars.length / 2;
+        byte[] bytes = new byte[len];
+        for (int i = 0; i < len; i++) {
+            int x = i * 2;
+            bytes[i] = (byte) Integer.parseInt(String.valueOf(new char[]{chars[x], chars[x + 1]}), 16);
+        }
+        return bytes;
     }
 
     @org.junit.Test
     public void test48() throws Exception {
-        String s = TimeUtil.getCurrentTimeString().replace("-", "")
-                .replace(":", "").replaceAll("\\s*", "");
-        System.out.println(s);
+        String fileUrl = "C:\\Users\\86157\\Desktop\\建模页面密码校验模块.xlsx";
+        int i = fileUrl.lastIndexOf(".");
+        String suffix = fileUrl.substring(i); // 文件后缀名
+
+        System.out.println(suffix);
     }
 
+    public void read1() {
+        byte[] data;
+        try (
+                FileInputStream fis = new FileInputStream("E:\\WEAVER\\Ecology9.00.2002.06.exe");
+                ByteArrayOutputStream baos = new ByteArrayOutputStream(fis.available());
+        ) {
+            int len;
+            byte[] buffer = new byte[2048];
+            while ((len = fis.read(buffer)) != -1) {
+                baos.write(buffer, 0, len);
+            }
 
-    @org.junit.Test
-    public void test49() throws IOException {
-        try {
-            File file = new File("d:\\20201027_合同管理_1200.docx");
-            FileInputStream fileInputStream = new FileInputStream(file);
-
-            String name = file.getName();
-            name = new String(name.getBytes("GBK"), StandardCharsets.ISO_8859_1);
-            String currentDate = "202010";
-            String htbm = "006";
-            String fieldName = "filedname";
-            String savePath = "/home/document/" + MeiTanConfigInfo.DWBM.getValue() + "/" + currentDate + "/" + htbm + "/" + fieldName + "/";
-
-            // 获取ftp对象
-//            FTPClient ftpClient = MeiTanZyFtpUtil.getFtpClient(MeiTanConfigInfo.FTP_URL.getValue(), Integer.parseInt(MeiTanConfigInfo.FTP_PORT.getValue()),
-//                    MeiTanConfigInfo.FTP_USERNAME.getValue(), MeiTanConfigInfo.FTP_PASSWORD.getValue());
-            FTPClient ftpClient = MeiTanZyFtpUtil.getFtpClient(MeiTanConfigInfo.FTP_URL.getValue(), Integer.parseInt(MeiTanConfigInfo.FTP_PORT.getValue()),
-                    "cqyjyftp", "cqyjyftp");
-
-            // 上传文件
-            boolean upload = MeiTanZyFtpUtil.upload(savePath, name, fileInputStream, ftpClient);
-            System.out.println("上传： " + upload);
-
-            // 关闭ftp连接
-            MeiTanZyFtpUtil.disconnect(ftpClient);
-
+            data = baos.toByteArray();
+            System.out.println("data长度： " + data.length);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    public void read2() {
+        try (
+                BufferedReader bufferedReader = new BufferedReader(new FileReader("C:\\Users\\86157\\Desktop\\ceshi(1).txt"));
+        ) {
+            StringBuilder stringBuilder = new StringBuilder();
+            String str;
+            while ((str = bufferedReader.readLine()) != null) {
+                stringBuilder.append(str);
+            }
+            System.out.println(stringBuilder.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @org.junit.Test
+    public void test49() throws Exception {
+
+//        String encode = URLEncoder.encode("http://101.37.168.17/ccteg", "utf-8");
+//        System.out.println(encode);
+        String join = String.join(",", "hello", "word");
+        System.out.println(join);
+
+    }
+
+
+    public Key getKey(String key) {
+        try {
+            // 生成KEY
+            KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
+            keyGenerator.init(128, new SecureRandom(key.getBytes()));
+            SecretKey secretKey = keyGenerator.generateKey();
+            byte[] keyBytes = secretKey.getEncoded();
+            // 转换KEY
+            return new SecretKeySpec(keyBytes, "AES");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
+    @org.junit.Test
+    public void test65() throws Exception {
+
+        String middleKey = "password";  //就是所谓的密钥，加密和解密双方都需要
+        String password = "{\"MenuType\":null,\"LoginName\":\"shmk_admin\",\"Password\":\"123456\"}";//需要被加密的内容
+
+        // 生成KEY
+        KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
+        keyGenerator.init(new SecureRandom(middleKey.getBytes()));
+        SecretKey secretKey = keyGenerator.generateKey();
+        byte[] byteKey = secretKey.getEncoded();
+        Key key = new SecretKeySpec(byteKey, "AES");
+
+        // 加密
+        Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
+        cipher.init(Cipher.ENCRYPT_MODE, key);
+        byte[] result = cipher.doFinal(password.getBytes());
+        System.out.println("加密后：" + Base64.getEncoder().encodeToString(result));
+
+        String encrypt = AESUtil.encrypt(password, middleKey);
+        System.out.println("系统方法： " + encrypt);
+    }
+
+    @org.junit.Test
+    public void test66() {
+        long time1 = System.currentTimeMillis();
+        FTPClient ftpClient = MeiTanZyFtpUtil.getFtpClient(MeiTanConfigInfo.FTP_URL.getValue(), Integer.parseInt(MeiTanConfigInfo.FTP_PORT.getValue()),
+                MeiTanConfigInfo.FTP_USERNAME.getValue(), MeiTanConfigInfo.FTP_PASSWORD.getValue());
+        String name = "市政三公司增资方案.pptx";
+        String imagefilenameFtp = new String(name.getBytes(StandardCharsets.UTF_8), StandardCharsets.ISO_8859_1);
+        try (
+                BufferedInputStream inputStream = new BufferedInputStream(new FileInputStream("C:\\Users\\86157\\Desktop\\" + name));
+        ) {
+            boolean upload = MeiTanZyFtpUtil.upload("/home/document/mkzy/202011/576/fzzj1", imagefilenameFtp, inputStream, ftpClient);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        long time2 = System.currentTimeMillis();
+        System.out.println("耗时： " + (time2 - time1));
+
+    }
+
+    public static String getElementP(String html) {
+        if (html == null || "".equals(html)) {
+            return null;
+        }
+        if (!html.contains("<p>") || !html.contains("</p>")) {
+            html = "<p>" + html + "</p>";
+        }
+        Document doc = Jsoup.parse(html);
+        Elements p = doc.getElementsByTag("p");
+        return p.text();
+    }
+
+    @org.junit.Test
+    public void test67(){
+
+    }
+
 
 
 }
