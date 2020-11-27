@@ -53,6 +53,7 @@ public class SrInfoService implements PushService {
                     object.put("incomeId", MeiTanConfigInfo.DWBM.getValue() + "_" + recordSet_Detail.getString("id")); // 收入ID
                     object.put("incomeAmount", recordSet_Detail.getString("yqrsrje")); // 已确认收入金额
                     object.put("assistEvidence", ConnUtil.pushFileToFtp(recordSet_Detail.getString("fzzj1"), htzbh, "fzzj1")); // 辅助证据
+                    object.put("remarks", recordSet_Detail.getString("bz")); // 备注
                     object.put("currentPeriodAmount", recordSet_Detail.getString("dqkpje")); // 当期开票金额
                     jsonArray.add(object);
                 }

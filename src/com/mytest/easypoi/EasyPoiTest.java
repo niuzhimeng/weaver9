@@ -3,15 +3,15 @@ package com.mytest.easypoi;
 import cn.afterturn.easypoi.entity.ImageEntity;
 import cn.afterturn.easypoi.excel.ExcelExportUtil;
 import cn.afterturn.easypoi.excel.entity.TemplateExportParams;
+import cn.afterturn.easypoi.word.WordExportUtil;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import weaver.email.mime.ByteOutputStream;
 
-import java.io.FileInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -81,10 +81,10 @@ public class EasyPoiTest {
             params.setSheetName(sheetNames);
             Workbook workbook = ExcelExportUtil.exportExcel(params, map);
 
-            ByteOutputStream byteOutputStream = new ByteOutputStream();
+            ByteArrayOutputStream byteOutputStream = new ByteArrayOutputStream();
             workbook.write(byteOutputStream);
 
-            fileOutputStream.write(byteOutputStream.getBytes());
+            fileOutputStream.write(byteOutputStream.toByteArray());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -92,19 +92,26 @@ public class EasyPoiTest {
 
     }
 
-    private byte[] getImage(String imagePath) {
-        byte[] bytes = new byte[1024];
+    /**
+     * docx标签替换
+     */
+    @Test
+    public void test3() {
         try (
-                InputStream inputStream = new FileInputStream(imagePath);
+                // 文件输出路径
+                FileOutputStream fileOutputStream = new FileOutputStream("C:\\Users\\86157\\Desktop\\test.docx");
         ) {
-            int available = inputStream.available();
-            bytes = new byte[available];
-            int read = inputStream.read(bytes);
+            Map<String, Object> map = new HashMap<>();
+            map.put("year", "2021");
 
+            XWPFDocument doc = WordExportUtil.exportWord07("C:\\Users\\86157\\Desktop\\testWord.docx", map);
+
+            doc.write(fileOutputStream);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return bytes;
+
+
     }
 
 

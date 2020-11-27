@@ -9,6 +9,7 @@ import com.alibaba.excel.support.ExcelTypeEnum;
 import com.fapiao.neon.util.AESUtil;
 import com.weavernorth.meitanzy.util.MeiTanConfigInfo;
 import com.weavernorth.meitanzy.util.MeiTanZyFtpUtil;
+import okhttp3.MediaType;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.poi.xssf.usermodel.XSSFCell;
@@ -21,6 +22,7 @@ import org.artofsolving.jodconverter.office.OfficeManager;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+import weaver.file.ImageFileManager;
 import weaver.general.Util;
 
 import javax.crypto.Cipher;
@@ -31,6 +33,7 @@ import java.awt.*;
 import java.io.*;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.security.SecureRandom;
@@ -476,7 +479,14 @@ public class Test {
 
     @org.junit.Test
     public void test67(){
+//        ImageFileManager imageFileManager = new ImageFileManager();
+//        imageFileManager.getImageFileInfoById(1);
+//
+//        InputStream inputStream = imageFileManager.getInputStream();
 
+        MediaType xml = MediaType.parse("application/xml");
+        Charset charset = xml.charset();
+        System.out.println(charset);
     }
 
 

@@ -25,6 +25,7 @@ public class HtqdService implements PushService {
 
         try {
             RecordSet updateSet = new RecordSet();
+            RecordSet detailSet = new RecordSet();
             RecordSet recordSet = new RecordSet();
             recordSet.executeQuery("select * from uf_Mkzy_htgl where id in (" + ids + ")");
             while (recordSet.next()) {
@@ -122,20 +123,30 @@ public class HtqdService implements PushService {
                 jsonObject.put("signItemList", signItemList);
 
                 // relatedPartyList拼接
-                JSONArray relatedPartyList = new JSONArray();
                 JSONObject relatedParty = new JSONObject(true);
                 relatedParty.put("isRelatedParty", recordSet.getString("sfglf")); // 是否关联方
+                //relatedParty.put("rpName", recordSet.getString("glfmc")); // 关联方名称
                 relatedParty.put("rpType", recordSet.getString("glflx")); // 关联方类型
                 relatedParty.put("isRelatedDeal", recordSet.getString("sfgljy")); // 是否关联交易
                 relatedParty.put("dealType", recordSet.getString("gljylx")); // 关联交易类型
-                relatedParty.put("isIntertemporal", recordSet.getString("sfkqht")); // 是否跨期合同
 
-                relatedParty.put("intertemporalYear", recordSet.getString("nd")); // 年度
-                relatedParty.put("estimateAmount", recordSet.getString("ygje")); // 预估金额
+                relatedParty.put("relatedDealItem", recordSet.getString("gljysx")); // 关联交易事项
+                relatedParty.put("isIntertemporal", recordSet.getString("sfkqht")); // 是否跨期合同 1：是:0：否
                 relatedParty.put("isImportantRelatedDeal", recordSet.getString("sfzdgljy")); // 是否重大关联交易
                 relatedParty.put("isNeedPerfApprove", recordSet.getString("sfjlxgljysp")); // 是否经履行关联交易审批
-                relatedPartyList.add(relatedParty);
-                jsonObject.put("relatedPartyList", relatedPartyList);
+
+                // 年度 预估金额 为明细表字段
+                detailSet.executeQuery("select nd, ygjey from uf_Mkzy_htgl_dt3 where mainid = ?", id);
+                JSONArray intertemporalList = new JSONArray();
+                while (detailSet.next()) {
+                    JSONObject intertemporal = new JSONObject(true);
+                    intertemporal.put("intertemporalYear", detailSet.getString("nd")); // 年度
+                    intertemporal.put("estimateAmount", detailSet.getString("ygjey")); // 预估金额
+                    intertemporalList.add(intertemporal);
+                }
+                relatedParty.put("intertemporalList", intertemporalList);
+
+                jsonObject.put("relatedParty", relatedParty);
 
                 JSONObject allObj = new JSONObject();
                 allObj.put("contractInfo", jsonObject.toJSONString());
