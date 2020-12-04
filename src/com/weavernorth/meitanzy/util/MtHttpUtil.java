@@ -58,12 +58,42 @@ public class MtHttpUtil {
         return "";
     }
 
-    public static String get(String url) {
+    /**
+     * post请求发送 键值对
+     */
+    public static String postKeyValue(String url, Map<String, String> bodyMap) {
+        OkHttpClient client = new OkHttpClient();
+        FormBody.Builder formBodyBuilder = new FormBody.Builder();
+        if (bodyMap != null) {
+            bodyMap.forEach(formBodyBuilder::add);
+        }
+
+        Request.Builder requestBuilder = new Request.Builder()
+                .post(formBodyBuilder.build())
+                .url(url);
+
+        try {
+            Response response = client.newCall(requestBuilder.build()).execute();
+            return response.body().string();
+        } catch (IOException e) {
+            LOGGER.error("http请求postJsonHeader异常： " + e);
+        }
+
+        return "";
+    }
+
+    /**
+     * get请求 带请求头
+     */
+    public static String get(String url, Map<String, String> headerMap) {
         String returnStr = "";
         OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder().url(url).get().build();
+        Request.Builder builder = new Request.Builder().url(url).get();
+        if (headerMap != null) {
+            headerMap.forEach(builder::addHeader);
+        }
         try {
-            Response response = client.newCall(request).execute();
+            Response response = client.newCall(builder.build()).execute();
             returnStr = response.body().string();
         } catch (IOException e) {
             LOGGER.error("http请求get异常： " + e);
