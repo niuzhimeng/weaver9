@@ -1,6 +1,7 @@
 package com.weavernorth.zhongDk.orgSyn.vo;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import org.apache.commons.lang3.StringUtils;
 import weaver.general.BaseBean;
 
 import java.io.Serializable;
@@ -11,9 +12,9 @@ import java.io.Serializable;
 public class ZdkSubCompany extends BaseBean implements Serializable {
 
     @JSONField(name = "B01AN")
-    private String orgType; // 组织类型 10是分部，其他是部门
+    private String orgType; // 组织类型 传的是汉字：是分部，其他是部门
 
-    @JSONField(name = "B0110_0")
+    @JSONField(name = "CODEITEMID")
     private String orgCode; // 组织编码
 
     @JSONField(name = "B01AM")
@@ -29,9 +30,12 @@ public class ZdkSubCompany extends BaseBean implements Serializable {
     private String status; // 数据状态 0是停用，1是启用
     private String statusOa;
 
+    @JSONField(name = "UNIQUE_ID")
+    private String uniqueId; // 唯一标识码
+
     private String ErrMessage; // 错误信息
     private String supperCompanyId; // 上级分部id
-    private String supperDepartmentId; // 上级分部id
+    private String supperDepartmentId; // 上级部门id
 
     public void changeStatusOa() {
         if ("0".equals(this.status)) {
@@ -41,22 +45,31 @@ public class ZdkSubCompany extends BaseBean implements Serializable {
             this.statusOa = "0";
         }
 
+        if (StringUtils.isBlank(this.orgFullName)) {
+            this.orgFullName = this.orgShortName;
+        }
+
     }
 
     @Override
     public String toString() {
-        return "ZdkSubCompany{" +
-                "orgType='" + orgType + '\'' +
-                ", orgCode='" + orgCode + '\'' +
-                ", supCode='" + supCode + '\'' +
-                ", orgFullName='" + orgFullName + '\'' +
-                ", orgShortName='" + orgShortName + '\'' +
-                ", status='" + status + '\'' +
-                ", statusOa='" + statusOa + '\'' +
-                ", ErrMessage='" + ErrMessage + '\'' +
-                ", supperCompanyId='" + supperCompanyId + '\'' +
-                ", supperDepartmentId='" + supperDepartmentId + '\'' +
-                '}';
+        return "组织类型='" + orgType + '\'' +
+                ", 组织编码='" + orgCode + '\'' +
+                ", 上级组织编码='" + supCode + '\'' +
+                ", 组织名称='" + orgFullName + '\'' +
+                ", 组织简称='" + orgShortName + '\'' +
+                ", 数据状态='" + status + '\'' +
+                ", 数据状态Oa='" + statusOa + '\'' +
+                ", 上级分部id='" + supperCompanyId + '\'' +
+                ", 上级部门id='" + supperDepartmentId + '\'';
+    }
+
+    public String getUniqueId() {
+        return uniqueId;
+    }
+
+    public void setUniqueId(String uniqueId) {
+        this.uniqueId = uniqueId;
     }
 
     public String getSupperDepartmentId() {

@@ -4,12 +4,12 @@ public interface MainDataOrgSyn {
     /**
      * 分部、部门同步
      */
-    void synOrganization(String orgJsonStr);
+    String synOrganization(String orgJsonStr);
 
     /**
      * 人员同步
      */
-    void synHrmResource(String manJsonStr);
+    String synHrmResource(String manJsonStr);
 
 
 }

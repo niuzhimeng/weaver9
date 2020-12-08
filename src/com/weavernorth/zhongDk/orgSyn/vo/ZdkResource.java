@@ -1,7 +1,9 @@
 package com.weavernorth.zhongDk.orgSyn.vo;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import weaver.conn.RecordSet;
-import weaver.general.BaseBean;
 import weaver.general.Util;
 
 import java.util.ArrayList;
@@ -11,24 +13,34 @@ import java.util.Calendar;
  * 人员信息
  */
 public class ZdkResource {
-
-    private BaseBean baseBean = new BaseBean();
+    private static final Log LOGGER = LogFactory.getLog(ZdkResource.class);
 
     private String telephone; // 座机
     private String certificatenum; // 身份证号码
     private String startdate; // 入职日期
     private String jobtitlecode; //岗位编码
+    @JSONField(name = "A0121")
+    private String folk; // 民族
 
-    private String workcode;//员工编号
-    private String lastname;//姓名
-    private String loginid;//系统登陆帐号
+    @JSONField(name = "ID")
+    private String workCode;//员工编号
+    @JSONField(name = "A0101")
+    private String lastName;//姓名
+    @JSONField(name = "A01AK")
+    private String loginId;//系统登陆帐号
+    @JSONField(name = "A0182")
     private String status;//员工状态
-    private String sex;//性别
+    @JSONField(name = "A0107")
+    private String sex; // 性别
+
+    @JSONField(name = "DATASTATUS")
+    private String dataStatus; // 数据状态 0是停用，1是启用
+    @JSONField(name = "E0122")
+    private String departmentCode; // 所属部门编码
 
     private String location;//工作地点
     private String email;//电子邮件
     private String phone;//手机
-    private String depcode;//所属部门编码
     private String dsporder;//人员排序
 
     private String depId;//部门id
@@ -46,10 +58,34 @@ public class ZdkResource {
     private String passWord;//密码
     private String id;
     private String statusOa; //员工状态
-    private String sexOa;
+    private String sexOa; // 性别OA
     private String locationId;
 
     private String errMessage;
+
+    public void changeStatus() {
+        if ("男".equals(this.sex)) {
+            this.sexOa = "0";
+        } else {
+            this.sexOa = "1";
+        }
+
+        if ("0".equals(this.dataStatus)) {
+            this.statusOa = "7"; // 无效
+        } else if ("离职".equals(this.status)) {
+            this.statusOa = "5"; // 离职
+        } else {
+            this.statusOa = "1"; // 在职
+        }
+    }
+
+    public String getWorkCode() {
+        return workCode;
+    }
+
+    public void setWorkCode(String workCode) {
+        this.workCode = workCode;
+    }
 
     public String getJobtitlecode() {
         return jobtitlecode;
@@ -92,7 +128,7 @@ public class ZdkResource {
             }
             returnStr = replaceStr(managerstr) + ",";
         } catch (Exception e) {
-            baseBean.writeLog("get hrmresource all manager Exception :" + e);
+            LOGGER.error("get hrmresource all manager Exception :" + e);
         }
         return returnStr;
     }
@@ -133,7 +169,7 @@ public class ZdkResource {
                 rs.executeSql(sql_10);
             }
         } catch (Exception e) {
-            baseBean.writeLog("update rights Exception :" + e);
+            LOGGER.error("update rights Exception :" + e);
         }
     }
 
@@ -193,29 +229,6 @@ public class ZdkResource {
         this.id = id;
     }
 
-    public String getWorkcode() {
-        return workcode;
-    }
-
-    public void setWorkcode(String workcode) {
-        this.workcode = workcode;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public String getLoginid() {
-        return loginid;
-    }
-
-    public void setLoginid(String loginid) {
-        this.loginid = loginid;
-    }
 
     public String getStatus() {
         return status;
@@ -257,12 +270,44 @@ public class ZdkResource {
         this.phone = phone;
     }
 
-    public String getDepcode() {
-        return depcode;
+    public String getFolk() {
+        return folk;
     }
 
-    public void setDepcode(String depcode) {
-        this.depcode = depcode;
+    public void setFolk(String folk) {
+        this.folk = folk;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getLoginId() {
+        return loginId;
+    }
+
+    public void setLoginId(String loginId) {
+        this.loginId = loginId;
+    }
+
+    public String getDataStatus() {
+        return dataStatus;
+    }
+
+    public void setDataStatus(String dataStatus) {
+        this.dataStatus = dataStatus;
+    }
+
+    public String getDepartmentCode() {
+        return departmentCode;
+    }
+
+    public void setDepartmentCode(String departmentCode) {
+        this.departmentCode = departmentCode;
     }
 
     public String getDsporder() {
