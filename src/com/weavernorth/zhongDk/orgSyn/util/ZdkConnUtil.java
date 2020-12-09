@@ -377,9 +377,10 @@ public class ZdkConnUtil {
             String sql = "insert into hrmresource (workcode, lastname, loginid, status, sex," +
                     " locationid, email, mobile, managerid, seclevel, " +
                     "departmentid, subcompanyid1, jobtitle, dsporder, id," +
-                    "password, accounttype, belongto, systemlanguage, telephone, " +
-                    "startdate, certificatenum ) " +
-                    "values (?,?,?,?,?,  ?,?,?,?,?,  ?,?,?,?,?,  ?,?,?,?,?, ?,?)";
+                    "password, accounttype, belongto, systemlanguage, nativeplace, " +
+                    "birthplace, certificatenum, degree, policy, companystartdate, " +
+                    "workstartdate, UNIQUE_ID, birthday, folk) " +
+                    "values (?,?,?,?,?,  ?,?,?,?,?,  ?,?,?,?,?,  ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?)";
             statement.setStatementSql(sql);
             int stnCount = 0;
             for (ZdkResource hrmResource : insertHrmResourceList) {
@@ -410,10 +411,18 @@ public class ZdkConnUtil {
                 statement.setString(17, hrmResource.getAccounttype());
                 statement.setString(18, hrmResource.getBelongto());
                 statement.setString(19, hrmResource.getSystemlanguage());
-                statement.setString(20, hrmResource.getTelephone());
+                statement.setString(20, hrmResource.getNativePlace());
 
-                statement.setString(21, hrmResource.getStartdate());
+                statement.setString(21, hrmResource.getBirthplace());
                 statement.setString(22, hrmResource.getCertificatenum());
+                statement.setString(23, hrmResource.getDegree());
+                statement.setString(24, hrmResource.getPolicy());
+                statement.setString(25, hrmResource.getCompanystartdate());
+
+                statement.setString(26, hrmResource.getWorkstartdate());
+                statement.setString(27, hrmResource.getUniqueId());
+                statement.setString(28, hrmResource.getBirthday());
+                statement.setString(29, hrmResource.getFolk());
 
                 statement.executeUpdate();
                 hrmResource.updaterights(hrmResource.getId());
@@ -435,7 +444,8 @@ public class ZdkConnUtil {
         try {
             String sql = "update hrmresource set lastname = ?, status = ?, sex = ?, locationid = ?, mobile = ?, " +
                     "departmentid = ?, subcompanyid1 = ?, email = ?, workcode = ?, telephone = ?, " +
-                    "loginid = ?, jobtitle = ? where certificatenum = ?";
+                    "loginid = ?, jobtitle = ?, certificatenum = ?, birthday = ?, degree = ?, " +
+                    "policy = ?, companystartdate = ?, workstartdate = ? where UNIQUE_ID = ?";
             statement.setStatementSql(sql);
             int stnCount = 0;
             for (ZdkResource hrmResource : updateHrmResourceList) {
@@ -454,11 +464,19 @@ public class ZdkConnUtil {
                 statement.setString(7, hrmResource.getSubId());
                 statement.setString(8, hrmResource.getEmail());
                 statement.setString(9, hrmResource.getWorkCode());
-                statement.setString(10, hrmResource.getTelephone());
+                statement.setString(10, hrmResource.getPhone());
 
                 statement.setString(11, hrmResource.getLoginId());
                 statement.setString(12, hrmResource.getJobtitleId());
                 statement.setString(13, hrmResource.getCertificatenum());
+                statement.setString(14, hrmResource.getBirthday());
+                statement.setString(15, hrmResource.getDegree());
+
+                statement.setString(16, hrmResource.getPolicy());
+                statement.setString(17, hrmResource.getCompanystartdate());
+                statement.setString(18, hrmResource.getWorkstartdate());
+
+                statement.setString(19, hrmResource.getUniqueId());
 
                 statement.executeUpdate();
                 stnCount++;
@@ -512,6 +530,23 @@ public class ZdkConnUtil {
         RecordSet recordSet = new RecordSet();
         String insertSql = "insert into uf_zzxxtbrz(rq, sj, lx, cwxx, sjxx) values(?,?,?,?,?)";
         for (ZdkSubCompany company : errOrgList) {
+            recordSet.executeUpdate(insertSql,
+                    dates[0].trim(), dates[1].trim(), type, company.getErrMessage(), company.toString());
+        }
+
+    }
+
+    /**
+     * 人员插入错误日志
+     *
+     * @param errOrgList 错误数据集合
+     * @param type       数据类型（分部、部门，人员）
+     */
+    public static void insertErrLogResource(List<ZdkResource> errOrgList, String type) {
+        String[] dates = TimeUtil.getCurrentTimeString().split(" ");
+        RecordSet recordSet = new RecordSet();
+        String insertSql = "insert into uf_zzxxtbrz(rq, sj, lx, cwxx, sjxx) values(?,?,?,?,?)";
+        for (ZdkResource company : errOrgList) {
             recordSet.executeUpdate(insertSql,
                     dates[0].trim(), dates[1].trim(), type, company.getErrMessage(), company.toString());
         }

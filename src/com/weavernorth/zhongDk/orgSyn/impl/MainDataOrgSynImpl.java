@@ -121,12 +121,20 @@ public class MainDataOrgSynImpl implements MainDataOrgSyn {
                 }
             }
 
-            // 根据【身份证】判断人员是否存在
-            List<String> existList = new ArrayList<>();
-            recordSet.executeQuery("select workcode from hrmresource");
+            // 人员状态对照 map
+            Map<String, String> statusMap = new HashMap<>();
+            recordSet.executeQuery("select mdmmc, oabm from uf_ryztysb");
             while (recordSet.next()) {
-                if (!"".equals(recordSet.getString("workcode"))) {
-                    existList.add(recordSet.getString("workcode"));
+                statusMap.put(recordSet.getString("mdmmc"), recordSet.getString("oabm"));
+
+            }
+
+            // 根据【UNIQUE_ID】判断人员是否存在
+            List<String> existList = new ArrayList<>();
+            recordSet.executeQuery("select UNIQUE_ID from hrmresource");
+            while (recordSet.next()) {
+                if (!"".equals(recordSet.getString("UNIQUE_ID"))) {
+                    existList.add(recordSet.getString("UNIQUE_ID"));
                 }
             }
 
@@ -137,10 +145,10 @@ public class MainDataOrgSynImpl implements MainDataOrgSyn {
             for (int i = 0; i < size; i++) {
                 JSONObject orgObj = jsonArray.getJSONObject(i).getJSONObject("USRA01");
                 ZdkResource hrmResource = JSONObject.toJavaObject(orgObj, ZdkResource.class);
-                hrmResource.changeStatus();
+                hrmResource.changeStatus(statusMap);
 
-                // 身份证号码（唯一标识）
-                String certificatenum = Util.null2String(hrmResource.getCertificatenum()).trim();
+                // UNIQUE_ID（唯一标识）
+                String uniqueId = Util.null2String(hrmResource.getUniqueId()).trim();
                 // 岗位编码
                 String jobtitlecode = Util.null2String(hrmResource.getJobtitlecode()).trim();
                 // 登录名
@@ -150,15 +158,14 @@ public class MainDataOrgSynImpl implements MainDataOrgSyn {
                 // 工作地点
                 String locationStr = Util.null2String(hrmResource.getLocation()).trim();
                 if ("".equals(locationStr)) {
-                    locationStr = "北京";
+                    locationStr = "暂无";
                 }
                 String locationId = ZdkConnUtil.insertLocation(locationStr);
-                String telPhone = Util.null2String(hrmResource.getTelephone());
 
                 LOGGER.info("========================");
-                LOGGER.info("人员姓名： " + hrmResource.getLastName() + ", 身份证号码：" + certificatenum + ", 登录名： " + loginId +
+                LOGGER.info("人员姓名： " + hrmResource.getLastName() + ", UNIQUE_ID：" + uniqueId + ", 登录名： " + loginId +
                         ", 所属部门编码： " + depCode + ", 主数据Status： " + hrmResource.getStatus() + ", 岗位编码： " + jobtitlecode +
-                        ", 性别： " + hrmResource.getSex() + ", 工作地点： " + locationStr + ", 办公室电话: " + telPhone);
+                        ", 性别： " + hrmResource.getSex() + ", 工作地点： " + locationStr + ", 联系电话: " + hrmResource.getPhone());
                 // 部门ID
                 int depId = Util.getIntValue(depIdMap.get(depCode), 0);
 
@@ -202,13 +209,12 @@ public class MainDataOrgSynImpl implements MainDataOrgSyn {
                 hrmResource.setSystemlanguage("7");
                 // 安全级别默认10
                 hrmResource.setSeclevel("10");
-                hrmResource.setTelephone(telPhone);
 
-                if (!existList.contains(certificatenum)) {
+                if (!existList.contains(uniqueId)) {
                     String newId = String.valueOf(ZdkConnUtil.getHrmMaxId());
                     hrmResource.setId(newId);
                     insertHrmResource.add(hrmResource);
-                    existList.add(certificatenum);
+                    existList.add(uniqueId);
                 } else {
                     updateHrmResource.add(hrmResource);
                 }
@@ -220,11 +226,13 @@ public class MainDataOrgSynImpl implements MainDataOrgSyn {
             LOGGER.info("更新人员数： " + updateHrmResource.size());
             ZdkConnUtil.updateHrmResource(updateHrmResource);
 
-            LOGGER.info("人员同步失败数据： " + JSONObject.toJSONString(errHrmResourceList));
-
             // 清空人员缓存
             new ResourceComInfo().removeResourceCache();
-
+            if (errHrmResourceList.size() > 0) {
+                LOGGER.info("人员同步失败数据： " + JSONObject.toJSONString(errHrmResourceList));
+                ZdkConnUtil.insertErrLogResource(errHrmResourceList, "人员");
+                return "0";
+            }
         } catch (Exception e) {
             LOGGER.error("人员同步异常： " + e);
         }

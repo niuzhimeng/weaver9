@@ -4,21 +4,26 @@ import com.alibaba.fastjson.annotation.JSONField;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import weaver.conn.RecordSet;
+import weaver.general.BaseBean;
 import weaver.general.Util;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Map;
 
 /**
  * 人员信息
  */
-public class ZdkResource {
+public class ZdkResource extends BaseBean {
     private static final Log LOGGER = LogFactory.getLog(ZdkResource.class);
 
-    private String telephone; // 座机
+    @JSONField(name = "UNIQUE_ID")
+    private String uniqueId; // 唯一标识码
+    @JSONField(name = "A01BF")
+    private String certificatenumType; // 证件类型
+    @JSONField(name = "A0177")
     private String certificatenum; // 身份证号码
-    private String startdate; // 入职日期
-    private String jobtitlecode; //岗位编码
+
     @JSONField(name = "A0121")
     private String folk; // 民族
 
@@ -37,10 +42,27 @@ public class ZdkResource {
     private String dataStatus; // 数据状态 0是停用，1是启用
     @JSONField(name = "E0122")
     private String departmentCode; // 所属部门编码
+    @JSONField(name = "A0111")
+    private String birthday; // 生日
+    @JSONField(name = "A0114")
+    private String nativePlace; // 籍贯
+    @JSONField(name = "A01AG")
+    private String birthplace; // 出生地
+
+    @JSONField(name = "A0440")
+    private String degree; // 学位
+    @JSONField(name = "A2205")
+    private String policy; // 政治面貌
+    @JSONField(name = "A0142")
+    private String companystartdate; // 公司开始日期
+    @JSONField(name = "A0141")
+    private String workstartdate; // 工作开始日期
+
 
     private String location;//工作地点
     private String email;//电子邮件
-    private String phone;//手机
+    @JSONField(name = "A0148")
+    private String phone; //手机
     private String dsporder;//人员排序
 
     private String depId;//部门id
@@ -61,21 +83,24 @@ public class ZdkResource {
     private String sexOa; // 性别OA
     private String locationId;
 
+    private String jobtitlecode; //岗位编码
     private String errMessage;
 
-    public void changeStatus() {
+    public void changeStatus(Map<String, String> statusMap) {
         if ("男".equals(this.sex)) {
             this.sexOa = "0";
         } else {
             this.sexOa = "1";
         }
 
+        if (!"居民身份证".equals(Util.null2String(this.certificatenumType).trim())) {
+            this.certificatenum = "";
+        }
+
         if ("0".equals(this.dataStatus)) {
             this.statusOa = "7"; // 无效
-        } else if ("离职".equals(this.status)) {
-            this.statusOa = "5"; // 离职
         } else {
-            this.statusOa = "1"; // 在职
+            this.statusOa = statusMap.get(this.status);
         }
     }
 
@@ -95,13 +120,6 @@ public class ZdkResource {
         this.jobtitlecode = jobtitlecode;
     }
 
-    public String getStartdate() {
-        return startdate;
-    }
-
-    public void setStartdate(String startdate) {
-        this.startdate = startdate;
-    }
 
     /**
      * 获取所有上级String
@@ -116,7 +134,7 @@ public class ZdkResource {
             return returnStr;
         }
         try {
-            rs.executeSql("select managerstr from HrmResource where id = " + managerid);
+            rs.executeQuery("select managerstr from HrmResource where id = " + managerid);
             String managerstr = "";
             if (rs.next()) {
                 managerstr = Util.null2String(rs.getString("managerstr"));
@@ -179,14 +197,6 @@ public class ZdkResource {
 
     public void setCertificatenum(String certificatenum) {
         this.certificatenum = certificatenum;
-    }
-
-    public String getTelephone() {
-        return telephone;
-    }
-
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
     }
 
     public String getErrMessage() {
@@ -404,5 +414,77 @@ public class ZdkResource {
 
     public void setPassWord(String passWord) {
         this.passWord = passWord;
+    }
+
+    public String getUniqueId() {
+        return uniqueId;
+    }
+
+    public void setUniqueId(String uniqueId) {
+        this.uniqueId = uniqueId;
+    }
+
+    public String getCertificatenumType() {
+        return certificatenumType;
+    }
+
+    public void setCertificatenumType(String certificatenumType) {
+        this.certificatenumType = certificatenumType;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getNativePlace() {
+        return nativePlace;
+    }
+
+    public void setNativePlace(String nativePlace) {
+        this.nativePlace = nativePlace;
+    }
+
+    public String getBirthplace() {
+        return birthplace;
+    }
+
+    public void setBirthplace(String birthplace) {
+        this.birthplace = birthplace;
+    }
+
+    public String getDegree() {
+        return degree;
+    }
+
+    public void setDegree(String degree) {
+        this.degree = degree;
+    }
+
+    public String getPolicy() {
+        return policy;
+    }
+
+    public void setPolicy(String policy) {
+        this.policy = policy;
+    }
+
+    public String getCompanystartdate() {
+        return companystartdate;
+    }
+
+    public void setCompanystartdate(String companystartdate) {
+        this.companystartdate = companystartdate;
+    }
+
+    public String getWorkstartdate() {
+        return workstartdate;
+    }
+
+    public void setWorkstartdate(String workstartdate) {
+        this.workstartdate = workstartdate;
     }
 }
