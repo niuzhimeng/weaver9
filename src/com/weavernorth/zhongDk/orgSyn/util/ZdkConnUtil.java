@@ -5,6 +5,7 @@ import com.weaver.general.TimeUtil;
 import com.weaver.general.Util;
 import com.weavernorth.zhongDk.orgSyn.vo.ZdkResource;
 import com.weavernorth.zhongDk.orgSyn.vo.ZdkSubCompany;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import weaver.conn.ConnStatement;
@@ -520,20 +521,23 @@ public class ZdkConnUtil {
     }
 
     /**
-     * 插入错误日志
+     * 组织插入错误日志
      *
      * @param errOrgList 错误数据集合
      * @param type       数据类型（分部、部门，人员）
      */
     private static void insertErrLog(List<ZdkSubCompany> errOrgList, String type) {
-        String[] dates = TimeUtil.getCurrentTimeString().split(" ");
-        RecordSet recordSet = new RecordSet();
-        String insertSql = "insert into uf_zzxxtbrz(rq, sj, lx, cwxx, sjxx) values(?,?,?,?,?)";
-        for (ZdkSubCompany company : errOrgList) {
-            recordSet.executeUpdate(insertSql,
-                    dates[0].trim(), dates[1].trim(), type, company.getErrMessage(), company.toString());
+        try {
+            String[] dates = TimeUtil.getCurrentTimeString().split(" ");
+            RecordSet recordSet = new RecordSet();
+            String insertSql = "insert into uf_zzxxtbrz(rq, sj, lx, cwxx, sjxx) values(?,?,?,?,?)";
+            for (ZdkSubCompany company : errOrgList) {
+                recordSet.executeUpdate(insertSql,
+                        dates[0].trim(), dates[1].trim(), type, company.getErrMessage(), company.toString());
+            }
+        } catch (Exception e) {
+            LOGGER.error("组织插入错误日志异常： " + e);
         }
-
     }
 
     /**
@@ -543,14 +547,45 @@ public class ZdkConnUtil {
      * @param type       数据类型（分部、部门，人员）
      */
     public static void insertErrLogResource(List<ZdkResource> errOrgList, String type) {
-        String[] dates = TimeUtil.getCurrentTimeString().split(" ");
+        try {
+            String[] dates = TimeUtil.getCurrentTimeString().split(" ");
+            RecordSet recordSet = new RecordSet();
+            String insertSql = "insert into uf_zzxxtbrz(rq, sj, lx, cwxx, sjxx) values(?,?,?,?,?)";
+            for (ZdkResource company : errOrgList) {
+                recordSet.executeUpdate(insertSql,
+                        dates[0].trim(), dates[1].trim(), type, company.getErrMessage(), company.toString());
+            }
+        } catch (Exception e) {
+            LOGGER.error("人员插入错误日志异常： " + e);
+        }
+    }
+
+    /**
+     * 根据岗位名称获取岗位id
+     *
+     * @param jobMap  库中已有的岗位map - 名称，id
+     * @param jobName 岗位名称
+     * @return 岗位id
+     */
+    public static String getJobTitleId(Map<String, String> jobMap, String jobName) {
+        if (StringUtils.isBlank(jobName)) {
+            return "";
+        }
+        String jobId = jobMap.get(jobName);
+        if (StringUtils.isNotBlank(jobId)) {
+            return jobId;
+        }
+        // 库中没有，需新增岗位
         RecordSet recordSet = new RecordSet();
-        String insertSql = "insert into uf_zzxxtbrz(rq, sj, lx, cwxx, sjxx) values(?,?,?,?,?)";
-        for (ZdkResource company : errOrgList) {
-            recordSet.executeUpdate(insertSql,
-                    dates[0].trim(), dates[1].trim(), type, company.getErrMessage(), company.toString());
+        String sql = "insert into HrmJobTitles (jobtitlename, jobtitlemark, jobactivityid) values (?,?,?)";
+        recordSet.executeUpdate(sql, jobName, jobName, "15");
+        recordSet.executeQuery("select max(id) id from HrmJobTitles");
+        if (recordSet.next()) {
+            jobId = recordSet.getString("id");
+            jobMap.put(jobName, jobId);
         }
 
+        return jobId;
     }
 
 }

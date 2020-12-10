@@ -12,6 +12,7 @@ import weaver.conn.RecordSet;
 import weaver.general.Util;
 import weaver.hrm.company.DepartmentComInfo;
 import weaver.hrm.company.SubCompanyComInfo;
+import weaver.hrm.job.JobTitlesComInfo;
 import weaver.hrm.resource.ResourceComInfo;
 
 import java.util.ArrayList;
@@ -90,6 +91,7 @@ public class MainDataOrgSynImpl implements MainDataOrgSyn {
     @Override
     public String synHrmResource(String manJsonStr) {
         LOGGER.info("人员同步开始, 接收数据：" + manJsonStr);
+        long time1 = System.currentTimeMillis();
         try {
             JSONObject jsonObject = JSONObject.parseObject(manJsonStr);
             JSONArray jsonArray = jsonObject.getJSONArray("LIST");
@@ -112,12 +114,12 @@ public class MainDataOrgSynImpl implements MainDataOrgSyn {
                 }
             }
 
-            // 岗位编码 - 岗位id
+            // 岗位名称 - 岗位id
             Map<String, String> jobCodeIdMap = new HashMap<>();
-            recordSet.executeQuery("select id, jobtitlecode from hrmjobtitles");
+            recordSet.executeQuery("select id, jobtitlemark from hrmjobtitles");
             while (recordSet.next()) {
-                if (!"".equals(recordSet.getString("jobtitlecode"))) {
-                    jobCodeIdMap.put(recordSet.getString("jobtitlecode"), recordSet.getString("id"));
+                if (!"".equals(recordSet.getString("jobtitlemark"))) {
+                    jobCodeIdMap.put(recordSet.getString("jobtitlemark"), recordSet.getString("id"));
                 }
             }
 
@@ -149,7 +151,7 @@ public class MainDataOrgSynImpl implements MainDataOrgSyn {
 
                 // UNIQUE_ID（唯一标识）
                 String uniqueId = Util.null2String(hrmResource.getUniqueId()).trim();
-                // 岗位编码
+                // 岗位名称
                 String jobtitlecode = Util.null2String(hrmResource.getJobtitlecode()).trim();
                 // 登录名
                 String loginId = Util.null2String(hrmResource.getLoginId()).trim();
@@ -164,7 +166,7 @@ public class MainDataOrgSynImpl implements MainDataOrgSyn {
 
                 LOGGER.info("========================");
                 LOGGER.info("人员姓名： " + hrmResource.getLastName() + ", UNIQUE_ID：" + uniqueId + ", 登录名： " + loginId +
-                        ", 所属部门编码： " + depCode + ", 主数据Status： " + hrmResource.getStatus() + ", 岗位编码： " + jobtitlecode +
+                        ", 所属部门编码： " + depCode + ", 主数据Status： " + hrmResource.getStatus() + ", 岗位名称： " + jobtitlecode +
                         ", 性别： " + hrmResource.getSex() + ", 工作地点： " + locationStr + ", 联系电话: " + hrmResource.getPhone());
                 // 部门ID
                 int depId = Util.getIntValue(depIdMap.get(depCode), 0);
@@ -201,7 +203,7 @@ public class MainDataOrgSynImpl implements MainDataOrgSyn {
                 hrmResource.setPassWord(Util.getEncrypt("123456"));
                 hrmResource.setDepId(String.valueOf(depId));
                 hrmResource.setSubId(String.valueOf(subId));
-                hrmResource.setJobtitleId(jobCodeIdMap.get(jobtitlecode));
+                hrmResource.setJobtitleId(ZdkConnUtil.getJobTitleId(jobCodeIdMap, jobtitlecode));
                 hrmResource.setLocationId(locationId);
                 //账号类型
                 hrmResource.setAccounttype("0");
@@ -226,17 +228,20 @@ public class MainDataOrgSynImpl implements MainDataOrgSyn {
             LOGGER.info("更新人员数： " + updateHrmResource.size());
             ZdkConnUtil.updateHrmResource(updateHrmResource);
 
-            // 清空人员缓存
+            // 清空人员、岗位缓存
             new ResourceComInfo().removeResourceCache();
+            new JobTitlesComInfo().removeJobTitlesCache();
+
             if (errHrmResourceList.size() > 0) {
                 LOGGER.info("人员同步失败数据： " + JSONObject.toJSONString(errHrmResourceList));
                 ZdkConnUtil.insertErrLogResource(errHrmResourceList, "人员");
+                LOGGER.info("人员信息同步完成, 耗时：" + (System.currentTimeMillis() - time1) + " 毫秒。");
                 return "0";
             }
+            LOGGER.info("人员信息同步完成, 耗时：" + (System.currentTimeMillis() - time1) + " 毫秒。");
         } catch (Exception e) {
             LOGGER.error("人员同步异常： " + e);
         }
-        LOGGER.info("人员同步结束==============");
         return "1";
     }
 }

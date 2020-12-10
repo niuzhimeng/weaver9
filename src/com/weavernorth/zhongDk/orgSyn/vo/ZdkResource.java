@@ -23,7 +23,6 @@ public class ZdkResource extends BaseBean {
     private String certificatenumType; // 证件类型
     @JSONField(name = "A0177")
     private String certificatenum; // 身份证号码
-
     @JSONField(name = "A0121")
     private String folk; // 民族
 
@@ -83,6 +82,7 @@ public class ZdkResource extends BaseBean {
     private String sexOa; // 性别OA
     private String locationId;
 
+    @JSONField(name = "A01BN")
     private String jobtitlecode; //岗位编码
     private String errMessage;
 
@@ -102,6 +102,13 @@ public class ZdkResource extends BaseBean {
         } else {
             this.statusOa = statusMap.get(this.status);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "uniqueId=" + uniqueId + ", workCode=" + workCode + ", lastName=" + lastName +
+                ", loginId=" + loginId + ", status=" + status + ", dataStatus=" + dataStatus +
+                ", departmentCode=" + departmentCode + ", jobtitlecode=" + jobtitlecode;
     }
 
     public String getWorkCode() {

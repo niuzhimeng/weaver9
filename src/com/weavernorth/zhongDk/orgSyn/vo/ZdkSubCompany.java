@@ -53,15 +53,8 @@ public class ZdkSubCompany extends BaseBean implements Serializable {
 
     @Override
     public String toString() {
-        return "组织类型='" + orgType + '\'' +
-                ", 组织编码='" + orgCode + '\'' +
-                ", 上级组织编码='" + supCode + '\'' +
-                ", 组织名称='" + orgFullName + '\'' +
-                ", 组织简称='" + orgShortName + '\'' +
-                ", 数据状态='" + status + '\'' +
-                ", 数据状态Oa='" + statusOa + '\'' +
-                ", 上级分部id='" + supperCompanyId + '\'' +
-                ", 上级部门id='" + supperDepartmentId + '\'';
+        return "组织类型=" + orgType + ", 组织编码=" + orgCode + ", 上级组织编码=" + supCode + ", 组织名称=" + orgFullName +
+                ", 组织简称=" + orgShortName + ", 数据状态=" + status + ", 数据状态Oa=" + statusOa;
     }
 
     public String getUniqueId() {
