@@ -10,9 +10,9 @@ import weaver.soa.workflow.request.RequestInfo;
 import weaver.workflow.action.BaseAction;
 
 /**
- * 主数据通用action
+ * 主数据通用action 状态变更接口
  */
-public class CommonAction extends BaseAction {
+public class CommonActionChange extends BaseAction {
 
     @Override
     public String execute(RequestInfo requestInfo) {
@@ -27,8 +27,14 @@ public class CommonAction extends BaseAction {
             tableName = recordSet.getString("tablename");
         }
 
-        this.writeLog("推送信息至主数据系统Start requestid=" + requestId + "，requestName=" + requestName + "，tableName --- " + tableName);
+        this.writeLog("推送信息至主数据系统-状态变更Start requestid=" + requestId + "，requestName=" + requestName + "，tableName --- " + tableName);
         try {
+            // 查询主表
+            recordSet.executeQuery("select * from " + tableName + " where requestid = '" + requestId + "'");
+            recordSet.next();
+            String sjzt = recordSet.getString("sjzt"); // 数据状态
+            this.writeLog("数据状态： " + sjzt);
+
             // 根据流程表单名  查询主数据表名（接口中需要传递）
             String selSql = "select mdmbmc from uf_lczddzb where lcbdmc like '%," + tableName + ",%'";
             this.writeLog("字段对应关系查询语句： " + selSql);
@@ -44,41 +50,41 @@ public class CommonAction extends BaseAction {
                         "    xmlns:int=\"http://www.meritit.com/ws/IntfsServiceWS\">\n" +
                         "    <soapenv:Header/>\n" +
                         "    <soapenv:Body>\n" +
-                        "        <int:importData>\n" +
+                        "        <int:updateDataUseStatus>\n" +
                         "            <int:modelCode>" + mdmbmc + "</int:modelCode>\n" +
                         "            <int:dataStr>" + sendJson + "</int:dataStr>\n" +
                         "            <int:dataType>JSON</int:dataType>\n" +
-                        "            <int:dataStatus>1</int:dataStatus>\n" +
+                        "            <int:dataStatus>" + sjzt + "</int:dataStatus>\n" +
                         "            <int:userName></int:userName>\n" +
                         "            <int:password></int:password>\n" +
-                        "        </int:importData>\n" +
+                        "        </int:updateDataUseStatus>\n" +
                         "    </soapenv:Body>\n" +
                         "</soapenv:Envelope>";
                 this.writeLog("发送xml：" + sendXml);
-                String returnXml = ZdkFlowUtil.postJson(sendXml, "importData");
+                String returnXml = ZdkFlowUtil.postJson(sendXml, "updateDataUseStatus");
                 this.writeLog("主数据返回xml：" + returnXml);
                 if (StringUtils.isBlank(returnXml)) {
                     requestInfo.getRequestManager().setMessageid("110000");
-                    requestInfo.getRequestManager().setMessagecontent("推送信息至主数据系统 Error 请查看日志");
+                    requestInfo.getRequestManager().setMessagecontent("推送信息至主数据系统-状态变更 Error 请查看日志");
                     return "0";
                 }
                 Document document = DocumentHelper.parseText(returnXml);
                 Element rootElt = document.getRootElement();
                 Element s = rootElt.element("Body");
-                Element ns2 = s.element("importDataResponse");
+                Element ns2 = s.element("updateDataUseStatusResponse");
                 String aReturn = StringUtils.trimToEmpty(ns2.elementTextTrim("return"));
                 if (!"1".equals(aReturn)) {
                     requestInfo.getRequestManager().setMessageid("110000");
-                    requestInfo.getRequestManager().setMessagecontent("推送信息至主数据系统 Error: " + aReturn);
+                    requestInfo.getRequestManager().setMessagecontent("推送信息至主数据系统-状态变更 Error: " + aReturn);
                     return "0";
                 }
             }
 
-            this.writeLog("推送信息至主数据系统 End ===============");
+            this.writeLog("推送信息至主数据系统-状态变更 End ===============");
         } catch (Exception e) {
-            this.writeLog("推送信息至主数据系统 Error： " + e);
+            this.writeLog("推送信息至主数据系统-状态变更 Error： " + e);
             requestInfo.getRequestManager().setMessageid("110000");
-            requestInfo.getRequestManager().setMessagecontent("推送信息至主数据系统 Error： " + e);
+            requestInfo.getRequestManager().setMessagecontent("推送信息至主数据系统-状态变更 Error： " + e);
             return "0";
         }
 

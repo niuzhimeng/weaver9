@@ -18,7 +18,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ZdkFlowUtil {
-
+    public static final String IP = "10.120.4.21:8080";
+    public static final String URL = "http://" + IP + "/cidp/ws/intfsServiceWS";
     private static final Log LOGGER = LogFactory.getLog(ZdkFlowUtil.class);
 
     /**
@@ -26,15 +27,14 @@ public class ZdkFlowUtil {
      *
      * @param sendXml 拼接好的xml
      */
-    public static String postJson(String sendXml) {
+    public static String postJson(String sendXml, String method) {
         try {
-            String strUrl = "http://10.120.4.21:8080/cidp/ws/intfsServiceWS";
-            URL url = new URL(strUrl);
+            URL url = new URL(URL);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
-            connection.setRequestProperty("Host", "10.120.4.21:8080");
+            connection.setRequestProperty("Host", IP);
             connection.setRequestProperty("Content-Type", "text/xml;charset=UTF-8");
-            connection.setRequestProperty("SOAPAction", "");
+            connection.setRequestProperty("SOAPAction", method);
             connection.setRequestProperty("Content-Length", String.valueOf(sendXml.length()));
             connection.setDoInput(true);
             connection.setDoOutput(true);
@@ -81,7 +81,7 @@ public class ZdkFlowUtil {
         Map<String, ZdkJsonVO> zdMap = new HashMap<>();
 
         RecordSet recordSet = new RecordSet();
-        recordSet.executeQuery("select b.* from uf_lczddzb a left join uf_lczddzb_dt1 b on a.id = b.mainid where a.lcbdmc = '" + tableName + "'");
+        recordSet.executeQuery("select b.* from uf_lczddzb a left join uf_lczddzb_dt1 b on a.id = b.mainid where a.lcbdmc like '%," + tableName + ",%'");
         while (recordSet.next()) {
             String szbd = recordSet.getString("szbd");
             if ("0".equals(szbd)) {
