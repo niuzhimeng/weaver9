@@ -38,24 +38,24 @@ public class CommonAction extends BaseAction {
                 this.writeLog("主数据对应表名： " + mdmbmc);
                 String sendJson = ZdkFlowUtil.getSendJson(tableName, requestId, mdmbmc);
                 this.writeLog("发送json：" + sendJson);
-
                 String sendXml = "<soapenv:Envelope\n" +
                         "    xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\n" +
                         "    xmlns:int=\"http://www.meritit.com/ws/IntfsServiceWS\">\n" +
                         "    <soapenv:Header/>\n" +
                         "    <soapenv:Body>\n" +
-                        "        <int:importData>\n" +
+                        "        <int:importDataProCode>\n" +
                         "            <int:modelCode>" + mdmbmc + "</int:modelCode>\n" +
+                        "            <int:codeField>ID</int:codeField>\n" +
                         "            <int:dataStr>" + sendJson + "</int:dataStr>\n" +
                         "            <int:dataType>JSON</int:dataType>\n" +
                         "            <int:dataStatus>1</int:dataStatus>\n" +
                         "            <int:userName></int:userName>\n" +
                         "            <int:password></int:password>\n" +
-                        "        </int:importData>\n" +
+                        "        </int:importDataProCode>\n" +
                         "    </soapenv:Body>\n" +
                         "</soapenv:Envelope>";
                 this.writeLog("发送xml：" + sendXml);
-                String returnXml = ZdkFlowUtil.postJson(sendXml, "importData");
+                String returnXml = ZdkFlowUtil.postJson(sendXml, "importDataProCode");
                 this.writeLog("主数据返回xml：" + returnXml);
                 if (StringUtils.isBlank(returnXml)) {
                     requestInfo.getRequestManager().setMessageid("110000");
@@ -65,7 +65,7 @@ public class CommonAction extends BaseAction {
                 Document document = DocumentHelper.parseText(returnXml);
                 Element rootElt = document.getRootElement();
                 Element s = rootElt.element("Body");
-                Element ns2 = s.element("importDataResponse");
+                Element ns2 = s.element("importDataProCodeResponse");
                 String aReturn = StringUtils.trimToEmpty(ns2.elementTextTrim("return"));
                 if (!"1".equals(aReturn)) {
                     requestInfo.getRequestManager().setMessageid("110000");

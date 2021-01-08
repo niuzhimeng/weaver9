@@ -109,11 +109,6 @@ public class ZdkFlowUtil {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put(mdmTableName, jsonContent);
 
-        JSONArray jsonArray = new JSONArray();
-        jsonArray.add(jsonObject);
-
-        JSONObject allObj = new JSONObject();
-        allObj.put("LIST", jsonArray);
-        return allObj.toJSONString();
+        return jsonObject.toJSONString();
     }
 }

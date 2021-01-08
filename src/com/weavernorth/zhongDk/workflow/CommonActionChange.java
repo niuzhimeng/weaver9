@@ -1,6 +1,9 @@
 package com.weavernorth.zhongDk.workflow;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.weavernorth.zhongDk.workflow.util.ZdkFlowUtil;
+import com.weavernorth.zhongDk.workflow.vo.ZdkJsonVO;
 import org.apache.commons.lang3.StringUtils;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
@@ -8,6 +11,9 @@ import org.dom4j.Element;
 import weaver.conn.RecordSet;
 import weaver.soa.workflow.request.RequestInfo;
 import weaver.workflow.action.BaseAction;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 主数据通用action 状态变更接口
@@ -42,7 +48,7 @@ public class CommonActionChange extends BaseAction {
             if (recordSet.next()) {
                 String mdmbmc = recordSet.getString("mdmbmc");
                 this.writeLog("主数据对应表名： " + mdmbmc);
-                String sendJson = ZdkFlowUtil.getSendJson(tableName, requestId, mdmbmc);
+                String sendJson = getSendJson(tableName, requestId, mdmbmc);
                 this.writeLog("发送json：" + sendJson);
 
                 String sendXml = "<soapenv:Envelope\n" +
@@ -89,5 +95,54 @@ public class CommonActionChange extends BaseAction {
         }
 
         return "1";
+    }
+
+    /**
+     * 根据配置表，拼接发送的字段json
+     *
+     * @param tableName    oa流程表名
+     * @param requestId    流程请求id
+     * @param mdmTableName 主数据表名
+     * @return 拼接好的json
+     */
+    public static String getSendJson(String tableName, String requestId, String mdmTableName) {
+        // 主数据字段名 - 自定义类
+        Map<String, ZdkJsonVO> zdMap = new HashMap<>();
+
+        RecordSet recordSet = new RecordSet();
+        recordSet.executeQuery("select b.* from uf_lczddzb a left join uf_lczddzb_dt1 b on a.id = b.mainid where a.lcbdmc like '%," + tableName + ",%'");
+        while (recordSet.next()) {
+            String szbd = recordSet.getString("szbd");
+            if ("0".equals(szbd)) {
+                // 主表字段
+                ZdkJsonVO zdkJsonVO = new ZdkJsonVO();
+                zdkJsonVO.setOaColName(recordSet.getString("oazdm"));
+                zdkJsonVO.setIfSplit(recordSet.getString("sffg")); // 是否分隔
+                zdkJsonVO.setSplitFlag(recordSet.getString("fgf")); // 分隔符
+                zdkJsonVO.setTakePart(recordSet.getString("qzbf")); // 取值部分
+
+                zdMap.put(recordSet.getString("zsjzdm"), zdkJsonVO);
+            }
+        }
+
+        JSONObject jsonContent = new JSONObject(true);
+        // 查询主表
+        recordSet.executeQuery("select * from " + tableName + " where requestid = '" + requestId + "'");
+        recordSet.next();
+        for (Map.Entry<String, ZdkJsonVO> entry : zdMap.entrySet()) {
+            ZdkJsonVO zdkJsonVO = entry.getValue();
+            String colValue = recordSet.getString(zdkJsonVO.getOaColName()); // 字段值
+            jsonContent.put(entry.getKey(), zdkJsonVO.handle(colValue));
+        }
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put(mdmTableName, jsonContent);
+
+        JSONArray jsonArray = new JSONArray();
+        jsonArray.add(jsonObject);
+
+        JSONObject allObj = new JSONObject();
+        allObj.put("LIST", jsonArray);
+        return allObj.toJSONString();
     }
 }
