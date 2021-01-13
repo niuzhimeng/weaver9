@@ -23,15 +23,15 @@ import java.util.regex.Pattern;
 
 public class HlConnUtil {
 
-    public static final String URL = "http://10.154.220.208:8082/api/WorkFlow/RequestWorkFlow";
+    public static final String URL = "http://60.247.2.195:8081/api/WorkFlow/RequestWorkFlow";
 
     public static final String URI = "/api/WorkFlow/RequestWorkFlow";
 
     public static final String APP_KEY = "797768b551191c41aeb6a363a04ac787"; // 秘钥
 
-    public static final String APP_ID = "ab660c784f07e016c25ab3bf2d152eb5"; // 供应商ID
+    public static final String APP_ID = "OA20210111"; // 供应商ID
 
-    public static final String USER_IP = "10.154.220.116"; // OA IP
+    public static final String USER_IP = "47.91.169.15"; // OA IP
 
     private static Log log = LogFactory.getLog(HlConnUtil.class);
 
@@ -42,8 +42,8 @@ public class HlConnUtil {
 
     private static OkHttpClient okHttpClient = new OkHttpClient.Builder()
             .connectTimeout(15, TimeUnit.SECONDS)
-            .readTimeout(15, TimeUnit.SECONDS)
-            .writeTimeout(15, TimeUnit.SECONDS)
+            .readTimeout(20, TimeUnit.SECONDS)
+            .writeTimeout(20, TimeUnit.SECONDS)
             .retryOnConnectionFailure(true)
             .build();
 
