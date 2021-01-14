@@ -17,13 +17,12 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.IOException;
 import java.net.URLEncoder;
-import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class HlConnUtil {
 
-    public static final String URL = "http://60.247.2.195:8081/api/WorkFlow/RequestWorkFlow";
+    public static final String URL = "http://60.247.2.195:8082/api/WorkFlow/RequestWorkFlow";
 
     public static final String URI = "/api/WorkFlow/RequestWorkFlow";
 
@@ -31,7 +30,7 @@ public class HlConnUtil {
 
     public static final String APP_ID = "OA20210111"; // 供应商ID
 
-    public static final String USER_IP = "47.91.169.15"; // OA IP
+    public static final String USER_IP = "124.126.15.171"; // OA IP
 
     private static Log log = LogFactory.getLog(HlConnUtil.class);
 
@@ -40,12 +39,14 @@ public class HlConnUtil {
 
     private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
-    private static OkHttpClient okHttpClient = new OkHttpClient.Builder()
-            .connectTimeout(15, TimeUnit.SECONDS)
-            .readTimeout(20, TimeUnit.SECONDS)
-            .writeTimeout(20, TimeUnit.SECONDS)
-            .retryOnConnectionFailure(true)
-            .build();
+//    private static OkHttpClient okHttpClient = new OkHttpClient.Builder()
+//            .connectTimeout(15, TimeUnit.SECONDS)
+//            .readTimeout(20, TimeUnit.SECONDS)
+//            .writeTimeout(20, TimeUnit.SECONDS)
+//            .retryOnConnectionFailure(true)
+//            .build();
+
+    private static OkHttpClient okHttpClient = new OkHttpClient();
 
     /**
      * 校验接口调用权限
