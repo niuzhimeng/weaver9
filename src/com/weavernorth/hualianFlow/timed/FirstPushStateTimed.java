@@ -114,7 +114,7 @@ public class FirstPushStateTimed extends BaseCronJob {
                     sendJsonObj.put("format", "json");
                     sendJsonObj.put("userip", HlConnUtil.USER_IP);
 
-                    String sendType = getSendType(isstart, isend);
+                    int sendType = Util.getIntValue(getSendType(isstart, isend), 0);
 
                     String description = "节点名称： " + nodeName + "；操作类型： " + logType +
                             "；操作人：" + operatorName + "；签字意见： " + remark + "；接收人：" + receivedPersons +

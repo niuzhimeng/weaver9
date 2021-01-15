@@ -8,6 +8,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import weaver.conn.RecordSet;
+import weaver.general.BaseBean;
 import weaver.general.MD5;
 import weaver.general.TimeUtil;
 import weaver.general.Util;
@@ -15,8 +16,14 @@ import weaver.general.Util;
 import javax.crypto.Mac;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.net.URLEncoder;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,9 +35,9 @@ public class HlConnUtil {
 
     public static final String APP_KEY = "797768b551191c41aeb6a363a04ac787"; // 秘钥
 
-    public static final String APP_ID = "OA20210111"; // 供应商ID
+    public static final String APP_ID = "ab660c784f07e016c25ab3bf2d152eb5"; // 供应商ID
 
-    public static final String USER_IP = "124.126.15.171"; // OA IP
+    public static final String USER_IP = "36.112.129.84"; // OA IP
 
     private static Log log = LogFactory.getLog(HlConnUtil.class);
 
@@ -39,14 +46,67 @@ public class HlConnUtil {
 
     private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
-//    private static OkHttpClient okHttpClient = new OkHttpClient.Builder()
-//            .connectTimeout(15, TimeUnit.SECONDS)
-//            .readTimeout(20, TimeUnit.SECONDS)
-//            .writeTimeout(20, TimeUnit.SECONDS)
-//            .retryOnConnectionFailure(true)
-//            .build();
+    private static final OkHttpClient okHttpClient = new OkHttpClient.Builder()
+            .connectTimeout(25, TimeUnit.SECONDS)
+            .readTimeout(25, TimeUnit.SECONDS)
+            .writeTimeout(25, TimeUnit.SECONDS)
+            .retryOnConnectionFailure(true)
+            .build();
 
-    private static OkHttpClient okHttpClient = new OkHttpClient();
+    // private static OkHttpClient okHttpClient = new OkHttpClient();
+
+    public static String sendPostByNet(String url, String param) {
+        OutputStreamWriter out = null;
+        BufferedReader reader = null;
+        StringBuilder response = new StringBuilder();
+
+        //创建连接
+        try {
+            java.net.URL httpUrl = new URL(url);
+            //建立连接
+            HttpURLConnection conn = (HttpURLConnection) httpUrl.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.setRequestProperty("connection", "keep-alive");
+            conn.setUseCaches(false);//设置不要缓存
+            conn.setInstanceFollowRedirects(true);
+            conn.setDoOutput(true);
+            conn.setDoInput(true);
+            conn.connect();
+            //POST请求
+            out = new OutputStreamWriter(conn.getOutputStream());
+            out.write(param);
+            out.flush();
+            //读取响应
+            reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String lines;
+            while ((lines = reader.readLine()) != null) {
+                lines = new String(lines.getBytes(), "utf-8");
+                response.append(lines);
+            }
+            reader.close();
+            // 断开连接
+            conn.disconnect();
+
+        } catch (Exception e) {
+            new BaseBean().writeLog("发送 POST 请求出现异常！" + e);
+        }
+        //使用finally块来关闭输出流、输入流
+        finally {
+            try {
+                if (out != null) {
+                    out.close();
+                }
+                if (reader != null) {
+                    reader.close();
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+        return response.toString();
+    }
 
     /**
      * 校验接口调用权限
