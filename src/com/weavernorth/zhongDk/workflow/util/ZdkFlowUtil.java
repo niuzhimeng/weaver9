@@ -1,6 +1,5 @@
 package com.weavernorth.zhongDk.workflow.util;
 
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.weavernorth.zhongDk.workflow.vo.ZdkJsonVO;
 import org.apache.commons.logging.Log;
@@ -28,9 +27,10 @@ public class ZdkFlowUtil {
      * @param sendXml 拼接好的xml
      */
     public static String postJson(String sendXml, String method) {
+        HttpURLConnection connection = null;
         try {
             URL url = new URL(URL);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Host", IP);
             connection.setRequestProperty("Content-Type", "text/xml;charset=UTF-8");
@@ -64,6 +64,10 @@ public class ZdkFlowUtil {
             }
         } catch (Exception e) {
             LOGGER.error("主数据web接口发送数据异常： " + e);
+        } finally {
+            if (connection != null) {
+                connection.disconnect();
+            }
         }
         return "";
     }
