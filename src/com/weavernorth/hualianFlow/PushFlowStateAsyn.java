@@ -2,7 +2,6 @@ package com.weavernorth.hualianFlow;
 
 import weaver.conn.RecordSet;
 import weaver.general.TimeUtil;
-import weaver.general.Util;
 import weaver.hrm.User;
 import weaver.soa.workflow.request.RequestInfo;
 import weaver.workflow.action.BaseAction;
@@ -14,7 +13,6 @@ public class PushFlowStateAsyn extends BaseAction {
 
     @Override
     public String execute(RequestInfo requestInfo) {
-        this.writeLog("推送签字意见节点后执行==========");
         String requestId = requestInfo.getRequestid();
         int nodeId = requestInfo.getRequestManager().getNodeid();
         String operateType = requestInfo.getRequestManager().getSrc();
@@ -26,7 +24,7 @@ public class PushFlowStateAsyn extends BaseAction {
         if (recordSet.next()) {
             tableName = recordSet.getString("tablename");
         }
-
+        this.writeLog("推送签字意见节点后执行==========requestId=" + requestId + ", nodeId=" + nodeId);
         try {
             String timeString = TimeUtil.getCurrentTimeString();
             String nodeName = getColumn("nodename", "workflow_nodebase", "id", String.valueOf(nodeId));
