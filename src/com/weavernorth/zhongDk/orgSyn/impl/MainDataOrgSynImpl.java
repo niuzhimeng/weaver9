@@ -77,9 +77,9 @@ public class MainDataOrgSynImpl implements MainDataOrgSyn {
             new DepartmentComInfo().removeCompanyCache();
             long time4 = System.currentTimeMillis();
             LOGGER.info("部门信息同步完成, 耗时：" + (time4 - time3) + " 毫秒。");
-            if (companyErrorCount > 0 || departmentErrorCount > 0) {
-                return "0";
-            }
+//            if (companyErrorCount > 0 || departmentErrorCount > 0) {
+//                return "0";
+//            }
             LOGGER.info("分部、部门同步结束==============");
         } catch (Exception e) {
             LOGGER.error("分部、部门同步异常： " + e);
@@ -236,7 +236,7 @@ public class MainDataOrgSynImpl implements MainDataOrgSyn {
                 LOGGER.info("人员同步失败数据： " + JSONObject.toJSONString(errHrmResourceList));
                 ZdkConnUtil.insertErrLogResource(errHrmResourceList, "人员");
                 LOGGER.info("人员信息同步完成, 耗时：" + (System.currentTimeMillis() - time1) + " 毫秒。");
-                return "0";
+//                return "0";
             }
             LOGGER.info("人员信息同步完成, 耗时：" + (System.currentTimeMillis() - time1) + " 毫秒。");
         } catch (Exception e) {
