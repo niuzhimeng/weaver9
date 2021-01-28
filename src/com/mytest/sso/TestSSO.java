@@ -13,10 +13,12 @@ public class TestSSO {
      */
     @Test
     public void test1() {
-        Map<String, String> heads = new HashMap<>();
-        heads.put("appid", "ssss");
-        heads.put("loginid", "nzm");
-        String token = OkHttpUtil.okPostBodyHeader("http://127.0.0.1:8080/ssologin/getToken", heads, null);
-        System.out.println("获取token： " + "http://localhost:8080/wui/index.html?ssoToken=" + token + "#/main");
+        Map<String, String> body = new HashMap<>();
+        body.put("appid", "ssss");
+        body.put("loginid", "1001");
+        String token = OkHttpUtil.okPostBodyHeader("http://127.0.0.1:8080/ssologin/getToken", body, null);
+        System.out.println("打开首页： " + "http://localhost:8080/wui/index.html?ssoToken=" + token + "#/main");
+        System.out.println("打开流程： " + "http://localhost:8080/spa/workflow/static4form/index.html?ssoToken=" + token + "#/main/workflow/req?requestid=305305");
+        System.out.println("打开待办： " + "http://localhost:8080/wui/index.html?ssoToken=" + token + "#/main/workflow/listDoing");
     }
 }
