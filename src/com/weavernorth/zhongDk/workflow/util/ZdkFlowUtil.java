@@ -2,9 +2,11 @@ package com.weavernorth.zhongDk.workflow.util;
 
 import com.alibaba.fastjson.JSONObject;
 import com.weavernorth.zhongDk.workflow.vo.ZdkJsonVO;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import weaver.conn.RecordSet;
+import weaver.general.MD5;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -19,6 +21,7 @@ import java.util.Map;
 public class ZdkFlowUtil {
     public static final String IP = "10.120.4.21:8080";
     public static final String URL = "http://" + IP + "/cidp/ws/intfsServiceWS";
+    private static final String KEY = "OA_HD_TODO";
     private static final Log LOGGER = LogFactory.getLog(ZdkFlowUtil.class);
 
     /**
@@ -115,4 +118,65 @@ public class ZdkFlowUtil {
 
         return jsonObject.toJSONString();
     }
+
+    /**
+     * 校验接口调用权限
+     *
+     * @param loginId   登录名
+     * @param timestamp 时间戳
+     * @param sign      加密串
+     */
+    public static JSONObject apiCheck(String loginId, String timestamp, String sign) {
+        try {
+            // 非空判断
+            if (StringUtils.isBlank(sign)) {
+                return createReturnObj("500", "认证失败-sign为空");
+            }
+
+            // 时间验证
+            long currentTimeMillis = System.currentTimeMillis();
+            long longValue = getLongValue(timestamp);
+            long result = currentTimeMillis - longValue;
+            long min = result / 1000 / 60;
+            if (min > 15) {
+                return createReturnObj("500", "认证失败-sign已过期");
+            }
+
+            // 加密方式验证
+            String md5ofStr = new MD5().getMD5ofStr(loginId + KEY + timestamp);
+            LOGGER.info("oa加密后的sign：" + md5ofStr);
+            if (!md5ofStr.equals(sign)) {
+                return createReturnObj("500", "认证失败-sign错误");
+            }
+
+            // 创建人验证
+            RecordSet recordSet = new RecordSet();
+            loginId = StringUtils.isBlank(loginId) ? "error" : loginId;
+            recordSet.executeQuery("select id from HrmResource where loginid = lower('" + loginId + "') and status < 4");
+            if (!recordSet.next()) {
+                return createReturnObj("500", "创建人登录名不存在");
+            }
+        } catch (Exception e) {
+            LOGGER.error("apiCheck异常： " + e);
+            return createReturnObj("500", "认证失败-校验接口调用权限异常");
+
+        }
+        return createReturnObj("200", "认证通过");
+    }
+
+    public static JSONObject createReturnObj(String status, String message) {
+        JSONObject jsonObject = new JSONObject(true);
+        jsonObject.put("status", status);
+        jsonObject.put("message", message);
+        return jsonObject;
+    }
+
+    private static long getLongValue(String time) {
+        try {
+            return Long.parseLong(time);
+        } catch (Exception e) {
+            return -1;
+        }
+    }
+
 }
