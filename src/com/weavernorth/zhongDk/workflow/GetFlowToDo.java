@@ -106,7 +106,8 @@ public class GetFlowToDo {
             // 查询待办条件
             Map<String, String> map = new HashMap<>();
             WorkflowRequestListPAImpl workflowRequestListPA = new WorkflowRequestListPAImpl();
-            List<ApiWorkflowRequestInfo> toDoWorkflowRequestList = workflowRequestListPA.getToDoWorkflowRequestList(1, count, userNew, map, true, true);
+            // 最后一个参数，是否显示异构系统流程（比如慧点推过来的）
+            List<ApiWorkflowRequestInfo> toDoWorkflowRequestList = workflowRequestListPA.getToDoWorkflowRequestList(1, count, userNew, map, true, false);
 
             jsonObject.put("count", toDoWorkflowRequestList.size());
             jsonObject.put("content", toDoWorkflowRequestList);

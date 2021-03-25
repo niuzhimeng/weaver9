@@ -5,7 +5,6 @@ import com.weavernorth.gqzl.BeisenSSO.oidcsdk.models.Jwt;
 import com.weavernorth.gqzl.BeisenSSO.oidcsdk.models.Jwt_header;
 import com.weavernorth.gqzl.BeisenSSO.oidcsdk.models.Jwt_payload;
 import com.weavernorth.gqzl.BeisenSSO.oidcsdk.utility.SafeTools;
-import org.bouncycastle.util.encoders.Base64;
 
 import java.util.HashMap;
 
@@ -111,8 +110,8 @@ public class BeisenTokenProvider {
      */
     public static String GetIdToken(String header, String payload, String private_key) throws Exception {
         String[] jwt = new String[3];
-        jwt[0] = new String(Base64.encode(header.getBytes(encoding)));
-        jwt[1] = new String(Base64.encode(payload.getBytes(encoding)));
+        jwt[0] = java.util.Base64.getEncoder().encodeToString(header.getBytes(encoding));
+        jwt[1] = java.util.Base64.getEncoder().encodeToString(payload.getBytes(encoding));
         jwt[2] = Crypto.Sign(String.format("%s.%s", jwt[0], jwt[1]), private_key);
         // 转为 url safe base64
         for (int i = 0; i < 3; i++) {
@@ -134,16 +133,17 @@ public class BeisenTokenProvider {
 
     /**
      * 生成idtoken
+     * <p>
+     * iss         Issuer Identifier：必须。提供认证信息者的唯一标识。一般是一个https的url（不包含querystring和fragment部分）。
+     * sub         Subject Identifier：必须。iss提供的EU的标识，在iss范围内唯一。它会被RP用来标识唯一的用户。最长为255个ASCII个字符。
+     * aud         Audience(s)：必须。标识ID Token的受众。必须包含OAuth2的client_id。
+     * private_key
+     * public_key
      *
-     *  iss         Issuer Identifier：必须。提供认证信息者的唯一标识。一般是一个https的url（不包含querystring和fragment部分）。
-     *  sub         Subject Identifier：必须。iss提供的EU的标识，在iss范围内唯一。它会被RP用来标识唯一的用户。最长为255个ASCII个字符。
-     *  aud         Audience(s)：必须。标识ID Token的受众。必须包含OAuth2的client_id。
-     *  private_key
-     *  public_key
      * @return jwt 格式token
      * @throws Exception
      */
-    public static String GenerateBeisenIDToken(String sub,String url_type) throws Exception {
+    public static String GenerateBeisenIDToken(String sub, String url_type) throws Exception {
         String header = GetHeader("RS256", public_key);
         HashMap<String, Object> cls = new HashMap<String, Object>();// 用户自定义可见权限内容列表
         cls.put("appid", "100");

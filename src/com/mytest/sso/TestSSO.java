@@ -21,4 +21,18 @@ public class TestSSO {
         System.out.println("打开流程： " + "http://localhost:8080/spa/workflow/static4form/index.html?ssoToken=" + token + "#/main/workflow/req?requestid=305305");
         System.out.println("打开待办： " + "http://localhost:8080/wui/index.html?ssoToken=" + token + "#/main/workflow/listDoing");
     }
+
+    /**
+     * 加入自定义过滤器，对入参出参进行修改
+     */
+    @Test
+    public void test2() {
+        Map<String, String> body = new HashMap<>();
+        body.put("appid", "ssss");
+        body.put("workCode", "1001");
+        String token = OkHttpUtil.okPostBodyHeader("http://127.0.0.1:8080/ssologin/getToken", body, null);
+        System.out.println("打开首页： " + "http://localhost:8080/wui/index.html?ssoToken=" + token + "#/main");
+        System.out.println("打开流程： " + "http://localhost:8080/spa/workflow/static4form/index.html?ssoToken=" + token + "#/main/workflow/req?requestid=305305");
+        System.out.println("打开待办： " + "http://localhost:8080/wui/index.html?ssoToken=" + token + "#/main/workflow/listDoing");
+    }
 }

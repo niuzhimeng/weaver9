@@ -4,12 +4,14 @@ import com.google.gson.Gson;
 import com.weavernorth.gqzl.BeisenSSO.oidcsdk.utility.SafeTools;
 import org.bouncycastle.util.encoders.Base64;
 
+import java.lang.reflect.Type;
+
 public class Jwt {
 //    ObjectMapper mapper = new ObjectMapper();
 
-    public Jwt(String id_token) throws Exception{
+    public Jwt(String id_token) throws Exception {
         String[] stringArray = id_token.split("\\.");
-        if(stringArray.length != 3) {
+        if (stringArray.length != 3) {
             throw new Exception("非法的id_token！");
         }
         try {
@@ -17,8 +19,8 @@ public class Jwt {
                 stringArray[i] = SafeTools.SafeBase64ToBase64String(stringArray[i]);
             }
             Gson gson = new Gson();
-            setHeader(gson.fromJson(new String(Base64.decode(stringArray[0])), Jwt_header.class));
-            setPayload(gson.fromJson(new String(Base64.decode(stringArray[1])), Jwt_payload.class));
+            setHeader(gson.fromJson(new String(Base64.decode(stringArray[0])), (Type) Jwt_header.class));
+            setPayload(gson.fromJson(new String(Base64.decode(stringArray[1])), (Type) Jwt_payload.class));
 //            setHeader(mapper.readValue(new String(Base64.decode(stringArray[0])), Jwt_header.class));
 //            setPayload(mapper.readValue(new String(Base64.decode(stringArray[1])), Jwt_payload.class));
         } catch (Exception exp) {

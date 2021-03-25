@@ -39,7 +39,8 @@ public class CreateReportBySource extends BaseCronJob {
             erpSource.executeSql("SELECT DATA_TYPE AS lx, COMPANY AS bm,SUBSTR( PERIOD_NAME, 1, 4 ) AS YEAR,SUBSTR( PERIOD_NAME, 5, 2 ) AS MONTH,round( PROD_PRICE, 4 ) AS PROD_PRICE,round( NO_PROD_PRICE, 4 ) AS NO_PROD_PRICE FROM apps.cux_fcm_oil_purchars_jnhb_v");
 
             MY_LOG.info("生产单价虚拟表数量： " + erpSource.getCounts() + ", oa实体表已有数据量：" + erpCounts);
-            String insertErp = "insert into uf_tbscdj(lx, bm, n, y, scdj, fscdj)values(?,?,?,?,?, ?)";
+            String insertErpSql = "insert into uf_tbscdj(lx, bm, n, y, scdj, fscdj)values(?,?,?,?,?, ?)";
+            String updateErpSql = "update uf_tbscdj set scdj = ?, fscdj = ? where lx = ? and bm = ? and n = ? and y = ?";
             while (erpSource.next()) {
                 String lx = erpSource.getString("lx"); // 类型
                 String bm = erpSource.getString("bm"); // 部门
@@ -51,9 +52,12 @@ public class CreateReportBySource extends BaseCronJob {
 
                 // MY_LOG.info("lx+bm + year + month: " + lx + bm + year + month + "; contains: " + erpExistList.contains(lx + bm + year + month));
                 if (erpExistList.contains(lx + bm + year + month)) {
-                    continue;
+                    updateErp.executeUpdate(updateErpSql, prod_price, NO_PROD_PRICE,
+                            lx, bm, year, month);
+                } else {
+                    updateErp.executeUpdate(insertErpSql, lx, bm, year, month, prod_price, NO_PROD_PRICE);
                 }
-                updateErp.executeUpdate(insertErp, lx, bm, year, month, prod_price, NO_PROD_PRICE);
+
             }
 
             // 生产数据虚拟表（数据源是GHSCTJ）
@@ -70,8 +74,10 @@ public class CreateReportBySource extends BaseCronJob {
             GHSCTJSource.executeSql("SELECT LX AS lx,FXD AS bm,SUBSTR( NY, 1, 4 ) AS YEAR,SUBSTR( NY, 5, 2 ) AS MONTH,round( SCHY, 4 ) AS schbxhl,round( FSCHY, 4 ) AS fschbxhl,round( FSCHY + SCHY, 4 ) AS hkmyxhl,round( SCZZL, 2 ) AS yszzl,round( SCXS, 2 ) AS fxxs FROM acepub.v_fls_ljyt");
 
             MY_LOG.info("生产数据虚拟表数量： " + GHSCTJSource.getCounts() + ", oa实体表已有数据量：" + counts);
-            String insertGHSCTJ = "insert into uf_tbscsj(lx, bm, n, y, schbxhl, " +
+            String insertGHSCTJ_sql = "insert into uf_tbscsj(lx, bm, n, y, schbxhl, " +
                     "fschbxhl, hkmyxhl, yszzl, fxxs)values(?,?,?,?,?, ?,?,?,?)";
+            String updateGHSCTJ_sql = "update uf_tbscsj set schbxhl = ?, fschbxhl = ?, hkmyxhl = ?, yszzl = ?, fxxs = ? " +
+                    " where lx = ? and bm = ? and n = ? and y = ?";
             while (GHSCTJSource.next()) {
                 String lx = GHSCTJSource.getString("lx"); // 类型
                 String bm = GHSCTJSource.getString("bm"); // 部门
@@ -85,11 +91,16 @@ public class CreateReportBySource extends BaseCronJob {
                 String fxxs = null2Double(GHSCTJSource.getString("fxxs"), "0.00"); // 飞行小时数
 
                 if (GHSCTJExistList.contains(lx + bm + year + month)) {
-                    continue;
+                    updateGHSCTJ.executeUpdate(updateGHSCTJ_sql,
+                            schbxhl, fschbxhl, hkmyxhl, yszzl, fxxs,
+                            lx, bm, year, month
+                    );
+                } else {
+                    updateGHSCTJ.executeUpdate(insertGHSCTJ_sql,
+                            lx, bm, year, month, schbxhl,
+                            fschbxhl, hkmyxhl, yszzl, fxxs);
                 }
-                updateGHSCTJ.executeUpdate(insertGHSCTJ,
-                        lx, bm, year, month, schbxhl,
-                        fschbxhl, hkmyxhl, yszzl, fxxs);
+
             }
 
             // 拼接报表

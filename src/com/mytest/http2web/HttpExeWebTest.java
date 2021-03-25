@@ -1,6 +1,5 @@
 package com.mytest.http2web;
 
-import com.alibaba.fastjson.JSONObject;
 import okhttp3.*;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
@@ -12,11 +11,12 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 public class HttpExeWebTest {
+
+    private static final OkHttpClient client = new OkHttpClient();
 
     @Test
     public void test2() throws Exception {
@@ -57,6 +57,7 @@ public class HttpExeWebTest {
             }
 
             bufferedReader.close();
+            connection.disconnect();
             String voucherReturn = stringBuilder.toString();
             System.out.println(voucherReturn);
 
@@ -115,8 +116,6 @@ public class HttpExeWebTest {
 
     public static String postJsonHeader(String url, String jsonStr, Map<String, String> headerMap) {
         MediaType xml = MediaType.parse("");
-        OkHttpClient client = new OkHttpClient();
-
         RequestBody requestBody1 = RequestBody.create(xml, jsonStr);
 
         Request.Builder requestBuilder = new Request.Builder()

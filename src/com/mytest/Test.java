@@ -6,10 +6,16 @@ import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.metadata.Sheet;
 import com.alibaba.excel.metadata.Table;
 import com.alibaba.excel.support.ExcelTypeEnum;
+import com.alibaba.fastjson.JSONObject;
 import com.fapiao.neon.util.AESUtil;
+import com.spire.xls.FileFormat;
+import com.spire.xls.Workbook;
 import com.weavernorth.meitanzy.util.MeiTanConfigInfo;
 import com.weavernorth.meitanzy.util.MeiTanZyFtpUtil;
-import okhttp3.MediaType;
+import com.weavernorth.meitanzy.util.MtHttpUtil;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.poi.xssf.usermodel.XSSFCell;
@@ -23,6 +29,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import weaver.file.ImageFileManager;
+import weaver.general.MD5;
 import weaver.general.Util;
 
 import javax.crypto.Cipher;
@@ -33,7 +40,6 @@ import java.awt.*;
 import java.io.*;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.security.SecureRandom;
@@ -47,6 +53,8 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
@@ -425,8 +433,8 @@ public class Test {
     @org.junit.Test
     public void test65() throws Exception {
 
-        String middleKey = "password";  //就是所谓的密钥，加密和解密双方都需要
-        String password = "{\"MenuType\":null,\"LoginName\":\"shmk_admin\",\"Password\":\"123456\"}";//需要被加密的内容
+        String middleKey = "1234567890abcdef";  //就是所谓的密钥，加密和解密双方都需要
+        String password = "{\"id\":\"test\",\"password\":\"123456\"}";//需要被加密的内容
 
         // 生成KEY
         KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
@@ -439,7 +447,7 @@ public class Test {
         Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
         cipher.init(Cipher.ENCRYPT_MODE, key);
         byte[] result = cipher.doFinal(password.getBytes());
-        System.out.println("加密后：" + Base64.getEncoder().encodeToString(result));
+        System.out.println("加密后：" + Base64.getEncoder().encodeToString(result) + "  结束");
 
         String encrypt = AESUtil.encrypt(password, middleKey);
         System.out.println("系统方法： " + encrypt);
@@ -478,17 +486,244 @@ public class Test {
     }
 
     @org.junit.Test
-    public void test67(){
-//        ImageFileManager imageFileManager = new ImageFileManager();
-//        imageFileManager.getImageFileInfoById(1);
-//
-//        InputStream inputStream = imageFileManager.getInputStream();
+    public void test67() {
+        ImageFileManager imageFileManager = new ImageFileManager();
+        imageFileManager.getImageFileInfoById(1);
 
-        MediaType xml = MediaType.parse("application/xml");
-        Charset charset = xml.charset();
-        System.out.println(charset);
+        InputStream inputStream = imageFileManager.getInputStream();
+
+
+    }
+
+    @org.junit.Test
+    public void test68() {
+        String tokenUrl = "http://106.55.171.45/rvhm/api/v1/user/login";
+
+        String tokenUserId = "admin";
+        String md5ofStr = new MD5().getMD5ofStr(tokenUserId).toLowerCase();
+
+        Map<String, String> bodyMap = new HashMap<>();
+        bodyMap.put("userid", tokenUserId);
+        bodyMap.put("password", md5ofStr);
+
+        String tokenReturn = MtHttpUtil.postKeyValue(tokenUrl, bodyMap);
+
+        JSONObject tokenObj = JSONObject.parseObject(tokenReturn);
+        if (!"0".equals(tokenObj.getString("code"))) {
+            System.out.println("异常=======");
+            return;
+        }
+        String tokenStr = tokenObj.getString("token");
+        System.out.println(tokenStr);
+        // 获取token完成=============
+        String url = "http://106.55.171.45/rvhm/api/v1/user/oalogin?userid=1";
+
+        Map<String, String> headerMap = new HashMap<>();
+        headerMap.put("Authorization", tokenStr);
+        String loginStr = MtHttpUtil.get(url, headerMap);
+        System.out.println("loginStr: " + loginStr);
+        JSONObject loginObj = JSONObject.parseObject(loginStr);
+        if (!"0".equals(loginObj.getString("code"))) {
+            return;
+        }
+        String skipUrl = loginObj.getJSONObject("data").getString("url");
+        System.out.println("跳转url: " + skipUrl);
+    }
+
+    @org.junit.Test
+    public void test69() throws Exception {
+        // ⽤⼾名
+        String u = "admin";
+        // 随机字符串
+        String n = org.apache.commons.lang3.RandomStringUtils.random(8, "utf-8");
+        System.out.println(n);
+        // 双⽅约定密钥，传参时不传
+        String key = "Eebiep2Aec4vahl3";
+        // 时间戳
+        long d = System.currentTimeMillis();
+        String[] str = new String[]{"key=" + key, "u=" + u, "d=" + d, "n=" + n};
+        // 排序 升序
+        Arrays.sort(str);
+        System.out.println(JSONObject.toJSONString(str));
+        // 拼接成字符串
+        StringBuilder params = new StringBuilder();
+        for (String s : str) {
+            params.append(s).append("&");
+        }
+        // 去掉最后⼀个&
+        String queryString = params.toString().substring(0, params.toString().length() - 1);
+        //md5Hex 加密
+        String sign = cn.hutool.crypto.digest.DigestUtil.md5Hex(queryString, "utf-8");
+        System.out.println(sign);
     }
 
 
+    @org.junit.Test
+    public void test70() throws UnsupportedEncodingException {
+        //InputStream in  =
+        //加载Excel文档
+        Workbook wb = new Workbook();
+        //wb.loadFromStream();
+        //wb.
+        wb.loadFromFile("C:\\Users\\86157\\Desktop\\test.xls");
+        //wb.setMaxDigitWidth(800);
+
+        //调用方法保存为PDF格式
+        wb.saveToFile("C:\\Users\\86157\\Desktop\\ToPDF.pdf", FileFormat.PDF);
+    }
+
+    /**
+     * 压缩成ZIP 方法1
+     *
+     * @param srcDir           压缩文件夹路径
+     * @param out              压缩文件输出流
+     * @param KeepDirStructure 是否保留原来的目录结构,true:保留目录结构;
+     *                         false:所有文件跑到压缩包根目录下(注意：不保留目录结构可能会出现同名文件,会压缩失败)
+     * @throws RuntimeException 压缩失败会抛出运行时异常
+     */
+    private static void toZip(String srcDir, OutputStream out, boolean KeepDirStructure) throws Exception {
+        long start = System.currentTimeMillis();
+        ZipOutputStream zos = null;
+        try {
+            zos = new ZipOutputStream(out);
+
+            File sourceFile = new File(srcDir);
+            compress(sourceFile, zos, sourceFile.getName(), KeepDirStructure);
+            long end = System.currentTimeMillis();
+            System.out.println("压缩完成，耗时：" + (end - start) + " ms");
+        } catch (Exception e) {
+            throw new RuntimeException("zip error from ZipUtils", e);
+        } finally {
+            if (zos != null) {
+                try {
+                    zos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+
+    private static void compress(File sourceFile, ZipOutputStream zos, String name,
+                                 boolean KeepDirStructure) throws Exception {
+        byte[] buf = new byte[2048];
+        if (sourceFile.isFile()) {
+            // 向zip输出流中添加一个zip实体，构造器中name为zip实体的文件的名字
+            zos.putNextEntry(new ZipEntry(name));
+            // copy文件到zip输出流中
+            int len;
+            FileInputStream in = new FileInputStream(sourceFile);
+            while ((len = in.read(buf)) != -1) {
+                zos.write(buf, 0, len);
+            }
+            // Complete the entry
+            zos.closeEntry();
+            in.close();
+        } else {
+            File[] listFiles = sourceFile.listFiles();
+            if (listFiles == null || listFiles.length == 0) {
+                // 需要保留原来的文件结构时,需要对空文件夹进行处理
+                if (KeepDirStructure) {
+                    // 空文件夹的处理
+                    zos.putNextEntry(new ZipEntry(name + "/"));
+                    // 没有文件，不需要文件的copy
+                    zos.closeEntry();
+                }
+            } else {
+                for (File file : listFiles) {
+                    // 判断是否需要保留原来的文件结构
+                    if (KeepDirStructure) {
+                        // 注意：file.getName()前面需要带上父文件夹的名字加一斜杠,
+                        // 不然最后压缩包中就不能保留原来的文件结构,即：所有文件都跑到压缩包根目录下了
+                        compress(file, zos, name + "/" + file.getName(), KeepDirStructure);
+                    } else {
+                        compress(file, zos, file.getName(), KeepDirStructure);
+                    }
+                }
+            }
+        }
+    }
+
+    @org.junit.Test
+    public void test71() {
+        String url = "https://demo.elearnplus.com/app/user/sso";
+        url += "?username=dszb_admin&uuid=" + UUID.randomUUID();
+        System.out.println(url);
+        String s = get(url, null);
+        System.out.println(s);
+    }
+
+    public static String get(String url, Map<String, String> headerMap) {
+        String returnStr = "";
+        OkHttpClient client = new OkHttpClient();
+        Request.Builder builder = new Request.Builder().url(url).get();
+        if (headerMap != null) {
+            headerMap.forEach(builder::addHeader);
+        }
+        try {
+            Response response = client.newCall(builder.build()).execute();
+            returnStr = response.body().string();
+        } catch (IOException e) {
+            System.out.println("http请求get异常： " + e);
+        }
+
+        return returnStr;
+    }
+
+    @org.junit.Test
+    public void test72() throws UnsupportedEncodingException {
+        JSONObject jsonObject = new JSONObject(true);
+        jsonObject.put("id", "test");
+        jsonObject.put("password", "123456");
+        System.out.println(jsonObject.toJSONString());
+        String s = aesEncrypt(jsonObject.toJSONString(), "1234567890abcdef");
+        System.out.println(s);
+
+        String url = "http://192.168.4.80/";
+        System.out.println(URLEncoder.encode(url, "utf-8"));
+    }
+
+    /**
+     * base 64 encode
+     *
+     * @param bytes 待编码的byte[]
+     * @return 编码后的base 64 code
+     */
+    private static String base64Encode(byte[] bytes) {
+        return org.apache.commons.codec.binary.Base64.encodeBase64String(bytes);
+    }
+
+    /**
+     * AES加密
+     *
+     * @param content    待加密的内容
+     * @param encryptKey 加密密钥
+     * @return 加密后的byte[]
+     */
+    private static byte[] aesEncryptToBytes(String content, String encryptKey) throws Exception {
+        KeyGenerator kgen = KeyGenerator.getInstance("AES");
+        kgen.init(128);
+        Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
+        cipher.init(Cipher.ENCRYPT_MODE, new SecretKeySpec(encryptKey.getBytes(), "AES"));
+
+        return cipher.doFinal(content.getBytes("utf-8"));
+    }
+
+
+    /**
+     * AES加密为base 64 code
+     *
+     * @param content    待加密的内容
+     * @param encryptKey 加密密钥
+     * @return 加密后的base 64 code
+     */
+    private static String aesEncrypt(String content, String encryptKey) {
+        try {
+            return base64Encode(aesEncryptToBytes(content, encryptKey));
+        } catch (Exception e) {
+        }
+        return "";
+    }
 
 }

@@ -2,7 +2,6 @@ package com.weavernorth.gqzl.BeisenSSO.oidcsdk.crypto;
 
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.openssl.PEMReader;
-import org.bouncycastle.util.encoders.Base64;
 import sun.misc.BASE64Decoder;
 
 import java.io.ByteArrayInputStream;
@@ -138,6 +137,6 @@ public class Crypto {
         //进行签名
         byte[] signed = signature.sign();
         //将加密后的字节数组，转换成BASE64编码的字符串，作为最终的签名数据
-        return new String(Base64.encode(signed));
+        return java.util.Base64.getEncoder().encodeToString(signed);
     }
 }
