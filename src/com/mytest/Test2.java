@@ -1,11 +1,7 @@
 package com.mytest;
 
+import cn.hutool.core.util.ZipUtil;
 import com.alibaba.fastjson.JSONObject;
-import com.alibaba.nacos.api.NacosFactory;
-import com.alibaba.nacos.api.config.ConfigService;
-import com.alibaba.nacos.api.exception.NacosException;
-import com.alibaba.nacos.api.naming.NamingFactory;
-import com.alibaba.nacos.api.naming.NamingService;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.weavernorth.gqzl.BeisenSSO.oidcsdk.models.Jwt_header;
@@ -28,8 +24,8 @@ import java.net.Socket;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 import java.util.Stack;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -204,18 +200,27 @@ public class Test2 {
     }
 
     @Test
-    public void test8() throws NacosException {
+    public void test8() throws Exception {
 
+        String outPath = "E:\\WEAVER\\cus_file\\2021\\04\\12\\9fb5759f-a631-4423-a55b-495fde4750b9.zip";
+
+        String str = "e:\\WEAVER\\ecology\\filesystem\\202104\\X\\9fb5759f-a631-4423-a55b-495fde4750b9.zip";
+        String str1 = "[\"Java异常体系.png#nzm#E:\\\\WEAVER\\\\cus_file\\\\2021\\\\04\\\\12\\\\6c1f3b74-b523-4df5-aedd-94d90a57da19.zip\",\"wait原理.png#nzm#E:\\\\WEAVER\\\\cus_file\\\\2021\\\\04\\\\12\\\\051b3118-0717-43b7-8001-33e05ec4a350.zip\"]";
+        List<String> list = JSONObject.parseObject(str1, List.class);
+//        for (String path : list) {
+//            String[] split = path.split("#nzm#");
+//            String fileName = split[0];
+//            String pathStr = split[1];
+//            System.out.println(fileName + ", " + pathStr);
+//        }
+
+        String s = "4dfaa437-2432-4c08-bf33-4eec303f5627.zip";
+        int i = s.lastIndexOf(".");
+        String substring = s.substring(0, i);
+        System.out.println(substring);
 
     }
 
 
 }
 
-class MyResource {
-    private int i;
-    private void add1(){
-
-    }
-
-}

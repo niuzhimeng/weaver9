@@ -15,10 +15,10 @@ public class RequestLogFilter {
 
     @WeaReplaceAfter(value = "/api/workflow/reqform/getRequestLogList", order = 1)
     public String after(WeaAfterReplaceParam weaAfterReplaceParam) {
-
+// api/ec/dev/table/datas
         String data = weaAfterReplaceParam.getData();//这个就是接口执行完的报文
 
-        log.info("接口返回json： " + data);
+        log.info("RequestLogFilter接口返回json： " + data);
         JSONObject jsonObject = JSONObject.parseObject(data);
         JSONArray logList = jsonObject.getJSONArray("loglist");
         JSONArray newArray = new JSONArray();
