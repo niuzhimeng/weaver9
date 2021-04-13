@@ -25,6 +25,7 @@ public class File2Other extends BaseAction {
 
     @Override
     public String execute(RequestInfo requestInfo) {
+        String pf = this.getPropValue("fileToOther", "pf"); // ecology所在盘符
         String requestId = requestInfo.getRequestid();
         String operateType = requestInfo.getRequestManager().getSrc();
         int formId = requestInfo.getRequestManager().getFormid();
@@ -45,7 +46,7 @@ public class File2Other extends BaseAction {
             String month = now.substring(5, 7);
             String day = now.substring(8);
             // E:\WEAVER\cus_file\2021\04\12
-            String baseStr = "E:" + SEPARATOR + "WEAVER" + SEPARATOR + "cus_file" + SEPARATOR + year + SEPARATOR +
+            String baseStr = pf + SEPARATOR + "WEAVER" + SEPARATOR + "cus_file" + SEPARATOR + year + SEPARATOR +
                     month + SEPARATOR + day + SEPARATOR;
             this.writeLog("基础路径： " + baseStr);
 

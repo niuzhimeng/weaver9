@@ -20,6 +20,7 @@ import java.lang.management.ThreadInfo;
 import java.lang.management.ThreadMXBean;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.RoundingMode;
 import java.net.Socket;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -219,6 +220,16 @@ public class Test2 {
         String substring = s.substring(0, i);
         System.out.println(substring);
 
+    }
+
+    @Test
+    public void test9() {
+        BigDecimal zero = BigDecimal.ZERO;
+        for (int i = 0; i < 5; i++) {
+            zero = zero.add(BigDecimal.valueOf(i));
+        }
+        BigDecimal scale = zero.setScale(2, BigDecimal.ROUND_HALF_UP);//保留两位小数
+        System.out.println(scale.toString());
     }
 
 
