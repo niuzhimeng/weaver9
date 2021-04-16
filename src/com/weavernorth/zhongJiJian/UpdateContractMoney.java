@@ -1,5 +1,6 @@
 package com.weavernorth.zhongJiJian;
 
+import org.apache.commons.lang3.StringUtils;
 import weaver.conn.RecordSet;
 import weaver.general.BaseBean;
 import weaver.soa.workflow.request.RequestInfo;
@@ -53,17 +54,24 @@ public class UpdateContractMoney extends BaseAction {
         // 查询基本信息表
         recordSet.executeQuery("select gchtzjy from uf_gcjbxxwh where htmc = '" + yhtmc + "'");
         recordSet.next();
-        double gchtzjy = recordSet.getDouble("gchtzjy") < 0 ? 0 : recordSet.getDouble("gchtzjy"); // 工程合同造价（元）
-        baseBean.writeLog("工程合同造价（元）: " + gchtzjy);
-        BigDecimal add1 = BigDecimal.valueOf(gchtzjy);
+        String gchtzjyStr = recordSet.getString("gchtzjy"); // 工程合同造价（元）
+        if (StringUtils.isBlank(gchtzjyStr)) {
+            gchtzjyStr = "0";
+        }
+        baseBean.writeLog("工程合同造价（元）: " + gchtzjyStr);
+        BigDecimal add1 = new BigDecimal(gchtzjyStr);
 
+        String myCountStr = "0";
         recordSet.executeQuery("select sum(je) myCount from formtable_main_45 where yhtmc = '" + yhtmc + "' and requestid is null");
-        recordSet.next();
-        double myCount = recordSet.getDouble("myCount") < 0 ? 0 : recordSet.getDouble("myCount");
-        baseBean.writeLog("修改列表金额合计： " + myCount);
-        BigDecimal add2 = BigDecimal.valueOf(myCount);
+        if (recordSet.next()) {
+            myCountStr = recordSet.getString("myCount");
+            if (StringUtils.isBlank(myCountStr)) {
+                myCountStr = "0";
+            }
+        }
+        baseBean.writeLog("修改列表金额合计： " + myCountStr);
 
-        BigDecimal result = add1.add(add2);
+        BigDecimal result = add1.add(new BigDecimal(myCountStr));
         result = result.setScale(2, BigDecimal.ROUND_HALF_UP);//保留两位小数
         double value = result.doubleValue();
         baseBean.writeLog("工程合同变更后造价：" + value);
