@@ -52,9 +52,9 @@ public class UpdateContractMoney extends BaseAction {
     public static double updateMode(String yhtmc) throws Exception {
         RecordSet recordSet = new RecordSet();
         // 查询基本信息表
-        recordSet.executeQuery("select gchtzjy from uf_gcjbxxwh where htmc = '" + yhtmc + "'");
+        recordSet.executeQuery("select hte from uf_gcjbxxwh where htmc = '" + yhtmc + "'");
         recordSet.next();
-        String gchtzjyStr = recordSet.getString("gchtzjy"); // 工程合同造价（元）
+        String gchtzjyStr = recordSet.getString("hte"); // 工程合同造价（元）
         if (StringUtils.isBlank(gchtzjyStr)) {
             gchtzjyStr = "0";
         }
@@ -77,7 +77,7 @@ public class UpdateContractMoney extends BaseAction {
         baseBean.writeLog("工程合同变更后造价：" + value);
 
         // 更改基本信息表中的 工程合同变更后造价
-        recordSet.executeUpdate("update uf_gcjbxxwh set gcbghhtzj = ? where htmc = ?",
+        recordSet.executeUpdate("update uf_gcjbxxwh set htbgje = ? where htmc = ?",
                 value, yhtmc);
 
         return value;
