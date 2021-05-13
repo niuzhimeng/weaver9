@@ -12,7 +12,6 @@ import weaver.workflow.action.BaseAction;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,8 +19,6 @@ import java.util.List;
  * 文件另存为
  */
 public class File2Other extends BaseAction {
-
-    private static final String SEPARATOR = File.separator;
 
     @Override
     public String execute(RequestInfo requestInfo) {
@@ -45,9 +42,8 @@ public class File2Other extends BaseAction {
             String year = now.substring(0, 4);
             String month = now.substring(5, 7);
             String day = now.substring(8);
-            // E:\WEAVER\cus_file\2021\04\12
-            String baseStr = pf + SEPARATOR + "WEAVER" + SEPARATOR + "cus_file" + SEPARATOR + year + SEPARATOR +
-                    month + SEPARATOR + day + SEPARATOR;
+            // E:/WEAVER/cus_file/2021/04/12
+            String baseStr = pf + "/Weaver2019_base/cus_file/" + year + "/" + month + "/" + day + "/";
             this.writeLog("基础路径： " + baseStr);
 
             recordSet.executeQuery("select * from " + tableName + " where requestid = '" + requestId + "'");

@@ -1,6 +1,6 @@
 package com.mytest;
 
-import cn.hutool.core.util.ZipUtil;
+import cn.hutool.http.HtmlUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -20,14 +20,10 @@ import java.lang.management.ThreadInfo;
 import java.lang.management.ThreadMXBean;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.math.RoundingMode;
 import java.net.Socket;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class Test2 {
@@ -224,12 +220,26 @@ public class Test2 {
 
     @Test
     public void test9() {
-        BigDecimal zero = BigDecimal.ZERO;
-        for (int i = 0; i < 5; i++) {
-            zero = zero.add(BigDecimal.valueOf(i));
+        String strFileRealPath = "[\"mk7.jpg#nzm#D:\\Weaver2019_base\\cus_file\\2021\\04\\16\\7edd9df6-fb89-46eb-8687-8aebd0ddd52e.zip\"]";
+        List<String> list = JSONObject.parseObject(strFileRealPath, List.class);
+        for (String path : list) {
+            String[] split = path.split("#nzm#");
+            String fileName = split[0]; // 压缩文件真实名  Java异常体系.png
+            String pathStr = split[1]; // 压缩文件全路径 E:\WEAVER\cus_file\2021\04\12\4dfaa437-2432-4c08-bf33-4eec303f5627.zip
+            System.out.println(fileName);
+            System.out.println(pathStr);
         }
-        BigDecimal scale = zero.setScale(2, BigDecimal.ROUND_HALF_UP);//保留两位小数
-        System.out.println(scale.toString());
+
+    }
+
+    @Test
+    public void test10() {
+        System.out.println(System.currentTimeMillis());
+        ReentrantLock reentrantLock = new ReentrantLock();
+        reentrantLock.lock();
+        System.out.println("reentrantLock = " + reentrantLock);
+        System.out.println();
+
     }
 
 

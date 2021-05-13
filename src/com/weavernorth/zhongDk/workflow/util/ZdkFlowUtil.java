@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ZdkFlowUtil {
-    public static final String IP = "10.120.4.21:8080";
+    public static final String IP = "10.120.4.1:8080";
     public static final String URL = "http://" + IP + "/cidp/ws/intfsServiceWS";
     private static final String KEY = "OA_HD_TODO";
     private static final Log LOGGER = LogFactory.getLog(ZdkFlowUtil.class);
