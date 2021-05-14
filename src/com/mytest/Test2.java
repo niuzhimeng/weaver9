@@ -229,7 +229,6 @@ public class Test2 {
             System.out.println(fileName);
             System.out.println(pathStr);
         }
-
     }
 
     @Test
@@ -239,6 +238,7 @@ public class Test2 {
         JSONObject jsonObject1 = jsonObject.getJSONObject("labelInfo").getJSONObject("langid7");
         //jsonObject1.remove("rememberPassword","记住密码");
         jsonObject1.fluentRemove("rememberPassworddev");
+        System.out.println("这里是dev的开发");
 
     }
 
