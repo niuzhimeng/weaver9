@@ -238,9 +238,8 @@ public class Test2 {
         JSONObject jsonObject = JSONObject.parseObject(str);
         JSONObject jsonObject1 = jsonObject.getJSONObject("labelInfo").getJSONObject("langid7");
         //jsonObject1.remove("rememberPassword","记住密码");
-        jsonObject1.fluentRemove("rememberPassword");
+        jsonObject1.fluentRemove("rememberPassworddev");
 
-        System.out.println(jsonObject.toJSONString());
     }
 
 
