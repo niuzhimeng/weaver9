@@ -1,0 +1,643 @@
+INFO main com.mytest.easypoi.EasyPoiTest - 213
+ERROR main cn.afterturn.easypoi.excel.export.template.ExcelExportOfTemplateUtil - 
+java.lang.reflect.InvocationTargetException
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at cn.afterturn.easypoi.excel.export.template.ExcelExportOfTemplateUtil.createExcleByTemplate(ExcelExportOfTemplateUtil.java:188)
+	at cn.afterturn.easypoi.excel.ExcelExportUtil.exportExcel(ExcelExportUtil.java:165)
+	at com.mytest.easypoi.EasyPoiTest.test1(EasyPoiTest.java:70)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:33)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:230)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:58)
+Caused by: java.lang.NoSuchMethodError: org.apache.poi.ss.usermodel.CellStyle.setAlignment(S)V
+	at cn.afterturn.easypoi.excel.export.styler.ExcelExportStylerDefaultImpl.stringNoneStyle(ExcelExportStylerDefaultImpl.java:69)
+	at cn.afterturn.easypoi.excel.export.styler.AbstractExcelExportStyler.createStyles(AbstractExcelExportStyler.java:44)
+	at cn.afterturn.easypoi.excel.export.styler.ExcelExportStylerDefaultImpl.<init>(ExcelExportStylerDefaultImpl.java:31)
+	... 29 more
+DEBUG main org.apache.http.client.protocol.RequestAddCookies - CookieSpec selected: default
+DEBUG main org.apache.http.client.protocol.RequestAuthCache - Auth cache not set in the context
+DEBUG main org.apache.http.impl.conn.PoolingHttpClientConnectionManager - Connection request: [route: {}->http://ws.webxml.com.cn:80][total kept alive: 0; route allocated: 0 of 2; total allocated: 0 of 20]
+DEBUG main org.apache.http.impl.conn.PoolingHttpClientConnectionManager - Connection leased: [id: 0][route: {}->http://ws.webxml.com.cn:80][total kept alive: 0; route allocated: 1 of 2; total allocated: 1 of 20]
+DEBUG main org.apache.http.impl.execchain.MainClientExec - Opening connection {}->http://ws.webxml.com.cn:80
+DEBUG main org.apache.http.impl.conn.DefaultHttpClientConnectionOperator - Connecting to ws.webxml.com.cn/61.147.124.120:80
+DEBUG main org.apache.http.impl.conn.DefaultHttpClientConnectionOperator - Connection established 192.168.124.2:53517<->61.147.124.120:80
+DEBUG main org.apache.http.impl.execchain.MainClientExec - Executing request POST /WebServices/WeatherWS.asmx?wsdl HTTP/1.1
+DEBUG main org.apache.http.impl.execchain.MainClientExec - Target auth state: UNCHALLENGED
+DEBUG main org.apache.http.impl.execchain.MainClientExec - Proxy auth state: UNCHALLENGED
+DEBUG main org.apache.http.headers - http-outgoing-0 >> POST /WebServices/WeatherWS.asmx?wsdl HTTP/1.1
+DEBUG main org.apache.http.headers - http-outgoing-0 >> Content-Type: text/xml;charset=UTF-8
+DEBUG main org.apache.http.headers - http-outgoing-0 >> SOAPAction: getRegionCountry
+DEBUG main org.apache.http.headers - http-outgoing-0 >> Content-Length: 218
+DEBUG main org.apache.http.headers - http-outgoing-0 >> Host: ws.webxml.com.cn
+DEBUG main org.apache.http.headers - http-outgoing-0 >> Connection: Keep-Alive
+DEBUG main org.apache.http.headers - http-outgoing-0 >> User-Agent: Apache-HttpClient/4.4.1 (Java/1.8.0_251)
+DEBUG main org.apache.http.headers - http-outgoing-0 >> Accept-Encoding: gzip,deflate
+DEBUG main org.apache.http.wire - http-outgoing-0 >> "POST /WebServices/WeatherWS.asmx?wsdl HTTP/1.1[\r][\n]"
+DEBUG main org.apache.http.wire - http-outgoing-0 >> "Content-Type: text/xml;charset=UTF-8[\r][\n]"
+DEBUG main org.apache.http.wire - http-outgoing-0 >> "SOAPAction: getRegionCountry[\r][\n]"
+DEBUG main org.apache.http.wire - http-outgoing-0 >> "Content-Length: 218[\r][\n]"
+DEBUG main org.apache.http.wire - http-outgoing-0 >> "Host: ws.webxml.com.cn[\r][\n]"
+DEBUG main org.apache.http.wire - http-outgoing-0 >> "Connection: Keep-Alive[\r][\n]"
+DEBUG main org.apache.http.wire - http-outgoing-0 >> "User-Agent: Apache-HttpClient/4.4.1 (Java/1.8.0_251)[\r][\n]"
+DEBUG main org.apache.http.wire - http-outgoing-0 >> "Accept-Encoding: gzip,deflate[\r][\n]"
+DEBUG main org.apache.http.wire - http-outgoing-0 >> "[\r][\n]"
+DEBUG main org.apache.http.wire - http-outgoing-0 >> "<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://WebXml.com.cn/">[\n]"
+DEBUG main org.apache.http.wire - http-outgoing-0 >> "   <soapenv:Header/>[\n]"
+DEBUG main org.apache.http.wire - http-outgoing-0 >> "   <soapenv:Body>[\n]"
+DEBUG main org.apache.http.wire - http-outgoing-0 >> "      <web:getRegionCountry/>[\n]"
+DEBUG main org.apache.http.wire - http-outgoing-0 >> "   </soapenv:Body>[\n]"
+DEBUG main org.apache.http.wire - http-outgoing-0 >> "</soapenv:Envelope>"
+DEBUG main org.apache.http.wire - http-outgoing-0 << "HTTP/1.1 500 Internal Server Error[\r][\n]"
+DEBUG main org.apache.http.wire - http-outgoing-0 << "Cache-Control: private[\r][\n]"
+DEBUG main org.apache.http.wire - http-outgoing-0 << "Content-Length: 411[\r][\n]"
+DEBUG main org.apache.http.wire - http-outgoing-0 << "Content-Type: text/xml; charset=utf-8[\r][\n]"
+DEBUG main org.apache.http.wire - http-outgoing-0 << "Server: Microsoft-IIS/7.5[\r][\n]"
+DEBUG main org.apache.http.wire - http-outgoing-0 << "X-AspNet-Version: 2.0.50727[\r][\n]"
+DEBUG main org.apache.http.wire - http-outgoing-0 << "X-Powered-By: ASP.NET[\r][\n]"
+DEBUG main org.apache.http.wire - http-outgoing-0 << "Date: Fri, 27 Nov 2020 04:17:50 GMT[\r][\n]"
+DEBUG main org.apache.http.wire - http-outgoing-0 << "[\r][\n]"
+DEBUG main org.apache.http.wire - http-outgoing-0 << "<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><soap:Fault><faultcode>soap:Client</faultcode><faultstring>[0xe6][0x9c][0x8d][0xe5][0x8a][0xa1][0xe5][0x99][0xa8][0xe6][0x9c][0xaa][0xe8][0x83][0xbd][0xe8][0xaf][0x86][0xe5][0x88][0xab] HTTP [0xe5][0xa4][0xb4] SOAPAction [0xe7][0x9a][0x84][0xe5][0x80][0xbc]: getRegionCountry[0xe3][0x80][0x82]</faultstring><detail /></soap:Fault></soap:Body></soap:Envelope>"
+DEBUG main org.apache.http.headers - http-outgoing-0 << HTTP/1.1 500 Internal Server Error
+DEBUG main org.apache.http.headers - http-outgoing-0 << Cache-Control: private
+DEBUG main org.apache.http.headers - http-outgoing-0 << Content-Length: 411
+DEBUG main org.apache.http.headers - http-outgoing-0 << Content-Type: text/xml; charset=utf-8
+DEBUG main org.apache.http.headers - http-outgoing-0 << Server: Microsoft-IIS/7.5
+DEBUG main org.apache.http.headers - http-outgoing-0 << X-AspNet-Version: 2.0.50727
+DEBUG main org.apache.http.headers - http-outgoing-0 << X-Powered-By: ASP.NET
+DEBUG main org.apache.http.headers - http-outgoing-0 << Date: Fri, 27 Nov 2020 04:17:50 GMT
+DEBUG main org.apache.http.impl.execchain.MainClientExec - Connection can be kept alive indefinitely
+DEBUG main org.apache.http.impl.conn.PoolingHttpClientConnectionManager - Connection [id: 0][route: {}->http://ws.webxml.com.cn:80] can be kept alive indefinitely
+DEBUG main org.apache.http.impl.conn.PoolingHttpClientConnectionManager - Connection released: [id: 0][route: {}->http://ws.webxml.com.cn:80][total kept alive: 1; route allocated: 1 of 2; total allocated: 1 of 20]
+DEBUG main org.apache.http.impl.conn.PoolingHttpClientConnectionManager - Connection manager is shutting down
+DEBUG main org.apache.http.impl.conn.DefaultManagedHttpClientConnection - http-outgoing-0: Close connection
+DEBUG main org.apache.http.impl.conn.DefaultManagedHttpClientConnection - http-outgoing-0: Close connection
+DEBUG main org.apache.http.impl.conn.PoolingHttpClientConnectionManager - Connection manager shut down
+DEBUG main org.codehaus.xfire.jaxws.Provider - Creating service delegate {http://tempuri.org/}EmrService for service class javax.xml.ws.Service
+DEBUG main org.codehaus.xfire.transport.DefaultTransportManager - Registered transport org.codehaus.xfire.transport.local.LocalTransport@3ffc5af1
+DEBUG main org.codehaus.xfire.transport.DefaultTransportManager - Registered transport org.codehaus.xfire.transport.dead.DeadLetterTransport@3532ec19
+DEBUG main org.codehaus.xfire.transport.DefaultTransportManager - Registered transport org.codehaus.xfire.transport.http.SoapHttpTransport@3e6fa38a
+DEBUG main org.codehaus.xfire.transport.DefaultTransportManager - Registered transport org.codehaus.xfire.transport.http.HttpTransport@66a3ffec
+DEBUG main org.codehaus.xfire.service.documentation.XMLDocumentationBuilder - Searching for JAXWSHelper$SourceService.doc.xml config..
+DEBUG main org.codehaus.xfire.service.documentation.XMLDocumentationBuilder - Config JAXWSHelper$SourceService.doc.xml NOT found.
+DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /org/codehaus/xfire/jaxws/JAXWSHelper$SourceService.aegis.xml not found.
+DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /org/codehaus/xfire/jaxws/JAXWSHelper$SourceService.aegis.xml not found.
+DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /javax/xml/transform/Source.aegis.xml not found.
+DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /org/codehaus/xfire/jaxws/JAXWSHelper$SourceService.aegis.xml not found.
+DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /org/codehaus/xfire/jaxws/JAXWSHelper$SourceService.aegis.xml not found.
+DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /javax/xml/transform/Source.aegis.xml not found.
+DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /org/codehaus/xfire/jaxws/JAXWSHelper$SourceService.aegis.xml not found.
+DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /javax/xml/transform/Source.aegis.xml not found.
+DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /org/codehaus/xfire/jaxws/JAXWSHelper$SourceService.aegis.xml not found.
+DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /javax/xml/transform/Source.aegis.xml not found.
+DEBUG main org.codehaus.xfire.jaxws.Provider - Creating service delegate {http://tempuri.org/}EmrService for service class javax.xml.ws.Service
+DEBUG main org.codehaus.xfire.transport.DefaultTransportManager - Registered transport org.codehaus.xfire.transport.local.LocalTransport@7a765367
+DEBUG main org.codehaus.xfire.transport.DefaultTransportManager - Registered transport org.codehaus.xfire.transport.dead.DeadLetterTransport@3043fe0e
+DEBUG main org.codehaus.xfire.transport.DefaultTransportManager - Registered transport org.codehaus.xfire.transport.http.SoapHttpTransport@86be70a
+DEBUG main org.codehaus.xfire.transport.DefaultTransportManager - Registered transport org.codehaus.xfire.transport.http.HttpTransport@480bdb19
+DEBUG main org.codehaus.xfire.service.documentation.XMLDocumentationBuilder - Searching for JAXWSHelper$SourceService.doc.xml config..
+DEBUG main org.codehaus.xfire.service.documentation.XMLDocumentationBuilder - Config JAXWSHelper$SourceService.doc.xml NOT found.
+DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /org/codehaus/xfire/jaxws/JAXWSHelper$SourceService.aegis.xml not found.
+DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /org/codehaus/xfire/jaxws/JAXWSHelper$SourceService.aegis.xml not found.
+DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /javax/xml/transform/Source.aegis.xml not found.
+DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /org/codehaus/xfire/jaxws/JAXWSHelper$SourceService.aegis.xml not found.
+DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /org/codehaus/xfire/jaxws/JAXWSHelper$SourceService.aegis.xml not found.
+DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /javax/xml/transform/Source.aegis.xml not found.
+DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /org/codehaus/xfire/jaxws/JAXWSHelper$SourceService.aegis.xml not found.
+DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /javax/xml/transform/Source.aegis.xml not found.
+DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /org/codehaus/xfire/jaxws/JAXWSHelper$SourceService.aegis.xml not found.
+DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /javax/xml/transform/Source.aegis.xml not found.
+DEBUG main org.codehaus.xfire.jaxws.Provider - Creating service delegate {http://tempuri.org/}getRegionCountry for service class javax.xml.ws.Service
+DEBUG main org.codehaus.xfire.transport.DefaultTransportManager - Registered transport org.codehaus.xfire.transport.local.LocalTransport@7a765367
+DEBUG main org.codehaus.xfire.transport.DefaultTransportManager - Registered transport org.codehaus.xfire.transport.dead.DeadLetterTransport@3043fe0e
+DEBUG main org.codehaus.xfire.transport.DefaultTransportManager - Registered transport org.codehaus.xfire.transport.http.SoapHttpTransport@86be70a
+DEBUG main org.codehaus.xfire.transport.DefaultTransportManager - Registered transport org.codehaus.xfire.transport.http.HttpTransport@480bdb19
+DEBUG main org.codehaus.xfire.service.documentation.XMLDocumentationBuilder - Searching for JAXWSHelper$SourceService.doc.xml config..
+DEBUG main org.codehaus.xfire.service.documentation.XMLDocumentationBuilder - Config JAXWSHelper$SourceService.doc.xml NOT found.
+DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /org/codehaus/xfire/jaxws/JAXWSHelper$SourceService.aegis.xml not found.
+DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /org/codehaus/xfire/jaxws/JAXWSHelper$SourceService.aegis.xml not found.
+DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /javax/xml/transform/Source.aegis.xml not found.
+DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /org/codehaus/xfire/jaxws/JAXWSHelper$SourceService.aegis.xml not found.
+DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /org/codehaus/xfire/jaxws/JAXWSHelper$SourceService.aegis.xml not found.
+DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /javax/xml/transform/Source.aegis.xml not found.
+DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /org/codehaus/xfire/jaxws/JAXWSHelper$SourceService.aegis.xml not found.
+DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /javax/xml/transform/Source.aegis.xml not found.
+DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /org/codehaus/xfire/jaxws/JAXWSHelper$SourceService.aegis.xml not found.
+DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /javax/xml/transform/Source.aegis.xml not found.
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - getBundle(org.apache.axis,org.apache.axis.i18n,resource,null,...)
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - loadBundle: Ignoring MissingResourceException: Can't find bundle for base name org.apache.axis.resource, locale zh_CN
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - Created org.apache.axis.i18n.resource, linked to parent null
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - getBundle(org.apache.axis,org.apache.axis.utils,resource,null,...)
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - loadBundle: Ignoring MissingResourceException: Can't find bundle for base name org.apache.axis.utils.resource, locale zh_CN
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - loadBundle: Ignoring MissingResourceException: Can't find bundle for base name org.apache.axis.resource, locale zh_CN
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - Root package not found, cross link to org.apache.axis.i18n.resource
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - Root package not found, cross link to org.apache.axis.i18n.resource
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(engineFactory)
+DEBUG main org.apache.axis.configuration.EngineConfigurationFactoryFinder - Got EngineFactory: org.apache.axis.configuration.EngineConfigurationFactoryDefault
+DEBUG main org.apache.axis.AxisEngine - Enter: AxisEngine::init
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(attachEnabled)
+DEBUG main org.apache.axis.utils.JavaUtils - Attachment support is enabled?  true
+DEBUG main org.apache.axis.encoding.ser.JAFDataHandlerDeserializerFactory - Enter/Exit: JAFDataHandlerDeserializerFactory(class java.lang.String, {http://xml.apache.org/xml-soap}PlainText)
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(oddDigits00)
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(badChars01)
+DEBUG main org.apache.axis.encoding.ser.JAFDataHandlerDeserializerFactory - Enter/Exit: JAFDataHandlerDeserializerFactory(class java.awt.Image, {http://xml.apache.org/xml-soap}Image)
+DEBUG main org.apache.axis.encoding.ser.JAFDataHandlerDeserializerFactory - Enter/Exit: JAFDataHandlerDeserializerFactory(class javax.mail.internet.MimeMultipart, {http://xml.apache.org/xml-soap}Multipart)
+DEBUG main org.apache.axis.encoding.ser.JAFDataHandlerDeserializerFactory - Enter/Exit: JAFDataHandlerDeserializerFactory(interface javax.xml.transform.Source, {http://xml.apache.org/xml-soap}Source)
+DEBUG main org.apache.axis.encoding.ser.JAFDataHandlerDeserializerFactory - Enter/Exit: JAFDataHandlerDeserializerFactory(class org.apache.axis.attachments.OctetStream, {http://xml.apache.org/xml-soap}octet-stream)
+DEBUG main org.apache.axis.encoding.ser.JAFDataHandlerDeserializerFactory - Enter/Exit: JAFDataHandlerDeserializerFactory()
+DEBUG main org.apache.axis.AxisEngine - Exit: AxisEngine::init
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(transport00)
+DEBUG main org.apache.axis.client.Call - Transport is org.apache.axis.transport.http.HTTPTransport@7c729a55
+DEBUG main org.apache.axis.description.OperationDesc - @4cc451f2 added parameter >name:       
+typeEntry:  null
+mode:       IN
+position:   0
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@6379eb<total parameters:1
+DEBUG main org.apache.axis.description.OperationDesc - @4cc451f2setReturnType({http://www.w3.org/2001/XMLSchema}string)
+DEBUG main org.apache.axis.client.Call - Enter: Call::invoke(ns, meth, args)
+DEBUG main org.apache.axis.client.Call - operation=name:        null
+returnQName: null
+returnType:  {http://www.w3.org/2001/XMLSchema}string
+returnClass: class java.lang.String
+elementQName:null
+soapAction:  null
+style:       rpc
+use:         encoded
+numInParams: 1
+method:null
+ ParameterDesc[0]:
+  name:       
+  typeEntry:  null
+  mode:       IN
+  position:   0
+  isReturn:   false
+  typeQName:  {http://www.w3.org/2001/XMLSchema}string
+  javaType:   class java.lang.String
+  inHeader:   false
+  outHeader:  false
+
+
+DEBUG main org.apache.axis.client.Call - operation.getNumParams()=1
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(parmMismatch00)
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(toAxisFault00)
+DEBUG main org.apache.axis.enterprise - Mapping Exception to AxisFault
+javax.xml.rpc.JAXRPCException: Number of parameters passed in (0) doesn't match the number of IN/INOUT parameters (1) from the addParameter() calls
+	at org.apache.axis.client.Call.getParamList(Call.java:2059)
+	at org.apache.axis.client.Call.invoke(Call.java:2364)
+	at org.apache.axis.client.Call.invoke(Call.java:1812)
+	at com.mytest.Test2.test1(Test2.java:25)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:33)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:230)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:58)
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - getBundle(org.apache.axis,org.apache.axis.i18n,resource,null,...)
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - loadBundle: Ignoring MissingResourceException: Can't find bundle for base name org.apache.axis.resource, locale zh_CN
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - Created org.apache.axis.i18n.resource, linked to parent null
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - getBundle(org.apache.axis,org.apache.axis.utils,resource,null,...)
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - loadBundle: Ignoring MissingResourceException: Can't find bundle for base name org.apache.axis.utils.resource, locale zh_CN
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - loadBundle: Ignoring MissingResourceException: Can't find bundle for base name org.apache.axis.resource, locale zh_CN
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - Root package not found, cross link to org.apache.axis.i18n.resource
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - Root package not found, cross link to org.apache.axis.i18n.resource
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(engineFactory)
+DEBUG main org.apache.axis.configuration.EngineConfigurationFactoryFinder - Got EngineFactory: org.apache.axis.configuration.EngineConfigurationFactoryDefault
+DEBUG main org.apache.axis.AxisEngine - Enter: AxisEngine::init
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(attachEnabled)
+DEBUG main org.apache.axis.utils.JavaUtils - Attachment support is enabled?  true
+DEBUG main org.apache.axis.encoding.ser.JAFDataHandlerDeserializerFactory - Enter/Exit: JAFDataHandlerDeserializerFactory(class java.lang.String, {http://xml.apache.org/xml-soap}PlainText)
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(oddDigits00)
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(badChars01)
+DEBUG main org.apache.axis.encoding.ser.JAFDataHandlerDeserializerFactory - Enter/Exit: JAFDataHandlerDeserializerFactory(class java.awt.Image, {http://xml.apache.org/xml-soap}Image)
+DEBUG main org.apache.axis.encoding.ser.JAFDataHandlerDeserializerFactory - Enter/Exit: JAFDataHandlerDeserializerFactory(class javax.mail.internet.MimeMultipart, {http://xml.apache.org/xml-soap}Multipart)
+DEBUG main org.apache.axis.encoding.ser.JAFDataHandlerDeserializerFactory - Enter/Exit: JAFDataHandlerDeserializerFactory(interface javax.xml.transform.Source, {http://xml.apache.org/xml-soap}Source)
+DEBUG main org.apache.axis.encoding.ser.JAFDataHandlerDeserializerFactory - Enter/Exit: JAFDataHandlerDeserializerFactory(class org.apache.axis.attachments.OctetStream, {http://xml.apache.org/xml-soap}octet-stream)
+DEBUG main org.apache.axis.encoding.ser.JAFDataHandlerDeserializerFactory - Enter/Exit: JAFDataHandlerDeserializerFactory()
+DEBUG main org.apache.axis.AxisEngine - Exit: AxisEngine::init
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(transport00)
+DEBUG main org.apache.axis.client.Call - Transport is org.apache.axis.transport.http.HTTPTransport@7c729a55
+DEBUG main org.apache.axis.description.OperationDesc - @359f7cdfsetReturnType({http://www.w3.org/2001/XMLSchema}string)
+DEBUG main org.apache.axis.client.Call - Enter: Call::invoke(ns, meth, args)
+DEBUG main org.apache.axis.client.Call - operation=name:        null
+returnQName: null
+returnType:  {http://www.w3.org/2001/XMLSchema}string
+returnClass: class java.lang.String
+elementQName:null
+soapAction:  null
+style:       rpc
+use:         encoded
+numInParams: 0
+method:null
+
+DEBUG main org.apache.axis.client.Call - operation.getNumParams()=0
+DEBUG main org.apache.axis.client.Call - Enter: Call::invoke(RPCElement)
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(attachEnabled)
+DEBUG main org.apache.axis.Message - Attachment support is enabled?  true
+DEBUG main org.apache.axis.SOAPPart - Enter: SOAPPart ctor(FORM_SOAPENVELOPE)
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(setMsgForm)
+DEBUG main org.apache.axis.SOAPPart - Setting current message form to: FORM_SOAPENVELOPE (currentMessage is now org.apache.axis.message.SOAPEnvelope)
+DEBUG main org.apache.axis.SOAPPart - Exit: SOAPPart ctor()
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(addBody00)
+DEBUG main org.apache.axis.message.SOAPBody - Adding body element to message...
+DEBUG main org.apache.axis.client.Call - Enter: Call::invoke()
+DEBUG main org.apache.axis.SOAPPart - Enter: SOAPPart::getAsSOAPEnvelope()
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(currForm)
+DEBUG main org.apache.axis.SOAPPart - current form is FORM_SOAPENVELOPE
+DEBUG main org.apache.axis.MessageContext - MessageContext: setTargetService(http://localhost/services/OrgResource)
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(noService10)
+DEBUG main org.apache.axis.ConfigurationException - Exception: 
+org.apache.axis.ConfigurationException: No service named http://localhost/services/OrgResource is available
+org.apache.axis.ConfigurationException: No service named http://localhost/services/OrgResource is available
+	at org.apache.axis.configuration.FileProvider.getService(FileProvider.java:233)
+	at org.apache.axis.AxisEngine.getService(AxisEngine.java:311)
+	at org.apache.axis.MessageContext.setTargetService(MessageContext.java:756)
+	at org.apache.axis.client.Call.invoke(Call.java:2708)
+	at org.apache.axis.client.Call.invoke(Call.java:2443)
+	at org.apache.axis.client.Call.invoke(Call.java:2366)
+	at org.apache.axis.client.Call.invoke(Call.java:1812)
+	at com.mytest.Test2.test1(Test2.java:25)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:33)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:230)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:58)
+
+	at org.apache.axis.configuration.FileProvider.getService(FileProvider.java:233)
+	at org.apache.axis.AxisEngine.getService(AxisEngine.java:311)
+	at org.apache.axis.MessageContext.setTargetService(MessageContext.java:756)
+	at org.apache.axis.client.Call.invoke(Call.java:2708)
+	at org.apache.axis.client.Call.invoke(Call.java:2443)
+	at org.apache.axis.client.Call.invoke(Call.java:2366)
+	at org.apache.axis.client.Call.invoke(Call.java:1812)
+	at com.mytest.Test2.test1(Test2.java:25)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:33)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:230)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:58)
+DEBUG main org.apache.axis.MessageContext - MessageContext: setServiceHandler(null)
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(targetService)
+DEBUG main org.apache.axis.client.Call - Target service:  http://localhost/services/OrgResource
+DEBUG main org.apache.axis.MessageContext - MessageContext: setTargetService(null)
+DEBUG main org.apache.axis.MessageContext - MessageContext: setServiceHandler(null)
+DEBUG main org.apache.axis.SOAPPart - Enter: SOAPPart::getAsSOAPEnvelope()
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(currForm)
+DEBUG main org.apache.axis.SOAPPart - current form is FORM_SOAPENVELOPE
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(register00)
+DEBUG main org.apache.axis.encoding.SerializationContext - register 'soapenv' - 'http://schemas.xmlsoap.org/soap/envelope/'
+DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
+DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(register00)
+DEBUG main org.apache.axis.encoding.SerializationContext - register 'soapenv' - 'http://schemas.xmlsoap.org/soap/envelope/'
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(register00)
+DEBUG main org.apache.axis.encoding.SerializationContext - register 'xsd' - 'http://www.w3.org/2001/XMLSchema'
+DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(register00)
+DEBUG main org.apache.axis.encoding.SerializationContext - register 'xsi' - 'http://www.w3.org/2001/XMLSchema-instance'
+DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(startElem00)
+DEBUG main org.apache.axis.encoding.SerializationContext - Start element [http://schemas.xmlsoap.org/soap/envelope/]:Envelope
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(startElem00)
+DEBUG main org.apache.axis.encoding.SerializationContext - Start element [http://schemas.xmlsoap.org/soap/envelope/]:Body
+DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(startElem00)
+DEBUG main org.apache.axis.encoding.SerializationContext - Start element [http://localhost/services/OrgResource]:getHrmJobTitleInfoXMLResponse
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(register00)
+DEBUG main org.apache.axis.encoding.SerializationContext - register 'ns1' - 'http://localhost/services/OrgResource'
+DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
+DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(endElem00)
+DEBUG main org.apache.axis.encoding.SerializationContext - End element ns1:getHrmJobTitleInfoXMLResponse
+DEBUG main org.apache.axis.utils.NSStack - NSPop (32)
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(endElem00)
+DEBUG main org.apache.axis.encoding.SerializationContext - End element soapenv:Body
+DEBUG main org.apache.axis.utils.NSStack - NSPop (32)
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(endElem00)
+DEBUG main org.apache.axis.encoding.SerializationContext - End element soapenv:Envelope
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(empty00)
+DEBUG main org.apache.axis.utils.NSStack - NSPop (empty)
+DEBUG main org.apache.axis.client.Call - <?xml version="1.0" encoding="UTF-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Body><ns1:getHrmJobTitleInfoXMLResponse soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" xmlns:ns1="http://localhost/services/OrgResource"/></soapenv:Body></soapenv:Envelope>
+DEBUG main org.apache.axis.client.AxisClient - Enter: AxisClient::invoke
+DEBUG main org.apache.axis.client.AxisClient - EngineHandler: null
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(axisUserAgent)
+DEBUG main org.apache.axis.SimpleChain - Enter: SimpleChain::invoke
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(enter00)
+DEBUG main org.apache.axis.transport.http.HTTPSender - Enter:  HTTPSender::invoke
+DEBUG main org.apache.axis.SOAPPart - Enter: SOAPPart::saveChanges
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(register00)
+DEBUG main org.apache.axis.encoding.SerializationContext - register 'soapenv' - 'http://schemas.xmlsoap.org/soap/envelope/'
+DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
+DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(register00)
+DEBUG main org.apache.axis.encoding.SerializationContext - register 'soapenv' - 'http://schemas.xmlsoap.org/soap/envelope/'
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(register00)
+DEBUG main org.apache.axis.encoding.SerializationContext - register 'xsd' - 'http://www.w3.org/2001/XMLSchema'
+DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(register00)
+DEBUG main org.apache.axis.encoding.SerializationContext - register 'xsi' - 'http://www.w3.org/2001/XMLSchema-instance'
+DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(startElem00)
+DEBUG main org.apache.axis.encoding.SerializationContext - Start element [http://schemas.xmlsoap.org/soap/envelope/]:Envelope
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(startElem00)
+DEBUG main org.apache.axis.encoding.SerializationContext - Start element [http://schemas.xmlsoap.org/soap/envelope/]:Body
+DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(startElem00)
+DEBUG main org.apache.axis.encoding.SerializationContext - Start element [http://localhost/services/OrgResource]:getHrmJobTitleInfoXMLResponse
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(register00)
+DEBUG main org.apache.axis.encoding.SerializationContext - register 'ns1' - 'http://localhost/services/OrgResource'
+DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
+DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(endElem00)
+DEBUG main org.apache.axis.encoding.SerializationContext - End element ns1:getHrmJobTitleInfoXMLResponse
+DEBUG main org.apache.axis.utils.NSStack - NSPop (32)
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(endElem00)
+DEBUG main org.apache.axis.encoding.SerializationContext - End element soapenv:Body
+DEBUG main org.apache.axis.utils.NSStack - NSPop (32)
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(endElem00)
+DEBUG main org.apache.axis.encoding.SerializationContext - End element soapenv:Envelope
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(empty00)
+DEBUG main org.apache.axis.utils.NSStack - NSPop (empty)
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(setMsgForm)
+DEBUG main org.apache.axis.SOAPPart - Setting current message form to: FORM_OPTIMIZED (currentMessage is now org.apache.axis.utils.ByteArray)
+DEBUG main org.apache.axis.SOAPPart - Exit: SOAPPart::saveChanges(): org.apache.axis.utils.ByteArray@145f66e3
+DEBUG main org.apache.axis.SOAPPart - Enter: SOAPPart::saveChanges
+DEBUG main org.apache.axis.SOAPPart - Enter: SOAPPart::saveChanges
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(createdHTTP00)
+DEBUG main org.apache.axis.components.net.DefaultSocketFactory - Created an insecure HTTP connection
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(xmlSent00)
+DEBUG main org.apache.axis.transport.http.HTTPSender - XML sent:
+DEBUG main org.apache.axis.transport.http.HTTPSender - ---------------------------------------------------
+DEBUG main org.apache.axis.SOAPPart - Enter: SOAPPart::saveChanges
+DEBUG main org.apache.axis.transport.http.HTTPSender - POST /services/OrgResource?wsdl HTTP/1.0
+Content-Type: text/xml; charset=utf-8
+Accept: application/soap+xml, application/dime, multipart/related, text/*
+User-Agent: Axis/1.4
+Host: localhost:8080
+Cache-Control: no-cache
+Pragma: no-cache
+SOAPAction: ""
+Content-Length: 413
+
+<?xml version="1.0" encoding="UTF-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Body><ns1:getHrmJobTitleInfoXMLResponse soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" xmlns:ns1="http://localhost/services/OrgResource"/></soapenv:Body></soapenv:Envelope>
+DEBUG main org.apache.axis.transport.http.HTTPSender - HTTP/1.0 200 OK
+DEBUG main org.apache.axis.transport.http.HTTPSender - Server WVS
+DEBUG main org.apache.axis.transport.http.HTTPSender - Cache-Control no-cache
+DEBUG main org.apache.axis.transport.http.HTTPSender - X-Frame-Options SAMEORIGIN
+DEBUG main org.apache.axis.transport.http.HTTPSender - X-XSS-Protection 1
+DEBUG main org.apache.axis.transport.http.HTTPSender - Expires Thu, 01 Dec 1994 16:00:00 GMT
+DEBUG main org.apache.axis.transport.http.HTTPSender - Set-Cookie ecology_JSessionid=aaai5kJTJSDZU5f2MD-Bx; path=/; HttpOnly
+DEBUG main org.apache.axis.transport.http.HTTPSender - Content-Type text/xml; charset=utf-8
+DEBUG main org.apache.axis.transport.http.HTTPSender - Date Thu, 14 Jan 2021 06:01:02 GMT
+DEBUG main org.apache.axis.SOAPPart - Enter: SOAPPart ctor(FORM_INPUTSTREAM)
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(setMsgForm)
+DEBUG main org.apache.axis.SOAPPart - Setting current message form to: FORM_INPUTSTREAM (currentMessage is now org.apache.axis.transport.http.SocketInputStream)
+DEBUG main org.apache.axis.SOAPPart - Exit: SOAPPart ctor()
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(no00)
+DEBUG main org.apache.axis.transport.http.HTTPSender - 
+no Content-Length
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(xmlRecd00)
+DEBUG main org.apache.axis.transport.http.HTTPSender - 
+XML received:
+DEBUG main org.apache.axis.transport.http.HTTPSender - -----------------------------------------------
+DEBUG main org.apache.axis.SOAPPart - Enter: SOAPPart::getAsSOAPEnvelope()
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(currForm)
+DEBUG main org.apache.axis.SOAPPart - current form is FORM_INPUTSTREAM
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(pushHandler00)
+DEBUG main org.apache.axis.encoding.DeserializationContext - Pushing handler org.apache.axis.message.EnvelopeHandler@1bb5a082
+DEBUG main org.apache.axis.encoding.DeserializationContext - Enter: DeserializationContext::startPrefixMapping(soapenc11, http://schemas.xmlsoap.org/soap/encoding/)
+DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
+DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
+DEBUG main org.apache.axis.encoding.DeserializationContext - Exit: DeserializationContext::startPrefixMapping()
+DEBUG main org.apache.axis.encoding.DeserializationContext - Enter: DeserializationContext::startPrefixMapping(wsdl, http://schemas.xmlsoap.org/wsdl/)
+DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
+DEBUG main org.apache.axis.encoding.DeserializationContext - Exit: DeserializationContext::startPrefixMapping()
+DEBUG main org.apache.axis.encoding.DeserializationContext - Enter: DeserializationContext::startPrefixMapping(xsd, http://www.w3.org/2001/XMLSchema)
+DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
+DEBUG main org.apache.axis.encoding.DeserializationContext - Exit: DeserializationContext::startPrefixMapping()
+DEBUG main org.apache.axis.encoding.DeserializationContext - Enter: DeserializationContext::startPrefixMapping(tns, http://localhost/services/OrgResource)
+DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
+DEBUG main org.apache.axis.encoding.DeserializationContext - Exit: DeserializationContext::startPrefixMapping()
+DEBUG main org.apache.axis.encoding.DeserializationContext - Enter: DeserializationContext::startPrefixMapping(soap12, http://www.w3.org/2003/05/soap-envelope)
+DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
+DEBUG main org.apache.axis.encoding.DeserializationContext - Exit: DeserializationContext::startPrefixMapping()
+DEBUG main org.apache.axis.encoding.DeserializationContext - Enter: DeserializationContext::startPrefixMapping(wsdlsoap, http://schemas.xmlsoap.org/wsdl/soap/)
+DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
+DEBUG main org.apache.axis.encoding.DeserializationContext - Exit: DeserializationContext::startPrefixMapping()
+DEBUG main org.apache.axis.encoding.DeserializationContext - Enter: DeserializationContext::startPrefixMapping(soap11, http://schemas.xmlsoap.org/soap/envelope/)
+DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
+DEBUG main org.apache.axis.encoding.DeserializationContext - Exit: DeserializationContext::startPrefixMapping()
+DEBUG main org.apache.axis.encoding.DeserializationContext - Enter: DeserializationContext::startPrefixMapping(ns1, http://webservice.hrm.weaver)
+DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
+DEBUG main org.apache.axis.encoding.DeserializationContext - Exit: DeserializationContext::startPrefixMapping()
+DEBUG main org.apache.axis.encoding.DeserializationContext - Enter: DeserializationContext::startPrefixMapping(soapenc12, http://www.w3.org/2003/05/soap-encoding)
+DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
+DEBUG main org.apache.axis.encoding.DeserializationContext - Exit: DeserializationContext::startPrefixMapping()
+DEBUG main org.apache.axis.encoding.DeserializationContext - Enter: DeserializationContext::startElement(http://schemas.xmlsoap.org/wsdl/, definitions)
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(pushHandler00)
+DEBUG main org.apache.axis.encoding.DeserializationContext - Pushing handler org.apache.axis.message.EnvelopeBuilder@74235045
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(badTag00)
+DEBUG main org.apache.axis.transport.http.HTTPSender - org.xml.sax.SAXException: Bad envelope tag:  definitions
+DEBUG main org.apache.axis.SOAPPart - Enter: SOAPPart ctor(FORM_FAULT)
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(setMsgForm)
+DEBUG main org.apache.axis.SOAPPart - Setting current message form to: FORM_FAULT (currentMessage is now org.apache.axis.AxisFault)
+DEBUG main org.apache.axis.SOAPPart - Exit: SOAPPart ctor()
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(toAxisFault00)
+DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(empty00)
+DEBUG main org.apache.axis.utils.NSStack - NSPop (empty)
+DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
+DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(empty00)
+DEBUG main org.apache.axis.utils.NSStack - NSPop (empty)
+DEBUG main org.apache.axis.enterprise - Mapping Exception to AxisFault
+AxisFault
+ faultCode: {http://schemas.xmlsoap.org/soap/envelope/}Server.userException
+ faultSubcode: 
+ faultString: org.xml.sax.SAXException: Bad envelope tag:  definitions
+ faultActor: 
+ faultNode: 
+ faultDetail: 
+	{http://xml.apache.org/axis/}stackTrace:org.xml.sax.SAXException: Bad envelope tag:  definitions
+	at org.apache.axis.message.EnvelopeBuilder.startElement(EnvelopeBuilder.java:71)
+	at org.apache.axis.encoding.DeserializationContext.startElement(DeserializationContext.java:1048)
+	at org.apache.xerces.parsers.AbstractSAXParser.startElement(Unknown Source)
+	at org.apache.xerces.impl.XMLNSDocumentScannerImpl.scanStartElement(Unknown Source)
+	at org.apache.xerces.impl.XMLNSDocumentScannerImpl$NSContentDispatcher.scanRootElementHook(Unknown Source)
+	at org.apache.xerces.impl.XMLDocumentFragmentScannerImpl$FragmentContentDispatcher.dispatch(Unknown Source)
+	at org.apache.xerces.impl.XMLDocumentFragmentScannerImpl.scanDocument(Unknown Source)
+	at org.apache.xerces.parsers.XML11Configuration.parse(Unknown Source)
+	at org.apache.xerces.parsers.XML11Configuration.parse(Unknown Source)
+	at org.apache.xerces.parsers.XMLParser.parse(Unknown Source)
+	at org.apache.xerces.parsers.AbstractSAXParser.parse(Unknown Source)
+	at org.apache.xerces.jaxp.SAXParserImpl$JAXPSAXParser.parse(Unknown Source)
+	at org.apache.xerces.jaxp.SAXParserImpl.parse(Unknown Source)
+	at org.apache.axis.encoding.DeserializationContext.parse(DeserializationContext.java:227)
+	at org.apache.axis.SOAPPart.getAsSOAPEnvelope(SOAPPart.java:696)
+	at org.apache.axis.Message.getSOAPEnvelope(Message.java:435)
+	at org.apache.axis.transport.http.HTTPSender.readFromSocket(HTTPSender.java:796)
+	at org.apache.axis.transport.http.HTTPSender.invoke(HTTPSender.java:144)
+	at org.apache.axis.strategies.InvocationStrategy.visit(InvocationStrategy.java:32)
+	at org.apache.axis.SimpleChain.doVisiting(SimpleChain.java:118)
+	at org.apache.axis.SimpleChain.invoke(SimpleChain.java:83)
+	at org.apache.axis.client.AxisClient.invoke(AxisClient.java:165)
+	at org.apache.axis.client.Call.invokeEngine(Call.java:2784)
+	at org.apache.axis.client.Call.invoke(Call.java:2767)
+	at org.apache.axis.client.Call.invoke(Call.java:2443)
+	at org.apache.axis.client.Call.invoke(Call.java:2366)
+	at org.apache.axis.client.Call.invoke(Call.java:1812)
+	at com.mytest.Test2.test1(Test2.java:25)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:33)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:230)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:58)
+
+	{http://xml.apache.org/axis/}hostname:nzm
+
+org.xml.sax.SAXException: Bad envelope tag:  definitions
+	at org.apache.axis.AxisFault.makeFault(AxisFault.java:101)
+	at org.apache.axis.SOAPPart.getAsSOAPEnvelope(SOAPPart.java:701)
+	at org.apache.axis.Message.getSOAPEnvelope(Message.java:435)
+	at org.apache.axis.transport.http.HTTPSender.readFromSocket(HTTPSender.java:796)
+	at org.apache.axis.transport.http.HTTPSender.invoke(HTTPSender.java:144)
+	at org.apache.axis.strategies.InvocationStrategy.visit(InvocationStrategy.java:32)
+	at org.apache.axis.SimpleChain.doVisiting(SimpleChain.java:118)
+	at org.apache.axis.SimpleChain.invoke(SimpleChain.java:83)
+	at org.apache.axis.client.AxisClient.invoke(AxisClient.java:165)
+	at org.apache.axis.client.Call.invokeEngine(Call.java:2784)
+	at org.apache.axis.client.Call.invoke(Call.java:2767)
+	at org.apache.axis.client.Call.invoke(Call.java:2443)
+	at org.apache.axis.client.Call.invoke(Call.java:2366)
+	at org.apache.axis.client.Call.invoke(Call.java:1812)
+	at com.mytest.Test2.test1(Test2.java:25)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:33)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:230)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:58)
+Caused by: org.xml.sax.SAXException: Bad envelope tag:  definitions
+	at org.apache.axis.message.EnvelopeBuilder.startElement(EnvelopeBuilder.java:71)
+	at org.apache.axis.encoding.DeserializationContext.startElement(DeserializationContext.java:1048)
+	at org.apache.xerces.parsers.AbstractSAXParser.startElement(Unknown Source)
+	at org.apache.xerces.impl.XMLNSDocumentScannerImpl.scanStartElement(Unknown Source)
+	at org.apache.xerces.impl.XMLNSDocumentScannerImpl$NSContentDispatcher.scanRootElementHook(Unknown Source)
+	at org.apache.xerces.impl.XMLDocumentFragmentScannerImpl$FragmentContentDispatcher.dispatch(Unknown Source)
+	at org.apache.xerces.impl.XMLDocumentFragmentScannerImpl.scanDocument(Unknown Source)
+	at org.apache.xerces.parsers.XML11Configuration.parse(Unknown Source)
+	at org.apache.xerces.parsers.XML11Configuration.parse(Unknown Source)
+	at org.apache.xerces.parsers.XMLParser.parse(Unknown Source)
+	at org.apache.xerces.parsers.AbstractSAXParser.parse(Unknown Source)
+	at org.apache.xerces.jaxp.SAXParserImpl$JAXPSAXParser.parse(Unknown Source)
+	at org.apache.xerces.jaxp.SAXParserImpl.parse(Unknown Source)
+	at org.apache.axis.encoding.DeserializationContext.parse(DeserializationContext.java:227)
+	at org.apache.axis.SOAPPart.getAsSOAPEnvelope(SOAPPart.java:696)
+	... 35 more
+ERROR main weaver.general.BaseBean - 发送 POST 请求出现异常！java.net.ConnectException: Connection refused: connect
