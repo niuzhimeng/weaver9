@@ -1,6 +1,5 @@
 package com.mytest;
 
-import cn.hutool.http.HtmlUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -11,6 +10,9 @@ import okhttp3.Request;
 import okhttp3.Response;
 import org.bouncycastle.util.encoders.Base64;
 import org.junit.Test;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.JedisPoolConfig;
 import weaver.general.MD5;
 
 import java.io.IOException;
@@ -23,7 +25,10 @@ import java.math.BigInteger;
 import java.net.Socket;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Stack;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class Test2 {
@@ -233,15 +238,70 @@ public class Test2 {
 
     @Test
     public void test10() {
-        String str = "{\"templateType\":\"Ecology8\",\"settingversion\":0,\"loginSettingInfo\":{\"loginForm\":{\"backgroundColor\":\"#0b1a32\",\"color\":\"#bacde0\",\"level\":\"center\",\"verticalMargin\":101,\"vertical\":\"middle\",\"showtype\":\"loginForm\",\"rate_x\":0,\"rate_y\":0,\"isLock\":true,\"win_width\":1920,\"win_height\":1080,\"x\":0,\"width\":324,\"isAbsolute\":\"0\",\"y\":0,\"levelMargin\":0,\"height\":292},\"qrcode\":{\"color\":\"#f5f7fa\",\"level\":\"center\",\"verticalMargin\":-269,\"vertical\":\"middle\",\"showtype\":\"qrcode\",\"rate_x\":0,\"rate_y\":0,\"isLock\":true,\"win_width\":1920,\"win_height\":1080,\"x\":0,\"width\":28,\"isAbsolute\":\"0\",\"y\":0,\"levelMargin\":198,\"height\":28},\"loginInfo\":{\"autoCarousel\":false,\"bgColor\":\"\",\"showBgImageBox\":true,\"width\":3000,\"carouselTime\":3,\"bgOpacity\":1,\"fillStyle\":\"stretch\",\"showQrcode\":true,\"imgsrc\":\"/wui/theme/ecology9/image/bg1.jpg\",\"height\":1875}},\"customElements\":[{\"original_width\":444,\"rotate\":0,\"level\":\"center\",\"verticalMargin\":0,\"vertical\":\"middle\",\"showtype\":\"loginbox\",\"type\":\"image\",\"rate_x\":0,\"content\":\"/wui/theme/ecology9/image/login-box.png\",\"rate_y\":0,\"isLock\":true,\"win_width\":1920,\"win_height\":1080,\"x\":0,\"width\":444,\"isAbsolute\":\"0\",\"y\":0,\"original_height\":587,\"levelMargin\":0,\"opacity\":100,\"height\":587},{\"original_width\":170,\"rotate\":0,\"level\":\"center\",\"verticalMargin\":-157,\"vertical\":\"middle\",\"showtype\":\"logo\",\"type\":\"image\",\"rate_x\":0,\"content\":\"/wui/theme/ecology9/image/e9.png\",\"rate_y\":0,\"isLock\":true,\"win_width\":1920,\"win_height\":1080,\"x\":0,\"width\":170,\"isAbsolute\":\"0\",\"y\":0,\"original_height\":130,\"levelMargin\":0,\"opacity\":100,\"height\":130}],\"labelInfo\":{\"langid7\":{\"fh\":\"返回\",\"rememberAccount\":\"记住账号\",\"rememberPassword\":\"记住密码\",\"forgetPassword\":\"忘记密码\",\"qrcode\":\"请使用e-mobile扫描二维码以登录\",\"validateCode\":\"请输入验证码\",\"refresh\":\"刷新\",\"djqhbj\":\"单击切换背景\",\"login\":\"登录\",\"backgroundtitle\":\"切换背景图\",\"password\":\"密码\",\"tokenKey\":\"动态令牌口令\",\"download\":\"点击下载客户端\",\"loginpoptitle\":\"由于长时间未操作，系统自动退出，需要重新登录\",\"lbsd\":\"轮播速度:\",\"resend\":\"重新发送\",\"smdl\":\"扫码登录\",\"zdlb\":\"自动轮播\",\"qrcodeisinvalid\":\"二维码已失效\",\"send\":\"获取动态密码\",\"account\":\"账号\"}},\"qrcode\":{\"loginkey\":\"8ff2b802-5e70-4118-a534-e490b6ce8be2\",\"text\":\"ecologylogin:8ff2b802-5e70-4118-a534-e490b6ce8be2,actionName:QR_LOGIN,randomNumber:-2033576501,bizSN:-1,em_sys_id:null\"},\"loginTemplateTitle\":\"泛微协同商务系统\",\"recordcode\":\"\",\"bgImage\":\"\",\"isDefault\":true,\"logoImage\":\"\",\"bgImagesInfo\":[{\"width\":3000,\"imgsrc\":\"/wui/theme/ecology9/image/bg1.jpg\",\"height\":1875},{\"width\":2000,\"imgsrc\":\"/wui/theme/ecology9/image/bg2.jpg\",\"height\":1333},{\"width\":2880,\"imgsrc\":\"/wui/theme/ecology9/image/bg3.jpg\",\"height\":1920},{\"width\":2560,\"imgsrc\":\"/wui/theme/ecology9/image/bg4.jpg\",\"height\":1568},{\"width\":3000,\"imgsrc\":\"/wui/theme/ecology9/image/bg5.jpg\",\"height\":2000}],\"isRememberPW\":\"1\",\"loginTemplateTitle_base64\":\"泛微协同商务系统\",\"id\":\"21\"}";
-        JSONObject jsonObject = JSONObject.parseObject(str);
-        JSONObject jsonObject1 = jsonObject.getJSONObject("labelInfo").getJSONObject("langid7");
-        //jsonObject1.remove("rememberPassword","记住密码");
-        jsonObject1.fluentRemove("rememberPassworddev");
-        System.out.println("这里是dev的开发");
+        JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
+        jedisPoolConfig.setMaxTotal(10);
+        JedisPool jedisPool = new JedisPool(jedisPoolConfig, "localhost", 6379, 10, "123456");
 
+        Jedis resource = jedisPool.getResource();
+        resource.set("sex", "男");
+        resource.close();
+        //连接本地的 Redis 服务
+//        Jedis jedis = new Jedis("localhost");
+//        jedis.auth("123456");
+//        String select = jedis.select(1);
+//        System.out.println(select);
+//        String ping = jedis.ping();
+//        System.out.println(ping);
+
+
+//        String s = jedis.flushDB();
+//        System.out.println("flushDB结果： "+ s);
+
+//        for (int i = 0; i < 13; i++) {
+//            jedis.set("age" + i, "27岁");
+//        }
+
+
+//        jedis.lpush("studentNo", "nzm");
+//        jedis.lpush("studentNo", "nzm");
+//        jedis.lpush("studentNo", "nzm1");
+//
+//        Long studentNo = jedis.llen("studentNo");
+//        System.out.println("数量： "+ studentNo);
+//        List studentNo1 = jedis.lrange("studentNo", 0, studentNo);
+//        System.out.println(JSONObject.toJSONString(studentNo1));
+
+        //jedis.expire("studentNo", 10);
+
+
+        //jedis.close();
     }
 
+
+    /**
+     * @param str     原字符串
+     * @param sToFind 需要查找的字符串
+     * @return 返回在原字符串中sToFind出现的次数
+     */
+    private int countStr(String str, String sToFind) {
+        int num = 0;
+        while (str.contains(sToFind)) {
+            str = str.substring(str.indexOf(sToFind) + sToFind.length());
+            num++;
+        }
+        return num;
+    }
+
+    @Test
+    public void test11() {
+
+        BigDecimal bigDecimal = new BigDecimal("1");
+        BigDecimal bigDecimal2 = new BigDecimal("6");
+        BigDecimal divide = bigDecimal.divide(bigDecimal2, 4, BigDecimal.ROUND_HALF_UP);
+        String s = divide.toString();
+        System.out.println(s);
+
+    }
 
 }
 

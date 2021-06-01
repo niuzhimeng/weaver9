@@ -19,20 +19,19 @@ public class Test {
         String url = "http://127.0.0.1:8080/rest/ofs/ReceiveTodoRequestByJson";
         JSONObject jsonObject = new JSONObject(true);
         jsonObject.put("syscode", "test"); // 异构系统标识
-        jsonObject.put("flowid", "1"); // 流程实例id
+        jsonObject.put("flowid", "2"); // 流程实例id
         jsonObject.put("requestname", "测试流程" + TimeUtil.getCurrentTimeString()); // 标题
         jsonObject.put("workflowname", "测试流程"); // 流程类型名称
         jsonObject.put("nodename", "领导审批"); // 步骤名称（节点名称）
 
-        jsonObject.put("pcurl", "http://www.xxxxx.com"); // PC地址
-        jsonObject.put("appurl", ""); // APP地址
+        jsonObject.put("pcurl", "http://www.baidu.com&todoRead=1"); // PC地址
+        jsonObject.put("appurl", "1"); // APP地址
         jsonObject.put("creator", "ls"); // 创建人（原值）
         jsonObject.put("createdatetime", TimeUtil.getCurrentTimeString()); // 创建日期时间
         jsonObject.put("receiver", "nzm"); // 接收人（原值）
 
         jsonObject.put("receivedatetime", TimeUtil.getCurrentTimeString()); // 接收日期时间
         jsonObject.put("receivets", String.valueOf(System.currentTimeMillis())); // 时间戳字段
-
 
         String jsonString = jsonObject.toJSONString();
         System.out.println("发送json： " + jsonString);
@@ -57,6 +56,35 @@ public class Test {
 
         jsonObject.put("receiver", "nzm"); // 接收人（原值）
         jsonObject.put("receivets", String.valueOf(System.currentTimeMillis()));
+
+
+      //  String jsonString = jsonObject.toJSONString();
+        String jsonString = "{\"syscode\":\"test\",\"nodename\":\"领导审批\",\"requestname\":\"测试流程2021-05-28 17:11:19\",\"receivets\":\"1622193803877\",\"receiver\":\"nzm\",\"workflowname\":\"测试流程\",\"flowid\":\"5\"}";
+        System.out.println("发送json： " + jsonString);
+
+        String s = MtHttpUtil.postJsonHeader(url, jsonString, null);
+        System.out.println(s);
+    }
+
+    @org.junit.Test
+    public void test5() {
+        // 发送待阅
+        String url = "http://127.0.0.1:8080/rest/ofs/ReceiveCCRequestByJson";
+        JSONObject jsonObject = new JSONObject(true);
+        jsonObject.put("syscode", "local"); // 异构系统标识
+        jsonObject.put("flowid", "2"); // 流程实例id
+        jsonObject.put("requestname", "local测试流程" + TimeUtil.getCurrentTimeString()); // 标题
+        jsonObject.put("workflowname", "local测试流程"); // 流程类型名称
+        jsonObject.put("nodename", "领导审批"); // 步骤名称（节点名称）
+
+        jsonObject.put("pcurl", "www.baidu.com"); // PC地址
+        jsonObject.put("appurl", "1"); // APP地址
+        jsonObject.put("creator", "ls"); // 创建人（原值）
+        jsonObject.put("createdatetime", TimeUtil.getCurrentTimeString()); // 创建日期时间
+        jsonObject.put("receiver", "nzm"); // 接收人（原值）
+
+        jsonObject.put("receivedatetime", TimeUtil.getCurrentTimeString()); // 接收日期时间
+        jsonObject.put("receivets", String.valueOf(System.currentTimeMillis())); // 时间戳字段
 
 
         String jsonString = jsonObject.toJSONString();
@@ -169,4 +197,32 @@ public class Test {
         return json.toJSONString();
     }
 
+    @org.junit.Test
+    public void test6() {
+        // 发送已办
+        String url = "http://127.0.0.1:8080/rest/ofs/ReceiveRequestInfoByJson";
+        JSONObject jsonObject = new JSONObject(true);
+        jsonObject.put("syscode", "test"); // 异构系统标识
+        jsonObject.put("flowid", "1"); // 流程实例id
+        jsonObject.put("requestname", "测试流程" + TimeUtil.getCurrentTimeString()); // 标题
+        jsonObject.put("workflowname", "测试流程-已办"); // 流程类型名称
+        jsonObject.put("nodename", "领导审批"); // 步骤名称（节点名称）
+
+        jsonObject.put("pcurl", "http://www.xxxxx.com&todoRead=1"); // PC地址
+        jsonObject.put("appurl", "1"); // APP地址
+        jsonObject.put("creator", "ls"); // 创建人（原值）
+        jsonObject.put("createdatetime", TimeUtil.getCurrentTimeString()); // 创建日期时间
+        jsonObject.put("receiver", "nzm"); // 接收人（原值）
+
+        jsonObject.put("receivedatetime", TimeUtil.getCurrentTimeString()); // 接收日期时间
+        jsonObject.put("receivets", String.valueOf(System.currentTimeMillis())); // 时间戳字段
+        jsonObject.put("isremark", "2");
+        jsonObject.put("viewtype", "1");
+
+        String jsonString = jsonObject.toJSONString();
+        System.out.println("发送json： " + jsonString);
+
+        String s = MtHttpUtil.postJsonHeader(url, jsonString, null);
+        System.out.println(s);
+    }
 }
