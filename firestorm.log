@@ -641,3 +641,23 @@ Caused by: org.xml.sax.SAXException: Bad envelope tag:  definitions
 	at org.apache.axis.SOAPPart.getAsSOAPEnvelope(SOAPPart.java:696)
 	... 35 more
 ERROR main weaver.general.BaseBean - 发送 POST 请求出现异常！java.net.ConnectException: Connection refused: connect
+INFO AMQP Connection 127.0.0.1:5672 com.rabbitmq.client.impl.AMQConnection - Received a frame on an unknown channel, ignoring it
+INFO main com.dtflys.forest.config.ForestConfiguration - [Forest] Http Backend: okhttp3
+INFO main com.dtflys.forest.logging.DefaultLogHandler - [Forest] Request: 
+	GET http://localhost:8080/api/GetDataTestApi/getDataTest HTTP
+INFO main com.dtflys.forest.logging.DefaultLogHandler - [Forest] Response: Status = 200, Time = 56ms
+INFO main com.dtflys.forest.config.ForestConfiguration - [Forest] Http Backend: okhttp3
+INFO main com.dtflys.forest.logging.DefaultLogHandler - [Forest] Request: 
+	GET http://localhost:8080/api/GetDataTestApi/getDataTest HTTP
+INFO main com.dtflys.forest.logging.DefaultLogHandler - [Forest] Response: Status = 200, Time = 134ms
+INFO main com.dtflys.forest.logging.DefaultLogHandler - [Forest] Request: 
+	GET http://localhost:8080/api/GetDataTestApi/getDataTest HTTP
+INFO main com.dtflys.forest.logging.DefaultLogHandler - [Forest] Response: Status = 200, Time = 10ms
+INFO main com.dtflys.forest.config.ForestConfiguration - [Forest] Http Backend: okhttp3
+INFO main com.dtflys.forest.logging.DefaultLogHandler - [Forest] Request: 
+	GET http://localhost:8080/api/GetDataTestApi/getDataTest HTTP
+INFO main com.dtflys.forest.logging.DefaultLogHandler - [Forest] Response: Status = 200, Time = 67ms
+INFO main com.dtflys.forest.config.ForestConfiguration - [Forest] Http Backend: okhttp3
+INFO main com.dtflys.forest.logging.DefaultLogHandler - [Forest] Request: 
+	GET http://localhost:8080/api/GetDataTestApi/getDataTest HTTP
+INFO main com.dtflys.forest.logging.DefaultLogHandler - [Forest] Response: Status = 200, Time = 68ms

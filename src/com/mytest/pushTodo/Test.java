@@ -73,7 +73,7 @@ public class Test {
         JSONObject jsonObject = new JSONObject(true);
         jsonObject.put("syscode", "local"); // 异构系统标识
         jsonObject.put("flowid", "2"); // 流程实例id
-        jsonObject.put("requestname", "local测试流程" + TimeUtil.getCurrentTimeString()); // 标题
+        jsonObject.put("requestname", "local测试流程-待阅" + TimeUtil.getCurrentTimeString()); // 标题
         jsonObject.put("workflowname", "local测试流程"); // 流程类型名称
         jsonObject.put("nodename", "领导审批"); // 步骤名称（节点名称）
 
@@ -87,7 +87,20 @@ public class Test {
         jsonObject.put("receivets", String.valueOf(System.currentTimeMillis())); // 时间戳字段
 
 
-        String jsonString = jsonObject.toJSONString();
+        //String jsonString = jsonObject.toJSONString();
+        String jsonString = "{\n" +
+                "    \"syscode\":\"xunshi\",\n" +
+                "    \"flowid\":\"517\",\n" +
+                "    \"requestname\":\"催办通知\",\n" +
+                "    \"workflowname\":\"通知提醒\",\n" +
+                "    \"nodename\":\"通知提醒\",\n" +
+                "    \"pcurl\":\"http://172.18.102.163:81/\",\n" +
+                "    \"appurl\":\"http://172.18.102.163:81/\",\n" +
+                "    \"creator\":\"ls\",\n" +
+                "    \"createdatetime\":\"2021-06-04 10:00:00\",\n" +
+                "    \"receiver\":\"nzm\",\n" +
+                "    \"receivedatetime\":\"2021-06-04 11:00:00\"\n" +
+                "}";
         System.out.println("发送json： " + jsonString);
 
         String s = MtHttpUtil.postJsonHeader(url, jsonString, null);

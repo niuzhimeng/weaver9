@@ -1,8 +1,14 @@
 package com.mytest;
 
 import com.alibaba.fastjson.JSONObject;
+import com.dtflys.forest.config.ForestConfiguration;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.mytest.annotation.vo.OneUtil;
+import com.mytest.forest.MyClient;
 import com.weavernorth.gqzl.BeisenSSO.oidcsdk.models.Jwt_header;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
@@ -15,6 +21,8 @@ import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 import weaver.general.MD5;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.management.ManagementFactory;
@@ -300,6 +308,15 @@ public class Test2 {
         BigDecimal divide = bigDecimal.divide(bigDecimal2, 4, BigDecimal.ROUND_HALF_UP);
         String s = divide.toString();
         System.out.println(s);
+
+    }
+
+    @Test
+    public void test12() throws Exception {
+        OneUtil abc = new OneUtil();
+
+        abc.setName("123");
+
 
     }
 

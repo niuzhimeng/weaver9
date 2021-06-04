@@ -1,34 +1,39 @@
 package com.mytest.annotation;
 
-import com.mytest.annotation.vo.AnnTestVO;
+import com.alibaba.fastjson.JSONObject;
+import com.mytest.annotation.proxy.MyProxy;
+import com.mytest.annotation.vo.Human;
+import com.mytest.annotation.vo.impl.Student;
 import org.junit.Test;
 
-import java.lang.reflect.Method;
+import java.lang.reflect.Field;
 
 public class MyTest {
 
     @Test
-    public void test() {
-        try {
-            Integer j = 0;
-            if (1 < 2) {
-                j = null;
-            }
-            int i = 1 + j;
-        } catch (Exception e) {
-            String simpleName = e.getCause().getClass().getSimpleName();
-            String message = e.getCause().getMessage();
+    public void test1() {
 
-            System.out.println(message);
-            System.out.println(simpleName);
-        }
-//        Class<AnnTestVO> annTestVOClass = AnnTestVO.class;
-//        Method test = annTestVOClass.getMethod("test");
-//
-//        MyAnn annotation = test.getAnnotation(MyAnn.class);
-//        String value = annotation.value();
-//        int order = annotation.order();
-//        System.out.println(value + " " + order);
+        Human human = MyProxy.getProxy(Student.class);
+        System.out.println(human);
+        human.study();
+    }
+
+    @Test
+    public void test2() throws Exception {
+        Class<Student> studentClass = Student.class;
+        Field name1 = studentClass.getDeclaredField("name");
+        name1.setAccessible(true);
+
+        Class<?> type = name1.getType();
+        System.out.println(type);
+
+        String name = name1.getType().getName();
+        System.out.println(name);
+
+        System.out.println(name1.getName());
+        name1.set(null, "nzm"); // 给静态变量赋值，第一个参数不用传
+        System.out.println("====================");
+
 
     }
 }
