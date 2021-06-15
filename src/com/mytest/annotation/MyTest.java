@@ -47,6 +47,7 @@ public class MyTest {
 
     @Test
     public void test3() {
+
         AnnTestVOImpl annTestVO = new AnnTestVOImpl();
         annTestVO.myPrint();
 

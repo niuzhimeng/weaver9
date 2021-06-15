@@ -19,16 +19,11 @@ public class MyContainer {
     public static Map<String, Object> containerMap = new HashMap<>();
 
     static {
-        List<String> list = new ArrayList<>();
-        try {
-            // 加载带有MyComponent注解的类到map中
-            initComponents();
-            // 为标有MyIoc注解的字段进行类注入
-            inject();
+        // 加载带有MyComponent注解的类到map中
+        initComponents();
+        // 为标有MyIoc注解的字段进行类注入
+        inject();
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     public static void inject() {
@@ -46,6 +41,11 @@ public class MyContainer {
                     if (StringUtils.isBlank(annName)) {
                         // 用户没有指定注入名称，按注入类的全路径
                         annName = field.getType().getName();
+                    }
+                    // 根据用户自定义名称或类的全路径 找到的obj
+                    Object o = containerMap.get(annName);
+                    if (null == o) {
+                        throw new RuntimeException("标记： " + annName + " 没有找到对应类");
                     }
                     field.setAccessible(true);
                     field.set(entry.getValue(), containerMap.get(annName));
@@ -72,9 +72,9 @@ public class MyContainer {
                 // 添加到容器中 name不为空按照name注入，否则按照类名注入
                 MyComponent myComponentAnn = aClass.getAnnotation(MyComponent.class);
                 // com.mytest.annotation.vo.impl.AnnTestVOImpl
-                String iocKey = aClass.getName();
-                if (StringUtils.isNotBlank(myComponentAnn.name())) {
-                    iocKey = myComponentAnn.name();
+                String iocKey = myComponentAnn.name();
+                if (StringUtils.isBlank(iocKey)) {
+                    iocKey = aClass.getName();
                 }
                 containerMap.put(iocKey, aClass.newInstance());
 

@@ -1,7 +1,6 @@
 package com.mytest.annotation.vo.impl;
 
 import com.mytest.annotation.MyComponent;
-import com.mytest.annotation.MyResource;
 import com.mytest.annotation.vo.Human;
 import com.mytest.annotation.vo.OneUtil;
 
@@ -12,7 +11,7 @@ public class Student implements Human {
 
     private String age;
 
-    @MyResource(classPath = "com.mytest.annotation.vo.OneUtil")
+    //@MyResource()
     private static OneUtil oneUtil;
 
     @Override

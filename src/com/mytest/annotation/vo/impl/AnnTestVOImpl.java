@@ -8,7 +8,7 @@ import com.mytest.annotation.vo.OneUtil;
 @MyComponent
 public class AnnTestVOImpl implements AnnTestVO {
 
-    @MyResource
+    @MyResource(name = "nzm")
     private static OneUtil oneUtil;
 
     @Override
