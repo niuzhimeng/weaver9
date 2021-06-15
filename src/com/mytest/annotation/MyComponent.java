@@ -7,7 +7,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented // 是否生成api文档
 @Inherited // 是否被子类集成
-public @interface MyCompoent {
+public @interface MyComponent {
 
     //String classPath();
 

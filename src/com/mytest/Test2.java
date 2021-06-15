@@ -1,14 +1,8 @@
 package com.mytest;
 
 import com.alibaba.fastjson.JSONObject;
-import com.dtflys.forest.config.ForestConfiguration;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfWriter;
-import com.mytest.annotation.vo.OneUtil;
-import com.mytest.forest.MyClient;
 import com.weavernorth.gqzl.BeisenSSO.oidcsdk.models.Jwt_header;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
@@ -21,8 +15,6 @@ import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 import weaver.general.MD5;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.management.ManagementFactory;
@@ -33,6 +25,8 @@ import java.math.BigInteger;
 import java.net.Socket;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -313,9 +307,12 @@ public class Test2 {
 
     @Test
     public void test12() throws Exception {
-        OneUtil abc = new OneUtil();
+        LocalDate now = LocalDate.now();
+        String start = now.getYear() + "-01-01";
+        System.out.println(start);
 
-        abc.setName("123");
+        LocalDate end = now.with(TemporalAdjusters.firstDayOfMonth());
+        System.out.println(end.toString());
 
 
     }

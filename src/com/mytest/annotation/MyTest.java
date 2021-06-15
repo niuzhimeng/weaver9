@@ -1,6 +1,5 @@
 package com.mytest.annotation;
 
-import com.alibaba.fastjson.JSONObject;
 import com.mytest.annotation.proxy.MyProxy;
 import com.mytest.annotation.vo.Human;
 import com.mytest.annotation.vo.impl.Student;
@@ -13,8 +12,8 @@ public class MyTest {
     @Test
     public void test1() {
 
-        Human human = MyProxy.getProxy(Student.class);
-        System.out.println(human);
+        Human human = (Human) MyProxy.getProxy(new Student());
+        System.out.println(human.getClass().getTypeName());
         human.study();
     }
 

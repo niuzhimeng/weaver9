@@ -1,7 +1,8 @@
 package com.mytest.annotation.proxy;
 
-import com.mytest.annotation.MyCompoent;
+import com.mytest.annotation.MyComponent;
 import com.mytest.annotation.MyIoc;
+import com.mytest.annotation.vo.impl.Student;
 
 import java.io.File;
 import java.lang.reflect.Field;
@@ -28,20 +29,21 @@ public class MyProxy implements InvocationHandler {
      *
      * @return 一个代理类对象
      */
-    public static <T> T getProxy(Class<T> aClass) {
+    public static Object getProxy(Student student) {
         MyProxy myProxy = new MyProxy();
         try {
-            myProxy.obj = aClass.newInstance();
+            myProxy.obj = student;
         } catch (Exception e) {
             e.printStackTrace();
         }
         // 实际对象类加载器， 实际对象实现的接口， 代理类对象
-        return (T) Proxy.newProxyInstance(aClass.getClassLoader(), aClass.getInterfaces(), myProxy);
+        return Proxy.newProxyInstance(student.getClass().getClassLoader(), student.getClass().getInterfaces(), myProxy);
     }
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         System.out.println("前置执行============");
+        System.out.println("真实方法名： "+ method.getName());
         method.invoke(this.obj, args); // 实际对象， 接口参数
         System.out.println("后置执行============");
         return null;
@@ -53,7 +55,7 @@ public class MyProxy implements InvocationHandler {
         getAllFile(file, list);
         for (String path : list) {
             Class<?> aClass = Class.forName(path);
-            if (!aClass.isAnnotationPresent(MyCompoent.class)) {
+            if (!aClass.isAnnotationPresent(MyComponent.class)) {
                 continue;
             }
             // 存在类注解, 获取字段中注解

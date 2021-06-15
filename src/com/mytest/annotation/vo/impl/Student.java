@@ -1,11 +1,11 @@
 package com.mytest.annotation.vo.impl;
 
-import com.mytest.annotation.MyCompoent;
+import com.mytest.annotation.MyComponent;
 import com.mytest.annotation.MyIoc;
 import com.mytest.annotation.vo.Human;
 import com.mytest.annotation.vo.OneUtil;
 
-@MyCompoent
+@MyComponent
 public class Student implements Human {
 
     public static String name;
