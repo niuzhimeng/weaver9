@@ -1,7 +1,7 @@
 package com.mytest.annotation.proxy;
 
 import com.mytest.annotation.MyComponent;
-import com.mytest.annotation.MyIoc;
+import com.mytest.annotation.MyResource;
 import com.mytest.annotation.vo.impl.Student;
 
 import java.io.File;
@@ -15,14 +15,6 @@ import java.util.List;
 public class MyProxy implements InvocationHandler {
 
     private Object obj;
-
-    static {
-        try {
-            init();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     /**
      * obj  实际对象
@@ -43,7 +35,7 @@ public class MyProxy implements InvocationHandler {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         System.out.println("前置执行============");
-        System.out.println("真实方法名： "+ method.getName());
+        System.out.println("真实方法名： " + method.getName());
         method.invoke(this.obj, args); // 实际对象， 接口参数
         System.out.println("后置执行============");
         return null;
@@ -62,10 +54,10 @@ public class MyProxy implements InvocationHandler {
             Field[] declaredFields = aClass.getDeclaredFields();
             for (Field field : declaredFields) {
                 field.setAccessible(true);
-                if (!field.isAnnotationPresent(MyIoc.class)) {
+                if (!field.isAnnotationPresent(MyResource.class)) {
                     continue;
                 }
-                MyIoc annotation = field.getAnnotation(MyIoc.class);
+                MyResource annotation = field.getAnnotation(MyResource.class);
 
                 String classPath = annotation.classPath();
                 Class<?> bClass = Class.forName(classPath);

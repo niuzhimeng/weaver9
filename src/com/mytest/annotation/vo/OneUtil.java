@@ -1,5 +1,8 @@
 package com.mytest.annotation.vo;
 
+import com.mytest.annotation.MyComponent;
+
+@MyComponent
 public class OneUtil {
 
     public static String name;

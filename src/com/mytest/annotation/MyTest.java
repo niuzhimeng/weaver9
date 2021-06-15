@@ -1,13 +1,17 @@
 package com.mytest.annotation;
 
+import com.mytest.annotation.container.MyContainer;
 import com.mytest.annotation.proxy.MyProxy;
 import com.mytest.annotation.vo.Human;
+import com.mytest.annotation.vo.impl.AnnTestVOImpl;
 import com.mytest.annotation.vo.impl.Student;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.lang.reflect.Field;
 
 public class MyTest {
+
 
     @Test
     public void test1() {
@@ -35,4 +39,17 @@ public class MyTest {
 
 
     }
+
+    @Before
+    public void testBefore() {
+        new MyContainer();
+    }
+
+    @Test
+    public void test3() {
+        AnnTestVOImpl annTestVO = new AnnTestVOImpl();
+        annTestVO.myPrint();
+
+    }
+
 }

@@ -1,14 +1,14 @@
 package com.mytest.annotation.vo.impl;
 
 import com.mytest.annotation.MyComponent;
-import com.mytest.annotation.MyIoc;
+import com.mytest.annotation.MyResource;
 import com.mytest.annotation.vo.AnnTestVO;
 import com.mytest.annotation.vo.OneUtil;
 
 @MyComponent
 public class AnnTestVOImpl implements AnnTestVO {
 
-    @MyIoc(classPath = "com.mytest.annotation.vo.OneUtil")
+    @MyResource
     private static OneUtil oneUtil;
 
     @Override
@@ -16,7 +16,7 @@ public class AnnTestVOImpl implements AnnTestVO {
         System.out.println("被代理类方法执行===");
     }
 
-    public static void myPrint(){
+    public static void myPrint() {
         oneUtil.myPrint();
     }
 }

@@ -7,9 +7,11 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented // 是否生成api文档
 @Inherited // 是否被子类集成
-public @interface MyIoc {
+public @interface MyResource {
 
-    String classPath();
+    String classPath() default "";
+
+    String name() default "";
 
 //    String url();
 //

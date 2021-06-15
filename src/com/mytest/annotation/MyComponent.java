@@ -9,7 +9,10 @@ import java.lang.annotation.*;
 @Inherited // 是否被子类集成
 public @interface MyComponent {
 
-    //String classPath();
+    /**
+     * 注入名称，默认为空
+     */
+    String name() default "";
 
 //    String url();
 //
