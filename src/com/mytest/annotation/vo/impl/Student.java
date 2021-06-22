@@ -1,18 +1,27 @@
 package com.mytest.annotation.vo.impl;
 
 import com.mytest.annotation.MyComponent;
+import com.mytest.annotation.MyResource;
 import com.mytest.annotation.vo.Human;
 import com.mytest.annotation.vo.OneUtil;
 
 @MyComponent
 public class Student implements Human {
 
-    public static String name;
+    public static String name = "1";
 
     private String age;
 
-    //@MyResource()
+    @MyResource
     private static OneUtil oneUtil;
+
+    public static String getName() {
+        return name;
+    }
+
+    public static void setName(String name) {
+        Student.name = name;
+    }
 
     @Override
     public void study() {

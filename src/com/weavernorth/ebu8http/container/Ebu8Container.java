@@ -1,4 +1,4 @@
-package com.mytest.annotation.container;
+package com.weavernorth.ebu8http.container;
 
 import com.mytest.annotation.MyComponent;
 import com.mytest.annotation.MyResource;
@@ -13,23 +13,23 @@ import java.util.concurrent.LinkedBlockingQueue;
  * 自定义ioc容器
  *
  * @author nzm
- * @date 2021-06-16
+ * @date 2021-06-22
  */
-public class MyContainer {
+public class Ebu8Container {
     /**
      * 遍历文件的根目录 路径
      */
-    private static final String ROOT_PATH = "C:\\Users\\86157\\Desktop\\weaver9\\src\\com\\mytest\\annotation\\";
+    private static final String ROOT_PATH = "E:\\WEAVER\\ecology\\classbean\\com\\weavernorth";
     /**
      * 用于装载带有注解MyComponent的类
      */
     public static Map<String, Object> containerMap = new HashMap<>();
 
     static {
-        // 加载带有MyComponent注解的类到map中
-        initComponents();
-        // 为标有MyIoc注解的字段进行类注入
-        inject();
+//        // 加载带有MyComponent注解的类到map中
+//        initComponents();
+//        // 为标有MyIoc注解的字段进行类注入
+//        inject();
 
     }
 
@@ -37,6 +37,7 @@ public class MyContainer {
         try {
             for (Map.Entry<String, Object> entry : containerMap.entrySet()) {
                 Class<?> aClass = entry.getValue().getClass();
+
                 Field[] declaredFields = aClass.getDeclaredFields();
                 for (Field field : declaredFields) {
                     // 字段上不包含MyResource 跳过
@@ -72,9 +73,10 @@ public class MyContainer {
             for (String path : list) {
                 Class<?> aClass = Class.forName(path);
                 // 不包含容器注解，跳过
-                if (!aClass.isAnnotationPresent(MyComponent.class)) {
-                    continue;
-                }
+//                if (!aClass.isAnnotationPresent(Ebu8Http.class)) {
+//                    continue;
+//                }
+
                 // 添加到容器中 name不为空按照name注入，否则按照类的全路径名注入
                 MyComponent myComponentAnn = aClass.getAnnotation(MyComponent.class);
                 String iocKey = myComponentAnn.name();
@@ -122,7 +124,7 @@ public class MyContainer {
             } else {
                 String path = currFile.getPath();
                 int i = path.indexOf("\\com\\");
-                path = path.substring(i + 1).replace("\\", ".").replace(".java", "");
+                path = path.substring(i + 1).replace("\\", ".").replace(".class", "");
                 list.add(path);
             }
         }
