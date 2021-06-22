@@ -1,687 +1,4 @@
-INFO main com.mytest.easypoi.EasyPoiTest - 213
-ERROR main cn.afterturn.easypoi.excel.export.template.ExcelExportOfTemplateUtil - 
-java.lang.reflect.InvocationTargetException
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
-	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
-	at cn.afterturn.easypoi.excel.export.template.ExcelExportOfTemplateUtil.createExcleByTemplate(ExcelExportOfTemplateUtil.java:188)
-	at cn.afterturn.easypoi.excel.ExcelExportUtil.exportExcel(ExcelExportUtil.java:165)
-	at com.mytest.easypoi.EasyPoiTest.test1(EasyPoiTest.java:70)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
-	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
-	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68)
-	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:33)
-	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:230)
-	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:58)
-Caused by: java.lang.NoSuchMethodError: org.apache.poi.ss.usermodel.CellStyle.setAlignment(S)V
-	at cn.afterturn.easypoi.excel.export.styler.ExcelExportStylerDefaultImpl.stringNoneStyle(ExcelExportStylerDefaultImpl.java:69)
-	at cn.afterturn.easypoi.excel.export.styler.AbstractExcelExportStyler.createStyles(AbstractExcelExportStyler.java:44)
-	at cn.afterturn.easypoi.excel.export.styler.ExcelExportStylerDefaultImpl.<init>(ExcelExportStylerDefaultImpl.java:31)
-	... 29 more
-DEBUG main org.apache.http.client.protocol.RequestAddCookies - CookieSpec selected: default
-DEBUG main org.apache.http.client.protocol.RequestAuthCache - Auth cache not set in the context
-DEBUG main org.apache.http.impl.conn.PoolingHttpClientConnectionManager - Connection request: [route: {}->http://ws.webxml.com.cn:80][total kept alive: 0; route allocated: 0 of 2; total allocated: 0 of 20]
-DEBUG main org.apache.http.impl.conn.PoolingHttpClientConnectionManager - Connection leased: [id: 0][route: {}->http://ws.webxml.com.cn:80][total kept alive: 0; route allocated: 1 of 2; total allocated: 1 of 20]
-DEBUG main org.apache.http.impl.execchain.MainClientExec - Opening connection {}->http://ws.webxml.com.cn:80
-DEBUG main org.apache.http.impl.conn.DefaultHttpClientConnectionOperator - Connecting to ws.webxml.com.cn/61.147.124.120:80
-DEBUG main org.apache.http.impl.conn.DefaultHttpClientConnectionOperator - Connection established 192.168.124.2:53517<->61.147.124.120:80
-DEBUG main org.apache.http.impl.execchain.MainClientExec - Executing request POST /WebServices/WeatherWS.asmx?wsdl HTTP/1.1
-DEBUG main org.apache.http.impl.execchain.MainClientExec - Target auth state: UNCHALLENGED
-DEBUG main org.apache.http.impl.execchain.MainClientExec - Proxy auth state: UNCHALLENGED
-DEBUG main org.apache.http.headers - http-outgoing-0 >> POST /WebServices/WeatherWS.asmx?wsdl HTTP/1.1
-DEBUG main org.apache.http.headers - http-outgoing-0 >> Content-Type: text/xml;charset=UTF-8
-DEBUG main org.apache.http.headers - http-outgoing-0 >> SOAPAction: getRegionCountry
-DEBUG main org.apache.http.headers - http-outgoing-0 >> Content-Length: 218
-DEBUG main org.apache.http.headers - http-outgoing-0 >> Host: ws.webxml.com.cn
-DEBUG main org.apache.http.headers - http-outgoing-0 >> Connection: Keep-Alive
-DEBUG main org.apache.http.headers - http-outgoing-0 >> User-Agent: Apache-HttpClient/4.4.1 (Java/1.8.0_251)
-DEBUG main org.apache.http.headers - http-outgoing-0 >> Accept-Encoding: gzip,deflate
-DEBUG main org.apache.http.wire - http-outgoing-0 >> "POST /WebServices/WeatherWS.asmx?wsdl HTTP/1.1[\r][\n]"
-DEBUG main org.apache.http.wire - http-outgoing-0 >> "Content-Type: text/xml;charset=UTF-8[\r][\n]"
-DEBUG main org.apache.http.wire - http-outgoing-0 >> "SOAPAction: getRegionCountry[\r][\n]"
-DEBUG main org.apache.http.wire - http-outgoing-0 >> "Content-Length: 218[\r][\n]"
-DEBUG main org.apache.http.wire - http-outgoing-0 >> "Host: ws.webxml.com.cn[\r][\n]"
-DEBUG main org.apache.http.wire - http-outgoing-0 >> "Connection: Keep-Alive[\r][\n]"
-DEBUG main org.apache.http.wire - http-outgoing-0 >> "User-Agent: Apache-HttpClient/4.4.1 (Java/1.8.0_251)[\r][\n]"
-DEBUG main org.apache.http.wire - http-outgoing-0 >> "Accept-Encoding: gzip,deflate[\r][\n]"
-DEBUG main org.apache.http.wire - http-outgoing-0 >> "[\r][\n]"
-DEBUG main org.apache.http.wire - http-outgoing-0 >> "<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://WebXml.com.cn/">[\n]"
-DEBUG main org.apache.http.wire - http-outgoing-0 >> "   <soapenv:Header/>[\n]"
-DEBUG main org.apache.http.wire - http-outgoing-0 >> "   <soapenv:Body>[\n]"
-DEBUG main org.apache.http.wire - http-outgoing-0 >> "      <web:getRegionCountry/>[\n]"
-DEBUG main org.apache.http.wire - http-outgoing-0 >> "   </soapenv:Body>[\n]"
-DEBUG main org.apache.http.wire - http-outgoing-0 >> "</soapenv:Envelope>"
-DEBUG main org.apache.http.wire - http-outgoing-0 << "HTTP/1.1 500 Internal Server Error[\r][\n]"
-DEBUG main org.apache.http.wire - http-outgoing-0 << "Cache-Control: private[\r][\n]"
-DEBUG main org.apache.http.wire - http-outgoing-0 << "Content-Length: 411[\r][\n]"
-DEBUG main org.apache.http.wire - http-outgoing-0 << "Content-Type: text/xml; charset=utf-8[\r][\n]"
-DEBUG main org.apache.http.wire - http-outgoing-0 << "Server: Microsoft-IIS/7.5[\r][\n]"
-DEBUG main org.apache.http.wire - http-outgoing-0 << "X-AspNet-Version: 2.0.50727[\r][\n]"
-DEBUG main org.apache.http.wire - http-outgoing-0 << "X-Powered-By: ASP.NET[\r][\n]"
-DEBUG main org.apache.http.wire - http-outgoing-0 << "Date: Fri, 27 Nov 2020 04:17:50 GMT[\r][\n]"
-DEBUG main org.apache.http.wire - http-outgoing-0 << "[\r][\n]"
-DEBUG main org.apache.http.wire - http-outgoing-0 << "<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><soap:Fault><faultcode>soap:Client</faultcode><faultstring>[0xe6][0x9c][0x8d][0xe5][0x8a][0xa1][0xe5][0x99][0xa8][0xe6][0x9c][0xaa][0xe8][0x83][0xbd][0xe8][0xaf][0x86][0xe5][0x88][0xab] HTTP [0xe5][0xa4][0xb4] SOAPAction [0xe7][0x9a][0x84][0xe5][0x80][0xbc]: getRegionCountry[0xe3][0x80][0x82]</faultstring><detail /></soap:Fault></soap:Body></soap:Envelope>"
-DEBUG main org.apache.http.headers - http-outgoing-0 << HTTP/1.1 500 Internal Server Error
-DEBUG main org.apache.http.headers - http-outgoing-0 << Cache-Control: private
-DEBUG main org.apache.http.headers - http-outgoing-0 << Content-Length: 411
-DEBUG main org.apache.http.headers - http-outgoing-0 << Content-Type: text/xml; charset=utf-8
-DEBUG main org.apache.http.headers - http-outgoing-0 << Server: Microsoft-IIS/7.5
-DEBUG main org.apache.http.headers - http-outgoing-0 << X-AspNet-Version: 2.0.50727
-DEBUG main org.apache.http.headers - http-outgoing-0 << X-Powered-By: ASP.NET
-DEBUG main org.apache.http.headers - http-outgoing-0 << Date: Fri, 27 Nov 2020 04:17:50 GMT
-DEBUG main org.apache.http.impl.execchain.MainClientExec - Connection can be kept alive indefinitely
-DEBUG main org.apache.http.impl.conn.PoolingHttpClientConnectionManager - Connection [id: 0][route: {}->http://ws.webxml.com.cn:80] can be kept alive indefinitely
-DEBUG main org.apache.http.impl.conn.PoolingHttpClientConnectionManager - Connection released: [id: 0][route: {}->http://ws.webxml.com.cn:80][total kept alive: 1; route allocated: 1 of 2; total allocated: 1 of 20]
-DEBUG main org.apache.http.impl.conn.PoolingHttpClientConnectionManager - Connection manager is shutting down
-DEBUG main org.apache.http.impl.conn.DefaultManagedHttpClientConnection - http-outgoing-0: Close connection
-DEBUG main org.apache.http.impl.conn.DefaultManagedHttpClientConnection - http-outgoing-0: Close connection
-DEBUG main org.apache.http.impl.conn.PoolingHttpClientConnectionManager - Connection manager shut down
-DEBUG main org.codehaus.xfire.jaxws.Provider - Creating service delegate {http://tempuri.org/}EmrService for service class javax.xml.ws.Service
-DEBUG main org.codehaus.xfire.transport.DefaultTransportManager - Registered transport org.codehaus.xfire.transport.local.LocalTransport@3ffc5af1
-DEBUG main org.codehaus.xfire.transport.DefaultTransportManager - Registered transport org.codehaus.xfire.transport.dead.DeadLetterTransport@3532ec19
-DEBUG main org.codehaus.xfire.transport.DefaultTransportManager - Registered transport org.codehaus.xfire.transport.http.SoapHttpTransport@3e6fa38a
-DEBUG main org.codehaus.xfire.transport.DefaultTransportManager - Registered transport org.codehaus.xfire.transport.http.HttpTransport@66a3ffec
-DEBUG main org.codehaus.xfire.service.documentation.XMLDocumentationBuilder - Searching for JAXWSHelper$SourceService.doc.xml config..
-DEBUG main org.codehaus.xfire.service.documentation.XMLDocumentationBuilder - Config JAXWSHelper$SourceService.doc.xml NOT found.
-DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /org/codehaus/xfire/jaxws/JAXWSHelper$SourceService.aegis.xml not found.
-DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /org/codehaus/xfire/jaxws/JAXWSHelper$SourceService.aegis.xml not found.
-DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /javax/xml/transform/Source.aegis.xml not found.
-DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /org/codehaus/xfire/jaxws/JAXWSHelper$SourceService.aegis.xml not found.
-DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /org/codehaus/xfire/jaxws/JAXWSHelper$SourceService.aegis.xml not found.
-DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /javax/xml/transform/Source.aegis.xml not found.
-DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /org/codehaus/xfire/jaxws/JAXWSHelper$SourceService.aegis.xml not found.
-DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /javax/xml/transform/Source.aegis.xml not found.
-DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /org/codehaus/xfire/jaxws/JAXWSHelper$SourceService.aegis.xml not found.
-DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /javax/xml/transform/Source.aegis.xml not found.
-DEBUG main org.codehaus.xfire.jaxws.Provider - Creating service delegate {http://tempuri.org/}EmrService for service class javax.xml.ws.Service
-DEBUG main org.codehaus.xfire.transport.DefaultTransportManager - Registered transport org.codehaus.xfire.transport.local.LocalTransport@7a765367
-DEBUG main org.codehaus.xfire.transport.DefaultTransportManager - Registered transport org.codehaus.xfire.transport.dead.DeadLetterTransport@3043fe0e
-DEBUG main org.codehaus.xfire.transport.DefaultTransportManager - Registered transport org.codehaus.xfire.transport.http.SoapHttpTransport@86be70a
-DEBUG main org.codehaus.xfire.transport.DefaultTransportManager - Registered transport org.codehaus.xfire.transport.http.HttpTransport@480bdb19
-DEBUG main org.codehaus.xfire.service.documentation.XMLDocumentationBuilder - Searching for JAXWSHelper$SourceService.doc.xml config..
-DEBUG main org.codehaus.xfire.service.documentation.XMLDocumentationBuilder - Config JAXWSHelper$SourceService.doc.xml NOT found.
-DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /org/codehaus/xfire/jaxws/JAXWSHelper$SourceService.aegis.xml not found.
-DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /org/codehaus/xfire/jaxws/JAXWSHelper$SourceService.aegis.xml not found.
-DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /javax/xml/transform/Source.aegis.xml not found.
-DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /org/codehaus/xfire/jaxws/JAXWSHelper$SourceService.aegis.xml not found.
-DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /org/codehaus/xfire/jaxws/JAXWSHelper$SourceService.aegis.xml not found.
-DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /javax/xml/transform/Source.aegis.xml not found.
-DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /org/codehaus/xfire/jaxws/JAXWSHelper$SourceService.aegis.xml not found.
-DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /javax/xml/transform/Source.aegis.xml not found.
-DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /org/codehaus/xfire/jaxws/JAXWSHelper$SourceService.aegis.xml not found.
-DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /javax/xml/transform/Source.aegis.xml not found.
-DEBUG main org.codehaus.xfire.jaxws.Provider - Creating service delegate {http://tempuri.org/}getRegionCountry for service class javax.xml.ws.Service
-DEBUG main org.codehaus.xfire.transport.DefaultTransportManager - Registered transport org.codehaus.xfire.transport.local.LocalTransport@7a765367
-DEBUG main org.codehaus.xfire.transport.DefaultTransportManager - Registered transport org.codehaus.xfire.transport.dead.DeadLetterTransport@3043fe0e
-DEBUG main org.codehaus.xfire.transport.DefaultTransportManager - Registered transport org.codehaus.xfire.transport.http.SoapHttpTransport@86be70a
-DEBUG main org.codehaus.xfire.transport.DefaultTransportManager - Registered transport org.codehaus.xfire.transport.http.HttpTransport@480bdb19
-DEBUG main org.codehaus.xfire.service.documentation.XMLDocumentationBuilder - Searching for JAXWSHelper$SourceService.doc.xml config..
-DEBUG main org.codehaus.xfire.service.documentation.XMLDocumentationBuilder - Config JAXWSHelper$SourceService.doc.xml NOT found.
-DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /org/codehaus/xfire/jaxws/JAXWSHelper$SourceService.aegis.xml not found.
-DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /org/codehaus/xfire/jaxws/JAXWSHelper$SourceService.aegis.xml not found.
-DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /javax/xml/transform/Source.aegis.xml not found.
-DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /org/codehaus/xfire/jaxws/JAXWSHelper$SourceService.aegis.xml not found.
-DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /org/codehaus/xfire/jaxws/JAXWSHelper$SourceService.aegis.xml not found.
-DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /javax/xml/transform/Source.aegis.xml not found.
-DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /org/codehaus/xfire/jaxws/JAXWSHelper$SourceService.aegis.xml not found.
-DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /javax/xml/transform/Source.aegis.xml not found.
-DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /org/codehaus/xfire/jaxws/JAXWSHelper$SourceService.aegis.xml not found.
-DEBUG main org.codehaus.xfire.aegis.XMLClassMetaInfoManager - Mapping file : /javax/xml/transform/Source.aegis.xml not found.
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - getBundle(org.apache.axis,org.apache.axis.i18n,resource,null,...)
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - loadBundle: Ignoring MissingResourceException: Can't find bundle for base name org.apache.axis.resource, locale zh_CN
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - Created org.apache.axis.i18n.resource, linked to parent null
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - getBundle(org.apache.axis,org.apache.axis.utils,resource,null,...)
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - loadBundle: Ignoring MissingResourceException: Can't find bundle for base name org.apache.axis.utils.resource, locale zh_CN
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - loadBundle: Ignoring MissingResourceException: Can't find bundle for base name org.apache.axis.resource, locale zh_CN
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - Root package not found, cross link to org.apache.axis.i18n.resource
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - Root package not found, cross link to org.apache.axis.i18n.resource
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(engineFactory)
-DEBUG main org.apache.axis.configuration.EngineConfigurationFactoryFinder - Got EngineFactory: org.apache.axis.configuration.EngineConfigurationFactoryDefault
-DEBUG main org.apache.axis.AxisEngine - Enter: AxisEngine::init
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(attachEnabled)
-DEBUG main org.apache.axis.utils.JavaUtils - Attachment support is enabled?  true
-DEBUG main org.apache.axis.encoding.ser.JAFDataHandlerDeserializerFactory - Enter/Exit: JAFDataHandlerDeserializerFactory(class java.lang.String, {http://xml.apache.org/xml-soap}PlainText)
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(oddDigits00)
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(badChars01)
-DEBUG main org.apache.axis.encoding.ser.JAFDataHandlerDeserializerFactory - Enter/Exit: JAFDataHandlerDeserializerFactory(class java.awt.Image, {http://xml.apache.org/xml-soap}Image)
-DEBUG main org.apache.axis.encoding.ser.JAFDataHandlerDeserializerFactory - Enter/Exit: JAFDataHandlerDeserializerFactory(class javax.mail.internet.MimeMultipart, {http://xml.apache.org/xml-soap}Multipart)
-DEBUG main org.apache.axis.encoding.ser.JAFDataHandlerDeserializerFactory - Enter/Exit: JAFDataHandlerDeserializerFactory(interface javax.xml.transform.Source, {http://xml.apache.org/xml-soap}Source)
-DEBUG main org.apache.axis.encoding.ser.JAFDataHandlerDeserializerFactory - Enter/Exit: JAFDataHandlerDeserializerFactory(class org.apache.axis.attachments.OctetStream, {http://xml.apache.org/xml-soap}octet-stream)
-DEBUG main org.apache.axis.encoding.ser.JAFDataHandlerDeserializerFactory - Enter/Exit: JAFDataHandlerDeserializerFactory()
-DEBUG main org.apache.axis.AxisEngine - Exit: AxisEngine::init
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(transport00)
-DEBUG main org.apache.axis.client.Call - Transport is org.apache.axis.transport.http.HTTPTransport@7c729a55
-DEBUG main org.apache.axis.description.OperationDesc - @4cc451f2 added parameter >name:       
-typeEntry:  null
-mode:       IN
-position:   0
-isReturn:   false
-typeQName:  {http://www.w3.org/2001/XMLSchema}string
-javaType:   class java.lang.String
-inHeader:   false
-outHeader:  false
-@6379eb<total parameters:1
-DEBUG main org.apache.axis.description.OperationDesc - @4cc451f2setReturnType({http://www.w3.org/2001/XMLSchema}string)
-DEBUG main org.apache.axis.client.Call - Enter: Call::invoke(ns, meth, args)
-DEBUG main org.apache.axis.client.Call - operation=name:        null
-returnQName: null
-returnType:  {http://www.w3.org/2001/XMLSchema}string
-returnClass: class java.lang.String
-elementQName:null
-soapAction:  null
-style:       rpc
-use:         encoded
-numInParams: 1
-method:null
- ParameterDesc[0]:
-  name:       
-  typeEntry:  null
-  mode:       IN
-  position:   0
-  isReturn:   false
-  typeQName:  {http://www.w3.org/2001/XMLSchema}string
-  javaType:   class java.lang.String
-  inHeader:   false
-  outHeader:  false
-
-
-DEBUG main org.apache.axis.client.Call - operation.getNumParams()=1
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(parmMismatch00)
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(toAxisFault00)
-DEBUG main org.apache.axis.enterprise - Mapping Exception to AxisFault
-javax.xml.rpc.JAXRPCException: Number of parameters passed in (0) doesn't match the number of IN/INOUT parameters (1) from the addParameter() calls
-	at org.apache.axis.client.Call.getParamList(Call.java:2059)
-	at org.apache.axis.client.Call.invoke(Call.java:2364)
-	at org.apache.axis.client.Call.invoke(Call.java:1812)
-	at com.mytest.Test2.test1(Test2.java:25)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
-	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
-	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68)
-	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:33)
-	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:230)
-	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:58)
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - getBundle(org.apache.axis,org.apache.axis.i18n,resource,null,...)
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - loadBundle: Ignoring MissingResourceException: Can't find bundle for base name org.apache.axis.resource, locale zh_CN
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - Created org.apache.axis.i18n.resource, linked to parent null
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - getBundle(org.apache.axis,org.apache.axis.utils,resource,null,...)
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - loadBundle: Ignoring MissingResourceException: Can't find bundle for base name org.apache.axis.utils.resource, locale zh_CN
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - loadBundle: Ignoring MissingResourceException: Can't find bundle for base name org.apache.axis.resource, locale zh_CN
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - Root package not found, cross link to org.apache.axis.i18n.resource
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - Root package not found, cross link to org.apache.axis.i18n.resource
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(engineFactory)
-DEBUG main org.apache.axis.configuration.EngineConfigurationFactoryFinder - Got EngineFactory: org.apache.axis.configuration.EngineConfigurationFactoryDefault
-DEBUG main org.apache.axis.AxisEngine - Enter: AxisEngine::init
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(attachEnabled)
-DEBUG main org.apache.axis.utils.JavaUtils - Attachment support is enabled?  true
-DEBUG main org.apache.axis.encoding.ser.JAFDataHandlerDeserializerFactory - Enter/Exit: JAFDataHandlerDeserializerFactory(class java.lang.String, {http://xml.apache.org/xml-soap}PlainText)
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(oddDigits00)
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(badChars01)
-DEBUG main org.apache.axis.encoding.ser.JAFDataHandlerDeserializerFactory - Enter/Exit: JAFDataHandlerDeserializerFactory(class java.awt.Image, {http://xml.apache.org/xml-soap}Image)
-DEBUG main org.apache.axis.encoding.ser.JAFDataHandlerDeserializerFactory - Enter/Exit: JAFDataHandlerDeserializerFactory(class javax.mail.internet.MimeMultipart, {http://xml.apache.org/xml-soap}Multipart)
-DEBUG main org.apache.axis.encoding.ser.JAFDataHandlerDeserializerFactory - Enter/Exit: JAFDataHandlerDeserializerFactory(interface javax.xml.transform.Source, {http://xml.apache.org/xml-soap}Source)
-DEBUG main org.apache.axis.encoding.ser.JAFDataHandlerDeserializerFactory - Enter/Exit: JAFDataHandlerDeserializerFactory(class org.apache.axis.attachments.OctetStream, {http://xml.apache.org/xml-soap}octet-stream)
-DEBUG main org.apache.axis.encoding.ser.JAFDataHandlerDeserializerFactory - Enter/Exit: JAFDataHandlerDeserializerFactory()
-DEBUG main org.apache.axis.AxisEngine - Exit: AxisEngine::init
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(transport00)
-DEBUG main org.apache.axis.client.Call - Transport is org.apache.axis.transport.http.HTTPTransport@7c729a55
-DEBUG main org.apache.axis.description.OperationDesc - @359f7cdfsetReturnType({http://www.w3.org/2001/XMLSchema}string)
-DEBUG main org.apache.axis.client.Call - Enter: Call::invoke(ns, meth, args)
-DEBUG main org.apache.axis.client.Call - operation=name:        null
-returnQName: null
-returnType:  {http://www.w3.org/2001/XMLSchema}string
-returnClass: class java.lang.String
-elementQName:null
-soapAction:  null
-style:       rpc
-use:         encoded
-numInParams: 0
-method:null
-
-DEBUG main org.apache.axis.client.Call - operation.getNumParams()=0
-DEBUG main org.apache.axis.client.Call - Enter: Call::invoke(RPCElement)
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(attachEnabled)
-DEBUG main org.apache.axis.Message - Attachment support is enabled?  true
-DEBUG main org.apache.axis.SOAPPart - Enter: SOAPPart ctor(FORM_SOAPENVELOPE)
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(setMsgForm)
-DEBUG main org.apache.axis.SOAPPart - Setting current message form to: FORM_SOAPENVELOPE (currentMessage is now org.apache.axis.message.SOAPEnvelope)
-DEBUG main org.apache.axis.SOAPPart - Exit: SOAPPart ctor()
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(addBody00)
-DEBUG main org.apache.axis.message.SOAPBody - Adding body element to message...
-DEBUG main org.apache.axis.client.Call - Enter: Call::invoke()
-DEBUG main org.apache.axis.SOAPPart - Enter: SOAPPart::getAsSOAPEnvelope()
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(currForm)
-DEBUG main org.apache.axis.SOAPPart - current form is FORM_SOAPENVELOPE
-DEBUG main org.apache.axis.MessageContext - MessageContext: setTargetService(http://localhost/services/OrgResource)
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(noService10)
-DEBUG main org.apache.axis.ConfigurationException - Exception: 
-org.apache.axis.ConfigurationException: No service named http://localhost/services/OrgResource is available
-org.apache.axis.ConfigurationException: No service named http://localhost/services/OrgResource is available
-	at org.apache.axis.configuration.FileProvider.getService(FileProvider.java:233)
-	at org.apache.axis.AxisEngine.getService(AxisEngine.java:311)
-	at org.apache.axis.MessageContext.setTargetService(MessageContext.java:756)
-	at org.apache.axis.client.Call.invoke(Call.java:2708)
-	at org.apache.axis.client.Call.invoke(Call.java:2443)
-	at org.apache.axis.client.Call.invoke(Call.java:2366)
-	at org.apache.axis.client.Call.invoke(Call.java:1812)
-	at com.mytest.Test2.test1(Test2.java:25)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
-	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
-	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68)
-	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:33)
-	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:230)
-	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:58)
-
-	at org.apache.axis.configuration.FileProvider.getService(FileProvider.java:233)
-	at org.apache.axis.AxisEngine.getService(AxisEngine.java:311)
-	at org.apache.axis.MessageContext.setTargetService(MessageContext.java:756)
-	at org.apache.axis.client.Call.invoke(Call.java:2708)
-	at org.apache.axis.client.Call.invoke(Call.java:2443)
-	at org.apache.axis.client.Call.invoke(Call.java:2366)
-	at org.apache.axis.client.Call.invoke(Call.java:1812)
-	at com.mytest.Test2.test1(Test2.java:25)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
-	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
-	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68)
-	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:33)
-	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:230)
-	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:58)
-DEBUG main org.apache.axis.MessageContext - MessageContext: setServiceHandler(null)
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(targetService)
-DEBUG main org.apache.axis.client.Call - Target service:  http://localhost/services/OrgResource
-DEBUG main org.apache.axis.MessageContext - MessageContext: setTargetService(null)
-DEBUG main org.apache.axis.MessageContext - MessageContext: setServiceHandler(null)
-DEBUG main org.apache.axis.SOAPPart - Enter: SOAPPart::getAsSOAPEnvelope()
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(currForm)
-DEBUG main org.apache.axis.SOAPPart - current form is FORM_SOAPENVELOPE
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(register00)
-DEBUG main org.apache.axis.encoding.SerializationContext - register 'soapenv' - 'http://schemas.xmlsoap.org/soap/envelope/'
-DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
-DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(register00)
-DEBUG main org.apache.axis.encoding.SerializationContext - register 'soapenv' - 'http://schemas.xmlsoap.org/soap/envelope/'
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(register00)
-DEBUG main org.apache.axis.encoding.SerializationContext - register 'xsd' - 'http://www.w3.org/2001/XMLSchema'
-DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(register00)
-DEBUG main org.apache.axis.encoding.SerializationContext - register 'xsi' - 'http://www.w3.org/2001/XMLSchema-instance'
-DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(startElem00)
-DEBUG main org.apache.axis.encoding.SerializationContext - Start element [http://schemas.xmlsoap.org/soap/envelope/]:Envelope
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(startElem00)
-DEBUG main org.apache.axis.encoding.SerializationContext - Start element [http://schemas.xmlsoap.org/soap/envelope/]:Body
-DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(startElem00)
-DEBUG main org.apache.axis.encoding.SerializationContext - Start element [http://localhost/services/OrgResource]:getHrmJobTitleInfoXMLResponse
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(register00)
-DEBUG main org.apache.axis.encoding.SerializationContext - register 'ns1' - 'http://localhost/services/OrgResource'
-DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
-DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(endElem00)
-DEBUG main org.apache.axis.encoding.SerializationContext - End element ns1:getHrmJobTitleInfoXMLResponse
-DEBUG main org.apache.axis.utils.NSStack - NSPop (32)
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(endElem00)
-DEBUG main org.apache.axis.encoding.SerializationContext - End element soapenv:Body
-DEBUG main org.apache.axis.utils.NSStack - NSPop (32)
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(endElem00)
-DEBUG main org.apache.axis.encoding.SerializationContext - End element soapenv:Envelope
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(empty00)
-DEBUG main org.apache.axis.utils.NSStack - NSPop (empty)
-DEBUG main org.apache.axis.client.Call - <?xml version="1.0" encoding="UTF-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Body><ns1:getHrmJobTitleInfoXMLResponse soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" xmlns:ns1="http://localhost/services/OrgResource"/></soapenv:Body></soapenv:Envelope>
-DEBUG main org.apache.axis.client.AxisClient - Enter: AxisClient::invoke
-DEBUG main org.apache.axis.client.AxisClient - EngineHandler: null
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(axisUserAgent)
-DEBUG main org.apache.axis.SimpleChain - Enter: SimpleChain::invoke
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(enter00)
-DEBUG main org.apache.axis.transport.http.HTTPSender - Enter:  HTTPSender::invoke
-DEBUG main org.apache.axis.SOAPPart - Enter: SOAPPart::saveChanges
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(register00)
-DEBUG main org.apache.axis.encoding.SerializationContext - register 'soapenv' - 'http://schemas.xmlsoap.org/soap/envelope/'
-DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
-DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(register00)
-DEBUG main org.apache.axis.encoding.SerializationContext - register 'soapenv' - 'http://schemas.xmlsoap.org/soap/envelope/'
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(register00)
-DEBUG main org.apache.axis.encoding.SerializationContext - register 'xsd' - 'http://www.w3.org/2001/XMLSchema'
-DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(register00)
-DEBUG main org.apache.axis.encoding.SerializationContext - register 'xsi' - 'http://www.w3.org/2001/XMLSchema-instance'
-DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(startElem00)
-DEBUG main org.apache.axis.encoding.SerializationContext - Start element [http://schemas.xmlsoap.org/soap/envelope/]:Envelope
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(startElem00)
-DEBUG main org.apache.axis.encoding.SerializationContext - Start element [http://schemas.xmlsoap.org/soap/envelope/]:Body
-DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(startElem00)
-DEBUG main org.apache.axis.encoding.SerializationContext - Start element [http://localhost/services/OrgResource]:getHrmJobTitleInfoXMLResponse
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(register00)
-DEBUG main org.apache.axis.encoding.SerializationContext - register 'ns1' - 'http://localhost/services/OrgResource'
-DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
-DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(endElem00)
-DEBUG main org.apache.axis.encoding.SerializationContext - End element ns1:getHrmJobTitleInfoXMLResponse
-DEBUG main org.apache.axis.utils.NSStack - NSPop (32)
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(endElem00)
-DEBUG main org.apache.axis.encoding.SerializationContext - End element soapenv:Body
-DEBUG main org.apache.axis.utils.NSStack - NSPop (32)
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(endElem00)
-DEBUG main org.apache.axis.encoding.SerializationContext - End element soapenv:Envelope
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(empty00)
-DEBUG main org.apache.axis.utils.NSStack - NSPop (empty)
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(setMsgForm)
-DEBUG main org.apache.axis.SOAPPart - Setting current message form to: FORM_OPTIMIZED (currentMessage is now org.apache.axis.utils.ByteArray)
-DEBUG main org.apache.axis.SOAPPart - Exit: SOAPPart::saveChanges(): org.apache.axis.utils.ByteArray@145f66e3
-DEBUG main org.apache.axis.SOAPPart - Enter: SOAPPart::saveChanges
-DEBUG main org.apache.axis.SOAPPart - Enter: SOAPPart::saveChanges
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(createdHTTP00)
-DEBUG main org.apache.axis.components.net.DefaultSocketFactory - Created an insecure HTTP connection
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(xmlSent00)
-DEBUG main org.apache.axis.transport.http.HTTPSender - XML sent:
-DEBUG main org.apache.axis.transport.http.HTTPSender - ---------------------------------------------------
-DEBUG main org.apache.axis.SOAPPart - Enter: SOAPPart::saveChanges
-DEBUG main org.apache.axis.transport.http.HTTPSender - POST /services/OrgResource?wsdl HTTP/1.0
-Content-Type: text/xml; charset=utf-8
-Accept: application/soap+xml, application/dime, multipart/related, text/*
-User-Agent: Axis/1.4
-Host: localhost:8080
-Cache-Control: no-cache
-Pragma: no-cache
-SOAPAction: ""
-Content-Length: 413
-
-<?xml version="1.0" encoding="UTF-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Body><ns1:getHrmJobTitleInfoXMLResponse soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" xmlns:ns1="http://localhost/services/OrgResource"/></soapenv:Body></soapenv:Envelope>
-DEBUG main org.apache.axis.transport.http.HTTPSender - HTTP/1.0 200 OK
-DEBUG main org.apache.axis.transport.http.HTTPSender - Server WVS
-DEBUG main org.apache.axis.transport.http.HTTPSender - Cache-Control no-cache
-DEBUG main org.apache.axis.transport.http.HTTPSender - X-Frame-Options SAMEORIGIN
-DEBUG main org.apache.axis.transport.http.HTTPSender - X-XSS-Protection 1
-DEBUG main org.apache.axis.transport.http.HTTPSender - Expires Thu, 01 Dec 1994 16:00:00 GMT
-DEBUG main org.apache.axis.transport.http.HTTPSender - Set-Cookie ecology_JSessionid=aaai5kJTJSDZU5f2MD-Bx; path=/; HttpOnly
-DEBUG main org.apache.axis.transport.http.HTTPSender - Content-Type text/xml; charset=utf-8
-DEBUG main org.apache.axis.transport.http.HTTPSender - Date Thu, 14 Jan 2021 06:01:02 GMT
-DEBUG main org.apache.axis.SOAPPart - Enter: SOAPPart ctor(FORM_INPUTSTREAM)
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(setMsgForm)
-DEBUG main org.apache.axis.SOAPPart - Setting current message form to: FORM_INPUTSTREAM (currentMessage is now org.apache.axis.transport.http.SocketInputStream)
-DEBUG main org.apache.axis.SOAPPart - Exit: SOAPPart ctor()
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(no00)
-DEBUG main org.apache.axis.transport.http.HTTPSender - 
-no Content-Length
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(xmlRecd00)
-DEBUG main org.apache.axis.transport.http.HTTPSender - 
-XML received:
-DEBUG main org.apache.axis.transport.http.HTTPSender - -----------------------------------------------
-DEBUG main org.apache.axis.SOAPPart - Enter: SOAPPart::getAsSOAPEnvelope()
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(currForm)
-DEBUG main org.apache.axis.SOAPPart - current form is FORM_INPUTSTREAM
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(pushHandler00)
-DEBUG main org.apache.axis.encoding.DeserializationContext - Pushing handler org.apache.axis.message.EnvelopeHandler@1bb5a082
-DEBUG main org.apache.axis.encoding.DeserializationContext - Enter: DeserializationContext::startPrefixMapping(soapenc11, http://schemas.xmlsoap.org/soap/encoding/)
-DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
-DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
-DEBUG main org.apache.axis.encoding.DeserializationContext - Exit: DeserializationContext::startPrefixMapping()
-DEBUG main org.apache.axis.encoding.DeserializationContext - Enter: DeserializationContext::startPrefixMapping(wsdl, http://schemas.xmlsoap.org/wsdl/)
-DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
-DEBUG main org.apache.axis.encoding.DeserializationContext - Exit: DeserializationContext::startPrefixMapping()
-DEBUG main org.apache.axis.encoding.DeserializationContext - Enter: DeserializationContext::startPrefixMapping(xsd, http://www.w3.org/2001/XMLSchema)
-DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
-DEBUG main org.apache.axis.encoding.DeserializationContext - Exit: DeserializationContext::startPrefixMapping()
-DEBUG main org.apache.axis.encoding.DeserializationContext - Enter: DeserializationContext::startPrefixMapping(tns, http://localhost/services/OrgResource)
-DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
-DEBUG main org.apache.axis.encoding.DeserializationContext - Exit: DeserializationContext::startPrefixMapping()
-DEBUG main org.apache.axis.encoding.DeserializationContext - Enter: DeserializationContext::startPrefixMapping(soap12, http://www.w3.org/2003/05/soap-envelope)
-DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
-DEBUG main org.apache.axis.encoding.DeserializationContext - Exit: DeserializationContext::startPrefixMapping()
-DEBUG main org.apache.axis.encoding.DeserializationContext - Enter: DeserializationContext::startPrefixMapping(wsdlsoap, http://schemas.xmlsoap.org/wsdl/soap/)
-DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
-DEBUG main org.apache.axis.encoding.DeserializationContext - Exit: DeserializationContext::startPrefixMapping()
-DEBUG main org.apache.axis.encoding.DeserializationContext - Enter: DeserializationContext::startPrefixMapping(soap11, http://schemas.xmlsoap.org/soap/envelope/)
-DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
-DEBUG main org.apache.axis.encoding.DeserializationContext - Exit: DeserializationContext::startPrefixMapping()
-DEBUG main org.apache.axis.encoding.DeserializationContext - Enter: DeserializationContext::startPrefixMapping(ns1, http://webservice.hrm.weaver)
-DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
-DEBUG main org.apache.axis.encoding.DeserializationContext - Exit: DeserializationContext::startPrefixMapping()
-DEBUG main org.apache.axis.encoding.DeserializationContext - Enter: DeserializationContext::startPrefixMapping(soapenc12, http://www.w3.org/2003/05/soap-encoding)
-DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
-DEBUG main org.apache.axis.encoding.DeserializationContext - Exit: DeserializationContext::startPrefixMapping()
-DEBUG main org.apache.axis.encoding.DeserializationContext - Enter: DeserializationContext::startElement(http://schemas.xmlsoap.org/wsdl/, definitions)
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(pushHandler00)
-DEBUG main org.apache.axis.encoding.DeserializationContext - Pushing handler org.apache.axis.message.EnvelopeBuilder@74235045
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(badTag00)
-DEBUG main org.apache.axis.transport.http.HTTPSender - org.xml.sax.SAXException: Bad envelope tag:  definitions
-DEBUG main org.apache.axis.SOAPPart - Enter: SOAPPart ctor(FORM_FAULT)
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(setMsgForm)
-DEBUG main org.apache.axis.SOAPPart - Setting current message form to: FORM_FAULT (currentMessage is now org.apache.axis.AxisFault)
-DEBUG main org.apache.axis.SOAPPart - Exit: SOAPPart ctor()
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(toAxisFault00)
-DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(empty00)
-DEBUG main org.apache.axis.utils.NSStack - NSPop (empty)
-DEBUG main org.apache.axis.utils.NSStack - NSPush (32)
-DEBUG main org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(empty00)
-DEBUG main org.apache.axis.utils.NSStack - NSPop (empty)
-DEBUG main org.apache.axis.enterprise - Mapping Exception to AxisFault
-AxisFault
- faultCode: {http://schemas.xmlsoap.org/soap/envelope/}Server.userException
- faultSubcode: 
- faultString: org.xml.sax.SAXException: Bad envelope tag:  definitions
- faultActor: 
- faultNode: 
- faultDetail: 
-	{http://xml.apache.org/axis/}stackTrace:org.xml.sax.SAXException: Bad envelope tag:  definitions
-	at org.apache.axis.message.EnvelopeBuilder.startElement(EnvelopeBuilder.java:71)
-	at org.apache.axis.encoding.DeserializationContext.startElement(DeserializationContext.java:1048)
-	at org.apache.xerces.parsers.AbstractSAXParser.startElement(Unknown Source)
-	at org.apache.xerces.impl.XMLNSDocumentScannerImpl.scanStartElement(Unknown Source)
-	at org.apache.xerces.impl.XMLNSDocumentScannerImpl$NSContentDispatcher.scanRootElementHook(Unknown Source)
-	at org.apache.xerces.impl.XMLDocumentFragmentScannerImpl$FragmentContentDispatcher.dispatch(Unknown Source)
-	at org.apache.xerces.impl.XMLDocumentFragmentScannerImpl.scanDocument(Unknown Source)
-	at org.apache.xerces.parsers.XML11Configuration.parse(Unknown Source)
-	at org.apache.xerces.parsers.XML11Configuration.parse(Unknown Source)
-	at org.apache.xerces.parsers.XMLParser.parse(Unknown Source)
-	at org.apache.xerces.parsers.AbstractSAXParser.parse(Unknown Source)
-	at org.apache.xerces.jaxp.SAXParserImpl$JAXPSAXParser.parse(Unknown Source)
-	at org.apache.xerces.jaxp.SAXParserImpl.parse(Unknown Source)
-	at org.apache.axis.encoding.DeserializationContext.parse(DeserializationContext.java:227)
-	at org.apache.axis.SOAPPart.getAsSOAPEnvelope(SOAPPart.java:696)
-	at org.apache.axis.Message.getSOAPEnvelope(Message.java:435)
-	at org.apache.axis.transport.http.HTTPSender.readFromSocket(HTTPSender.java:796)
-	at org.apache.axis.transport.http.HTTPSender.invoke(HTTPSender.java:144)
-	at org.apache.axis.strategies.InvocationStrategy.visit(InvocationStrategy.java:32)
-	at org.apache.axis.SimpleChain.doVisiting(SimpleChain.java:118)
-	at org.apache.axis.SimpleChain.invoke(SimpleChain.java:83)
-	at org.apache.axis.client.AxisClient.invoke(AxisClient.java:165)
-	at org.apache.axis.client.Call.invokeEngine(Call.java:2784)
-	at org.apache.axis.client.Call.invoke(Call.java:2767)
-	at org.apache.axis.client.Call.invoke(Call.java:2443)
-	at org.apache.axis.client.Call.invoke(Call.java:2366)
-	at org.apache.axis.client.Call.invoke(Call.java:1812)
-	at com.mytest.Test2.test1(Test2.java:25)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
-	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
-	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68)
-	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:33)
-	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:230)
-	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:58)
-
-	{http://xml.apache.org/axis/}hostname:nzm
-
-org.xml.sax.SAXException: Bad envelope tag:  definitions
-	at org.apache.axis.AxisFault.makeFault(AxisFault.java:101)
-	at org.apache.axis.SOAPPart.getAsSOAPEnvelope(SOAPPart.java:701)
-	at org.apache.axis.Message.getSOAPEnvelope(Message.java:435)
-	at org.apache.axis.transport.http.HTTPSender.readFromSocket(HTTPSender.java:796)
-	at org.apache.axis.transport.http.HTTPSender.invoke(HTTPSender.java:144)
-	at org.apache.axis.strategies.InvocationStrategy.visit(InvocationStrategy.java:32)
-	at org.apache.axis.SimpleChain.doVisiting(SimpleChain.java:118)
-	at org.apache.axis.SimpleChain.invoke(SimpleChain.java:83)
-	at org.apache.axis.client.AxisClient.invoke(AxisClient.java:165)
-	at org.apache.axis.client.Call.invokeEngine(Call.java:2784)
-	at org.apache.axis.client.Call.invoke(Call.java:2767)
-	at org.apache.axis.client.Call.invoke(Call.java:2443)
-	at org.apache.axis.client.Call.invoke(Call.java:2366)
-	at org.apache.axis.client.Call.invoke(Call.java:1812)
-	at com.mytest.Test2.test1(Test2.java:25)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
-	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
-	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68)
-	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:33)
-	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:230)
-	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:58)
-Caused by: org.xml.sax.SAXException: Bad envelope tag:  definitions
-	at org.apache.axis.message.EnvelopeBuilder.startElement(EnvelopeBuilder.java:71)
-	at org.apache.axis.encoding.DeserializationContext.startElement(DeserializationContext.java:1048)
-	at org.apache.xerces.parsers.AbstractSAXParser.startElement(Unknown Source)
-	at org.apache.xerces.impl.XMLNSDocumentScannerImpl.scanStartElement(Unknown Source)
-	at org.apache.xerces.impl.XMLNSDocumentScannerImpl$NSContentDispatcher.scanRootElementHook(Unknown Source)
-	at org.apache.xerces.impl.XMLDocumentFragmentScannerImpl$FragmentContentDispatcher.dispatch(Unknown Source)
-	at org.apache.xerces.impl.XMLDocumentFragmentScannerImpl.scanDocument(Unknown Source)
-	at org.apache.xerces.parsers.XML11Configuration.parse(Unknown Source)
-	at org.apache.xerces.parsers.XML11Configuration.parse(Unknown Source)
-	at org.apache.xerces.parsers.XMLParser.parse(Unknown Source)
-	at org.apache.xerces.parsers.AbstractSAXParser.parse(Unknown Source)
-	at org.apache.xerces.jaxp.SAXParserImpl$JAXPSAXParser.parse(Unknown Source)
-	at org.apache.xerces.jaxp.SAXParserImpl.parse(Unknown Source)
-	at org.apache.axis.encoding.DeserializationContext.parse(DeserializationContext.java:227)
-	at org.apache.axis.SOAPPart.getAsSOAPEnvelope(SOAPPart.java:696)
-	... 35 more
-ERROR main weaver.general.BaseBean - 发送 POST 请求出现异常！java.net.ConnectException: Connection refused: connect
-INFO AMQP Connection 127.0.0.1:5672 com.rabbitmq.client.impl.AMQConnection - Received a frame on an unknown channel, ignoring it
-INFO main com.dtflys.forest.config.ForestConfiguration - [Forest] Http Backend: okhttp3
-INFO main com.dtflys.forest.logging.DefaultLogHandler - [Forest] Request: 
-	GET http://localhost:8080/api/GetDataTestApi/getDataTest HTTP
-INFO main com.dtflys.forest.logging.DefaultLogHandler - [Forest] Response: Status = 200, Time = 56ms
-INFO main com.dtflys.forest.config.ForestConfiguration - [Forest] Http Backend: okhttp3
-INFO main com.dtflys.forest.logging.DefaultLogHandler - [Forest] Request: 
-	GET http://localhost:8080/api/GetDataTestApi/getDataTest HTTP
-INFO main com.dtflys.forest.logging.DefaultLogHandler - [Forest] Response: Status = 200, Time = 134ms
-INFO main com.dtflys.forest.logging.DefaultLogHandler - [Forest] Request: 
-	GET http://localhost:8080/api/GetDataTestApi/getDataTest HTTP
-INFO main com.dtflys.forest.logging.DefaultLogHandler - [Forest] Response: Status = 200, Time = 10ms
-INFO main com.dtflys.forest.config.ForestConfiguration - [Forest] Http Backend: okhttp3
-INFO main com.dtflys.forest.logging.DefaultLogHandler - [Forest] Request: 
-	GET http://localhost:8080/api/GetDataTestApi/getDataTest HTTP
-INFO main com.dtflys.forest.logging.DefaultLogHandler - [Forest] Response: Status = 200, Time = 67ms
-INFO main com.dtflys.forest.config.ForestConfiguration - [Forest] Http Backend: okhttp3
-INFO main com.dtflys.forest.logging.DefaultLogHandler - [Forest] Request: 
-	GET http://localhost:8080/api/GetDataTestApi/getDataTest HTTP
-INFO main com.dtflys.forest.logging.DefaultLogHandler - [Forest] Response: Status = 200, Time = 68ms
-DEBUG main org.apache.axis.description.OperationDesc - @78e94dcf added parameter >name:       {http://tempuri.org/}customerXml
-typeEntry:  null
-mode:       IN
-position:   0
-isReturn:   false
-typeQName:  {http://www.w3.org/2001/XMLSchema}string
-javaType:   class java.lang.String
-inHeader:   false
-outHeader:  false
-@233fe9b6<total parameters:1
-DEBUG main org.apache.axis.description.OperationDesc - @78e94dcf added parameter >name:       {http://tempuri.org/}u9User
-typeEntry:  null
-mode:       IN
-position:   1
-isReturn:   false
-typeQName:  {http://www.w3.org/2001/XMLSchema}string
-javaType:   class java.lang.String
-inHeader:   false
-outHeader:  false
-@358ee631<total parameters:2
-DEBUG main org.apache.axis.description.OperationDesc - @78e94dcf added parameter >name:       {http://tempuri.org/}u9Pwd
+DEBUG main org.apache.axis.description.OperationDesc - @309e345f added parameter >name:       {http://tempuri.org/}u9Pwd
 typeEntry:  null
 mode:       IN
 position:   2
@@ -690,8 +7,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@ec756bd<total parameters:3
-DEBUG main org.apache.axis.description.OperationDesc - @78e94dcf added parameter >name:       {http://tempuri.org/}u9Org
+@4445629<total parameters:3
+DEBUG main org.apache.axis.description.OperationDesc - @309e345f added parameter >name:       {http://tempuri.org/}u9Org
 typeEntry:  null
 mode:       IN
 position:   3
@@ -700,9 +17,9 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@3c72f59f<total parameters:4
-DEBUG main org.apache.axis.description.OperationDesc - @78e94dcfsetReturnType({http://www.w3.org/2001/XMLSchema}string)
-DEBUG main org.apache.axis.description.OperationDesc - @7a4ccb53 added parameter >name:       {http://tempuri.org/}supplierXml
+@45b9a632<total parameters:4
+DEBUG main org.apache.axis.description.OperationDesc - @309e345fsetReturnType({http://www.w3.org/2001/XMLSchema}string)
+DEBUG main org.apache.axis.description.OperationDesc - @25d250c6 added parameter >name:       {http://tempuri.org/}xml
 typeEntry:  null
 mode:       IN
 position:   0
@@ -711,8 +28,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@309e345f<total parameters:1
-DEBUG main org.apache.axis.description.OperationDesc - @7a4ccb53 added parameter >name:       {http://tempuri.org/}u9User
+@4df50bcc<total parameters:1
+DEBUG main org.apache.axis.description.OperationDesc - @25d250c6 added parameter >name:       {http://tempuri.org/}u9User
 typeEntry:  null
 mode:       IN
 position:   1
@@ -721,8 +38,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@56a6d5a6<total parameters:2
-DEBUG main org.apache.axis.description.OperationDesc - @7a4ccb53 added parameter >name:       {http://tempuri.org/}u9Pwd
+@6b26e945<total parameters:2
+DEBUG main org.apache.axis.description.OperationDesc - @25d250c6 added parameter >name:       {http://tempuri.org/}u9Pwd
 typeEntry:  null
 mode:       IN
 position:   2
@@ -731,8 +48,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@18ce0030<total parameters:3
-DEBUG main org.apache.axis.description.OperationDesc - @7a4ccb53 added parameter >name:       {http://tempuri.org/}u9Org
+@63a65a25<total parameters:3
+DEBUG main org.apache.axis.description.OperationDesc - @25d250c6 added parameter >name:       {http://tempuri.org/}u9Org
 typeEntry:  null
 mode:       IN
 position:   3
@@ -741,9 +58,9 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@4445629<total parameters:4
-DEBUG main org.apache.axis.description.OperationDesc - @7a4ccb53setReturnType({http://www.w3.org/2001/XMLSchema}string)
-DEBUG main org.apache.axis.description.OperationDesc - @45b9a632 added parameter >name:       {http://tempuri.org/}xml
+@54c562f7<total parameters:4
+DEBUG main org.apache.axis.description.OperationDesc - @25d250c6setReturnType({http://www.w3.org/2001/XMLSchema}string)
+DEBUG main org.apache.axis.description.OperationDesc - @318ba8c8 added parameter >name:       {http://tempuri.org/}xml
 typeEntry:  null
 mode:       IN
 position:   0
@@ -752,8 +69,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@25d250c6<total parameters:1
-DEBUG main org.apache.axis.description.OperationDesc - @45b9a632 added parameter >name:       {http://tempuri.org/}u9User
+@6dbb137d<total parameters:1
+DEBUG main org.apache.axis.description.OperationDesc - @318ba8c8 added parameter >name:       {http://tempuri.org/}u9User
 typeEntry:  null
 mode:       IN
 position:   1
@@ -762,8 +79,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@4df50bcc<total parameters:2
-DEBUG main org.apache.axis.description.OperationDesc - @45b9a632 added parameter >name:       {http://tempuri.org/}u9Pwd
+@3c9d0b9d<total parameters:2
+DEBUG main org.apache.axis.description.OperationDesc - @318ba8c8 added parameter >name:       {http://tempuri.org/}u9Pwd
 typeEntry:  null
 mode:       IN
 position:   2
@@ -772,8 +89,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@6b26e945<total parameters:3
-DEBUG main org.apache.axis.description.OperationDesc - @45b9a632 added parameter >name:       {http://tempuri.org/}u9Org
+@43301423<total parameters:3
+DEBUG main org.apache.axis.description.OperationDesc - @318ba8c8 added parameter >name:       {http://tempuri.org/}u9Org
 typeEntry:  null
 mode:       IN
 position:   3
@@ -782,9 +99,9 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@63a65a25<total parameters:4
-DEBUG main org.apache.axis.description.OperationDesc - @45b9a632setReturnType({http://www.w3.org/2001/XMLSchema}string)
-DEBUG main org.apache.axis.description.OperationDesc - @54c562f7 added parameter >name:       {http://tempuri.org/}xml
+@2f112965<total parameters:4
+DEBUG main org.apache.axis.description.OperationDesc - @318ba8c8setReturnType({http://www.w3.org/2001/XMLSchema}string)
+DEBUG main org.apache.axis.description.OperationDesc - @1a04f701 added parameter >name:       {http://tempuri.org/}xml
 typeEntry:  null
 mode:       IN
 position:   0
@@ -793,8 +110,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@318ba8c8<total parameters:1
-DEBUG main org.apache.axis.description.OperationDesc - @54c562f7 added parameter >name:       {http://tempuri.org/}u9User
+@4e91d63f<total parameters:1
+DEBUG main org.apache.axis.description.OperationDesc - @1a04f701 added parameter >name:       {http://tempuri.org/}u9User
 typeEntry:  null
 mode:       IN
 position:   1
@@ -803,8 +120,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@6dbb137d<total parameters:2
-DEBUG main org.apache.axis.description.OperationDesc - @54c562f7 added parameter >name:       {http://tempuri.org/}u9Pwd
+@d4342c2<total parameters:2
+DEBUG main org.apache.axis.description.OperationDesc - @1a04f701 added parameter >name:       {http://tempuri.org/}u9Pwd
 typeEntry:  null
 mode:       IN
 position:   2
@@ -813,8 +130,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@3c9d0b9d<total parameters:3
-DEBUG main org.apache.axis.description.OperationDesc - @54c562f7 added parameter >name:       {http://tempuri.org/}u9Org
+@2bbf180e<total parameters:3
+DEBUG main org.apache.axis.description.OperationDesc - @1a04f701 added parameter >name:       {http://tempuri.org/}u9Org
 typeEntry:  null
 mode:       IN
 position:   3
@@ -823,9 +140,9 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@43301423<total parameters:4
-DEBUG main org.apache.axis.description.OperationDesc - @54c562f7setReturnType({http://www.w3.org/2001/XMLSchema}string)
-DEBUG main org.apache.axis.description.OperationDesc - @2f112965 added parameter >name:       {http://tempuri.org/}xml
+@163e4e87<total parameters:4
+DEBUG main org.apache.axis.description.OperationDesc - @1a04f701setReturnType({http://www.w3.org/2001/XMLSchema}string)
+DEBUG main org.apache.axis.description.OperationDesc - @56de5251 added parameter >name:       {http://tempuri.org/}xml
 typeEntry:  null
 mode:       IN
 position:   0
@@ -834,8 +151,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@1a04f701<total parameters:1
-DEBUG main org.apache.axis.description.OperationDesc - @2f112965 added parameter >name:       {http://tempuri.org/}u9User
+@419c5f1a<total parameters:1
+DEBUG main org.apache.axis.description.OperationDesc - @56de5251 added parameter >name:       {http://tempuri.org/}u9User
 typeEntry:  null
 mode:       IN
 position:   1
@@ -844,8 +161,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@4e91d63f<total parameters:2
-DEBUG main org.apache.axis.description.OperationDesc - @2f112965 added parameter >name:       {http://tempuri.org/}u9Pwd
+@12b0404f<total parameters:2
+DEBUG main org.apache.axis.description.OperationDesc - @56de5251 added parameter >name:       {http://tempuri.org/}u9Pwd
 typeEntry:  null
 mode:       IN
 position:   2
@@ -854,8 +171,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@d4342c2<total parameters:3
-DEBUG main org.apache.axis.description.OperationDesc - @2f112965 added parameter >name:       {http://tempuri.org/}u9Org
+@769e7ee8<total parameters:3
+DEBUG main org.apache.axis.description.OperationDesc - @56de5251 added parameter >name:       {http://tempuri.org/}u9Org
 typeEntry:  null
 mode:       IN
 position:   3
@@ -864,9 +181,9 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@2bbf180e<total parameters:4
-DEBUG main org.apache.axis.description.OperationDesc - @2f112965setReturnType({http://www.w3.org/2001/XMLSchema}string)
-DEBUG main org.apache.axis.description.OperationDesc - @163e4e87 added parameter >name:       {http://tempuri.org/}xml
+@5276e6b0<total parameters:4
+DEBUG main org.apache.axis.description.OperationDesc - @56de5251setReturnType({http://www.w3.org/2001/XMLSchema}string)
+DEBUG main org.apache.axis.description.OperationDesc - @71b1176b added parameter >name:       {http://tempuri.org/}xml
 typeEntry:  null
 mode:       IN
 position:   0
@@ -875,8 +192,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@56de5251<total parameters:1
-DEBUG main org.apache.axis.description.OperationDesc - @163e4e87 added parameter >name:       {http://tempuri.org/}u9User
+@6193932a<total parameters:1
+DEBUG main org.apache.axis.description.OperationDesc - @71b1176b added parameter >name:       {http://tempuri.org/}u9User
 typeEntry:  null
 mode:       IN
 position:   1
@@ -885,8 +202,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@419c5f1a<total parameters:2
-DEBUG main org.apache.axis.description.OperationDesc - @163e4e87 added parameter >name:       {http://tempuri.org/}u9Pwd
+@647fd8ce<total parameters:2
+DEBUG main org.apache.axis.description.OperationDesc - @71b1176b added parameter >name:       {http://tempuri.org/}u9Pwd
 typeEntry:  null
 mode:       IN
 position:   2
@@ -895,8 +212,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@12b0404f<total parameters:3
-DEBUG main org.apache.axis.description.OperationDesc - @163e4e87 added parameter >name:       {http://tempuri.org/}u9Org
+@159f197<total parameters:3
+DEBUG main org.apache.axis.description.OperationDesc - @71b1176b added parameter >name:       {http://tempuri.org/}u9Org
 typeEntry:  null
 mode:       IN
 position:   3
@@ -905,9 +222,9 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@769e7ee8<total parameters:4
-DEBUG main org.apache.axis.description.OperationDesc - @163e4e87setReturnType({http://www.w3.org/2001/XMLSchema}string)
-DEBUG main org.apache.axis.description.OperationDesc - @5276e6b0 added parameter >name:       {http://tempuri.org/}xml
+@78aab498<total parameters:4
+DEBUG main org.apache.axis.description.OperationDesc - @71b1176bsetReturnType({http://www.w3.org/2001/XMLSchema}string)
+DEBUG main org.apache.axis.description.OperationDesc - @5dd6264 added parameter >name:       {http://tempuri.org/}xml
 typeEntry:  null
 mode:       IN
 position:   0
@@ -916,8 +233,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@71b1176b<total parameters:1
-DEBUG main org.apache.axis.description.OperationDesc - @5276e6b0 added parameter >name:       {http://tempuri.org/}u9User
+@1ffe63b9<total parameters:1
+DEBUG main org.apache.axis.description.OperationDesc - @5dd6264 added parameter >name:       {http://tempuri.org/}u9User
 typeEntry:  null
 mode:       IN
 position:   1
@@ -926,8 +243,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@6193932a<total parameters:2
-DEBUG main org.apache.axis.description.OperationDesc - @5276e6b0 added parameter >name:       {http://tempuri.org/}u9Pwd
+@51e5fc98<total parameters:2
+DEBUG main org.apache.axis.description.OperationDesc - @5dd6264 added parameter >name:       {http://tempuri.org/}u9Pwd
 typeEntry:  null
 mode:       IN
 position:   2
@@ -936,8 +253,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@647fd8ce<total parameters:3
-DEBUG main org.apache.axis.description.OperationDesc - @5276e6b0 added parameter >name:       {http://tempuri.org/}u9Org
+@7c469c48<total parameters:3
+DEBUG main org.apache.axis.description.OperationDesc - @5dd6264 added parameter >name:       {http://tempuri.org/}u9Org
 typeEntry:  null
 mode:       IN
 position:   3
@@ -946,9 +263,9 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@159f197<total parameters:4
-DEBUG main org.apache.axis.description.OperationDesc - @5276e6b0setReturnType({http://www.w3.org/2001/XMLSchema}string)
-DEBUG main org.apache.axis.description.OperationDesc - @78aab498 added parameter >name:       {http://tempuri.org/}xml
+@12e61fe6<total parameters:4
+DEBUG main org.apache.axis.description.OperationDesc - @5dd6264setReturnType({http://www.w3.org/2001/XMLSchema}string)
+DEBUG main org.apache.axis.description.OperationDesc - @7ee955a8 added parameter >name:       {http://tempuri.org/}payXml
 typeEntry:  null
 mode:       IN
 position:   0
@@ -957,8 +274,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@5dd6264<total parameters:1
-DEBUG main org.apache.axis.description.OperationDesc - @78aab498 added parameter >name:       {http://tempuri.org/}u9User
+@1677d1<total parameters:1
+DEBUG main org.apache.axis.description.OperationDesc - @7ee955a8 added parameter >name:       {http://tempuri.org/}u9User
 typeEntry:  null
 mode:       IN
 position:   1
@@ -967,8 +284,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@1ffe63b9<total parameters:2
-DEBUG main org.apache.axis.description.OperationDesc - @78aab498 added parameter >name:       {http://tempuri.org/}u9Pwd
+@48fa0f47<total parameters:2
+DEBUG main org.apache.axis.description.OperationDesc - @7ee955a8 added parameter >name:       {http://tempuri.org/}u9Pwd
 typeEntry:  null
 mode:       IN
 position:   2
@@ -977,8 +294,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@51e5fc98<total parameters:3
-DEBUG main org.apache.axis.description.OperationDesc - @78aab498 added parameter >name:       {http://tempuri.org/}u9Org
+@6ac13091<total parameters:3
+DEBUG main org.apache.axis.description.OperationDesc - @7ee955a8 added parameter >name:       {http://tempuri.org/}u9Org
 typeEntry:  null
 mode:       IN
 position:   3
@@ -987,9 +304,9 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@7c469c48<total parameters:4
-DEBUG main org.apache.axis.description.OperationDesc - @78aab498setReturnType({http://www.w3.org/2001/XMLSchema}string)
-DEBUG main org.apache.axis.description.OperationDesc - @12e61fe6 added parameter >name:       {http://tempuri.org/}xml
+@5e316c74<total parameters:4
+DEBUG main org.apache.axis.description.OperationDesc - @7ee955a8setReturnType({http://www.w3.org/2001/XMLSchema}string)
+DEBUG main org.apache.axis.description.OperationDesc - @6d2a209c added parameter >name:       {http://tempuri.org/}xml
 typeEntry:  null
 mode:       IN
 position:   0
@@ -998,8 +315,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@7ee955a8<total parameters:1
-DEBUG main org.apache.axis.description.OperationDesc - @12e61fe6 added parameter >name:       {http://tempuri.org/}u9User
+@75329a49<total parameters:1
+DEBUG main org.apache.axis.description.OperationDesc - @6d2a209c added parameter >name:       {http://tempuri.org/}u9User
 typeEntry:  null
 mode:       IN
 position:   1
@@ -1008,8 +325,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@1677d1<total parameters:2
-DEBUG main org.apache.axis.description.OperationDesc - @12e61fe6 added parameter >name:       {http://tempuri.org/}u9Pwd
+@161479c6<total parameters:2
+DEBUG main org.apache.axis.description.OperationDesc - @6d2a209c added parameter >name:       {http://tempuri.org/}u9Pwd
 typeEntry:  null
 mode:       IN
 position:   2
@@ -1018,8 +335,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@48fa0f47<total parameters:3
-DEBUG main org.apache.axis.description.OperationDesc - @12e61fe6 added parameter >name:       {http://tempuri.org/}u9Org
+@4313f5bc<total parameters:3
+DEBUG main org.apache.axis.description.OperationDesc - @6d2a209c added parameter >name:       {http://tempuri.org/}u9Org
 typeEntry:  null
 mode:       IN
 position:   3
@@ -1028,9 +345,9 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@6ac13091<total parameters:4
-DEBUG main org.apache.axis.description.OperationDesc - @12e61fe6setReturnType({http://www.w3.org/2001/XMLSchema}string)
-DEBUG main org.apache.axis.description.OperationDesc - @5e316c74 added parameter >name:       {http://tempuri.org/}payXml
+@7f010382<total parameters:4
+DEBUG main org.apache.axis.description.OperationDesc - @6d2a209csetReturnType({http://www.w3.org/2001/XMLSchema}string)
+DEBUG main org.apache.axis.description.OperationDesc - @1e802ef9 added parameter >name:       {http://tempuri.org/}xml
 typeEntry:  null
 mode:       IN
 position:   0
@@ -1039,8 +356,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@6d2a209c<total parameters:1
-DEBUG main org.apache.axis.description.OperationDesc - @5e316c74 added parameter >name:       {http://tempuri.org/}u9User
+@2b6faea6<total parameters:1
+DEBUG main org.apache.axis.description.OperationDesc - @1e802ef9 added parameter >name:       {http://tempuri.org/}u9User
 typeEntry:  null
 mode:       IN
 position:   1
@@ -1049,8 +366,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@75329a49<total parameters:2
-DEBUG main org.apache.axis.description.OperationDesc - @5e316c74 added parameter >name:       {http://tempuri.org/}u9Pwd
+@778d1062<total parameters:2
+DEBUG main org.apache.axis.description.OperationDesc - @1e802ef9 added parameter >name:       {http://tempuri.org/}u9Pwd
 typeEntry:  null
 mode:       IN
 position:   2
@@ -1059,8 +376,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@161479c6<total parameters:3
-DEBUG main org.apache.axis.description.OperationDesc - @5e316c74 added parameter >name:       {http://tempuri.org/}u9Org
+@670002<total parameters:3
+DEBUG main org.apache.axis.description.OperationDesc - @1e802ef9 added parameter >name:       {http://tempuri.org/}u9Org
 typeEntry:  null
 mode:       IN
 position:   3
@@ -1069,9 +386,9 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@4313f5bc<total parameters:4
-DEBUG main org.apache.axis.description.OperationDesc - @5e316c74setReturnType({http://www.w3.org/2001/XMLSchema}string)
-DEBUG main org.apache.axis.description.OperationDesc - @7f010382 added parameter >name:       {http://tempuri.org/}xml
+@1f0f1111<total parameters:4
+DEBUG main org.apache.axis.description.OperationDesc - @1e802ef9setReturnType({http://www.w3.org/2001/XMLSchema}string)
+DEBUG main org.apache.axis.description.OperationDesc - @49c386c8 added parameter >name:       {http://tempuri.org/}xml
 typeEntry:  null
 mode:       IN
 position:   0
@@ -1080,8 +397,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@1e802ef9<total parameters:1
-DEBUG main org.apache.axis.description.OperationDesc - @7f010382 added parameter >name:       {http://tempuri.org/}u9User
+@56528192<total parameters:1
+DEBUG main org.apache.axis.description.OperationDesc - @49c386c8 added parameter >name:       {http://tempuri.org/}u9User
 typeEntry:  null
 mode:       IN
 position:   1
@@ -1090,8 +407,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@2b6faea6<total parameters:2
-DEBUG main org.apache.axis.description.OperationDesc - @7f010382 added parameter >name:       {http://tempuri.org/}u9Pwd
+@6e0dec4a<total parameters:2
+DEBUG main org.apache.axis.description.OperationDesc - @49c386c8 added parameter >name:       {http://tempuri.org/}u9Pwd
 typeEntry:  null
 mode:       IN
 position:   2
@@ -1100,8 +417,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@778d1062<total parameters:3
-DEBUG main org.apache.axis.description.OperationDesc - @7f010382 added parameter >name:       {http://tempuri.org/}u9Org
+@96def03<total parameters:3
+DEBUG main org.apache.axis.description.OperationDesc - @49c386c8 added parameter >name:       {http://tempuri.org/}u9Org
 typeEntry:  null
 mode:       IN
 position:   3
@@ -1110,9 +427,9 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@670002<total parameters:4
-DEBUG main org.apache.axis.description.OperationDesc - @7f010382setReturnType({http://www.w3.org/2001/XMLSchema}string)
-DEBUG main org.apache.axis.description.OperationDesc - @1f0f1111 added parameter >name:       {http://tempuri.org/}xml
+@5ccddd20<total parameters:4
+DEBUG main org.apache.axis.description.OperationDesc - @49c386c8setReturnType({http://www.w3.org/2001/XMLSchema}string)
+DEBUG main org.apache.axis.description.OperationDesc - @1ed1993a added parameter >name:       {http://tempuri.org/}customerXml
 typeEntry:  null
 mode:       IN
 position:   0
@@ -1121,8 +438,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@49c386c8<total parameters:1
-DEBUG main org.apache.axis.description.OperationDesc - @1f0f1111 added parameter >name:       {http://tempuri.org/}u9User
+@1f3f4916<total parameters:1
+DEBUG main org.apache.axis.description.OperationDesc - @1ed1993a added parameter >name:       {http://tempuri.org/}u9User
 typeEntry:  null
 mode:       IN
 position:   1
@@ -1131,8 +448,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@56528192<total parameters:2
-DEBUG main org.apache.axis.description.OperationDesc - @1f0f1111 added parameter >name:       {http://tempuri.org/}u9Pwd
+@794cb805<total parameters:2
+DEBUG main org.apache.axis.description.OperationDesc - @1ed1993a added parameter >name:       {http://tempuri.org/}u9Pwd
 typeEntry:  null
 mode:       IN
 position:   2
@@ -1141,8 +458,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@6e0dec4a<total parameters:3
-DEBUG main org.apache.axis.description.OperationDesc - @1f0f1111 added parameter >name:       {http://tempuri.org/}u9Org
+@4b5a5ed1<total parameters:3
+DEBUG main org.apache.axis.description.OperationDesc - @1ed1993a added parameter >name:       {http://tempuri.org/}u9Org
 typeEntry:  null
 mode:       IN
 position:   3
@@ -1151,9 +468,9 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@96def03<total parameters:4
-DEBUG main org.apache.axis.description.OperationDesc - @1f0f1111setReturnType({http://www.w3.org/2001/XMLSchema}string)
-DEBUG main org.apache.axis.description.OperationDesc - @5ccddd20 added parameter >name:       {http://tempuri.org/}xml
+@59d016c9<total parameters:4
+DEBUG main org.apache.axis.description.OperationDesc - @1ed1993asetReturnType({http://www.w3.org/2001/XMLSchema}string)
+DEBUG main org.apache.axis.description.OperationDesc - @3cc2931c added parameter >name:       {http://tempuri.org/}supplierXml
 typeEntry:  null
 mode:       IN
 position:   0
@@ -1162,8 +479,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@1ed1993a<total parameters:1
-DEBUG main org.apache.axis.description.OperationDesc - @5ccddd20 added parameter >name:       {http://tempuri.org/}u9User
+@20d28811<total parameters:1
+DEBUG main org.apache.axis.description.OperationDesc - @3cc2931c added parameter >name:       {http://tempuri.org/}u9User
 typeEntry:  null
 mode:       IN
 position:   1
@@ -1172,8 +489,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@1f3f4916<total parameters:2
-DEBUG main org.apache.axis.description.OperationDesc - @5ccddd20 added parameter >name:       {http://tempuri.org/}u9Pwd
+@3967e60c<total parameters:2
+DEBUG main org.apache.axis.description.OperationDesc - @3cc2931c added parameter >name:       {http://tempuri.org/}u9Pwd
 typeEntry:  null
 mode:       IN
 position:   2
@@ -1182,8 +499,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@794cb805<total parameters:3
-DEBUG main org.apache.axis.description.OperationDesc - @5ccddd20 added parameter >name:       {http://tempuri.org/}u9Org
+@60d8c9b7<total parameters:3
+DEBUG main org.apache.axis.description.OperationDesc - @3cc2931c added parameter >name:       {http://tempuri.org/}u9Org
 typeEntry:  null
 mode:       IN
 position:   3
@@ -1192,9 +509,9 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@4b5a5ed1<total parameters:4
-DEBUG main org.apache.axis.description.OperationDesc - @5ccddd20setReturnType({http://www.w3.org/2001/XMLSchema}string)
-DEBUG main org.apache.axis.description.OperationDesc - @59d016c9 added parameter >name:       {http://tempuri.org/}customerXml
+@48aaecc3<total parameters:4
+DEBUG main org.apache.axis.description.OperationDesc - @3cc2931csetReturnType({http://www.w3.org/2001/XMLSchema}string)
+DEBUG main org.apache.axis.description.OperationDesc - @7c0c77c7 added parameter >name:       {http://tempuri.org/}xml
 typeEntry:  null
 mode:       IN
 position:   0
@@ -1203,8 +520,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@3cc2931c<total parameters:1
-DEBUG main org.apache.axis.description.OperationDesc - @59d016c9 added parameter >name:       {http://tempuri.org/}u9User
+@7adda9cc<total parameters:1
+DEBUG main org.apache.axis.description.OperationDesc - @7c0c77c7 added parameter >name:       {http://tempuri.org/}u9User
 typeEntry:  null
 mode:       IN
 position:   1
@@ -1213,8 +530,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@20d28811<total parameters:2
-DEBUG main org.apache.axis.description.OperationDesc - @59d016c9 added parameter >name:       {http://tempuri.org/}u9Pwd
+@5cee5251<total parameters:2
+DEBUG main org.apache.axis.description.OperationDesc - @7c0c77c7 added parameter >name:       {http://tempuri.org/}u9Pwd
 typeEntry:  null
 mode:       IN
 position:   2
@@ -1223,8 +540,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@3967e60c<total parameters:3
-DEBUG main org.apache.axis.description.OperationDesc - @59d016c9 added parameter >name:       {http://tempuri.org/}u9Org
+@433d61fb<total parameters:3
+DEBUG main org.apache.axis.description.OperationDesc - @7c0c77c7 added parameter >name:       {http://tempuri.org/}u9Org
 typeEntry:  null
 mode:       IN
 position:   3
@@ -1233,9 +550,9 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@60d8c9b7<total parameters:4
-DEBUG main org.apache.axis.description.OperationDesc - @59d016c9setReturnType({http://www.w3.org/2001/XMLSchema}string)
-DEBUG main org.apache.axis.description.OperationDesc - @48aaecc3 added parameter >name:       {http://tempuri.org/}supplierXml
+@5c909414<total parameters:4
+DEBUG main org.apache.axis.description.OperationDesc - @7c0c77c7setReturnType({http://www.w3.org/2001/XMLSchema}string)
+DEBUG main org.apache.axis.description.OperationDesc - @4b14c583 added parameter >name:       {http://tempuri.org/}xml
 typeEntry:  null
 mode:       IN
 position:   0
@@ -1244,8 +561,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@7c0c77c7<total parameters:1
-DEBUG main org.apache.axis.description.OperationDesc - @48aaecc3 added parameter >name:       {http://tempuri.org/}u9User
+@65466a6a<total parameters:1
+DEBUG main org.apache.axis.description.OperationDesc - @4b14c583 added parameter >name:       {http://tempuri.org/}u9User
 typeEntry:  null
 mode:       IN
 position:   1
@@ -1254,8 +571,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@7adda9cc<total parameters:2
-DEBUG main org.apache.axis.description.OperationDesc - @48aaecc3 added parameter >name:       {http://tempuri.org/}u9Pwd
+@4ddced80<total parameters:2
+DEBUG main org.apache.axis.description.OperationDesc - @4b14c583 added parameter >name:       {http://tempuri.org/}u9Pwd
 typeEntry:  null
 mode:       IN
 position:   2
@@ -1264,8 +581,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@5cee5251<total parameters:3
-DEBUG main org.apache.axis.description.OperationDesc - @48aaecc3 added parameter >name:       {http://tempuri.org/}u9Org
+@1534f01b<total parameters:3
+DEBUG main org.apache.axis.description.OperationDesc - @4b14c583 added parameter >name:       {http://tempuri.org/}u9Org
 typeEntry:  null
 mode:       IN
 position:   3
@@ -1274,9 +591,9 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@433d61fb<total parameters:4
-DEBUG main org.apache.axis.description.OperationDesc - @48aaecc3setReturnType({http://www.w3.org/2001/XMLSchema}string)
-DEBUG main org.apache.axis.description.OperationDesc - @5c909414 added parameter >name:       {http://tempuri.org/}xml
+@78e117e3<total parameters:4
+DEBUG main org.apache.axis.description.OperationDesc - @4b14c583setReturnType({http://www.w3.org/2001/XMLSchema}string)
+DEBUG main org.apache.axis.description.OperationDesc - @2ea227af added parameter >name:       {http://tempuri.org/}xml
 typeEntry:  null
 mode:       IN
 position:   0
@@ -1285,8 +602,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@4b14c583<total parameters:1
-DEBUG main org.apache.axis.description.OperationDesc - @5c909414 added parameter >name:       {http://tempuri.org/}u9User
+@4386f16<total parameters:1
+DEBUG main org.apache.axis.description.OperationDesc - @2ea227af added parameter >name:       {http://tempuri.org/}u9User
 typeEntry:  null
 mode:       IN
 position:   1
@@ -1295,8 +612,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@65466a6a<total parameters:2
-DEBUG main org.apache.axis.description.OperationDesc - @5c909414 added parameter >name:       {http://tempuri.org/}u9Pwd
+@363ee3a2<total parameters:2
+DEBUG main org.apache.axis.description.OperationDesc - @2ea227af added parameter >name:       {http://tempuri.org/}u9Pwd
 typeEntry:  null
 mode:       IN
 position:   2
@@ -1305,8 +622,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@4ddced80<total parameters:3
-DEBUG main org.apache.axis.description.OperationDesc - @5c909414 added parameter >name:       {http://tempuri.org/}u9Org
+@4690b489<total parameters:3
+DEBUG main org.apache.axis.description.OperationDesc - @2ea227af added parameter >name:       {http://tempuri.org/}u9Org
 typeEntry:  null
 mode:       IN
 position:   3
@@ -1315,9 +632,9 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@1534f01b<total parameters:4
-DEBUG main org.apache.axis.description.OperationDesc - @5c909414setReturnType({http://www.w3.org/2001/XMLSchema}string)
-DEBUG main org.apache.axis.description.OperationDesc - @78e117e3 added parameter >name:       {http://tempuri.org/}xml
+@79b06cab<total parameters:4
+DEBUG main org.apache.axis.description.OperationDesc - @2ea227afsetReturnType({http://www.w3.org/2001/XMLSchema}string)
+DEBUG main org.apache.axis.description.OperationDesc - @3eb7fc54 added parameter >name:       {http://tempuri.org/}xml
 typeEntry:  null
 mode:       IN
 position:   0
@@ -1326,8 +643,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@2ea227af<total parameters:1
-DEBUG main org.apache.axis.description.OperationDesc - @78e117e3 added parameter >name:       {http://tempuri.org/}u9User
+@7f552bd3<total parameters:1
+DEBUG main org.apache.axis.description.OperationDesc - @3eb7fc54 added parameter >name:       {http://tempuri.org/}u9User
 typeEntry:  null
 mode:       IN
 position:   1
@@ -1336,8 +653,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@4386f16<total parameters:2
-DEBUG main org.apache.axis.description.OperationDesc - @78e117e3 added parameter >name:       {http://tempuri.org/}u9Pwd
+@3c22fc4c<total parameters:2
+DEBUG main org.apache.axis.description.OperationDesc - @3eb7fc54 added parameter >name:       {http://tempuri.org/}u9Pwd
 typeEntry:  null
 mode:       IN
 position:   2
@@ -1346,8 +663,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@363ee3a2<total parameters:3
-DEBUG main org.apache.axis.description.OperationDesc - @78e117e3 added parameter >name:       {http://tempuri.org/}u9Org
+@460d0a57<total parameters:3
+DEBUG main org.apache.axis.description.OperationDesc - @3eb7fc54 added parameter >name:       {http://tempuri.org/}u9Org
 typeEntry:  null
 mode:       IN
 position:   3
@@ -1356,9 +673,9 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@4690b489<total parameters:4
-DEBUG main org.apache.axis.description.OperationDesc - @78e117e3setReturnType({http://www.w3.org/2001/XMLSchema}string)
-DEBUG main org.apache.axis.description.OperationDesc - @79b06cab added parameter >name:       {http://tempuri.org/}xml
+@47d90b9e<total parameters:4
+DEBUG main org.apache.axis.description.OperationDesc - @3eb7fc54setReturnType({http://www.w3.org/2001/XMLSchema}string)
+DEBUG main org.apache.axis.description.OperationDesc - @1184ab05 added parameter >name:       {http://tempuri.org/}xml
 typeEntry:  null
 mode:       IN
 position:   0
@@ -1367,8 +684,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@3eb7fc54<total parameters:1
-DEBUG main org.apache.axis.description.OperationDesc - @79b06cab added parameter >name:       {http://tempuri.org/}u9User
+@3aefe5e5<total parameters:1
+DEBUG main org.apache.axis.description.OperationDesc - @1184ab05 added parameter >name:       {http://tempuri.org/}u9User
 typeEntry:  null
 mode:       IN
 position:   1
@@ -1377,8 +694,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@7f552bd3<total parameters:2
-DEBUG main org.apache.axis.description.OperationDesc - @79b06cab added parameter >name:       {http://tempuri.org/}u9Pwd
+@149e0f5d<total parameters:2
+DEBUG main org.apache.axis.description.OperationDesc - @1184ab05 added parameter >name:       {http://tempuri.org/}u9Pwd
 typeEntry:  null
 mode:       IN
 position:   2
@@ -1387,8 +704,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@3c22fc4c<total parameters:3
-DEBUG main org.apache.axis.description.OperationDesc - @79b06cab added parameter >name:       {http://tempuri.org/}u9Org
+@1b1473ab<total parameters:3
+DEBUG main org.apache.axis.description.OperationDesc - @1184ab05 added parameter >name:       {http://tempuri.org/}u9Org
 typeEntry:  null
 mode:       IN
 position:   3
@@ -1397,9 +714,9 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@460d0a57<total parameters:4
-DEBUG main org.apache.axis.description.OperationDesc - @79b06cabsetReturnType({http://www.w3.org/2001/XMLSchema}string)
-DEBUG main org.apache.axis.description.OperationDesc - @47d90b9e added parameter >name:       {http://tempuri.org/}xml
+@2f7c2f4f<total parameters:4
+DEBUG main org.apache.axis.description.OperationDesc - @1184ab05setReturnType({http://www.w3.org/2001/XMLSchema}string)
+DEBUG main org.apache.axis.description.OperationDesc - @6af93788 added parameter >name:       {http://tempuri.org/}xml
 typeEntry:  null
 mode:       IN
 position:   0
@@ -1408,8 +725,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@1184ab05<total parameters:1
-DEBUG main org.apache.axis.description.OperationDesc - @47d90b9e added parameter >name:       {http://tempuri.org/}u9User
+@ef9296d<total parameters:1
+DEBUG main org.apache.axis.description.OperationDesc - @6af93788 added parameter >name:       {http://tempuri.org/}u9User
 typeEntry:  null
 mode:       IN
 position:   1
@@ -1418,8 +735,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@3aefe5e5<total parameters:2
-DEBUG main org.apache.axis.description.OperationDesc - @47d90b9e added parameter >name:       {http://tempuri.org/}u9Pwd
+@36c88a32<total parameters:2
+DEBUG main org.apache.axis.description.OperationDesc - @6af93788 added parameter >name:       {http://tempuri.org/}u9Pwd
 typeEntry:  null
 mode:       IN
 position:   2
@@ -1428,8 +745,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@149e0f5d<total parameters:3
-DEBUG main org.apache.axis.description.OperationDesc - @47d90b9e added parameter >name:       {http://tempuri.org/}u9Org
+@7880cdf3<total parameters:3
+DEBUG main org.apache.axis.description.OperationDesc - @6af93788 added parameter >name:       {http://tempuri.org/}u9Org
 typeEntry:  null
 mode:       IN
 position:   3
@@ -1438,9 +755,9 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@1b1473ab<total parameters:4
-DEBUG main org.apache.axis.description.OperationDesc - @47d90b9esetReturnType({http://www.w3.org/2001/XMLSchema}string)
-DEBUG main org.apache.axis.description.OperationDesc - @2f7c2f4f added parameter >name:       {http://tempuri.org/}xml
+@5be6e01c<total parameters:4
+DEBUG main org.apache.axis.description.OperationDesc - @6af93788setReturnType({http://www.w3.org/2001/XMLSchema}string)
+DEBUG main org.apache.axis.description.OperationDesc - @1c93084c added parameter >name:       {http://tempuri.org/}xml
 typeEntry:  null
 mode:       IN
 position:   0
@@ -1449,8 +766,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@6af93788<total parameters:1
-DEBUG main org.apache.axis.description.OperationDesc - @2f7c2f4f added parameter >name:       {http://tempuri.org/}u9User
+@6ef888f6<total parameters:1
+DEBUG main org.apache.axis.description.OperationDesc - @1c93084c added parameter >name:       {http://tempuri.org/}u9User
 typeEntry:  null
 mode:       IN
 position:   1
@@ -1459,8 +776,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@ef9296d<total parameters:2
-DEBUG main org.apache.axis.description.OperationDesc - @2f7c2f4f added parameter >name:       {http://tempuri.org/}u9Pwd
+@10e92f8f<total parameters:2
+DEBUG main org.apache.axis.description.OperationDesc - @1c93084c added parameter >name:       {http://tempuri.org/}u9Pwd
 typeEntry:  null
 mode:       IN
 position:   2
@@ -1469,8 +786,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@36c88a32<total parameters:3
-DEBUG main org.apache.axis.description.OperationDesc - @2f7c2f4f added parameter >name:       {http://tempuri.org/}u9Org
+@7ce3cb8e<total parameters:3
+DEBUG main org.apache.axis.description.OperationDesc - @1c93084c added parameter >name:       {http://tempuri.org/}u9Org
 typeEntry:  null
 mode:       IN
 position:   3
@@ -1479,9 +796,9 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@7880cdf3<total parameters:4
-DEBUG main org.apache.axis.description.OperationDesc - @2f7c2f4fsetReturnType({http://www.w3.org/2001/XMLSchema}string)
-DEBUG main org.apache.axis.description.OperationDesc - @5be6e01c added parameter >name:       {http://tempuri.org/}xml
+@78b66d36<total parameters:4
+DEBUG main org.apache.axis.description.OperationDesc - @1c93084csetReturnType({http://www.w3.org/2001/XMLSchema}string)
+DEBUG main org.apache.axis.description.OperationDesc - @5223e5ee added parameter >name:       {http://tempuri.org/}payXml
 typeEntry:  null
 mode:       IN
 position:   0
@@ -1490,8 +807,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@1c93084c<total parameters:1
-DEBUG main org.apache.axis.description.OperationDesc - @5be6e01c added parameter >name:       {http://tempuri.org/}u9User
+@bef2d72<total parameters:1
+DEBUG main org.apache.axis.description.OperationDesc - @5223e5ee added parameter >name:       {http://tempuri.org/}u9User
 typeEntry:  null
 mode:       IN
 position:   1
@@ -1500,8 +817,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@6ef888f6<total parameters:2
-DEBUG main org.apache.axis.description.OperationDesc - @5be6e01c added parameter >name:       {http://tempuri.org/}u9Pwd
+@69b2283a<total parameters:2
+DEBUG main org.apache.axis.description.OperationDesc - @5223e5ee added parameter >name:       {http://tempuri.org/}u9Pwd
 typeEntry:  null
 mode:       IN
 position:   2
@@ -1510,8 +827,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@10e92f8f<total parameters:3
-DEBUG main org.apache.axis.description.OperationDesc - @5be6e01c added parameter >name:       {http://tempuri.org/}u9Org
+@22a637e7<total parameters:3
+DEBUG main org.apache.axis.description.OperationDesc - @5223e5ee added parameter >name:       {http://tempuri.org/}u9Org
 typeEntry:  null
 mode:       IN
 position:   3
@@ -1520,9 +837,9 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@7ce3cb8e<total parameters:4
-DEBUG main org.apache.axis.description.OperationDesc - @5be6e01csetReturnType({http://www.w3.org/2001/XMLSchema}string)
-DEBUG main org.apache.axis.description.OperationDesc - @78b66d36 added parameter >name:       {http://tempuri.org/}xml
+@6fe7aac8<total parameters:4
+DEBUG main org.apache.axis.description.OperationDesc - @5223e5eesetReturnType({http://www.w3.org/2001/XMLSchema}string)
+DEBUG main org.apache.axis.description.OperationDesc - @1d119efb added parameter >name:       {http://tempuri.org/}xml
 typeEntry:  null
 mode:       IN
 position:   0
@@ -1531,8 +848,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@5223e5ee<total parameters:1
-DEBUG main org.apache.axis.description.OperationDesc - @78b66d36 added parameter >name:       {http://tempuri.org/}u9User
+@659a969b<total parameters:1
+DEBUG main org.apache.axis.description.OperationDesc - @1d119efb added parameter >name:       {http://tempuri.org/}u9User
 typeEntry:  null
 mode:       IN
 position:   1
@@ -1541,8 +858,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@bef2d72<total parameters:2
-DEBUG main org.apache.axis.description.OperationDesc - @78b66d36 added parameter >name:       {http://tempuri.org/}u9Pwd
+@76908cc0<total parameters:2
+DEBUG main org.apache.axis.description.OperationDesc - @1d119efb added parameter >name:       {http://tempuri.org/}u9Pwd
 typeEntry:  null
 mode:       IN
 position:   2
@@ -1551,8 +868,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@69b2283a<total parameters:3
-DEBUG main org.apache.axis.description.OperationDesc - @78b66d36 added parameter >name:       {http://tempuri.org/}u9Org
+@2473d930<total parameters:3
+DEBUG main org.apache.axis.description.OperationDesc - @1d119efb added parameter >name:       {http://tempuri.org/}u9Org
 typeEntry:  null
 mode:       IN
 position:   3
@@ -1561,9 +878,9 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@22a637e7<total parameters:4
-DEBUG main org.apache.axis.description.OperationDesc - @78b66d36setReturnType({http://www.w3.org/2001/XMLSchema}string)
-DEBUG main org.apache.axis.description.OperationDesc - @6fe7aac8 added parameter >name:       {http://tempuri.org/}payXml
+@35047d03<total parameters:4
+DEBUG main org.apache.axis.description.OperationDesc - @1d119efbsetReturnType({http://www.w3.org/2001/XMLSchema}string)
+DEBUG main org.apache.axis.description.OperationDesc - @49b0b76 added parameter >name:       {http://tempuri.org/}xml
 typeEntry:  null
 mode:       IN
 position:   0
@@ -1572,8 +889,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@1d119efb<total parameters:1
-DEBUG main org.apache.axis.description.OperationDesc - @6fe7aac8 added parameter >name:       {http://tempuri.org/}u9User
+@769f71a9<total parameters:1
+DEBUG main org.apache.axis.description.OperationDesc - @49b0b76 added parameter >name:       {http://tempuri.org/}u9User
 typeEntry:  null
 mode:       IN
 position:   1
@@ -1582,8 +899,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@659a969b<total parameters:2
-DEBUG main org.apache.axis.description.OperationDesc - @6fe7aac8 added parameter >name:       {http://tempuri.org/}u9Pwd
+@4c9f8c13<total parameters:2
+DEBUG main org.apache.axis.description.OperationDesc - @49b0b76 added parameter >name:       {http://tempuri.org/}u9Pwd
 typeEntry:  null
 mode:       IN
 position:   2
@@ -1592,8 +909,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@76908cc0<total parameters:3
-DEBUG main org.apache.axis.description.OperationDesc - @6fe7aac8 added parameter >name:       {http://tempuri.org/}u9Org
+@5ae50ce6<total parameters:3
+DEBUG main org.apache.axis.description.OperationDesc - @49b0b76 added parameter >name:       {http://tempuri.org/}u9Org
 typeEntry:  null
 mode:       IN
 position:   3
@@ -1602,9 +919,9 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@2473d930<total parameters:4
-DEBUG main org.apache.axis.description.OperationDesc - @6fe7aac8setReturnType({http://www.w3.org/2001/XMLSchema}string)
-DEBUG main org.apache.axis.description.OperationDesc - @35047d03 added parameter >name:       {http://tempuri.org/}xml
+@6f96c77<total parameters:4
+DEBUG main org.apache.axis.description.OperationDesc - @49b0b76setReturnType({http://www.w3.org/2001/XMLSchema}string)
+DEBUG main org.apache.axis.description.OperationDesc - @be64738 added parameter >name:       {http://tempuri.org/}xml
 typeEntry:  null
 mode:       IN
 position:   0
@@ -1613,8 +930,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@49b0b76<total parameters:1
-DEBUG main org.apache.axis.description.OperationDesc - @35047d03 added parameter >name:       {http://tempuri.org/}u9User
+@3ba9ad43<total parameters:1
+DEBUG main org.apache.axis.description.OperationDesc - @be64738 added parameter >name:       {http://tempuri.org/}u9User
 typeEntry:  null
 mode:       IN
 position:   1
@@ -1623,8 +940,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@769f71a9<total parameters:2
-DEBUG main org.apache.axis.description.OperationDesc - @35047d03 added parameter >name:       {http://tempuri.org/}u9Pwd
+@49d904ec<total parameters:2
+DEBUG main org.apache.axis.description.OperationDesc - @be64738 added parameter >name:       {http://tempuri.org/}u9Pwd
 typeEntry:  null
 mode:       IN
 position:   2
@@ -1633,8 +950,8 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@4c9f8c13<total parameters:3
-DEBUG main org.apache.axis.description.OperationDesc - @35047d03 added parameter >name:       {http://tempuri.org/}u9Org
+@48e4374<total parameters:3
+DEBUG main org.apache.axis.description.OperationDesc - @be64738 added parameter >name:       {http://tempuri.org/}u9Org
 typeEntry:  null
 mode:       IN
 position:   3
@@ -1643,88 +960,5 @@ typeQName:  {http://www.w3.org/2001/XMLSchema}string
 javaType:   class java.lang.String
 inHeader:   false
 outHeader:  false
-@5ae50ce6<total parameters:4
-DEBUG main org.apache.axis.description.OperationDesc - @35047d03setReturnType({http://www.w3.org/2001/XMLSchema}string)
-DEBUG main org.apache.axis.description.OperationDesc - @6f96c77 added parameter >name:       {http://tempuri.org/}xml
-typeEntry:  null
-mode:       IN
-position:   0
-isReturn:   false
-typeQName:  {http://www.w3.org/2001/XMLSchema}string
-javaType:   class java.lang.String
-inHeader:   false
-outHeader:  false
-@be64738<total parameters:1
-DEBUG main org.apache.axis.description.OperationDesc - @6f96c77 added parameter >name:       {http://tempuri.org/}u9User
-typeEntry:  null
-mode:       IN
-position:   1
-isReturn:   false
-typeQName:  {http://www.w3.org/2001/XMLSchema}string
-javaType:   class java.lang.String
-inHeader:   false
-outHeader:  false
-@3ba9ad43<total parameters:2
-DEBUG main org.apache.axis.description.OperationDesc - @6f96c77 added parameter >name:       {http://tempuri.org/}u9Pwd
-typeEntry:  null
-mode:       IN
-position:   2
-isReturn:   false
-typeQName:  {http://www.w3.org/2001/XMLSchema}string
-javaType:   class java.lang.String
-inHeader:   false
-outHeader:  false
-@49d904ec<total parameters:3
-DEBUG main org.apache.axis.description.OperationDesc - @6f96c77 added parameter >name:       {http://tempuri.org/}u9Org
-typeEntry:  null
-mode:       IN
-position:   3
-isReturn:   false
-typeQName:  {http://www.w3.org/2001/XMLSchema}string
-javaType:   class java.lang.String
-inHeader:   false
-outHeader:  false
-@48e4374<total parameters:4
-DEBUG main org.apache.axis.description.OperationDesc - @6f96c77setReturnType({http://www.w3.org/2001/XMLSchema}string)
-DEBUG main org.apache.axis.description.OperationDesc - @3d680b5a added parameter >name:       {http://tempuri.org/}xml
-typeEntry:  null
-mode:       IN
-position:   0
-isReturn:   false
-typeQName:  {http://www.w3.org/2001/XMLSchema}string
-javaType:   class java.lang.String
-inHeader:   false
-outHeader:  false
-@4b5d6a01<total parameters:1
-DEBUG main org.apache.axis.description.OperationDesc - @3d680b5a added parameter >name:       {http://tempuri.org/}u9User
-typeEntry:  null
-mode:       IN
-position:   1
-isReturn:   false
-typeQName:  {http://www.w3.org/2001/XMLSchema}string
-javaType:   class java.lang.String
-inHeader:   false
-outHeader:  false
-@4a22f9e2<total parameters:2
-DEBUG main org.apache.axis.description.OperationDesc - @3d680b5a added parameter >name:       {http://tempuri.org/}u9Pwd
-typeEntry:  null
-mode:       IN
-position:   2
-isReturn:   false
-typeQName:  {http://www.w3.org/2001/XMLSchema}string
-javaType:   class java.lang.String
-inHeader:   false
-outHeader:  false
-@3c419631<total parameters:3
-DEBUG main org.apache.axis.description.OperationDesc - @3d680b5a added parameter >name:       {http://tempuri.org/}u9Org
-typeEntry:  null
-mode:       IN
-position:   3
-isReturn:   false
-typeQName:  {http://www.w3.org/2001/XMLSchema}string
-javaType:   class java.lang.String
-inHeader:   false
-outHeader:  false
-@418e7838<total parameters:4
-DEBUG main org.apache.axis.description.OperationDesc - @3d680b5asetReturnType({http://www.w3.org/2001/XMLSchema}string)
-ERROR main com.weavernorth.ebu8http.realHttpUtil.RealHttpUtil - http请求get异常： java.net.ConnectException: Failed to connect to localhost/0:0:0:0:0:0:0:1:8081
+@3d680b5a<total parameters:4
+DEBUG main org.apache.axis.description.OperationDesc - @be64738setReturnType({http://www.w3.org/2001/XMLSchema}string)

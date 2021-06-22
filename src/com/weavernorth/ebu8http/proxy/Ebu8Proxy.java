@@ -3,10 +3,12 @@ package com.weavernorth.ebu8http.proxy;
 import com.alibaba.fastjson.JSONObject;
 import com.weavernorth.ebu8http.ann.GetBiu;
 import com.weavernorth.ebu8http.ann.PostBiu;
+import com.weavernorth.ebu8http.ann.field.Herder;
 import com.weavernorth.ebu8http.realHttpUtil.RealHttpUtil;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 import java.lang.reflect.Proxy;
 
 public class Ebu8Proxy implements InvocationHandler {
@@ -28,17 +30,24 @@ public class Ebu8Proxy implements InvocationHandler {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         System.out.println("方法名： " + method.getName());
-        if (method.isAnnotationPresent(GetBiu.class) ) {
+        System.out.println("方法参数： " + JSONObject.toJSONString(args));
+        Parameter[] parameters = method.getParameters();
+        for (Parameter parameter : parameters) {
+            System.out.println(parameter);
+            if (parameter.isAnnotationPresent(Herder.class)) {
+                System.out.println("存在参数注解");
+            }
+        }
+        if (method.isAnnotationPresent(GetBiu.class)) {
             GetBiu getBiu = method.getAnnotation(GetBiu.class);
             String path = getBiu.path();
-            System.out.println("get方法请求路径： "+ path);
+            System.out.println("get方法请求路径： " + path);
             return RealHttpUtil.get(path, null);
         }
         if (method.isAnnotationPresent(PostBiu.class)) {
             return "";
         }
-        System.out.println("方法参数： " + JSONObject.toJSONString(args));
-        System.out.println("后置执行============");
+
         return "";
     }
 

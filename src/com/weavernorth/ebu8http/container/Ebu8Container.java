@@ -20,7 +20,7 @@ public class Ebu8Container {
     /**
      * 遍历文件的根目录 路径
      */
-    private static final String ROOT_PATH = "C:\\Users\\86157\\Desktop\\weaver9\\target\\classes\\com\\weavernorth\\ebu8http\\";
+    private static final String ROOT_PATH = "C:\\Users\\86157\\Desktop\\weaver9\\target\\classes\\com\\weavernorth\\";
     /**
      * 用于装载带有注解MyComponent的类
      */
@@ -32,7 +32,7 @@ public class Ebu8Container {
         System.out.println("bean装载完成，共计： " + containerMap.size());
         // 为标有MyIoc注解的字段进行类注入
         inject();
-        System.out.println("注入完成=====");
+        System.out.println("代理类注入完成=====");
     }
 
     public static void inject() {
@@ -46,21 +46,13 @@ public class Ebu8Container {
                     if (!field.isAnnotationPresent(ResourceBiu.class)) {
                         continue;
                     }
-                    ResourceBiu annotation = field.getAnnotation(ResourceBiu.class);
-                    String annName = annotation.name();
-                    if (StringUtils.isBlank(annName)) {
-                        // 用户没有指定注入名称，按注入类的全路径
-                        annName = field.getType().getName();
-                    }
                     // 字段类型的全路径 例：com.mytest.annotation.test.TestInter
                     String name = field.getType().getName();
                     // 获取代理类对象
                     Object proxy = Ebu8Proxy.getProxy(Class.forName(name));
                     field.setAccessible(true);
                     field.set(entry.getValue(), proxy);
-
                 }
-
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -123,6 +115,9 @@ public class Ebu8Container {
                 }
             } else {
                 String path = currFile.getPath();
+                if (!path.endsWith(".class")) {
+                    continue;
+                }
                 int i = path.indexOf("\\com\\");
                 path = path.substring(i + 1).replace("\\", ".").replace(".class", "");
                 list.add(path);

@@ -4,13 +4,17 @@ import com.mytest.annotation.test.TestInter;
 import com.weavernorth.ebu8http.container.Ebu8Container;
 import com.weavernorth.ebu8http.proxy.Ebu8Proxy;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Test {
     /**
      * 注解扫描方式
      */
     @org.junit.Test
     public void test1() throws Exception {
-        new Ebu8Container();
+        Map<String, Object> containerMap = Ebu8Container.containerMap;
+        // MyResourceLei myResourceLei = (MyResourceLei) containerMap.get("MyResourceLei");
         MyResourceLei myResourceLei = new MyResourceLei();
         myResourceLei.sendGet();
     }
@@ -20,8 +24,11 @@ public class Test {
      */
     @org.junit.Test
     public void test2() throws Exception {
+        Map<String, String> map = new HashMap<>();
+        map.put("请求头", "头info");
+
         TestInter proxy = Ebu8Proxy.getProxy(TestInter.class);
-        String s = proxy.sendGet(null);
+        String s = proxy.sendGet(map, "parma21");
         System.out.println(s);
     }
 }
