@@ -1,7 +1,8 @@
 package com.weavernorth.ebu8http.container;
 
-import com.mytest.annotation.MyComponent;
-import com.mytest.annotation.MyResource;
+import com.weavernorth.ebu8http.ann.Ebu8Components;
+import com.weavernorth.ebu8http.ann.ResourceBiu;
+import com.weavernorth.ebu8http.proxy.Ebu8Proxy;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
@@ -19,18 +20,19 @@ public class Ebu8Container {
     /**
      * 遍历文件的根目录 路径
      */
-    private static final String ROOT_PATH = "E:\\WEAVER\\ecology\\classbean\\com\\weavernorth";
+    private static final String ROOT_PATH = "C:\\Users\\86157\\Desktop\\weaver9\\target\\classes\\com\\weavernorth\\ebu8http\\";
     /**
      * 用于装载带有注解MyComponent的类
      */
     public static Map<String, Object> containerMap = new HashMap<>();
 
     static {
-//        // 加载带有MyComponent注解的类到map中
-//        initComponents();
-//        // 为标有MyIoc注解的字段进行类注入
-//        inject();
-
+        // 加载带有MyComponent注解的类到map中
+        initComponents();
+        System.out.println("bean装载完成，共计： " + containerMap.size());
+        // 为标有MyIoc注解的字段进行类注入
+        inject();
+        System.out.println("注入完成=====");
     }
 
     public static void inject() {
@@ -40,25 +42,23 @@ public class Ebu8Container {
 
                 Field[] declaredFields = aClass.getDeclaredFields();
                 for (Field field : declaredFields) {
-                    // 字段上不包含MyResource 跳过
-                    if (!field.isAnnotationPresent(MyResource.class)) {
+                    // 字段上不包含ResourceBiu 跳过
+                    if (!field.isAnnotationPresent(ResourceBiu.class)) {
                         continue;
                     }
-                    MyResource annotation = field.getAnnotation(MyResource.class);
+                    ResourceBiu annotation = field.getAnnotation(ResourceBiu.class);
                     String annName = annotation.name();
                     if (StringUtils.isBlank(annName)) {
                         // 用户没有指定注入名称，按注入类的全路径
                         annName = field.getType().getName();
                     }
-                    // 根据用户自定义名称或类的全路径 找到的obj
-                    Object o = containerMap.get(annName);
-                    if (null == o) {
-                        System.out.println("标记： " + annName + " 没有找到对应类");
-                        continue;
-                    }
+                    // 字段类型的全路径 例：com.mytest.annotation.test.TestInter
+                    String name = field.getType().getName();
+                    // 获取代理类对象
+                    Object proxy = Ebu8Proxy.getProxy(Class.forName(name));
                     field.setAccessible(true);
-                    field.set(entry.getValue(), containerMap.get(annName));
-                    System.out.println("类： " + annName + " 注入到： " + aClass + " 中成功");
+                    field.set(entry.getValue(), proxy);
+
                 }
 
             }
@@ -73,12 +73,12 @@ public class Ebu8Container {
             for (String path : list) {
                 Class<?> aClass = Class.forName(path);
                 // 不包含容器注解，跳过
-//                if (!aClass.isAnnotationPresent(Ebu8Http.class)) {
-//                    continue;
-//                }
+                if (!aClass.isAnnotationPresent(Ebu8Components.class)) {
+                    continue;
+                }
 
                 // 添加到容器中 name不为空按照name注入，否则按照类的全路径名注入
-                MyComponent myComponentAnn = aClass.getAnnotation(MyComponent.class);
+                Ebu8Components myComponentAnn = aClass.getAnnotation(Ebu8Components.class);
                 String iocKey = myComponentAnn.name();
                 if (StringUtils.isBlank(iocKey)) {
                     iocKey = aClass.getName();

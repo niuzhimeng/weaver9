@@ -27,7 +27,6 @@ public class Ebu8Proxy implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        System.out.println("前置执行============");
         System.out.println("方法名： " + method.getName());
         if (method.isAnnotationPresent(GetBiu.class) ) {
             GetBiu getBiu = method.getAnnotation(GetBiu.class);

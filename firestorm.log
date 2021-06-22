@@ -661,3 +661,1070 @@ INFO main com.dtflys.forest.config.ForestConfiguration - [Forest] Http Backend: 
 INFO main com.dtflys.forest.logging.DefaultLogHandler - [Forest] Request: 
 	GET http://localhost:8080/api/GetDataTestApi/getDataTest HTTP
 INFO main com.dtflys.forest.logging.DefaultLogHandler - [Forest] Response: Status = 200, Time = 68ms
+DEBUG main org.apache.axis.description.OperationDesc - @78e94dcf added parameter >name:       {http://tempuri.org/}customerXml
+typeEntry:  null
+mode:       IN
+position:   0
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@233fe9b6<total parameters:1
+DEBUG main org.apache.axis.description.OperationDesc - @78e94dcf added parameter >name:       {http://tempuri.org/}u9User
+typeEntry:  null
+mode:       IN
+position:   1
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@358ee631<total parameters:2
+DEBUG main org.apache.axis.description.OperationDesc - @78e94dcf added parameter >name:       {http://tempuri.org/}u9Pwd
+typeEntry:  null
+mode:       IN
+position:   2
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@ec756bd<total parameters:3
+DEBUG main org.apache.axis.description.OperationDesc - @78e94dcf added parameter >name:       {http://tempuri.org/}u9Org
+typeEntry:  null
+mode:       IN
+position:   3
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@3c72f59f<total parameters:4
+DEBUG main org.apache.axis.description.OperationDesc - @78e94dcfsetReturnType({http://www.w3.org/2001/XMLSchema}string)
+DEBUG main org.apache.axis.description.OperationDesc - @7a4ccb53 added parameter >name:       {http://tempuri.org/}supplierXml
+typeEntry:  null
+mode:       IN
+position:   0
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@309e345f<total parameters:1
+DEBUG main org.apache.axis.description.OperationDesc - @7a4ccb53 added parameter >name:       {http://tempuri.org/}u9User
+typeEntry:  null
+mode:       IN
+position:   1
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@56a6d5a6<total parameters:2
+DEBUG main org.apache.axis.description.OperationDesc - @7a4ccb53 added parameter >name:       {http://tempuri.org/}u9Pwd
+typeEntry:  null
+mode:       IN
+position:   2
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@18ce0030<total parameters:3
+DEBUG main org.apache.axis.description.OperationDesc - @7a4ccb53 added parameter >name:       {http://tempuri.org/}u9Org
+typeEntry:  null
+mode:       IN
+position:   3
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@4445629<total parameters:4
+DEBUG main org.apache.axis.description.OperationDesc - @7a4ccb53setReturnType({http://www.w3.org/2001/XMLSchema}string)
+DEBUG main org.apache.axis.description.OperationDesc - @45b9a632 added parameter >name:       {http://tempuri.org/}xml
+typeEntry:  null
+mode:       IN
+position:   0
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@25d250c6<total parameters:1
+DEBUG main org.apache.axis.description.OperationDesc - @45b9a632 added parameter >name:       {http://tempuri.org/}u9User
+typeEntry:  null
+mode:       IN
+position:   1
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@4df50bcc<total parameters:2
+DEBUG main org.apache.axis.description.OperationDesc - @45b9a632 added parameter >name:       {http://tempuri.org/}u9Pwd
+typeEntry:  null
+mode:       IN
+position:   2
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@6b26e945<total parameters:3
+DEBUG main org.apache.axis.description.OperationDesc - @45b9a632 added parameter >name:       {http://tempuri.org/}u9Org
+typeEntry:  null
+mode:       IN
+position:   3
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@63a65a25<total parameters:4
+DEBUG main org.apache.axis.description.OperationDesc - @45b9a632setReturnType({http://www.w3.org/2001/XMLSchema}string)
+DEBUG main org.apache.axis.description.OperationDesc - @54c562f7 added parameter >name:       {http://tempuri.org/}xml
+typeEntry:  null
+mode:       IN
+position:   0
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@318ba8c8<total parameters:1
+DEBUG main org.apache.axis.description.OperationDesc - @54c562f7 added parameter >name:       {http://tempuri.org/}u9User
+typeEntry:  null
+mode:       IN
+position:   1
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@6dbb137d<total parameters:2
+DEBUG main org.apache.axis.description.OperationDesc - @54c562f7 added parameter >name:       {http://tempuri.org/}u9Pwd
+typeEntry:  null
+mode:       IN
+position:   2
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@3c9d0b9d<total parameters:3
+DEBUG main org.apache.axis.description.OperationDesc - @54c562f7 added parameter >name:       {http://tempuri.org/}u9Org
+typeEntry:  null
+mode:       IN
+position:   3
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@43301423<total parameters:4
+DEBUG main org.apache.axis.description.OperationDesc - @54c562f7setReturnType({http://www.w3.org/2001/XMLSchema}string)
+DEBUG main org.apache.axis.description.OperationDesc - @2f112965 added parameter >name:       {http://tempuri.org/}xml
+typeEntry:  null
+mode:       IN
+position:   0
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@1a04f701<total parameters:1
+DEBUG main org.apache.axis.description.OperationDesc - @2f112965 added parameter >name:       {http://tempuri.org/}u9User
+typeEntry:  null
+mode:       IN
+position:   1
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@4e91d63f<total parameters:2
+DEBUG main org.apache.axis.description.OperationDesc - @2f112965 added parameter >name:       {http://tempuri.org/}u9Pwd
+typeEntry:  null
+mode:       IN
+position:   2
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@d4342c2<total parameters:3
+DEBUG main org.apache.axis.description.OperationDesc - @2f112965 added parameter >name:       {http://tempuri.org/}u9Org
+typeEntry:  null
+mode:       IN
+position:   3
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@2bbf180e<total parameters:4
+DEBUG main org.apache.axis.description.OperationDesc - @2f112965setReturnType({http://www.w3.org/2001/XMLSchema}string)
+DEBUG main org.apache.axis.description.OperationDesc - @163e4e87 added parameter >name:       {http://tempuri.org/}xml
+typeEntry:  null
+mode:       IN
+position:   0
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@56de5251<total parameters:1
+DEBUG main org.apache.axis.description.OperationDesc - @163e4e87 added parameter >name:       {http://tempuri.org/}u9User
+typeEntry:  null
+mode:       IN
+position:   1
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@419c5f1a<total parameters:2
+DEBUG main org.apache.axis.description.OperationDesc - @163e4e87 added parameter >name:       {http://tempuri.org/}u9Pwd
+typeEntry:  null
+mode:       IN
+position:   2
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@12b0404f<total parameters:3
+DEBUG main org.apache.axis.description.OperationDesc - @163e4e87 added parameter >name:       {http://tempuri.org/}u9Org
+typeEntry:  null
+mode:       IN
+position:   3
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@769e7ee8<total parameters:4
+DEBUG main org.apache.axis.description.OperationDesc - @163e4e87setReturnType({http://www.w3.org/2001/XMLSchema}string)
+DEBUG main org.apache.axis.description.OperationDesc - @5276e6b0 added parameter >name:       {http://tempuri.org/}xml
+typeEntry:  null
+mode:       IN
+position:   0
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@71b1176b<total parameters:1
+DEBUG main org.apache.axis.description.OperationDesc - @5276e6b0 added parameter >name:       {http://tempuri.org/}u9User
+typeEntry:  null
+mode:       IN
+position:   1
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@6193932a<total parameters:2
+DEBUG main org.apache.axis.description.OperationDesc - @5276e6b0 added parameter >name:       {http://tempuri.org/}u9Pwd
+typeEntry:  null
+mode:       IN
+position:   2
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@647fd8ce<total parameters:3
+DEBUG main org.apache.axis.description.OperationDesc - @5276e6b0 added parameter >name:       {http://tempuri.org/}u9Org
+typeEntry:  null
+mode:       IN
+position:   3
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@159f197<total parameters:4
+DEBUG main org.apache.axis.description.OperationDesc - @5276e6b0setReturnType({http://www.w3.org/2001/XMLSchema}string)
+DEBUG main org.apache.axis.description.OperationDesc - @78aab498 added parameter >name:       {http://tempuri.org/}xml
+typeEntry:  null
+mode:       IN
+position:   0
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@5dd6264<total parameters:1
+DEBUG main org.apache.axis.description.OperationDesc - @78aab498 added parameter >name:       {http://tempuri.org/}u9User
+typeEntry:  null
+mode:       IN
+position:   1
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@1ffe63b9<total parameters:2
+DEBUG main org.apache.axis.description.OperationDesc - @78aab498 added parameter >name:       {http://tempuri.org/}u9Pwd
+typeEntry:  null
+mode:       IN
+position:   2
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@51e5fc98<total parameters:3
+DEBUG main org.apache.axis.description.OperationDesc - @78aab498 added parameter >name:       {http://tempuri.org/}u9Org
+typeEntry:  null
+mode:       IN
+position:   3
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@7c469c48<total parameters:4
+DEBUG main org.apache.axis.description.OperationDesc - @78aab498setReturnType({http://www.w3.org/2001/XMLSchema}string)
+DEBUG main org.apache.axis.description.OperationDesc - @12e61fe6 added parameter >name:       {http://tempuri.org/}xml
+typeEntry:  null
+mode:       IN
+position:   0
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@7ee955a8<total parameters:1
+DEBUG main org.apache.axis.description.OperationDesc - @12e61fe6 added parameter >name:       {http://tempuri.org/}u9User
+typeEntry:  null
+mode:       IN
+position:   1
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@1677d1<total parameters:2
+DEBUG main org.apache.axis.description.OperationDesc - @12e61fe6 added parameter >name:       {http://tempuri.org/}u9Pwd
+typeEntry:  null
+mode:       IN
+position:   2
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@48fa0f47<total parameters:3
+DEBUG main org.apache.axis.description.OperationDesc - @12e61fe6 added parameter >name:       {http://tempuri.org/}u9Org
+typeEntry:  null
+mode:       IN
+position:   3
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@6ac13091<total parameters:4
+DEBUG main org.apache.axis.description.OperationDesc - @12e61fe6setReturnType({http://www.w3.org/2001/XMLSchema}string)
+DEBUG main org.apache.axis.description.OperationDesc - @5e316c74 added parameter >name:       {http://tempuri.org/}payXml
+typeEntry:  null
+mode:       IN
+position:   0
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@6d2a209c<total parameters:1
+DEBUG main org.apache.axis.description.OperationDesc - @5e316c74 added parameter >name:       {http://tempuri.org/}u9User
+typeEntry:  null
+mode:       IN
+position:   1
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@75329a49<total parameters:2
+DEBUG main org.apache.axis.description.OperationDesc - @5e316c74 added parameter >name:       {http://tempuri.org/}u9Pwd
+typeEntry:  null
+mode:       IN
+position:   2
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@161479c6<total parameters:3
+DEBUG main org.apache.axis.description.OperationDesc - @5e316c74 added parameter >name:       {http://tempuri.org/}u9Org
+typeEntry:  null
+mode:       IN
+position:   3
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@4313f5bc<total parameters:4
+DEBUG main org.apache.axis.description.OperationDesc - @5e316c74setReturnType({http://www.w3.org/2001/XMLSchema}string)
+DEBUG main org.apache.axis.description.OperationDesc - @7f010382 added parameter >name:       {http://tempuri.org/}xml
+typeEntry:  null
+mode:       IN
+position:   0
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@1e802ef9<total parameters:1
+DEBUG main org.apache.axis.description.OperationDesc - @7f010382 added parameter >name:       {http://tempuri.org/}u9User
+typeEntry:  null
+mode:       IN
+position:   1
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@2b6faea6<total parameters:2
+DEBUG main org.apache.axis.description.OperationDesc - @7f010382 added parameter >name:       {http://tempuri.org/}u9Pwd
+typeEntry:  null
+mode:       IN
+position:   2
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@778d1062<total parameters:3
+DEBUG main org.apache.axis.description.OperationDesc - @7f010382 added parameter >name:       {http://tempuri.org/}u9Org
+typeEntry:  null
+mode:       IN
+position:   3
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@670002<total parameters:4
+DEBUG main org.apache.axis.description.OperationDesc - @7f010382setReturnType({http://www.w3.org/2001/XMLSchema}string)
+DEBUG main org.apache.axis.description.OperationDesc - @1f0f1111 added parameter >name:       {http://tempuri.org/}xml
+typeEntry:  null
+mode:       IN
+position:   0
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@49c386c8<total parameters:1
+DEBUG main org.apache.axis.description.OperationDesc - @1f0f1111 added parameter >name:       {http://tempuri.org/}u9User
+typeEntry:  null
+mode:       IN
+position:   1
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@56528192<total parameters:2
+DEBUG main org.apache.axis.description.OperationDesc - @1f0f1111 added parameter >name:       {http://tempuri.org/}u9Pwd
+typeEntry:  null
+mode:       IN
+position:   2
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@6e0dec4a<total parameters:3
+DEBUG main org.apache.axis.description.OperationDesc - @1f0f1111 added parameter >name:       {http://tempuri.org/}u9Org
+typeEntry:  null
+mode:       IN
+position:   3
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@96def03<total parameters:4
+DEBUG main org.apache.axis.description.OperationDesc - @1f0f1111setReturnType({http://www.w3.org/2001/XMLSchema}string)
+DEBUG main org.apache.axis.description.OperationDesc - @5ccddd20 added parameter >name:       {http://tempuri.org/}xml
+typeEntry:  null
+mode:       IN
+position:   0
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@1ed1993a<total parameters:1
+DEBUG main org.apache.axis.description.OperationDesc - @5ccddd20 added parameter >name:       {http://tempuri.org/}u9User
+typeEntry:  null
+mode:       IN
+position:   1
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@1f3f4916<total parameters:2
+DEBUG main org.apache.axis.description.OperationDesc - @5ccddd20 added parameter >name:       {http://tempuri.org/}u9Pwd
+typeEntry:  null
+mode:       IN
+position:   2
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@794cb805<total parameters:3
+DEBUG main org.apache.axis.description.OperationDesc - @5ccddd20 added parameter >name:       {http://tempuri.org/}u9Org
+typeEntry:  null
+mode:       IN
+position:   3
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@4b5a5ed1<total parameters:4
+DEBUG main org.apache.axis.description.OperationDesc - @5ccddd20setReturnType({http://www.w3.org/2001/XMLSchema}string)
+DEBUG main org.apache.axis.description.OperationDesc - @59d016c9 added parameter >name:       {http://tempuri.org/}customerXml
+typeEntry:  null
+mode:       IN
+position:   0
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@3cc2931c<total parameters:1
+DEBUG main org.apache.axis.description.OperationDesc - @59d016c9 added parameter >name:       {http://tempuri.org/}u9User
+typeEntry:  null
+mode:       IN
+position:   1
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@20d28811<total parameters:2
+DEBUG main org.apache.axis.description.OperationDesc - @59d016c9 added parameter >name:       {http://tempuri.org/}u9Pwd
+typeEntry:  null
+mode:       IN
+position:   2
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@3967e60c<total parameters:3
+DEBUG main org.apache.axis.description.OperationDesc - @59d016c9 added parameter >name:       {http://tempuri.org/}u9Org
+typeEntry:  null
+mode:       IN
+position:   3
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@60d8c9b7<total parameters:4
+DEBUG main org.apache.axis.description.OperationDesc - @59d016c9setReturnType({http://www.w3.org/2001/XMLSchema}string)
+DEBUG main org.apache.axis.description.OperationDesc - @48aaecc3 added parameter >name:       {http://tempuri.org/}supplierXml
+typeEntry:  null
+mode:       IN
+position:   0
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@7c0c77c7<total parameters:1
+DEBUG main org.apache.axis.description.OperationDesc - @48aaecc3 added parameter >name:       {http://tempuri.org/}u9User
+typeEntry:  null
+mode:       IN
+position:   1
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@7adda9cc<total parameters:2
+DEBUG main org.apache.axis.description.OperationDesc - @48aaecc3 added parameter >name:       {http://tempuri.org/}u9Pwd
+typeEntry:  null
+mode:       IN
+position:   2
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@5cee5251<total parameters:3
+DEBUG main org.apache.axis.description.OperationDesc - @48aaecc3 added parameter >name:       {http://tempuri.org/}u9Org
+typeEntry:  null
+mode:       IN
+position:   3
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@433d61fb<total parameters:4
+DEBUG main org.apache.axis.description.OperationDesc - @48aaecc3setReturnType({http://www.w3.org/2001/XMLSchema}string)
+DEBUG main org.apache.axis.description.OperationDesc - @5c909414 added parameter >name:       {http://tempuri.org/}xml
+typeEntry:  null
+mode:       IN
+position:   0
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@4b14c583<total parameters:1
+DEBUG main org.apache.axis.description.OperationDesc - @5c909414 added parameter >name:       {http://tempuri.org/}u9User
+typeEntry:  null
+mode:       IN
+position:   1
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@65466a6a<total parameters:2
+DEBUG main org.apache.axis.description.OperationDesc - @5c909414 added parameter >name:       {http://tempuri.org/}u9Pwd
+typeEntry:  null
+mode:       IN
+position:   2
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@4ddced80<total parameters:3
+DEBUG main org.apache.axis.description.OperationDesc - @5c909414 added parameter >name:       {http://tempuri.org/}u9Org
+typeEntry:  null
+mode:       IN
+position:   3
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@1534f01b<total parameters:4
+DEBUG main org.apache.axis.description.OperationDesc - @5c909414setReturnType({http://www.w3.org/2001/XMLSchema}string)
+DEBUG main org.apache.axis.description.OperationDesc - @78e117e3 added parameter >name:       {http://tempuri.org/}xml
+typeEntry:  null
+mode:       IN
+position:   0
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@2ea227af<total parameters:1
+DEBUG main org.apache.axis.description.OperationDesc - @78e117e3 added parameter >name:       {http://tempuri.org/}u9User
+typeEntry:  null
+mode:       IN
+position:   1
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@4386f16<total parameters:2
+DEBUG main org.apache.axis.description.OperationDesc - @78e117e3 added parameter >name:       {http://tempuri.org/}u9Pwd
+typeEntry:  null
+mode:       IN
+position:   2
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@363ee3a2<total parameters:3
+DEBUG main org.apache.axis.description.OperationDesc - @78e117e3 added parameter >name:       {http://tempuri.org/}u9Org
+typeEntry:  null
+mode:       IN
+position:   3
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@4690b489<total parameters:4
+DEBUG main org.apache.axis.description.OperationDesc - @78e117e3setReturnType({http://www.w3.org/2001/XMLSchema}string)
+DEBUG main org.apache.axis.description.OperationDesc - @79b06cab added parameter >name:       {http://tempuri.org/}xml
+typeEntry:  null
+mode:       IN
+position:   0
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@3eb7fc54<total parameters:1
+DEBUG main org.apache.axis.description.OperationDesc - @79b06cab added parameter >name:       {http://tempuri.org/}u9User
+typeEntry:  null
+mode:       IN
+position:   1
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@7f552bd3<total parameters:2
+DEBUG main org.apache.axis.description.OperationDesc - @79b06cab added parameter >name:       {http://tempuri.org/}u9Pwd
+typeEntry:  null
+mode:       IN
+position:   2
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@3c22fc4c<total parameters:3
+DEBUG main org.apache.axis.description.OperationDesc - @79b06cab added parameter >name:       {http://tempuri.org/}u9Org
+typeEntry:  null
+mode:       IN
+position:   3
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@460d0a57<total parameters:4
+DEBUG main org.apache.axis.description.OperationDesc - @79b06cabsetReturnType({http://www.w3.org/2001/XMLSchema}string)
+DEBUG main org.apache.axis.description.OperationDesc - @47d90b9e added parameter >name:       {http://tempuri.org/}xml
+typeEntry:  null
+mode:       IN
+position:   0
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@1184ab05<total parameters:1
+DEBUG main org.apache.axis.description.OperationDesc - @47d90b9e added parameter >name:       {http://tempuri.org/}u9User
+typeEntry:  null
+mode:       IN
+position:   1
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@3aefe5e5<total parameters:2
+DEBUG main org.apache.axis.description.OperationDesc - @47d90b9e added parameter >name:       {http://tempuri.org/}u9Pwd
+typeEntry:  null
+mode:       IN
+position:   2
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@149e0f5d<total parameters:3
+DEBUG main org.apache.axis.description.OperationDesc - @47d90b9e added parameter >name:       {http://tempuri.org/}u9Org
+typeEntry:  null
+mode:       IN
+position:   3
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@1b1473ab<total parameters:4
+DEBUG main org.apache.axis.description.OperationDesc - @47d90b9esetReturnType({http://www.w3.org/2001/XMLSchema}string)
+DEBUG main org.apache.axis.description.OperationDesc - @2f7c2f4f added parameter >name:       {http://tempuri.org/}xml
+typeEntry:  null
+mode:       IN
+position:   0
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@6af93788<total parameters:1
+DEBUG main org.apache.axis.description.OperationDesc - @2f7c2f4f added parameter >name:       {http://tempuri.org/}u9User
+typeEntry:  null
+mode:       IN
+position:   1
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@ef9296d<total parameters:2
+DEBUG main org.apache.axis.description.OperationDesc - @2f7c2f4f added parameter >name:       {http://tempuri.org/}u9Pwd
+typeEntry:  null
+mode:       IN
+position:   2
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@36c88a32<total parameters:3
+DEBUG main org.apache.axis.description.OperationDesc - @2f7c2f4f added parameter >name:       {http://tempuri.org/}u9Org
+typeEntry:  null
+mode:       IN
+position:   3
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@7880cdf3<total parameters:4
+DEBUG main org.apache.axis.description.OperationDesc - @2f7c2f4fsetReturnType({http://www.w3.org/2001/XMLSchema}string)
+DEBUG main org.apache.axis.description.OperationDesc - @5be6e01c added parameter >name:       {http://tempuri.org/}xml
+typeEntry:  null
+mode:       IN
+position:   0
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@1c93084c<total parameters:1
+DEBUG main org.apache.axis.description.OperationDesc - @5be6e01c added parameter >name:       {http://tempuri.org/}u9User
+typeEntry:  null
+mode:       IN
+position:   1
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@6ef888f6<total parameters:2
+DEBUG main org.apache.axis.description.OperationDesc - @5be6e01c added parameter >name:       {http://tempuri.org/}u9Pwd
+typeEntry:  null
+mode:       IN
+position:   2
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@10e92f8f<total parameters:3
+DEBUG main org.apache.axis.description.OperationDesc - @5be6e01c added parameter >name:       {http://tempuri.org/}u9Org
+typeEntry:  null
+mode:       IN
+position:   3
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@7ce3cb8e<total parameters:4
+DEBUG main org.apache.axis.description.OperationDesc - @5be6e01csetReturnType({http://www.w3.org/2001/XMLSchema}string)
+DEBUG main org.apache.axis.description.OperationDesc - @78b66d36 added parameter >name:       {http://tempuri.org/}xml
+typeEntry:  null
+mode:       IN
+position:   0
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@5223e5ee<total parameters:1
+DEBUG main org.apache.axis.description.OperationDesc - @78b66d36 added parameter >name:       {http://tempuri.org/}u9User
+typeEntry:  null
+mode:       IN
+position:   1
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@bef2d72<total parameters:2
+DEBUG main org.apache.axis.description.OperationDesc - @78b66d36 added parameter >name:       {http://tempuri.org/}u9Pwd
+typeEntry:  null
+mode:       IN
+position:   2
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@69b2283a<total parameters:3
+DEBUG main org.apache.axis.description.OperationDesc - @78b66d36 added parameter >name:       {http://tempuri.org/}u9Org
+typeEntry:  null
+mode:       IN
+position:   3
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@22a637e7<total parameters:4
+DEBUG main org.apache.axis.description.OperationDesc - @78b66d36setReturnType({http://www.w3.org/2001/XMLSchema}string)
+DEBUG main org.apache.axis.description.OperationDesc - @6fe7aac8 added parameter >name:       {http://tempuri.org/}payXml
+typeEntry:  null
+mode:       IN
+position:   0
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@1d119efb<total parameters:1
+DEBUG main org.apache.axis.description.OperationDesc - @6fe7aac8 added parameter >name:       {http://tempuri.org/}u9User
+typeEntry:  null
+mode:       IN
+position:   1
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@659a969b<total parameters:2
+DEBUG main org.apache.axis.description.OperationDesc - @6fe7aac8 added parameter >name:       {http://tempuri.org/}u9Pwd
+typeEntry:  null
+mode:       IN
+position:   2
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@76908cc0<total parameters:3
+DEBUG main org.apache.axis.description.OperationDesc - @6fe7aac8 added parameter >name:       {http://tempuri.org/}u9Org
+typeEntry:  null
+mode:       IN
+position:   3
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@2473d930<total parameters:4
+DEBUG main org.apache.axis.description.OperationDesc - @6fe7aac8setReturnType({http://www.w3.org/2001/XMLSchema}string)
+DEBUG main org.apache.axis.description.OperationDesc - @35047d03 added parameter >name:       {http://tempuri.org/}xml
+typeEntry:  null
+mode:       IN
+position:   0
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@49b0b76<total parameters:1
+DEBUG main org.apache.axis.description.OperationDesc - @35047d03 added parameter >name:       {http://tempuri.org/}u9User
+typeEntry:  null
+mode:       IN
+position:   1
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@769f71a9<total parameters:2
+DEBUG main org.apache.axis.description.OperationDesc - @35047d03 added parameter >name:       {http://tempuri.org/}u9Pwd
+typeEntry:  null
+mode:       IN
+position:   2
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@4c9f8c13<total parameters:3
+DEBUG main org.apache.axis.description.OperationDesc - @35047d03 added parameter >name:       {http://tempuri.org/}u9Org
+typeEntry:  null
+mode:       IN
+position:   3
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@5ae50ce6<total parameters:4
+DEBUG main org.apache.axis.description.OperationDesc - @35047d03setReturnType({http://www.w3.org/2001/XMLSchema}string)
+DEBUG main org.apache.axis.description.OperationDesc - @6f96c77 added parameter >name:       {http://tempuri.org/}xml
+typeEntry:  null
+mode:       IN
+position:   0
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@be64738<total parameters:1
+DEBUG main org.apache.axis.description.OperationDesc - @6f96c77 added parameter >name:       {http://tempuri.org/}u9User
+typeEntry:  null
+mode:       IN
+position:   1
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@3ba9ad43<total parameters:2
+DEBUG main org.apache.axis.description.OperationDesc - @6f96c77 added parameter >name:       {http://tempuri.org/}u9Pwd
+typeEntry:  null
+mode:       IN
+position:   2
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@49d904ec<total parameters:3
+DEBUG main org.apache.axis.description.OperationDesc - @6f96c77 added parameter >name:       {http://tempuri.org/}u9Org
+typeEntry:  null
+mode:       IN
+position:   3
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@48e4374<total parameters:4
+DEBUG main org.apache.axis.description.OperationDesc - @6f96c77setReturnType({http://www.w3.org/2001/XMLSchema}string)
+DEBUG main org.apache.axis.description.OperationDesc - @3d680b5a added parameter >name:       {http://tempuri.org/}xml
+typeEntry:  null
+mode:       IN
+position:   0
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@4b5d6a01<total parameters:1
+DEBUG main org.apache.axis.description.OperationDesc - @3d680b5a added parameter >name:       {http://tempuri.org/}u9User
+typeEntry:  null
+mode:       IN
+position:   1
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@4a22f9e2<total parameters:2
+DEBUG main org.apache.axis.description.OperationDesc - @3d680b5a added parameter >name:       {http://tempuri.org/}u9Pwd
+typeEntry:  null
+mode:       IN
+position:   2
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@3c419631<total parameters:3
+DEBUG main org.apache.axis.description.OperationDesc - @3d680b5a added parameter >name:       {http://tempuri.org/}u9Org
+typeEntry:  null
+mode:       IN
+position:   3
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@418e7838<total parameters:4
+DEBUG main org.apache.axis.description.OperationDesc - @3d680b5asetReturnType({http://www.w3.org/2001/XMLSchema}string)
+ERROR main com.weavernorth.ebu8http.realHttpUtil.RealHttpUtil - http请求get异常： java.net.ConnectException: Failed to connect to localhost/0:0:0:0:0:0:0:1:8081

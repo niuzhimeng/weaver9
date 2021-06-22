@@ -10,6 +10,6 @@ public interface TestInter {
     @PostBiu(path = "")
     String sendPost(String json, Map<String, String> herders);
 
-    @GetBiu(path = "http://localhost:8081/person/23")
+    @GetBiu(path = "http://www.baidu.com")
     String sendGet(Map<String, String> herders);
 }
