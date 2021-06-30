@@ -4,6 +4,7 @@ import com.mytest.annotation.test.TestInter;
 import com.weavernorth.ebu8http.container.Ebu8Container;
 import com.weavernorth.ebu8http.proxy.Ebu8Proxy;
 
+import java.lang.annotation.Annotation;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,5 +31,15 @@ public class Test {
         TestInter proxy = Ebu8Proxy.getProxy(TestInter.class);
         String s = proxy.sendGet(map, "parma21");
         System.out.println(s);
+    }
+
+    @org.junit.Test
+    public void test3(){
+        Annotation[] annotations = TestInter.class.getAnnotations();
+        for (Annotation annotation : annotations) {
+            System.out.println(annotation);
+        }
+
+
     }
 }

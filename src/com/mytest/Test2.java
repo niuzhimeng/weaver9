@@ -14,6 +14,7 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 import weaver.general.MD5;
+import weaver.rsa.security.RSA;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -25,12 +26,7 @@ import java.math.BigInteger;
 import java.net.Socket;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.time.LocalDate;
-import java.time.temporal.TemporalAdjusters;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class Test2 {
@@ -307,13 +303,11 @@ public class Test2 {
 
     @Test
     public void test12() throws Exception {
-        LocalDate now = LocalDate.now();
-        String start = now.getYear() + "-01-01";
-        System.out.println(start);
+//        SonTest sonTest = new SonTest();
+//        sonTest.method1();
 
-        LocalDate end = now.with(TemporalAdjusters.firstDayOfMonth());
-        System.out.println(end.toString());
-
+        //String str = "ZHGUm+JnBeBQ0pVymp95Q+7pnD85ceQhiC5KN2dgmOoGCXPYBXidnRXf6u8g7HuqoVdYLwkT9FHoAv4tlD58pfoayC8IPHfAV27smiOSr+Kn9Q5s+AoslMFjtTIbvsAqM6WIKGzUcP5kQOMuLxVaYfkpoWoxD3gzTLRRCdxXKWJKYSadTpS7adm0OHW8fkpSfr/NgC/D7sXRmq5YvxIstx0qxKH96HSs3CLwSpzszrNZV0l9TOfadAgKOJu/b+y2H4Uvi01LC24hyW+0q9WMVeM9QxvuJoBqZ9GZrttvG5pAaJfyMtOtlnNPmp0zJGKrDtJMeTY4UkBQaNkhXZ2APw==``RSA``";
+        String var23 = "JlLE6MAjS1ie4vNst8wQgYjcEroUOILMGFt/1pqM319jehdHojRf8krZThW/a8BjauJxH3SxIYKA8rx9YwBQoT0sBkN0JCrNEdFAUF+x1nS7eZj4/N3BZtOoz4Y1pcabwKrfVGWM5Ryc+Udaf+tfdwLceBwcGN0jSY9fNicWf+1K3QU//JGkxKD61Xu/Ntjb7WKNMwCDLIuSAzEHHWWNDRaVT0zcDUYb0xWxOZe0BzxGerjbPSpXHNVykiOYBKFsjqeIE+EjXkkD0vr2CroShtjJUW4j+/weBL1+I+RMMzPWicfy+tFpiF0x7kXj8zfZik3Knil4ryEovz/Akde5kA==``RSA``";
 
     }
 

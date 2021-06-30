@@ -2,6 +2,7 @@ package com.weavernorth.ebu8http.ann;
 
 import java.lang.annotation.*;
 
+@BaseLifeCycle
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented // 是否生成api文档
